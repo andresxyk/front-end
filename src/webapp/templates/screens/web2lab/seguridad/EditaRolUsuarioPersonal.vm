@@ -1,0 +1,78 @@
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/EditaRolUsuario.js")"></SCRIPT> 
+
+
+#set ($strNomUser = $data.getParameters().getString("strNomUser"))
+
+#set ($titlePage = "Edici&oacute;n de roles para el usuario $strNomUser")
+#set ($rolesAsignados = $CSeguridadTool.getRolesAsignados())
+#set ($rolesSinAsignar = $CSeguridadTool.getRolesSinAsignar())
+#set ($strLigaRegresar = $link.setPage("web2lab,seguridad,AsignaPerfilUsuarioPersonal.vm?txtNombreUsuario=$strNomUser").toString())
+#set ($strLigaActual  = $link.setPage("web2lab,seguridad,EditaRolUsuarioPersonal.vm"))
+#set ($strLigaActual  = $link.setAction("seguridad.BUserAction").toString())
+#set ($objGrupoCtx = $ctxGrupo)
+<form name="frmEditaRolUsuario" method="post" action="$strLigaActual" onsubmit='selectAll("frmEditaRolUsuario","cboRolesAsig","cboRolesSinAsig");'>
+	<input type="hidden" name="hdnNombreUsuario" value="$strNomUser">
+	<input type="hidden" name="hdnGrupo" value="$objGrupoCtx.Name">
+	<table class="tabla" border="0" width="100%">
+		<tr>
+			<td align="left" colspan="3">
+		       		#if($bolActualizado)
+						<img align="middle" src="$content.getURI('images/icon_success_sml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="blue" aling="center">&nbsp; Los roles del usuario: $!strNomUser, se actualizaron con &eacute;xito.</font></b>
+					#else
+						&nbsp;
+					#end	
+			</td>		
+		</tr>
+		<tr>
+			<td align="right"><b>Roles asignados</b></td>
+			<td align="center">&nbsp;</b></td>
+			<td align="left"><b>Roles sin asignar</b></td>			
+		</tr>		
+		<tr>
+			<td align="right" colspan="3">&nbsp;</td>	
+		</tr>		
+		<tr>
+			<td align="right">
+				<select name="cboRolesAsig" size="10"  multiple>
+					#foreach($rolAsig in $rolesAsignados)
+						<option value="${objGrupoCtx.Name}${rolAsig.Name}">$rolAsig.getName()</option>
+					#end					
+				</select>					
+			</td>			
+			<td align="center">
+				<table border="0" class="tabla" width="100%">
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdAsigna" value=" << " class="boton" onclick='return editaRoles("frmEditaRolUsuario","cboRolesSinAsig","cboRolesAsig");'>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdElimina" value=" >> " class="boton" onclick='return editaRoles("frmEditaRolUsuario","cboRolesAsig","cboRolesSinAsig");'>
+						</td>
+					</tr>						
+				</table>
+			</td>
+			<td align="left">
+				<select name="cboRolesSinAsig" size="10"  multiple>
+					#foreach($rolSinAsig in $rolesSinAsignar)
+						<option value="${objGrupoCtx.Name}${rolSinAsig.Name}">$rolSinAsig.getName()</option>						
+					#end										
+				</select>					
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="3">&nbsp;</td>		
+		</tr>
+		<tr>
+			<td align="center" colspan="3">
+				<input type="submit" name="eventSubmit_doEditarolusuario" value="Actualizar" class="boton">
+				<input type="button" name="cmdCancelar" value="Regresar" class="boton" onclick="location.href='$strLigaRegresar'">
+			</td>		
+		</tr>
+		<tr>
+			<td align="center" colspan="3">&nbsp;</td>		
+		</tr>
+	</table>
+</form>

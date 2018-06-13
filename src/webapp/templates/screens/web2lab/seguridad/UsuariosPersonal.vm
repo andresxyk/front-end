@@ -1,0 +1,126 @@
+<SCRIPT language="javaScript" SRC="$content.getURI("javascript/generales.js")"></SCRIPT>
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT>  
+#set ( $strLigaAct = $link.setPage("web2lab,seguridad,UsuariosPersonal.vm"))
+#set ( $strLigaAct = $link.setAction("seguridad.BUserAction").toString())
+#set ( $strCargaPag = $link.setPage("web2lab,seguridad,Usuarios_FormPersonal.vm").toString())
+##set($objUsuarios = $CSeguridadTool.getUsuarioPorCriterio())
+#set($objUsuarios = $CSeguridadTool.getUsuarioPersistente())
+#set ( $titlePage = "Busqueda de Usuarios")
+<SCRIPT LANGUAGE="JavaScript">function irAurl() { window.location = "$strCargaPag"; }</script>
+	<form method="post" action="$strLigaAct" name="frmUsuario">
+		<table width="100%" class="tabla">
+			<tr>
+				<td>
+		       		#if($!bolExiste == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif ya se encuentra dado de baja</font></b>
+					#end	
+				</td>
+			 </tr>
+			 <tr>
+				<td>
+		       		#if($!bolAlta == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif fue dado de alta; con &eacute;xito.</font></b>
+					#end	
+				</td>
+			 </tr>
+			 <tr>
+				<td>
+		       		#if($!bolBaja == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif  fue dado de baja; con &eacute;xito.</font></b>
+					#end	
+				</td>
+			 </tr>
+			 <tr>
+       			<td>
+		       		#if($!bolModif == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
+					#end	
+				</td>
+			</tr>
+			<tr>
+       			<td>
+		       		#if($!bolActualizado == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; Los roles del usuario: $!strMensajeActualizado, se actualizaron con &eacute;xito.</font></b>
+					#end	
+				</td>
+			</tr>
+			#if($objUsuarios.size() == 0)
+				<tr>
+					<td>
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No existen resultados"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">No existen resultados para ese criterio de b&uacute;squeda</font></b>					
+					</td>
+				</tr>
+			#end
+		</table>
+		<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+			<tr>
+				<td>Selecciona un grupo:</td>
+           		<td>
+           			<select name="cboGrupo">
+					<OPTION value="">Seleccione un Grupo</OPTION>
+					#set ($objGrupos = $CSeguridadTool.getGruposQuery())
+					#set ($objGrupoSeleccionado = $CSeguridadTool.getGrupoSeleccionado())					
+					#foreach($objGrupo in $objGrupos)
+						#option("$objGrupo.IIntGroupId" "$objGrupo.IStrObjGroupName" "$objGrupoSeleccionado")
+					#end
+					</select>
+           		</td>
+        	</tr>
+			<tr>
+				<td>Login:</td>
+           		<td>
+           			<input type="text" name="txtNombreUsuario" value="$!strNomUsuVuel" >
+           		</td>
+        	</tr>
+        	<tr>
+           		<td>Nombre:</td>
+           		<td>
+              		<input type="text" name="txtNombre" onKeyUp="cambiaMay('frmUsuario','txtNombre');" value="$!strNomVuel" >
+           		</td>
+        	</tr>
+        	<tr>
+           		<td>Apellido:</td>           			
+           		<td>
+              		<input type="text" name="txtApellido" onKeyUp="cambiaMay('frmUsuario','txtApellido');" value="$!strApellidoVuel" >
+           		</td>
+        	</tr>        
+        	<tr>
+           		<td colspan="2">
+           	  		<input type="checkbox" name="chkSelTodos">Buscar todos
+           		</td>           
+        	</tr>        	
+         	<tr>
+         		<th>Login</th>
+          		<th>Usuario</th>          
+          		<th>Acciones</th>          
+         	</tr>         	         	         
+				#foreach ( $objUsuario in $objUsuarios)         		
+        		        
+        			    #set ( $strligaperfil = $link.setPage("web2lab,seguridad,AsignaPerfilUsuarioPersonal.vm"))
+        			    #set ( $strLigaperfil = $link.addQueryData("txtNombreUsuario",$objUsuario.getUserName()))
+        			    #set ( $strLigaperfil = $link.addQueryData("strModo","modificar").toString())
+        				        						
+        				#if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+        		        <tr class="$t">
+        		        	<td>$!objUsuario.getUserName()</td>
+        		        	<td>$!objUsuario.getFirstName()  $!objUsuario.getLastName()</td>		        	
+							<input type="hidden" name="hdnUserId" value="$!objUsuario.getUserId()">
+							<input type="hidden" name="hdnUserName" value="$!objUsuario.getUserName()">
+					
+        		          	<td>
+        			           	<a href="$strLigaperfil">Asignacion de perfil</a>&nbsp;
+								<a href="#" onClick="javascript:inhabilitarUsuario('$!strLigaAct',1);">Alta</a>
+								<a href="#" onClick="javascript:inhabilitarUsuario('$!strLigaAct',0);">Baja</a>
+        			      	</td>		         
+        		        </tr>		         		             
+		     	#end	
+        </table>
+        	<input type="submit" name="eventSubmit_doBuscar" class="boton" value="Buscar" onclick="return validaUsuarios('frmUsuario')"/>
+          	<input type="button"  onClick="irAurl()" class="boton" value="Crear Nuevo">
+    </form>        

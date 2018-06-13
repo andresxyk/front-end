@@ -1,0 +1,69 @@
+$data.setLayoutTemplate("/web2lab/templateFrames.vm")
+
+#set ( $codigo = $data.getParameters().getString("codigo"))
+#set ( $paciente = $data.getParameters().getString("paciente"))
+#set ( $idPaciente = $data.getParameters().getString("idPaciente"))
+#set ( $examen = $data.getParameters().getString("examen"))
+#set ( $fechaHora = $data.getParameters().getString("fechaHora"))
+#set ( $titlePage = $data.getParameters(""))
+#set ( $titlePage = $data.getParameters(""))
+
+<script language="vbscript">
+
+option explicit
+
+sub ejecutar()
+	
+	'Declaracion de variables!
+	Dim aObjetoSistema, archivoZpl 
+	Dim objShell, comando, inst
+	Dim codigo, paciente, examen, fechaHora, idPaciente
+	
+	codigo = document.frmZebra.hdnCodigo.value
+	paciente = document.frmZebra.hdnPaciente.value
+	examen = document.frmZebra.hdnExamen.value
+	fechaHora = document.frmZebra.hdnFechaHora.value
+	idPaciente = document.frmZebra.hdnIdPaciente.value
+	
+	'creamos el objetos script del sistema de archivos
+	Set aObjetoSistema = CreateObject("Scripting.FileSystemObject")
+	'creamos el archivo .zpl
+	Set archivoZpl = aObjetoSistema.CreateTextFile("c:\web2labzebra\codigoZebra.zpl", True)
+	'Escribimos las instrucciones en archivo.bat
+	archivoZpl.WriteLine("^XA")
+	archivoZpl.WriteLine("^LH05,20")
+	archivoZpl.WriteLine("^FO05,10^AD^FD" & paciente & "^FS ")
+	archivoZpl.WriteLine("^FO40,30^BY2,2.0:1^B3N,N,80,N^FD" & codigo & "^FS")
+	archivoZpl.WriteLine("^FO05,120^AD^FD" & codigo & "  " & fechaHora & "F45^FS")
+	archivoZpl.WriteLine("^FO05,140^AD^FD" & "TA596624" & "  Cliente:" & "^FS")
+	archivoZpl.WriteLine("^FO05,160^AD^FD" & examen & "^FS")
+	archivoZpl.WriteLine("^XZ")
+	archivoZpl.Close
+
+	'Ejecutamos el bat
+	set ObjShell = CreateObject("Wscript.shell")
+	comando = "c:\web2labzebra\imprimir.bat"
+	ObjShell.run comando,1,true
+	
+	aObjetoSistema.DeleteFile "c:\web2labzebra\codigoZebra.zpl"  	
+	
+	Set aObjetoSistema  = nothing
+	Set archivoZpl = nothing
+	Set ObjShell = nothing
+	
+End Sub
+</script>
+
+<form name="frmZebra" method="post">
+	<input type="hidden" name="hdnCodigo" value="$!codigo" >
+    <input type="hidden" name="hdnPaciente" value="$!paciente">
+	<input type="hidden" name="hdnExamen" value="$!examen">	 	
+    <input type="hidden" name="hdnFechaHora" value="$!fechaHora">
+	<input type="hidden" name="hdnIdPaciente" value="$!idPaciente" >
+	<input type="hidden" name="hdnLleno" value="" >
+	VM PARA ETIQUETAS DE TERCEROS 
+	
+</form>
+<script language=vbscript>
+	call ejecutar()
+</script>

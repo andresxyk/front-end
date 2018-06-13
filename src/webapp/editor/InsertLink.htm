@@ -1,0 +1,140 @@
+<HTML>
+<HEAD>
+<TITLE>Insert Link</TITLE>
+
+<!--Local style to this window -->
+<STYLE TYPE="text/css">
+ BODY   {margin-left:10; font-family:Verdana; font-size:12; background:white}
+ BUTTON {width:5em}
+ P      {text-align:center}
+.formfield { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 11px; line-height: 15px; font-weight: normal; color: #000000; text-decoration: none; border: 1px #666666 solid }
+</STYLE>
+
+<SCRIPT LANGUAGE=JavaScript>
+var control="";
+function click1()
+{
+  var links;
+  var vArr=new Array();
+  links=document.f1.link.value;
+
+  if (links.length==0)
+  {
+	  window.alert("Enter URL name and press OK");
+	  document.f1.link.focus();
+	  return;
+  }
+  else
+  {
+	//window.returnValue = document.f1.link.value+"|"+document.f1.newwin.checked;		//return value is the selected spc. character.
+	var str=document.f1.link.value+"|"+document.f1.newwin.checked;
+	if(document.f1.link.value.indexOf(":/")==-1 && document.f1.link.value.indexOf("@")==-1 )
+		document.f1.link.value="http://"+document.f1.link.value;
+
+	vArr["Source"]=document.f1.link.value;
+	vArr["NewWin"]=document.f1.newwin.checked;
+	vArr["control"]=control;
+	//alert("control="+control);
+	window.opener.insertlink_child(vArr);
+	window.close();
+  }
+}
+
+</SCRIPT>
+<SCRIPT>
+
+function setDefaultLinkName(l_str_linkname)
+{
+	var link=l_str_linkname;
+	for(i=0;i<document.f1.select1.length;i++)
+	{
+		if((document.f1.select1.options[i].text).toLowerCase()==link.toLowerCase())
+		{
+			document.f1.select1.selectedIndex=i;
+			document.f1.link.value=link;
+			break;
+		}
+		else
+		{
+			document.f1.select1.selectedIndex= 0;
+		}
+	}
+}
+
+function linkList(l_str_linknames)
+{
+	var linknames=l_str_linknames;
+
+	var lastlink=linknames.substring(linknames.lastIndexOf(",")+1,linknames.length);
+	document.write('<OPTION selected value="">--Select link--');
+	if(linknames.length>0)
+	{
+	while(linknames.indexOf(",")>=0)
+	{
+		var str=linknames;
+		var commaindex=linknames.indexOf(",");
+		var link=linknames.substring(0,commaindex);
+		linknames=linknames.substring(commaindex+1);
+		document.write('<OPTION value='+link+'>'+link+'</OPTION>');
+	}
+	document.write('<OPTION value='+lastlink+'>'+lastlink+'</OPTION>');
+	}
+	if(linknames=="")
+	{
+		alert("Please specify the URL list.");
+	}
+	setDefaultLinkName(window.opener.def_link_name);
+}
+
+function setlinkName()
+{
+
+	var i=document.f1.select1.selectedIndex;
+	if(document.f1.select1[i].value.indexOf("http://")==-1)
+		document.f1.link.value=document.f1.select1[i].value;
+	else
+		document.f1.link.value=document.f1.select1[i].value;
+}
+function newopen()
+{
+	//alert("INSERT LINK="+window.opener.getText());
+	var str=window.opener.getText();
+	//alert(str);
+	control=str.substring(str.indexOf("|")+1,str.length);
+	var str1=str.substring(0,str.indexOf("|"));
+	//alert(control +"      ="+str1);
+
+}
+
+</SCRIPT>
+
+</HEAD>
+
+<!-- Copyright 1999 Microsoft Corporation. All rights reserved. -->
+<BODY onload="newopen();">
+<!-- <DIV> &nbsp; </DIV> -->
+<form name="f1">
+<P><BR><BR>
+  <TABLE BORDER=1  BORDERCOLOR=#000000  BORDERCOLORLIGHT=WHITE  BORDERCOLORDARK=BLACK  CELLSPACING=0  CELLPADDING=5 width="420">
+    <TR>
+      <TD width="170" align="right"><font size=2><b><FONT face="Arial, Helvetica, sans-serif">Enter
+        URL/E-Mail Id:</FONT></B></FONT></TD>
+<TD><INPUT TYPE=TEXT SIZE=40 NAME="link" ID="link" value=""></TD>
+</TR>
+<TR>
+      <TD align="right"><font size=2><b><FONT face="Arial, Helvetica, sans-serif">URL
+        from List:</FONT></B></FONT></TD>
+<TD><Select class="formfield" name="select1" onChange=setlinkName()>
+<script>linkList(window.opener.link_name);</script>
+	    </SELECT> </TD>
+
+</TR>
+</TABLE>
+<BR><INPUT TYPE=CHECKBOX NAME="newwin" ID="newwin" value="true">
+  <FONT face="Arial, Helvetica, sans-serif" size="2">Open in New Window </FONT><BR>
+<P>
+<BUTTON ID="OK" TYPE=button onclick="click1()">OK</BUTTON>
+<BUTTON ONCLICK="window.close();" id=button1 name=button1>Cancel</BUTTON>
+</form>
+</BODY>
+</HTML>

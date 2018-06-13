@@ -1,0 +1,186 @@
+#set($tool=$CCatalogosTool)
+
+#macro(combotipos $indicador $default)
+	<select name="cboTipoMuestra$!indicador" class="selector80">
+		<option value="0_0">Seleccionar</option>
+    	#foreach($tipo in $objTipoMuestras)
+    		#set($selected="")
+			#set($display="")
+    		#if("$!default"=="$!tipo.getCtipomuestra()")#set($selected="selected")#end
+			#if("$!tipo.getStipomuestra()"=="$!tool.getSTipoMuestraPrimaria()")
+				#set($display = "Y")
+			#elseif("$!tipo.getStipomuestra()"=="$!tool.getSTipoMuestraSecundaria()") 
+				#set($display = "O")
+			#else
+				#set($display = "$!tipo.getCtipomuestra() - NA")
+			#end
+    		<option value="$!tipo.getCtipomuestra()" $!selected>$!display</option>
+    	#end
+	</select>
+#end
+
+#macro(comboMuestras)
+	<select name="cboMuestras" size="10" width="100%" class="selector350" >
+	#if($muestrasBuscadas)
+		#foreach($muestra in $muestrasBuscadas)
+			<option value="$velocityCount" >$muestra.getCmuestra() - $muestra.getSmuestra()</option>
+		#end
+	#end			
+	</select>	
+#end 
+
+#macro(asignaVariables $bean)
+	#set($cexamenmuestra = $!bean.getDexamenmuestra().getCexamenmuestra())
+	#set($cmuestra = $!bean.getDexamenmuestra().getCmuestra().getCmuestra())
+	#set($smuestra = $!bean.getDexamenmuestra().getCmuestra().getSmuestra())
+	#set($usecuencia=$!bean.getDexamenmuestra().getUsecuencia())
+	#set($ctipomuestra = $!bean.getDexamenmuestra().getStipomuestra().getCtipomuestra())
+	#set($stipomuestra = $!bean.getDexamenmuestra().getStipomuestra().getStipomuestra())
+#end
+
+#macro(limpiaVariables)
+	#set($cexamenmuestra = "")
+	#set($cmuestra = "")
+	#set($smuestra = "")
+	#set($usecuencia = "")
+	#set($ctipomuestra = "")
+	#set($stipomuestra = "")
+#end
+
+#macro(muestras)
+	#foreach($muestraBean in $muestrasBean)
+		#set( $intCont =  $velocityCount)
+		#limpiaVariables()
+		#asignaVariables($!muestraBean)
+		<tr>
+			<td>
+				<input type="hidden" name="hdnCExamenMuestra$velocityCount" value="$!cexamenmuestra">
+				<input type="hidden" name="hdnCMuestra$velocityCount" value="$!cmuestra">
+				<input type="hidden" name="hdnSMuestra$velocityCount" value="$!smuestra">	
+				<b>$!cmuestra - $!smuestra</b>
+			</td>
+			<td>
+			##	#combotipos($velocityCount "$!ctipomuestra")
+				#if($!ctipomuestra == 1)
+					<input type="radio" name="primario" value="$velocityCount" checked> 
+				#else
+					<input type="radio" name="primario" value="$velocityCount"> 
+				#end
+
+			</td>
+			<td>
+				#if("$!usecuencia" != '') #set($secmuestra=$!$usecuencia) #else #set($secmuestra= 0) #end
+##				#if($!muestraBean.getIObjIntSecuencia()) #set($secmuestra=$!muestraBean.getIObjIntSecuencia()) #else #set($secmuestra= 0) #end
+				<input type="text" name="txtSecuencia$velocityCount" value="$!secmuestra" size="10">
+			</td>
+			<td>
+				<input type="submit" value="Configurar" name="eventSubmit_doIreditarmuestra" class="boton" onClick='return editarMuestra("$velocityCount");'>
+			</td>			
+		</tr>
+		#limpiaVariables()
+	#end
+#end
+
+$data.setLayoutTemplate("/web2lab/Default.vm")
+
+#set ($objSesionActual = $data.getSession() )
+#set ($objConfExamenBean = $objSesionActual.getAttribute("aObjConfExamenBean") )
+#set ($strLigaActual = $link.setPage("proa2milv2,carpermor,examenes,DatosMuestra.vm") )
+#set ($strLigaActual = $link.setAction("carpermor.muestras.BConfiguraMuestraAction").toString() )
+##set ($objMuestras = $CConfiguraExamenTool.getCMuestrasLoinc() )
+#set ($objTipoMuestras = $tool.getTiposMuestras() )
+#if($objConfExamenBean)
+	#set($muestrasBean = $!objConfExamenBean.getMuestrasExamen())
+#end
+##estas se pusieron en contexto en el action 
+#set ($muestrasBuscadas = $aObjMuestrasNombre)
+
+#set ($titlePage = "Configuraci&oacute;n de muestras para el examen<br>$!objConfExamenBean.getObjDExamen().getStituloimpresion()"  )
+
+<style type="text/css">
+.selector350 { width: 350px; }
+.selector80 { width: 80px; }
+</style>
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/carpermor/muestras/ConfiguraMuestra.js")"></script>
+<script language="javascript">
+	var objArreglo = new Array();
+    var intIndiceA = 1;
+	#if($muestrasBuscadas)
+    	#foreach( $muestra in $muestrasBuscadas )
+        	objArreglo[ intIndiceA ] = [ '$!muestra.getCmuestra()' ,'$!muestra.getSmuestra()', '$!muestra.getSinstruccion()' ];
+        	intIndiceA = intIndiceA + 1;
+    	#end	
+	#else
+    	#foreach($muestra in $objMuestras)
+        	objArreglo[ intIndiceA ] = [ '$!muestra.getCmuestra()' ,'$!muestra.getSmuestra()', '$!muestra.getSinstruccion()' ];
+        	intIndiceA = intIndiceA + 1;
+    	#end
+	#end
+</script>
+
+<form name="frmDatosMuestra" action="$strLigaActual" method="post" >	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td colspan="3">		
+				#if($aStrMsjError)							
+					<img align="middle" src="$content.getURI('images/icon_error_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">$aStrMsjError</font></b>				
+				#elseif($aStrMensaje)							
+					<img align="middle" src="$content.getURI('images/icon_success_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$339933" aling="center">$aStrMensaje</font></b>				
+				#end					
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<input type="hidden" name="hdnCExamenMuestra">
+				<input type="hidden" name="hdnSecuencia">
+				<input type="hidden" name="hdnStrMuestra">
+				<input type="hidden" name="hdnIntMuestra">
+				<input type="hidden" name="hdnIndexMuestra">
+				<input type="hidden" name="hdnStrInstruccion">
+				<b>Buscar por nombre de muestra:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtNombreMuestra" size="30" value="$!aStrNombreMuestra" >
+			</td>
+			<td align="center">
+				<input type="submit" value="Buscar muestras" name="eventSubmit_doBuscarmuestras" class="boton" onClick="return validaBuscarmuestra();">
+			</td>			
+		</tr>
+		<tr><td>&nbsp;</td></tr>		
+		<tr>
+			<td colspan="2" align="center" >#comboMuestras()</td>												
+			<td align="center" valign="top">
+				<input type="submit" value="Asignar muestra" name="eventSubmit_doAgregarmuestra" class="boton" onClick="return validaConfigurarmuestra();">
+			</td>
+		</tr>
+		<tr><td>&nbsp;</td></tr>		
+		<tr><td>&nbsp;</td></tr>
+	</table>	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla" id="muestras">
+			<tr>
+				<th width="55%" nowrap>Muestra</th>
+				<th width="15%" nowrap>Primaria</th>
+				<th width="15%" nowrap>Secuencia</th>
+				<th width="15%" nowrap>&nbsp;</th>
+			</tr>
+		#set( $intCont = 0 )
+		#muestras()
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">		
+		<tr><td>&nbsp;<input type="hidden" name="hdnNumMuestras" value="$intCont" ></td></tr>
+		<tr><td>&nbsp;<input type="hidden" name="hdnPrimaria" value="" ></td></tr>
+		<tr>
+			<td align="center">
+				<input type="submit" value="Guardar" name="eventSubmit_doAsignarmuestrasexamen" class="boton" onclick="return verificaPrimario();">
+			</td>			
+			<td align="center">
+				<input type="submit" value="Regresar" name="eventSubmit_doRegresarexamen" class="boton">
+			</td>			
+		</tr>		
+	</table>	
+</form>
+	

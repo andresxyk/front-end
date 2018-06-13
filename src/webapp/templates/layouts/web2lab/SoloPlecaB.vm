@@ -1,0 +1,50 @@
+## Set defaults for all pages using this layout.  Anything set here can
+## be overridden in the screen templates
+$page.setTitle("WEB2LAB")
+$page.setHttpEquiv("Content-Style-Type","text/css")
+$page.setHttpEquiv("PRAGMA","NO-CACHE")
+$page.setHttpEquiv("CACHE-CONTROL","NO-CACHE")
+$page.setHttpEquiv("expires","-1")
+##$page.addStyleSheet($content.getURI("css/web2lab.css"))
+#set ($cMarca =$data.getUser().getConfirmed())	
+#if ($!cMarca == "1")	
+	$page.addStyleSheet($content.getURI("css/marcas/olab.css"))
+#elseif($!cMarca == "4")
+	$page.addStyleSheet($content.getURI("css/marcas/azteca.css"))
+#elseif($!cMarca == "5")
+	$page.addStyleSheet($content.getURI("css/marcas/condesa.css"))
+#end								
+$page.addBodyAttribute("marginheight","0")
+$page.addBodyAttribute("topmargin","0")
+$page.addBodyAttribute("leftmargin","0")
+$page.addBodyAttribute("marginwidth","0")
+## build the HTML, HEAD, and BODY tags dynamically
+
+##$page.DefaultDoctype
+<html>
+#TurbineHtmlHead()
+<body #TurbineHtmlBodyAttributes() class="fondo">
+<script>
+//<--
+	javascript:window.history.forward(1);
+//-->
+</script>
+<table width="750" border="0" cellpadding="0" cellspacing="0" class="fondo">
+	<tr class="fondo"> 
+		<td>
+            <table width="100%" border="0" cellspacing="0" class="fondo">
+            	<tr>
+            		<td width="100%" valign="top">
+            			<table width="100%" border="0" cellspacing="5" class="fondo">
+            				<tr>
+            					<td>$screen_placeholder</td>
+            				</tr>
+            			</table>
+            		</td>
+            	</tr>
+            </table> 
+		</td>
+	</tr>
+</table>
+</body>
+</html>

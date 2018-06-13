@@ -1,0 +1,41 @@
+$data.setLayoutTemplate("/web2lab/templateFrames.vm")
+
+#set ( $codigoZPL = $data.getParameters().getString("strEtiquetaZPL"))
+
+<script language="vbscript">
+	option explicit
+	
+	sub ejecutar()
+		'Declaracion de variables 
+		Dim objfso, fileZpl, objShell
+		Dim sCommand
+		Dim sEtiquetas
+		
+		sEtiquetas = document.frmZebra.hdnEtiquetasZPL.value
+	
+		Set objfso = CreateObject("Scripting.FileSystemObject")
+		Set fileZpl = objfso.CreateTextFile("c:\web2labzebra\Etiqueta.zpl", True)
+		fileZpl.WriteLine(sEtiquetas)
+		fileZpl.Close
+		
+		Set ObjShell = CreateObject("Wscript.shell")
+		sCommand = "c:\web2labzebra\imprimirZebra.bat"
+		ObjShell.run sCommand,1,true
+		objfso.DeleteFile "c:\web2labzebra\Etiqueta.zpl" 	
+					
+		Set objfso  = nothing
+		Set fileZpl = nothing
+		Set ObjShell = nothing
+	End Sub
+</script>
+
+<form name="frmZebra" method="get">
+	
+	<input type="hidden" name="hdnEtiquetasZPL" value="$!codigoZPL" >
+	
+</form>
+
+<script language="vbscript">
+	call ejecutar()
+	self.close()
+</script>			

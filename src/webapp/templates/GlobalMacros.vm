@@ -1,0 +1,199 @@
+#* ------------------------------------------------------------------
+#
+# Macros that are used for displaying input forms.
+#
+*# ------------------------------------------------------------------
+
+## Macro que crea control tipo hidden
+#macro (formHidden $name $value $extra)
+    <input type="hidden" name="$name" value="$!value" $extra>
+#end
+
+## Macro que crea una opcion de un componente Select
+#macro (option $value $label $select)
+    #if("$value" == "$select")
+        <option value="$value" selected>$label</option>
+    #else
+        <option value="$value">$label</option>
+    #end
+#end
+
+#macro(tab $title $lnk $label $sel)
+    #if ($label == $sel)
+              <th title="$title"><a href="$lnk">$label</a></th>
+    #else
+              <td title="$title"><a href="$lnk">$label</a></td>
+    #end
+#end
+
+#macro(tabEvento $title $lnk $label $sel $evento $onOf $idElemento)
+    #if ($label == $sel)
+              <th title="$title"><a href="$lnk" onClick="$evento" $onOf id="$idElemento">$label</a></th>
+    #else
+              <td title="$title"><a href="$lnk" onClick="$evento" $onOf id="$idElemento">$label</a></td>
+    #end
+#end
+
+#macro (focus $val)
+#set ( $focus = $val)
+#end
+
+#macro (securityTabSet $sel)
+    #set ( $userLnk = $link.toString()) ## Reset the value of $link
+    #set ( $userLnk = $link.setPage("security,FluxUserList.vm").toString())
+    #set ( $grpLnk  = $link.setPage("security,FluxGroupList.vm").toString())
+    #set ( $roleLnk = $link.setPage("security,FluxRoleList.vm").toString())
+    #set ( $permLnk = $link.setPage("security,FluxPermissionList.vm").toString())
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+#tab("View User List" $userLnk "Users" $sel)
+#tab("View Group List" $grpLnk "Groups" $sel)
+#tab("View Role List" $roleLnk "Roles" $sel)
+#tab("View Permission List" $permLnk "Permissions" $sel)
+         </tr>
+        </table>
+       </div>
+#end
+
+#macro (storeManagementTabSet $sel)
+    #set ( $prodLnk = $link.toString()) ## Reset the value of $link
+    #set ( $prodLnk = $link.setPage("admin,product,List.vm").toString())
+    #set ( $catLnk  = $link.setPage("admin,product,List.vm").toString())
+    #set ( $srepLnk = $link.setPage("admin,SalesReport.vm").toString())
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+#tab("View Product List" $prodLnk "Products" $sel)
+#tab("View Category List" $catLnk "Categories" $sel)
+#tab("View Sales Report" $srepLnk "Sales Report" $sel)
+         </tr>
+        </table>
+       </div>
+#end
+
+#macro (webContentManagementTabSet $sel)
+    #set ( $tmpLnk   = $link.toString()) ## Reset the value of $link
+    #set ( $secLnk   = $link.setPage("helice,SectionList.vm").toString())
+    #set ( $attrLnk  = $link.setPage("helice,AttributeList.vm").toString())
+    #set ( $ntypeLnk = $link.setPage("helice,AssetTypeList.vm").toString())
+    #set ( $ftLnk    = $link.setPage("helice,FamilyTypeList.vm").toString())
+    #set ( $famLnk   = $link.setPage("helice,FamilyList.vm").toString())
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+#tab("View Section List" $secLnk "Sections" $sel)
+#tab("View Asset Type List" $ntypeLnk "Asset Types" $sel)
+#tab("View Attribute List" $attrLnk "Attributes" $sel)
+#tab("View Family Type List" $ftLnk "Family Types" $sel)
+#tab("View Family List" $famLnk "Families" $sel)
+         </tr>
+        </table>
+       </div>
+#end
+
+#macro (workflowTabSet $sel)
+    #set ( $tmpLnk    = $link.toString()) ## Reset the value of $link
+    #set ( $wfLnk     = $link.setPage("helice,WorkflowList.vm").toString())
+    #set ( $stepLnk   = $link.setPage("helice,WorkflowStepList.vm").toString())
+    #set ( $stateLnk  = $link.setPage("helice,WorkflowStateList.vm").toString())
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+#tab("View Workflow List" $wfLnk "Workflows" $sel)
+#tab("View Workflow Steps List" $stepLnk "Steps" $sel)
+#tab("View Workflow States List" $stateLnk "States" $sel)
+         </tr>
+        </table>
+       </div>
+#end
+
+#macro (debugReport )
+       <div class="h3">
+        <h3>SQL Statments</h3>
+        <table border="0" cellspacing="2" cellpadding="3" >
+    #foreach ( $stm in $debugSQL )
+        #if ($t == "a") #set ($t = "b") #else #set ($t = "a") #end
+         <tr class="$t"><td>$stm</td></tr>
+    #end
+        </table>
+        <h3>Selected Objects</h3>
+        <table border="0" cellspacing="2" cellpadding="3" >
+         <tr>
+          <th>Object Class</th>
+          <th>Primary Key</th>
+         </tr>
+    #foreach ( $obj in $objs )
+        #if ($t == "a") #set ($t = "b") #else #set ($t = "a") #end
+         <tr class="$t">
+          <td>$obj.getClass().getName()</td>
+          <td>$obj.getPrimaryKey()</td>
+         </tr>
+    #end
+        </table>
+        <h3>Source Contents</h3>
+        <table border="0" cellspacing="2" cellpadding="3" >
+         <tr>
+    #foreach ( $cname in $sourceColNames )
+          <th>$cname</th>
+    #end
+         </tr>
+    #foreach ( $row in $source )
+        #if ($t == "a") #set ($t = "b") #else #set ($t = "a") #end
+         <tr class="$t">
+        #foreach ( $cname in $sourceColNames )
+          <td>$row.getString($cname)</td>
+        #end
+         </tr>
+    #end
+        </table>
+        <h3>Report Data</h3>
+        <table border="0" cellspacing="2" cellpadding="3" >
+         <tr>
+          <th>Type</th>
+    #foreach ( $cname in $reportDataColNames )
+          <th>$cname</th>
+    #end
+         </tr>
+    #foreach ( $row in $reportData )
+        #if ($t == "a") #set ($t = "b") #else #set ($t = "a") #end
+         <tr class="$t">
+          <td>$row.getRowType()</td>
+        #foreach ( $cname in $reportDataColNames )
+          <td>$row.getString($cname)</td>
+        #end
+         </tr>
+    #end
+         </tr>
+        </table>
+       </div>
+#end
+
+#macro (titlePage $titulo)
+<tr>
+    <td align="center" valign="middle">
+ <br>
+
+   <table width="650" border="0" cellspacing="1">
+        <tr>
+          <td><table width="672" border="0" cellpadding="0" cellspacing="0">
+              <tr>
+                <td width="11" height="21" background="$content.getURI("images/es_izs.jpg")">&nbsp;</td>
+                <td width="629" background="$content.getURI("images/tit_la.jpg")">&nbsp;</td>
+                <td width="10"  background="$content.getURI("images/es_des.jpg")">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="30" background="$content.getURI("images/tit_li.jpg")">&nbsp;</td>
+                <td class="titulologin"> &nbsp;&nbsp;$titulo</td>
+                <td  background="$content.getURI("images/tit_ld.jpg")">&nbsp;</td>
+              </tr>
+              <tr>
+                <td height="21" valign="top" background="$content.getURI("images/es_izi.jpg")">&nbsp;</td>
+                <td  background="$content.getURI("images/tit_lb.jpg")">&nbsp;</td>
+                <td  background="$content.getURI("images/es_dei.jpg")">&nbsp;</td>
+              </tr>
+            </table></td>
+        </tr>
+#end
+
+

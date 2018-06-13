@@ -1,0 +1,70 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT>
+#set ( $gStrModo = $CSeguridadTool.getModo() )
+#set ( $gStrRole = $CSeguridadTool.getRole() )
+##set ( $strLigaActual = $link.setPage("web2lab,seguridad,Roles_Form.vm"))
+##set ( $strLigaActual = $link.setAction("seguridad.BRoleAction").toString())
+##set ( $strCargapagina = $link.setPage("web2lab,seguridad,Roles.vm").toString())
+
+#set ( $strLigaAct = $link.setPage("web2lab,seguridad,Roles.vm"))
+#set ( $strLigaAct = $link.setAction("seguridad.BRoleAction").toString())
+#set ( $strCargapagina = $link.setAction("seguridad.BRoleAction").setPage("web2lab,seguridad,Roles_Form.vm").toString())
+
+#if ($gStrModo == "modify")
+    #set ($titlePage = "Modifica rol")
+#elseif ($gStrModo == "delete") 
+    #set ($titlePage = "Elimina rol")
+#else
+    #set ($gStrModo = "insert")
+    #set ($titlePage = "Ingresa un nuevo rol")
+#end
+<SCRIPT LANGUAGE ="JavaScript">
+
+	function irAurl() { 
+		window.document.frmRoleForma.action = "$strCargapagina";
+	}
+</script>
+<form method="post" action="$strLigaAct" name="frmRoleForma" onsubmit="return validaVacios('frmRoleForma', 'txtNombre', 'RoleNombre');">
+	<table width="100%" class="tabla">
+		<tr>   
+            <td>
+				#if($!bolCreado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Alta de rol exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El rol: $!strMensaje, se dio de alta con &eacute;xito.</font></b>
+				#elseif($!bolCreado == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Rol existente"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El rol: $!strMensaje, ya existe.</font></b>
+				#end
+			</td>
+        </tr>
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" class="tabla" width="100%">
+        <tr>
+            <th>Nombre del rol</th>
+            <td>
+			#if ($gStrModo != "delete")
+				<input type="text" name="txtNombre" value="$!gStrRole.Name" onKeyUp="cambiaMay('frmRoleForma', 'txtNombre');">
+                <input type="hidden" name="hdnNombreAnterior" value="$!gStrRole.Name">
+			#else
+                <input type="hidden" name="hdnNombre" value="$!gStrRole.Name">
+                $!gStrRole.Name
+			#end
+            </td>
+         </tr>         
+    </table>
+
+	#if ($gStrModo == "modify")
+    <input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar" />
+	#elseif ($gStrModo == "delete")
+    <input type="submit" name="eventSubmit_doBorra" class="boton" value="Eliminar" onClick="return confirm('Confirma eliminar Role');"/>
+	#else
+    <input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onClick="irAurl();"/>
+	#end
+	#if($!bolCreado == "true")
+		<input type="button"  name="" value="Regresar" class="boton" onClick="location.href='$strLigaAct'">
+	#else
+    	<input type="button" name="eventSubmit_doCancela" class="boton" value="Cancelar" onClick="location.href='$strLigaAct'"/>     
+    #end
+   
+    
+</form>

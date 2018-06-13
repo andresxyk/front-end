@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <link type="text/css" href="css/websocket/default.css?123" rel="stylesheet" />
+    <link type="text/css" href="css/websocket/smoothness/jquery-ui-1.8.22.custom.css" rel="stylesheet" />
+    <script type="text/javascript" src="javascript/websocket/jquery-1.9.1.min.js"></script>
+    <script type="text/javascript" src="javascript/websocket/jquery-ui-1.8.22.custom.min.js"></script>
+    <script type="text/javascript" src="javascript/websocket/stomp.js"></script>
+    <script type="text/javascript" src="javascript/websocket/activeMQClient.js?2032"></script>
+    <title>Autentia - Chat con Websockets y ActiveMQ</title>
+    <script type="text/javascript">
+        $(function(){
+            $('#conversations').tabs();
+        });
+    </script>
+</head>
+<body>
+
+
+
+
+<a href="http://www.autentia.com" target="_blank"><img src="images/logo_olab.png" alt="Laboratorio Olab"/></a>
+<h1>EJEMPLO DE WEBSOCKETS STOMP Y ACTIVEMQ</h1>
+<p class="info">
+    Recuerda que debes tener ActiveMQ levantado con el soporte de WebSockets configurado (transportConnector). La URL y el puerto se configuran en el fichero activeMQClient.js (por defecto ws://localhost:61614)
+</p>
+<div id="container">
+    <div class="leftPanel">
+        <div class="userInfo">
+            <span class="disconnected" id="status">Desconectado</span>
+            Nombre: <input type="text" id="userName"/><span class="onLineUserName"></span>
+        </div>
+        <div>
+            <button id="connect" onclick="ActiveMQClient.connect($('#userName').val());">Conectar</button>
+            <button id="disconnect" disabled="disabled" onclick="ActiveMQClient.disconnect()">Desconexi&oacute;n</button>
+        </div>
+        <div id="onLineUsersPanel">
+            <h3>Usuarios conectados:</h3>
+            <ul id="onlineUsers">
+
+            </ul>
+        </div>
+
+    </div>
+
+    <div id="conversations">
+        <ul>
+        </ul>
+    </div>
+</div>
+
+
+
+
+
+</body>
+</html>

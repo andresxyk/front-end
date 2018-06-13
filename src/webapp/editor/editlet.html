@@ -1,0 +1,33 @@
+<HTML>
+<HEAD>
+<TITLE>Html Editor</TITLE>
+<script src="editor.js"></script>
+<script>
+var path="";
+</script>
+</HEAD>
+<BODY topmargin="0" leftmargin="0" onafterprint="return window_onafterprint()" LANGUAGE="javascript">
+	<center>
+		HTML EDITOR
+		<table border="0" width="760" cellspacing="0" cellpadding="2" style="HEIGHT: 151px; WIDTH: 760px">
+		<tr>
+			<td width="100%" valign="center" align="middle">
+				<script>
+				// Set the input content here
+				setContent('Your Content');
+
+				// Set the editlet editor 
+				setEditlet(path);
+				</script>
+
+				<form name="form1" method="post" action ="">
+					<input 		name="hid_out_content"			value=""     	type="hidden">
+					<input 		name="clk"	value="submit" type="button" onclick ="return getContent()">
+				</form>
+
+			</td>
+		</tr>
+		</table>
+	</center>
+</BODY>
+</HTML>

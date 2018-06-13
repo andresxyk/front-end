@@ -1,0 +1,14 @@
+$page.setTitle("Error")
+
+<font face="verdana,geneva,helvetica">
+
+<h2>Error</h2>
+
+#if($data.getMessage())
+Message: $data.getMessage()
+#end
+
+</font>
+
+<br>
+

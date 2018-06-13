@@ -1,0 +1,37 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+
+
+#set ($titlePage = "Alta Bloques Factura" )
+#set ($strKfacturas = $data.getParameters().getString('strKfacturas') )
+#set ($montoTotalNota = $data.getParameters().getString('montoTotalNota') )
+#set ($cConvenio = $data.getParameters().getString('cConvenio') )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($aBloque = $data.getParameters().getString('aBloque') )
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/NotadeCredito.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/NotasdeCredito.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+
+<form name="frmAltaBloques" action="$ligaAct" method="post" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">
+	<input type="hidden" id="hdnFacturas" name="hdnFacturas" value="$!strKfacturas">	
+	<input type="hidden" id="hdnMontoNota" name="hdnMontoNota" value="$!montoTotalNota">
+	<input type="hidden" id="hdnCconvenio" name="hdnCconvenio" value="$!cConvenio">
+	<input type="hidden" id="hdnABloques" name="hdnABloques" value="$!aBloque">
+		
+	<table	border="0" class="tabla" width="100%">	
+		<tr><th colspan="5">Asignacion de Bloques a Facturas</th></tr>
+	</table>
+	<div id="gridFactuasElegidasAsignacionBloque"> 
+	</div>
+</form>
+#if($strKfacturas)
+	<script>		
+	     mostrarFacturasAsignacionBloque('$strKfacturas','$aBloque');
+	</script>	
+#end	

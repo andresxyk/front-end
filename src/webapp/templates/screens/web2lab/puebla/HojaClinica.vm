@@ -1,0 +1,543 @@
+#set ($titlePage = "Hoja Cl&iacute;nica" )
+#set ($intkPaciente = $data.getParameters().getString('kPaciente') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/puebla/HojaClinica.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/Puebla.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#if($intkPaciente)
+	<script>		
+		 window.onload = init;		
+		 buscarPacienteECE("$!intkPaciente");
+	</script>	
+#end
+
+#set ($ligaPDFFormatoPuebla = $link.setPage("www.olab.com.mx/puebla/HistoriaClinica.pdf").toString() )
+#set ($strLigaPaciente = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
+
+<form name="frmPantallaPuebla" action="" method="post" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="kcuestionariopacientepuebla" name="kcuestionariopacientepuebla" value="0">	
+    <table border="0" align="center" style="width: 980px" frame="border">
+    	<tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">IDENTIFICACI&Oacute;N DE LA PACIENTE</b>
+    	         </center>
+    	    </th>     
+        </tr>
+     	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Paciente
+            </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" value="0" STYLE="font-size: 30px;" size="5" />
+            </td>  
+			<td>
+			</td>    	    
+			<td onclick="viewPacienteCaptura('$strLigaPaciente',window.document.frmPantallaPuebla.txtCodigoPaciente.value);"  style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+				<a href="" onclick="return false;" title="Datos Paciente" style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal"><< Regresar Datos del Paciente</a>
+			</td>    	    
+    	</tr>  
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Apellido Paterno 
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Apellido Materno 
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Nombre(s) 
+    	    </td> 	       
+        </tr> 	
+        <tr>
+            <td >
+                <input type="text" id="txtApellidoPaterno"  size="46"/>
+    	    </td>     
+            <td >
+                <input type="text" id="txtApellidoMaterno"  size="46" />
+    	    </td>     
+            <td >
+                <input type="text" id="txtNombre"  size="46" />
+    	    </td>	    
+    	</tr>
+     	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Fecha nacimiento
+    	    </td>     
+            <td style="width: 187px">
+    		    <div id="CalendarioNac">
+                    <input type="text" name="txtFechaNacimiento" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onFocus="javascript:obtenerEdadfrm(window.document.frmHojaClinica);" onChange="javascript:this.value=validaFormatoFecha(this.value); obtenerEdadfrm(window.document.frmHojaClinica);">		
+    		    </div>				
+            </td>     
+            <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
+                <b>Edad (años-meses-dias)</b
+    	    </td>     
+            <td style="width: 158px">
+                <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                <input type="text"  id="txtEdadDescompuesta" style="font-size: 19px;" value="$!objDemPaciente.getIStrAnios()" class="textflat" disabled>&nbsp;
+    	    </td>     
+        </tr> 
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Tel&eacute;fono
+    	    </td>     
+            <td style="width: 250px">
+                <input type="text" id="txtTelefono" size="30"/>
+            </td>     
+        </tr>
+    	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" style="width: 490px" />
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" style="width: 157px"/>
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" style="width: 180px" />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Estado
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtEstado" />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" />
+    	    </td>
+        </tr>   	
+    </table>
+	<table border="0" align="center" style="width: 980px" frame="border">
+		<tr>
+			<th colspan="6">
+				<center>
+					<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">DATOS PARA LA HOJA CL&Iacute;NICA</b>
+				</center>
+			</th>     
+		</tr>
+		<tr align="left" >
+			<td>
+				Edad de primera menstruaci&oacute;n
+			</td>  
+			<td>
+				Cuantos hijos tiene 
+			</td>
+			<td>
+				Cuantos abortos tiene 
+			</td>  
+		</tr>
+		<tr align="left" >
+			<td>
+				<input type="text" id="txtEdadPrimMens" onKeyPress="numero()" size="2" maxlength="2" />
+			</td>     	                
+			<td>
+				<input type="text" id="txtHijos" onKeyPress="numero()" size="2" maxlength="2"/>
+			</td> 
+			<td>
+				<input type="text" id="txtAbortos" onKeyPress="numero()" size="2" maxlength="2"/>
+			</td>
+		</tr> 
+		<tr> 
+			<td>
+				Esta embarazada actualmente
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radEmbarazo" value="1">SI &nbsp;
+				<input type="radio" name="radEmbarazo" value="0">NO 
+			</td>
+			<td>
+				<input type="text" id="txtEmbarazada" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td> 
+		</tr>
+		<tr> 
+			<td>
+				Se ha realizado mastograf&iacute;as
+			</td>
+			<td>
+				En que a&ntilde;o
+			</td>  
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radMastografiaAnterior" value="1">SI &nbsp;
+				<input type="radio" name="radMastografiaAnterior" value="0" checked>NO 
+			</td>
+			<td>
+				<input type="text" id="txtCuandoMasto" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td> 
+		</tr>
+		<tr> 
+			<td>
+				Ha tenido c&aacute;ncer de mama
+			</td>
+			<td>
+				Cuando
+			</td>  
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radCancerMama" value="1">SI &nbsp;
+				<input type="radio" name="radCancerMama" value="0">NO 
+			</td>
+			<td >
+				<input type="text" id="txtCuandoCancer" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td> 
+		</tr>
+		<tr> 
+			<td>
+				&Uacute;ltima menstruaci&oacute;n
+			</td>  
+		</tr>
+		<tr>
+			<td>
+				<input type="text" id="txtUltimaMens" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+		</tr>
+	</table>
+	<table border="0" align="center" style="width: 980px" frame="border">
+		<tr>
+			<th colspan="6">
+				<center>
+					<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">HISTORIA DE C&Aacute;NCER EN LA FAMILIA</b>
+				</center>
+			</th>     
+		</tr>
+		<tr>
+			<td>  &nbsp; </td>   
+		</tr>	
+		<tr>	
+			<td align="center" >
+				<table border="1" cellspacing="5" width="170"  frame="border">
+			</td>
+		</tr>
+		<tr>
+			<td>
+				PARENTESCO
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				EDAD
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Madre
+			</td>
+			<td>
+				<input type="text" id="txtMadre" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtEdadMadre" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				T&iacute;as
+			</td>
+			<td>
+				<input type="text" id="txtTias" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtEdadTias" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Abuelas
+			</td>
+			<td>
+				<input type="text" id="txtAbuelas" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtEdadAbuelas" size="46"  maxlength="35" onKeyPress="mayuscula()"/>
+			</td>
+		</tr>
+	</table>
+	<table border="0" align="center" style="width: 980px" frame="border">
+		<tr>
+			<th colspan="6">
+				<center>
+					<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">OTROS</b>
+				</center>
+			</th>     
+		</tr>
+		<tr>
+			<td>
+				A ingerido anticonceptivos &nbsp;
+			</td>
+			<td>
+				Cuales
+			</td>
+			<td>
+				Cuanto tiempo
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radAnticonceptivo" value="1">SI &nbsp;
+				<input type="radio" name="radAnticonceptivo" value="0">NO 
+			</td>
+			<td>
+				<input type="text" id="txtCualesAnti" size="46"  maxlength="50" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtTiempoAnti" size="46"  maxlength="50" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Le han realizado cirug&iacute;a de mama
+			</td>
+			<td>
+				Que tipo de cirug&iacute;a
+			</td>
+			<td>
+				Cuando
+			</td>
+			<td>
+				Donde
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radCirugia" value="1">SI &nbsp;
+				<input type="radio" name="radCirugia" value="0">NO 
+			</td>
+			<td>
+				<input type="text" id="txtTipoCirugia" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtCuandoCirugia" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtDondeCirugia" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Presenta alguna se&ntilde;a en mama
+			</td>
+			<td>
+				Donde
+			</td>
+			<td>
+				De que tipo
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radSenaMama" value="1">SI &nbsp;
+				<input type="radio" name="radSenaMama" value="0">NO 
+			</td>
+			<td>
+				<input type="text" id="txtDondeSena" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				<input type="text" id="txtTipoSena" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Motivo por el que se realiza el estudio de Mastograf&iacute;a
+			</td>
+			<td>
+				<input type="text" id="txtMotivoEstudio" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Tiene alguna lesi&oacute;n en sus mamas
+			</td>
+			<td>
+				En donde se ubica
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radLesion" value="1">SI &nbsp;
+				<input type="radio" name="radLesion" value="0">NO
+			</td>
+			<td>
+				<input type="text" id="txtUbicacionLesion" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Fuma
+			</td>
+			<td>
+				Desde cuando
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<input type="radio" name="radFuma" value="1">SI &nbsp;
+				<input type="radio" name="radFuma" value="0">NO
+			</td>
+			<td>
+				<input type="text" id="txtDesdeCuandoFuma" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				Padece alguna enfermedad
+			</td>
+			<td>
+				<input type="text" id="txtPadecimiento" size="46"  maxlength="45" onKeyPress="mayuscula()"/>
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td>
+				&nbsp;
+			</td>
+			<td>
+				&nbsp;
+			</td>
+			<td style="width: 158px">
+				<input type="button" class="boton" onClick="actualizaCuestionario();" value="Guardar Cuestionario">
+			</td>
+			<td style="width: 158px">
+				<input type="button" class="boton" id="butImprimirFormato"  value="Imprimir Cuestionario" onClick="imprimirCuestionario();">
+			</td>
+		</tr>	
+	</table>
+</form>
+<script>		
+		frmPantalla = window.document.frmPantallaPuebla;
+		document.getElementById('txtCuandoMasto').className = 'textflat';
+		frmPantalla.txtCuandoMasto.disabled = true;
+
+		frmPantalla.radMastografiaAnterior[0].disabled = true;
+		frmPantalla.radMastografiaAnterior[1].disabled = true;		
+		
+</script>	

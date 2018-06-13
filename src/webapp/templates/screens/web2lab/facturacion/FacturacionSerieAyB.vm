@@ -1,0 +1,325 @@
+#set ($titlePage = "Creacion de Previos" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturaElectronicaEmpresaAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+#set ($lstConvenios = $CatalogosTool.obtenAll("ConvenioCredito","601"))
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+<form name="frmFacturacionSerieAyB" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="5">Generación Serie A y B</th></tr>
+		<tr>
+			 <td align="right" width="50%">Tipo de Factura: 
+				<select id="selTipoSerieFactura" style="width: 120px" align="up">
+					    <option value="0">Seleccionar</option>
+    					<option value="1">Anticipada Serie B por RFC</option>
+    					<option value="2">Anticipada Serie B por Convenio</option>
+    					<option value="3">Nota de credito</option> 
+    					<option value="4">Global</option> 
+    					<option value="5">Anticipada Serie A</option>     		
+    					<option value="6">Copago</option>   			
+		         </select>
+			 </td>
+			<td align="left" width="50%">
+				<input type="button" id="idshowFacturaSerie" name="idshowFacturaSerie" value="Mostrar" onClick="showFacturaSerie();" class="boton">
+			</td>			
+		</tr>
+	</table>
+	<div id="creacionSerieB" style="display:none">
+		<table border="0" class="tabla" width="100%">
+			<tr><th colspan="6">Serie B</th></tr>
+			<tr>
+				<td valign="middle" align="right">
+					*RFC:
+				</td>
+				<td valign="middle">
+					<input type="text" id="txtRFC" size="25" style="width:130px;" onKeyPress="mayusculaIgnorandoCaracteres();">					
+				</td>
+				<td valign="middle" align="right">*Uso de CFDI:
+				</td>
+				<td valign="middle">
+					<select id="selTipoUsoCFDI" name="selTipoUsoCFDI" style="width: 60px" align="up">
+						    <option value="G01">G01</option>
+						    <option value="G02">G02</option>
+						    <option value="G03">G03</option>
+	    					<option value="I01">I01</option>
+	    					<option value="I02">I02</option>
+	    					<option value="I03">I03</option>
+	    					<option value="I04">I04</option>
+	    					<option value="I05">I05</option>
+	    					<option value="I06">I06</option>
+	    					<option value="I07">I07</option>
+	    					<option value="I08">I08</option>
+	    					<option value="D01">D01</option>
+	    					<option value="D02">D02</option>
+	    					<option value="D03">D03</option>
+	    					<option value="D04">D04</option>
+	    					<option value="D05">D05</option>
+	    					<option value="D06">D06</option>
+	    					<option value="D07">D07</option>
+	    					<option value="D08">D08</option>
+	    					<option value="D09">D09</option>
+	    					<option value="D10">D10</option>
+	    					<option value="P01">P01</option>
+			        </select>
+			 	</td>	
+			 	<td valign="middle" align="right">*Marca:
+			 	</td>
+			 	<td valign="middle">
+					<select id="selMarca" style="width: 120px" align="up">
+						    <option value="1">1.Marca OLAB</option>
+						    <option value="4">4.Marca AZTECA</option>
+						   
+			        </select>
+			 	</td>
+		 	</tr>
+		 	<tr>
+			 	<td valign="middle" align="right">
+					*Monto Total:
+				</td>
+				<td valign="middle">
+					<input type="text" id="txtMontoTotal" size="25" style="width:130px;" onKeyPress="montos();">
+				</td>
+				<td valign="middle" align="right">*Forma de pago:
+				</td>
+				<td valign="middle"> 
+					<select id="selFormaPago" style="width: 60px" align="up">
+						    <option value="01">01</option>
+						    <option value="02">02</option>
+						    <option value="03">03</option>
+						    <option value="99">99</option>
+			        </select>
+			 	</td>
+			 	<td valign="middle" align="right">
+					
+				</td>
+				<td valign="middle">
+			        <input type="button" id="idProcesarInfo" name="idProcesarInfo" value="Procesar Informacion" onClick="procesarInformacion();" class="boton">
+				</td>
+			</tr>
+			<tr>
+				<td>
+              	</td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>								
+				<td valign="middle" align="left">
+					<br>	
+					<input type="button" id="idLimpiarSerieB" name="idLimpiarSerieB" value="Limpiar Pantalla" onClick="limpiaPantallaSerieB();" class="boton">
+					<br>
+				</td>
+			</tr>
+		</table>
+	</div>
+	<div id="proceso2" style="display:none">
+		<table border="0" class="tabla" width="100%">
+			<tr>
+				<td valign="middle" align="right">
+					Razon social:
+				</td>
+				<td valign="middle">
+					<select id="selRazonSocial" name="selRazonSocial" style="width: 200px" align="up">
+					</select>
+				</td>
+				<td valign="middle" align="right">
+					*Cantidad de conceptos:
+				</td>
+				<td valign="middle">					
+					<select id="selCantidad" style="width: 50px" align="up">
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="3">3</option>
+						    <option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						    <option value="8">8</option>
+						    <option value="9">9</option>
+						    <option value="10">10</option>
+						    <option value="11">11</option>
+						    <option value="12">12</option>
+						    <option value="13">13</option>
+						    <option value="14">14</option>
+						    <option value="15">15</option>
+						    <option value="16">16</option>
+						    <option value="17">17</option>
+						    <option value="18">18</option>
+						    <option value="19">19</option>
+						    <option value="20">20</option>
+						    <option value="21">21</option>
+						    <option value="22">22</option>
+						    <option value="23">23</option>
+						    <option value="24">24</option>
+						    <option value="25">25</option>
+						    <option value="26">26</option>
+						    <option value="27">27</option>
+						    <option value="28">28</option>
+						    <option value="29">29</option>
+						    <option value="30">30</option>
+			        </select>
+			        <input type="button" id="idMostrarConceptos" name="idMostrarConceptos" value="Mostrar Concepto(s)" onClick="agregar_conceptos();" class="boton">
+				</td>
+			</tr>
+			<tr>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td>
+				</td>
+				<td valign="middle" align="left">						
+						<input type="button" id="idLimpiarSerieBP2" name="idLimpiarSerieBP2" value="Limpiar Pantalla" onClick="limpiaPantallaSerieBProceso2();" class="boton" style="display:none">					
+				</td>
+			</tr>
+		</table>
+	</div>	
+	<div id="creacionAnticipadaSerieA" style="display:none">
+		<table border="0" class="tabla" width="100%">
+			<tr><th colspan="6">Anticipada Serie A</th></tr>
+			<tr>
+				<td valign="middle" align="right">
+					*Convenio:
+				</td>
+				<td valign="middle">
+					<input type="text" id="txtConvenio" size="25" style="width:130px;" onKeyPress="">					
+				</td>
+				<td valign="middle" align="right">*Uso de CFDI:
+				</td>
+				<td valign="middle">
+					<select id="selTipoUsoCFDISerieA" style="width: 60px" align="up">
+						    <option value="G01">G01</option>
+						    <option value="G02">G02</option>
+						    <option value="G03">G03</option>
+	    					<option value="I01">I01</option>
+	    					<option value="I02">I02</option>
+	    					<option value="I03">I03</option>
+	    					<option value="I04">I04</option>
+	    					<option value="I05">I05</option>
+	    					<option value="I06">I06</option>
+	    					<option value="I07">I07</option>
+	    					<option value="I08">I08</option>
+	    					<option value="D01">D01</option>
+	    					<option value="D02">D02</option>
+	    					<option value="D03">D03</option>
+	    					<option value="D04">D04</option>
+	    					<option value="D05">D05</option>
+	    					<option value="D06">D06</option>
+	    					<option value="D07">D07</option>
+	    					<option value="D08">D08</option>
+	    					<option value="D09">D09</option>
+	    					<option value="D10">D10</option>
+	    					<option value="P01">P01</option>
+			        </select>
+			 	</td>	
+			 	<td valign="middle" align="right">*Marca:
+			 	</td>
+			 	<td valign="middle">
+					<select id="selMarcaSerieA" style="width: 120px" align="up">
+						    <option value="1">1.Marca OLAB</option>
+						    <option value="4">4.Marca AZTECA</option>
+						   
+			        </select>
+			 	</td>
+		 	</tr>
+		 	<tr>
+			 	<td valign="middle" align="right">
+					*Subtotal:
+				</td>
+				<td valign="middle">
+					<input type="text" id="txtSubtotal" size="25" style="width:130px;" onKeyPress="montos();">
+				</td>
+				<td valign="middle" align="right">
+					*Forma de pago:
+				</td>
+				<td valign="middle"> 
+					<select id="selFormaPagoSerieA" style="width: 60px" align="up">
+						    <option value="01">01</option>
+						    <option value="02">02</option>
+						    <option value="03">03</option>
+						    <option value="99">99</option>
+			        </select>
+			 	</td>
+			 	<td valign="middle" align="right">
+					*Cantidad de conceptos:
+				</td>
+				<td valign="middle">
+			        <select id="selCantidadSerieA" style="width: 50px" align="up">
+						    <option value="1">1</option>
+						    <option value="2">2</option>
+						    <option value="3">3</option>
+						    <option value="4">4</option>
+						    <option value="5">5</option>
+						    <option value="6">6</option>
+						    <option value="7">7</option>
+						    <option value="8">8</option>
+						    <option value="9">9</option>
+						    <option value="10">10</option>
+						    <option value="11">11</option>
+						    <option value="12">12</option>
+						    <option value="13">13</option>
+						    <option value="14">14</option>
+						    <option value="15">15</option>
+						    <option value="16">16</option>
+						    <option value="17">17</option>
+						    <option value="18">18</option>
+						    <option value="19">19</option>
+						    <option value="20">20</option>
+						    <option value="21">21</option>
+						    <option value="22">22</option>
+						    <option value="23">23</option>
+						    <option value="24">24</option>
+						    <option value="25">25</option>
+						    <option value="26">26</option>
+						    <option value="27">27</option>
+						    <option value="28">28</option>
+						    <option value="29">29</option>
+						    <option value="30">30</option>
+			        </select>
+			        <input type="button" id="idMostrarConceptos" name="idMostrarConceptos" value="Mostrar Concepto(s)" onClick="agregar_conceptos();" class="boton">				
+				</td>
+			</tr>
+			<tr>
+				<td>
+              	</td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>
+	            <td>
+	            </td>								
+				<td valign="middle" align="left">
+					<br>	
+					<input type="button" id="idLimpiarSerieB" name="idLimpiarSerieB" value="Limpiar Pantalla" onClick="" class="boton">
+					<br>
+				</td>
+			</tr>
+		</table>	
+	</div>
+	<div id="CamposConceptos" style="display:none">
+	</div>	
+</form>

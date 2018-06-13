@@ -1,0 +1,227 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+#set ($titlePage = "Facturacion Orden" )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($lstTipoEmpresa = $CatalogosTool.obtenAll("TipoPersona","0"))
+
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/nuevafacturacion/FacturacionInternet.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/nuevafacturacion/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/nuevafacturacion/DatosFiscales.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosOrden.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosExamen.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/OrdenFacturarAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosFiscales.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolFacSucursalesAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/MantenimientoOrdenFacturacion.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;		
+</script>	
+
+
+<form name="frmConsultaOrden" action="$ligaAct" method="post" >	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="idUsuarioPago" name="idUsuarioPago" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+	<input type="hidden" id="txtAdmision" name="txtAdmision" value="$intkOrdenSucursal">	
+	<input type="hidden" id="txtCorreoElectronico" name="txtCorreoElectronico" value="">	
+	<input type="hidden" id="txtDescuentoEmpresa" value='0'>
+	<input type="hidden" id="txtFacturarEmpresa" value='0'>
+	
+    <div id="pagoOrden">                
+	        <table border="0" style="width: 100%" class="tabla" >	        
+				<tr>
+	        		<td align="right">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">SubTotal</b>
+					</td>
+					<td align="left">
+	    				<input type="text" id="txtSubTotal" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Descuento Paciente</b>
+					</td>
+					<td align="left">
+	    				<input type="text" id="txtDescuentoPaciente" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Total a pagar: </b>
+					</td>
+					<td align="left">
+	    				<input type="text" id="txtTotalPagar" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+		       	<tr>
+	        		<td align="right">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">A cuenta: </b>
+					</td>
+	        		<td align="left">
+	    				<input type="text" id="txtAcuenta" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/>
+	    			</td>
+	        	</tr>
+	        	<tr>
+	        		<td align="right">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Adeuda: </b>
+					</td>
+	        		<td align="left">
+						<input type="text" id="txtAdeudo" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/> 
+		                <input type="hidden" id="hdnAdeudo" value="0" />
+	    			</td>        		
+	        	</tr>
+			</table>						
+	</div>		    	
+	<div id="BusquedaFiscal" style="display:none">
+	    <table  border="0"  style="width: 100%" class="tabla">	        
+            <input type="hidden" id="hdnDatosFiscales" value="0" />
+	        <tr>
+	    	    <th colspan="12">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Busqueda Fiscales</b>
+	    	        </center>
+	    	    </th>
+	        </tr>   
+			<tr>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+					<b>Tipo de Empresa:</b><br> 
+				</td>	            
+	        	<td align="left">
+					<select id="selTipoPersona" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+						#foreach($objTipoEmpresa in $lstTipoEmpresa)
+							#option("$!objTipoEmpresa.getCtipopersona()" "$!objTipoEmpresa.getStipopersona()" "0")							
+						#end
+					</select>	
+				</td>			
+			</tr>
+			<tr>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+					<b id="idTextrfc">RFC:</b><br> 				
+				</td>	            
+	        	<td align="left">
+					<input type="text" id="txtRFC" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();validaRFC(window.document.frmConsultaOrden);"  onblur="validaRFC(window.document.frmConsultaOrden);"  onkeyup="comparaRFC();" size="20" maxlength="13" >
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal" >
+					<b id="idTextConfirmacionrfc">RFC CONFIRMACION:</b><br> 
+				</td>	            
+	        	<td align="left">
+					<input type="text" id="txtConfirmarRFC" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();validaRFC(window.document.frmConsultaOrden);"  onblur="validaRFC(window.document.frmConsultaOrden);" onkeyup="comparaRFC();" size="20" maxlength="13" >
+				</td>
+			</tr>
+			<tr>
+	        	<td align="left">
+					<input type="button" id="idBuscarDatosFiscales" value="Buscar Datos Fiscales" onClick="consultaDatosFiscalesGrid(window.document.frmConsultaOrden);" class="boton">
+				</td>     
+			</tr>
+	    </table>
+	</div>
+	<div id="DireccionFiscal" style="display:none">
+	    <table border="0"  align="center" style="width: 883px">	        
+            <input type="hidden" id="hdnDatosFiscales" value="0" />
+	        <tr>
+	    	    <th colspan="6">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Fiscales</b>
+	    	        </center>
+	    	    </th>
+	        </tr>   
+			<tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+					Raz&oacute;n Social
+	    	    </td>	            
+	            <td colspan="5">
+					<input type="text" id="txtRazonSocialFiscal" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();" size="70" >
+					<input type="hidden" id="hdnkDatoFiscal" value="0">
+				</td>
+			</tr>
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Calle
+	    	    </td>	            
+	            <td colspan="5">
+	                <input type="text" id="txtCalleFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 490px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	        </tr>   
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Colonia
+	    	    </td>
+	            <td style="width: 158px">
+	                <input type="text" id="txtColoniaFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 157px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	        </tr>   
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Delegaci&oacute;n o Municipio
+	    	    </td>
+	            <td style="width: 158px">
+	                <input type="text" id="txtDelegacionMunicipioFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	        </tr>   
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Estado
+	    	    </td>
+	            <td style="width: 158px">
+	                <input type="text" id="txtEstadoFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();"  />
+	    	    </td>
+	        </tr>   
+			<tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                C&oacute;digo Postal
+	    	    </td>
+	            <td>
+	                <input type="text" id="txtCodigoPostalFiscal" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="javascript:return numero();"/>
+					<input type="hidden" id="hdnCodigoPostalFiscal" value="0">
+	    	    </td>			
+			</tr>
+	        <tr>
+        		<td>
+    	    		<input type="button" id="idLimpiarDatosFiscales" value="Guardar Datos Fiscales" onClick="cleanDatosFiscales();" class="boton">
+            	</td>     
+        		<td>
+		    		<input type="button" id="idGuardarFactura" value="Guardar Factura" onClick="guardarFactura();" class="boton">
+	        	</td>     
+	        </tr>   
+	    </table>
+	</div>
+    <div id="gridprogressbar" style="display:none">                
+        <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+            <td>
+        		<p align=center><img src="$content.getURI("images/ajax-loader.gif")" >	
+            </td>
+    	</table>
+	</div>            	 	
+	<div id="gridbusquedaDatosFiscales" style="display:none">                
+	</div>            		        					
+	<div id="RegistraUsuario" style="display:none">
+	</div>		    		
+	<div id="RegistraPago" style="display:none">		
+	</div>		    	
+</form>
+
+#if($intkOrdenSucursal)
+	<script>		
+	     mostrarFactura('$intkOrdenSucursal');
+		 adminDIV("RegistraUsuario","visible","inline");
+	</script>	
+#end

@@ -1,0 +1,50 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/TerminoTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/TomaMuestraAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ( $titlePage = "Termino Toma Muestra") 
+
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+
+#set ($bolTipoExamen = $data.getParameters().getString('bolTipoExamen') )
+
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+
+<form name="frmTerminoTomaMuestra">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="kOrdenSucursal" name="kOrdenSucursal" value="$!intkOrdenSucursal">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdlTipoExamen" name="hdlTipoExamen" value="$!bolTipoExamen">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridConfirmacion"> 
+    	<table border="0" width="100%" class="tabla">
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Numero de Empleado
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoEmpleado" value="" STYLE="font-size: 30px;" onKeyPress="terminoMuestra();"  size="5" />
+    	    </td>     
+    	</table>               
+    </div> 
+</form>
+<script>
+	document.getElementById('txtCodigoEmpleado').focus();		    		 
+</script>	

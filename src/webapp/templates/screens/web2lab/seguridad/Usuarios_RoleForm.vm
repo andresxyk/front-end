@@ -1,0 +1,43 @@
+#set ($ObjUsuario = $CSeguridadTool.getUsuario())
+#set ($ObjAccesos = $CSeguridadTool.getACL())
+#set ( $strLigaActual  = $link.setPage("web2lab,seguridad,Usuarios.vm"))
+#set ( $strLigaActual  = $link.setAction("seguridad.BUserAction").toString())
+#set ($titlePage = "Asignando roles a $!ObjUsuario.UserName")
+<form method="post" action="$strLigaActual">
+	<table border="0" cellspacing="2" cellpadding="3" class="tabla" width="100%">
+		<tr>
+			<td>&nbsp;</td>
+            <th colspan="5" align="center">ROLES</th>           
+        </tr> 	 
+	 	<tr>
+	 		<th>GRUPOS</th>
+			#foreach ($objRole in $CSeguridadTool.getRoles())
+           		<th>$objRole.Name</th>
+			#end
+        </tr>
+		#foreach ($objGrupo in $CSeguridadTool.getGrupos())    
+        	<tr>          
+           		<th>$objGrupo.Name</th>
+    			#foreach ($objRole in $CSeguridadTool.getRoles())
+        			#if ($ObjAccesos.hasRole($objRole, $objGrupo))
+            			#set ($checked = "checked")
+        			#else
+            			#set ($checked = "")
+        			#end
+           		<td colspan="1">
+	      			<input type="checkbox" name="${objGrupo.Name}${objRole.Name}" $checked>
+           		</td>
+    			#end
+          	</tr>
+		#end
+    </table>         	 
+	<table border="0" cellspacing="2" cellpadding="3" class="tabla" width="100%">
+		<td>
+			<input type="hidden" name="hdnNombreUsuario" value="$ObjUsuario.UserName">
+          	<input type="submit" name="eventSubmit_doRoles" class="boton" value="Actualizar"/>
+          	<input type="submit" name="eventSubmit_doCancela" class="boton" value="Cancelar"/>
+	 	</td> 
+	 </table>
+</form>      
+
+

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"  ?>
+<!-- Created with iReport - A designer for JasperReports -->
+<!DOCTYPE jasperReport PUBLIC "//JasperReports//DTD Report Design//EN" "http://jasperreports.sourceforge.net/dtds/jasperreport.dtd">
+<jasperReport
+		 name="RepIndicacionPaciente"
+		 columnCount="1"
+		 printOrder="Vertical"
+		 orientation="Portrait"
+		 pageWidth="549"
+		 pageHeight="791"
+		 columnWidth="549"
+		 columnSpacing="0"
+		 leftMargin="0"
+		 rightMargin="0"
+		 topMargin="0"
+		 bottomMargin="0"
+		 whenNoDataType="NoPages"
+		 isTitleNewPage="false"
+		 isSummaryNewPage="false">
+	<property name="ireport.scriptlethandling" value="0" />
+	<import value="java.util.*" />
+	<import value="net.sf.jasperreports.engine.*" />
+	<import value="net.sf.jasperreports.engine.data.*" />
+	<parameter name="kordensucursalcotizacion" isForPrompting="false" class="java.lang.Double">
+		<defaultValueExpression ><![CDATA[new Double(0)]]></defaultValueExpression>
+	</parameter>
+	<queryString><![CDATA[SELECT ce.cexamen uorden,
+       eec.sindicacionpaciente sindicacionpaciente
+FROM E_EXAMEN_CONFIGURACION eec 	
+	INNER JOIN C_EXAMEN ce 			
+	ON eec.cexamen=ce.cexamen 		
+WHERE ce.cexamen IN (SELECT toesc.cexamen cexamen
+		     FROM T_ORDEN_SUCURSAL_COTIZACION TOSC INNER JOIN T_ORDEN_EXAMEN_SUCURSAL_COTIZACION TOESC ON 
+						 TOSC.KORDENSUCURSALCOTIZACION= TOESC.KORDENSUCURSALCOTIZACION
+		     WHERE TOSC.KORDENSUCURSALCOTIZACION IN ($P{kordensucursalcotizacion}))
+order by ce.cexamen]]></queryString>
+	<field name="UORDEN" class="java.lang.Double"/>
+	<field name="SINDICACIONPACIENTE" class="java.lang.String"/>
+		<background>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</background>
+		<title>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</title>
+		<pageHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageHeader>
+		<columnHeader>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnHeader>
+		<detail>
+			<band height="12"  isSplitAllowed="true" >
+				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
+					<reportElement
+						mode="Transparent"
+						x="0"
+						y="0"
+						width="530"
+						height="12"
+						forecolor="#000000"
+						backcolor="#FFFFFF"
+						key="textField-2"
+						stretchType="NoStretch"
+						positionType="FixRelativeToTop"
+						isPrintRepeatedValues="true"
+						isRemoveLineWhenBlank="true"
+						isPrintInFirstWholeBand="false"
+						isPrintWhenDetailOverflows="true"/>
+					<box topBorder="None" topBorderColor="#000000" leftBorder="None" leftBorderColor="#000000" rightBorder="None" rightBorderColor="#000000" bottomBorder="None" bottomBorderColor="#000000"/>
+					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
+						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
+					</textElement>
+				<textFieldExpression   class="java.lang.String"><![CDATA["(" +new DecimalFormat("##0").format($F{UORDEN}) + ") \t - \t " + $F{SINDICACIONPACIENTE}]]></textFieldExpression>
+				</textField>
+			</band>
+		</detail>
+		<columnFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</columnFooter>
+		<pageFooter>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</pageFooter>
+		<summary>
+			<band height="0"  isSplitAllowed="true" >
+			</band>
+		</summary>
+</jasperReport>

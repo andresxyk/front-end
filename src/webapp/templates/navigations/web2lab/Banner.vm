@@ -1,0 +1,30 @@
+
+      <tr>
+          <!--<td><image src="$content.getURI("images/pleca_a.jpg")" border="0" width="751" height="79" ></td> -->
+          <td class="espacio2"></td>
+      </tr>
+
+      <tr>
+        <td background="$content.getURI("images/espacio_s.jpg")"  >&nbsp;</td>
+      </tr>
+      <tr><td><table width="100%" border="0" cellspacing="1">
+         <tr>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">RECEPCI&Oacute;N
+              DE MUESTRAS</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">ORDENES
+              TERCEROS</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">ORDENES
+              PROTOCOLOS</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">DISTRIBUCION</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">CARGAS</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">RESULTADOS</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">SEGUIMIENTO</a></td>
+            <td width="12%" align="center" bgcolor="0877AF"><a href="#">BITACORA
+              DE SUCESOS</a></td>
+         </tr></table></td>
+     </tr>
+
+     <tr>
+         <td background="$content.getURI("images/sombra.jpg")" colspan="8">&nbsp;</td>
+     </tr>
+

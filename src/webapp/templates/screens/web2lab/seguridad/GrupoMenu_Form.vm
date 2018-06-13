@@ -1,0 +1,57 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT>
+#set ( $gStrModo = $CSeguridadTool.getModo() )
+#set ( $gStrGrupoDeMenu = $CSeguridadTool.getGrupoDeMenu() )
+#set ( $strLigaActual = $link.setPage("web2lab,seguridad,GrupoMenu.vm"))
+#set ( $strLigaActual = $link.setAction("seguridad.BGrupoMenuAction").toString())
+#set ( $strCargarPagina = $link.setAction("seguridad.BGrupoMenuAction").setPage("web2lab,seguridad,GrupoMenu_Form.vm").toString())
+#if ($gStrModo == "modify")
+    #set ($titlePage = "Modificar Grupo")
+#else
+    #set ($titlePage = "Insertar Nuevo Grupo")
+#end
+
+<SCRIPT LANGUAGE ="JavaScript">
+
+	function irAurl() { 
+		window.document.frmGrupoMenuForma.action = "$strCargarPagina";
+	}
+</script>
+<form method="post" action="$strLigaActual" name="frmGrupoMenuForma" onsubmit= "return validaVacios('frmGrupoMenuForma', 'txtNombre', 'GrupoMenuNombre');">
+	<table width="100%" class="tabla">
+		<tr>   
+             <td>
+				#if($!bolCreado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Alta de grupo exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El grupo: $!strMensaje, se dio de alta con &eacute;xito.</font></b>
+				#elseif($!bolCreado == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Grupo existente"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El grupo: $!strMensaje ya existe.</font></b>
+				#end
+			</td>
+        </tr>
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+        <tr>
+            <th>Nombre del Grupo</th>
+            <td>
+			#if ($gStrModo == "modify")
+                <input type="text" name="txtNombre" value="$!gStrGrupoDeMenu" onKeyUp="cambiaMay('frmGrupoMenuForma','txtNombre');">
+                <input type="hidden" name="hndNombreAnterior" value="$!gStrGrupoDeMenu">
+			#else   
+		        <input type="text" name="txtNombre" value="" onKeyUp="cambiaMay('frmGrupoMenuForma','txtNombre');">
+			#end
+            </td>
+        </tr>		
+    </table>
+	#if ($gStrModo == "modify")
+    <input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar" />
+	#else
+    <input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onClick="irAurl();"/>
+	#end
+	#if($!bolCreado == "true")
+		<input type="button"  name="" value="Regresar" class="boton" onClick="location.href='$strLigaActual'">
+	#else
+    	<input type="button" name="eventSubmit_doCancela" class="boton" value="Cancelar" onClick="location.href='$strLigaActual'"/>     
+    #end
+</form>

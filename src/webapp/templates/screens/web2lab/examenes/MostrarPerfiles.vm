@@ -1,0 +1,42 @@
+$data.setLayoutTemplate("web2lab/SoloPleca.vm")
+#set ( $titlePage = "Perfiles de un examen" )
+#set ( $cexamen = $data.getParameters().getString("cexamen",""))
+#set ( $sexamen = $data.getParameters().getString("sexamen",""))
+#set ( $mnemo = $data.getParameters().getString("mnemo",""))
+#if($cexamen && $cexamen!="")
+	Entra a buscar perfiles
+	#set ( $perfiles = $BCotizadorTool.getPerfilesDelExamen())
+#end
+<form name="frmConsExamen" method="post">
+	<!-- seccion de perfiles -->
+	<table id="tabla2" class="tabla" border="0" width="100%">
+		<tr><th colpspan="3">Examen</th>
+		</tr>
+		<tr>
+			<th>C&oacute;digo</th>
+			<th>Descripci&oacute;n</th>
+		</tr>
+		<tr>
+			<td>$!cexamen</td>
+			<td>$!sexamen</td>
+		</tr>
+		<tr>
+			<th colspan="3">Perfiles</th></tr>
+		<tr>
+			<th>C&oacute;digo</th>
+			<th>Perfil/Paquete</th>
+		</tr>	
+		#foreach($perfil in $perfiles)
+			#set ( $cperfil = $perfil.getcPerfil())
+			#set ( $sperfil = $perfil.getsPerfil())
+			#if ( $!t == "azul2") #set ( $t = "azul") #else #set($t = "azul2") #end
+			<tr class="$t">
+				<td>$!cperfil</td>
+				<td>$!sperfil</td>
+			</tr>
+		#end
+		<tr>
+			<td colspan="3"><input class="boton" type="button" value="Cerrar" name="close" onclick="window.close();" style="width:100px"></td>
+		</tr>	
+	</table>
+</form>

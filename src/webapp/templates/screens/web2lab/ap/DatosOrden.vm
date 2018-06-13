@@ -1,0 +1,792 @@
+#set ($titlePage = "Datos de la Orden" )
+#set ($strLigaDiagnostico = $link.setPage("web2lab,ap,Diagnostico.vm").toString())
+#set ($intkPaciente = $data.getSession().getAttribute('kPaciente') )
+#set ($intkPacientePuebla = $data.getParameters().getString('kPacientePuebla') )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+#set ($intuOrden = $data.getParameters().getString('uOrden') )
+#set ($intkPacienteECEEmpresa = $data.getParameters().getString('kPacienteECE') )
+#set ($intcConvenioECEEmpresa = $data.getParameters().getString('cConvenioECE') )
+#set ($intcConvenioMarca = $data.getSession().getAttribute('cConvenioMarca') )
+
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+#set ($intcMarca = $data.getUser().getConfirmed())
+
+#set ($intcSucursalNuevoProceso = "10" )
+
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+#set($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/cliente/convenio/CapturaOrdenConvenio.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/examen/CapturaOrdenExamen.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/CapturaOrdenFactura.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/medico/CapturaOrdenMedico.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/paciente/CapturaOrdenPaciente.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pagos/CapturaOrdenPago.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/CapturaOrden.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/PacienteMayoreo.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosOrden.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosExamen.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/CotizacionOrdenes.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/Tickets.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/TomaMuestraAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosReportesAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
+
+#if($intkPaciente)
+	<script>		
+		 window.onload = initConsulta;		
+		 buscarPacienteECE("$!intkPaciente");
+	</script>	
+#elseif($intkPacienteECEEmpresa)
+	<script>		
+		 window.onload = initConsulta;		
+		 buscarPacienteECEEmpresa("$!intkPacienteECEEmpresa","$!intcConvenioECEEmpresa");
+	</script>	
+#else
+	<script>		
+		 window.onload = init;		
+	</script>	
+#end
+
+#if($intuOrden)
+	<script>		
+	     DatosOrden.getkPaciente('$intcSucursal','$intuOrden',getkPaciente_CallBack);
+	</script>	
+#end
+
+#set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
+
+#set ($lstTiposPagos = $CatalogosTool.obtenAll("TipoPago","0"))
+
+#set ($lstSucursales = $CatalogosTool.obtenAll("Sucursal","999"))
+
+#set ($lstConvenios = $CatalogosTool.obtenAll("Convenio$data.getUser().getConfirmed()","600$data.getUser().getConfirmed()"))
+
+
+
+#set ($ligaAct = $link.setPage("web2lab,ap,DatosOrden.vm").setAction("fundacion.DatosOrden").toString() )
+
+#set ($cSucursalCallCenter = '13')
+
+#set ($ligaCuestionario = $link.setPage("web2lab,puebla,HojaClinica.vm").toString() )
+#set ($ligaFormatoPuebla = $link.setPage("web2lab,puebla,FormatoPuebla.vm").toString() )
+
+#set ($ligaCreaFactura = $link.setPage("web2lab,facturacion,sucursales,FacturacionInternet.vm").toString())
+
+
+<form name="frmDatosOrdenFundacion" action="$ligaAct" method="post" >	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="idRol" name="idRol" value="$!intRol">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="idMarca" name="idMarca" value="$data.getUser().getConfirmed()">	
+	<input type="hidden" id="idUsuarioPago" name="idUsuarioPago" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+	<input type="hidden" id="hdlUpdatePaciente" name="hdlUpdatePaciente" value="0">	
+	<input type="hidden" id="hdlNoOrdenes" name="hdlNoOrdenes" value="0">	
+	<input type="hidden" id="hdlTypeShowInfo" name="hdlTypeShowInfo" value="0">	
+	<input type="hidden" id="hdlTypeShow" name="hdlTypeShow" value="0">	
+	<input type="hidden" id="hdlConvenioECEShow" name="hdlConvenioECEShow" value="0">	
+	<input type="hidden" id="hdlCotizacionUtilizado" name="hdlCotizacionUtilizado" value="0">	
+	<input type="hidden" id="hdenRutaCreaFactura" name="hdenRutaCreaFactura" value="$ligaCreaFactura">
+	
+	<div id="gridToolEmpresas">                
+        <table border="0"  align="center" style="width: 883px">
+    	    <th colspan="6">
+    	    </th>     
+            <tr>
+                <td>
+        	    </td>     	                
+                <td>
+        	    </td>     	                
+                <td>
+        	    </td>     	                
+                <td>
+        	    </td>     	                
+                <td>
+    		        <a href="javascript:doNothing()" onclick="javascript:limpiaPantalla();">
+    		            <img alt='Nueva Orden' id="buttonNuevaOrden" width="30" height="30" border='0' src='$content.getURI('images/icoLimpiar.png')' />
+    		        </a>	
+        	    </td>     	                
+                <td>
+    		        <a href="javascript:doNothing()" onclick="javascript:TypeBusqueda();">
+    		            <img alt='Buscar - Orden o Cotizacion' id="idTypeBusqueda" width="30" height="30" border='0' src='$content.getURI('images/icoBuscar.png')' />
+    		        </a>	
+        	    </td>     
+                <td>
+                    #if($intcSucursal == $cSucursalCallCenter)
+        				<input type="radio" name="radTipo" value="0" onClick="onChangeTipoOperacion();" >Orden
+        				<input type="radio" name="radTipo" value="1" onClick="onChangeTipoOperacion();" checked>Cotizacion				
+                    #else
+        				<input type="radio" name="radTipo" value="0" onClick="onChangeTipoOperacion();" checked>Orden
+        				<input type="radio" name="radTipo" value="1" onClick="onChangeTipoOperacion();" >Cotizacion				
+                    #end
+        	    </td>     	                
+                <td>
+    				<input type="radio" id="radRecepcion1" name="radRecepcion" onClick="javascript:onClickRecepcion(0);" value="0" ><label id="labRecepcion1">Recepcion Pacientes</label>
+    				<input type="radio" id="radRecepcion2" name="radRecepcion" onClick="javascript:onClickRecepcion(1);" value="1" checked><label id="labRecepcion2">No Recepcion</label>				
+	                <select id="selCubiculo" style="width: 100px" >
+						<option value="A">A</option>								
+						<option value="B">B</option>								
+						<option value="C">C</option>								
+						<option value="D">D</option>								
+						<option value="E">E</option>								
+						<option value="F">F</option>								
+						<option value="G">G</option>								
+						<option value="H">H</option>								
+		            </select>						
+        	    </td>     	                
+    			<td  style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    				<a id="videoPaciente" href="http://web2-lab.com/videos/GuardarOrden.wmv" title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+    			</td>    	        	    
+        	</tr>   
+        </table>	        
+	</div>            		        				
+	<div id="divProcesoTickets">						
+	</div>
+	<div id="datosdemograficospaciente">                	
+        	<div id="gridbusquedaPacientesEmpresas">                
+                <table border="0"  align="center" style="width: 883px">
+                    <tr>
+                	    <th colspan="6">
+                	        <center>
+                	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Búsquedas Paciente</b>
+                	         </center>
+                	    </th>     
+                	</tr>
+                    <tr>
+                        <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                            Expediente Metro
+                	    </td>     	                
+                        <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                            Número Pase Metro
+                	    </td>     	                
+                        <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                            Número de Elegibilidad (MediAccess o VitaMedica)
+                	    </td>     
+                    </tr>   
+                    <tr>
+                        <td style="width: 187px">
+                            <input type="text" id="txtExpedienteMetro" value="" onKeyPress="mayuscula();buscarPacienteMetro();" size="12"/>
+                	    </td>     
+                        <td style="width: 187px">
+                            <input type="text" id="txtPaseMetro" value="" onKeyPress="mayuscula();buscarPacienteMetroWebService();"  size="12"/>
+                	    </td>     
+                        <td style="width: 158px">
+                            <input type="text" id="txtElegibilidadVitaMedica" onKeyPress="numero();buscarPacienteVitaMedica();" size="12" />
+                	    </td>     
+                    </tr>   
+                </table>	        	
+        	</div>            		        				
+        	<table border="0"  align="center" style="width: 883px">
+                <tr>
+            	    <th colspan="6">
+            	        <center>
+            	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Personales</b>
+            	         </center>
+            	    </th>     
+            	</tr>
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Codigo Paciente
+            	    </td>     	                
+                    <td style="width: 187px">
+                        <input type="text" id="txtCodigoPaciente" value="0" STYLE="font-size: 30px;" onKeyPress="numero();" onChange="buscarPaciente();" size="5" />
+                        <input type="hidden" id="hdnkPaciente" value="0" />
+            	    </td>     
+                    <td style="width: 187px">
+            			<input type="button" id="buttonHojaClinicaPuebla" value="Cuestionario" onClick="CallPuebla('$ligaCuestionario');" class="boton">				
+            			<input type="button" id="buttonFormatoPuebla" value="Formato Puebla" onClick="CallFormato('$ligaFormatoPuebla');" class="boton">				
+            	    </td>     
+                </tr>   
+                <tr>
+                </tr>   
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        &nbsp;* Apellido Paterno
+            	    </td>     	                
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        &nbsp;* Apellido Materno
+            	    </td>     
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        &nbsp;* Nombre(s)
+                        &nbsp;&nbsp;<b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">(busqueda min. 4 letras)</b>
+            	    </td>     
+                </tr>   
+                <tr>
+                    <td style="width: 187px">
+                        <input type="text" id="txtApellidoPaterno" onKeyPress="mayuscula();VerificaModificacion_KeyPress();" onkeyup="consultaPacienteGrid();" onblur="VerificaModificacion();" onChange="onChangeUpdatePaciente();" size="35"/>
+            	    </td>     
+                    <td style="width: 158px">
+                        <input type="text" id="txtApellidoMaterno" onKeyPress="mayuscula();VerificaModificacion_KeyPress();" onkeyup="consultaPacienteGrid();" onblur="VerificaModificacion();" onChange="onChangeUpdatePaciente();" size="35" />
+            	    </td>     
+                    <td>
+                        <input type="text" id="txtNombre" onKeyPress="mayuscula();VerificaModificacion_KeyPress();" onkeyup="consultaPacienteGrid();" onblur="VerificaModificacion();" onChange="onChangeUpdatePaciente();" size="35" />
+            	    </td>     
+                </tr>   
+            </table>	        
+        	<div id="gridshowCotizacionesPaciente">                
+        	</div>            		        				
+        	<div id="gridbusquedaPacientes">                
+        	</div>            		        				
+            <table border="0"  align="center" style="width: 883px">
+                <tr>
+            	    <th colspan="6">
+            	        <center>
+            	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Complementarios</b>
+            	         </center>
+            	    </th>     
+            	</tr>
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        &nbsp;* Fecha nacimiento
+            	    </td>     
+                    <td style="width: 187px">
+        			    <div id="CalendarioNac">
+                            <input type="text" name="txtFechaNacimiento" size="12" value="$!strFecFormat" onblur="VerificaModificacion();"
+                            style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onFocus="javascript:obtenerEdadfrm(window.document.frmDatosOrdenFundacion);" onChange="javascript:this.value=validaFormatoFecha(this.value); obtenerEdadfrm(window.document.frmDatosOrdenFundacion);onChangeUpdatePaciente();">		
+        			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmDatosOrdenFundacion.txtFechaNacimiento); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+        			            <img alt='Seleccione una fecha' id="imgFechaNacimiento" border='0' src='$content.getURI('images/icono_calend.gif')' />
+        			        </a>	
+        			    </div>				
+        	        </td>     
+                    <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
+                        <b>Edad (años-meses-dias)</b
+            	    </td>     
+                    <td style="width: 158px">
+                        <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                        <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                        <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                        <input type="text"  id="txtEdadDescompuesta" style="font-size: 19px;" value="$!objDemPaciente.getIStrAnios()" class="textflat" disabled>&nbsp;
+            	    </td>     
+                </tr>   
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Tel&eacute;fono
+            	    </td>     
+                    <td style="width: 250px">
+                        <input type="text" id="txtTelefono" onKeyPress="javascript:return numero();VerificaModificacion_KeyPress();" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();" size="30"/>
+           	        </td>     
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Sexo
+            	    </td>     
+                    <td style="width: 187px">
+        					<input type="radio" name="radSexo" value="0" onblur="VerificaModificacion();" onChange="onChangeUpdatePaciente();">Femenino
+        					<input type="radio" name="radSexo" value="1" onblur="VerificaModificacion();" onChange="onChangeUpdatePaciente();">Masculino
+           	        </td>        	        
+                </tr>   
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Celular
+            	    </td>     
+                    <td style="width: 250px">
+                        <input type="text" id="txtCelular" onKeyPress="javascript:return numero();VerificaModificacion_KeyPress();" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();" size="30"/>
+           	        </td>     
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+            	    </td>     
+                    <td style="width: 187px">
+           	        </td>        	        
+                </tr>   
+                <tr>   
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        				<b id="idTextCorreoElectronico" onClick="modifyCorreoElectronico();">Correo Electronico</b>
+            	    </td>     
+                    <td style="width: 500px">
+                        <input type="checkbox" id="optResultado" name="optResultado" onClick="onCorreoElectronico(this);" value="100"><b id="idTextEnvioInternet">Resultados, Factura y Expediente Clinico </b>
+                        <input type="text" id="txtCorreoElectronico" size="30"  onblur="javascript:if(iscorrectEmail()){VerificaModificacion_ClickCorreoElectronico();}" onChange="onChangeUpdatePaciente();" disabled/><b id="idTextResetPassword" onClick="resetPassword();"> Reset Pass</b>		
+                        <br>
+                        <input type="checkbox" id="optPromocion" name="optPromocion" onClick="onCorreoElectronico(this);" value="5">Envío promociones por correo<br>				
+                        <input type="checkbox" id="optCapacidadDiferente" onChange="onChangeUpdatePaciente();" value="1">Persona con Diferentes Capacidades<br>				
+           	        </td>        	        
+                </tr>   
+            </table>	        
+            <table border="0"  align="center" style="width: 883px">	        
+                <tr>
+                    <td>
+               	    </td>     
+                </tr>   
+            </table>	        
+            <table border="0"  align="center" style="width: 883px">	        
+                <tr>
+            	    <th colspan="6">
+            	        <center>
+            	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+        					<a href="http://web2-lab.com/videos/DireccionPaciente.wmv" title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>    	            
+            	        </center>
+            	    </th>
+                </tr>   
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Calle
+            	    </td>	            
+                    <td colspan="5">
+                        <input type="text" id="txtCalle" style="width: 490px" onKeyPress="mayuscula();" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();"/>
+            	    </td>
+                </tr>   
+                <tr>
+                    <input type="hidden" id="hdnCodigoPostal" value="0"/>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Colonia
+            	    </td>
+                    <td style="width: 158px">
+                        <input type="text" id="txtColonia" style="width: 157px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmDatosOrdenFundacion);" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();"/>
+            	    </td>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Delegaci&oacute;n o Municipio
+            	    </td>
+                    <td style="width: 158px">
+                        <input type="text" id="txtDelegacionMunicipio" style="width: 180px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmDatosOrdenFundacion);" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();" />
+            	    </td>
+                </tr>   
+                <tr>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        Estado
+            	    </td>
+                    <td style="width: 158px">
+                    	<select id="selEstado" style="width: 177px" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();">
+        					#foreach($objEstado in $lstEstados)
+        						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+        					#end
+        				</select>    	    
+            	    </td>
+                    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                        C&oacute;digo Postal
+            	    </td>
+                    <td>
+                        <input type="text" id="txtCodigoPostal" onKeyPress="javascript:return numero();" onkeyup="consultaDireccionGrid(window.document.frmDatosOrdenFundacion);" onblur="VerificaModificacionExcepcion();" onChange="onChangeUpdatePaciente();"/>
+            	    </td>
+                </tr>   
+            </table>
+	</div>            		        				
+	<div id="gridbusquedaDireccion">                
+	</div>            		        				
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+            <td>
+       	    </td>     
+        </tr>   
+    </table>	                
+    <div id="cotizaExamenes">                
+			<div id="cotizaExamenesSeccion">    	
+		        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+		            <tr>
+		        	    <th colspan="9" style="width: 1056px">
+		        	        <center>
+		        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Cotizacion Examenes</b>
+								<a href="http://web2-lab.com/videos/BusquedaExamenPerfil.wmv"  title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+		        	        </center>
+		        	    </th>
+			        </tr>   
+					<tr>
+						<td colspan="9" style="width: 1036px" align="left">
+							<a href="javascript:doNothing()" onclick="return false;" title="Medico" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Convenios</a>			
+			                <select id="selConvenios" style="width: 600px" onchange="javascript:getDatosConvenio();">
+								#foreach($objConvenio in $lstConvenios)
+									<option style="font-size:16;font-weight: bold" value="$!objConvenio.getCconvenio()" >$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()</option>
+								#end
+				            </select>						
+							<a href="javascript:abrirProcedimiento();" title="Procedimiento" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Procedimiento Atencion</a>			
+						</td>    	    
+					</tr>					
+					<tr>
+						<td colspan="9" style="width: 1036px" align="left">
+							<a href="javascript:doNothing()" onclick="activarBuscadorConvenios();" title="Medico" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Busqueda Convenios:</a>			
+							<input type="text" id="txtBuscarConvenio" onKeyPress="mayuscula();" onkeyup="buscarConvenioRapido(window.document.frmDatosOrdenFundacion.selConvenios,this.value);" onblur="buscarConvenioRapido(window.document.frmDatosOrdenFundacion.selConvenios,this.value);" size="35" style="width: 300px"/>
+						</td>    	    
+					</tr>					
+					<tr>
+						 <td colspan="9" style="width: 1036px" align="left">
+							<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Examen o Perfil:</b>
+		                    &nbsp; &nbsp;<b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">(busqueda automatica min. 5 letras)</b>
+			                <input type="text" id="txtExamenesACotizar" style="width: 400px" onKeyPress="mayuscula();newExamen();" onkeyup="consultaExamenesGrid();"/>
+			                <input type="hidden" id="hdnExamenesCotizados" value="0" />
+			                <input type="hidden" id="hdnVolumenesExamenesCotizados" value="0:0" />
+			    			<input type="button" id="idBuscarProducto" value="Buscar Producto" onClick="consultaProductosGridBoton();" class="boton">
+		                    &nbsp; &nbsp;<b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">(   Para buscar perfiles anteponer P. ejemplo: buscar Perfil Basico 1, debo escribir   P.BASICO  )</b>
+						 </td>
+					</tr>					
+				</table>
+				<div id="botonesSeccion">    	
+    		        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+    					<tr>
+    			            <td>
+    		        	    </td>     
+    			            <td>
+    		        	    </td>     
+    					</tr>
+    				</table>
+				</div>				
+		        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+					<tr>
+			            <td>
+			    			<input type="button" id="idImprimeEtiquetas" value="Imprime Etiquetas" onClick="imprimirEtiquetas();" class="boton">
+		        	    </td>     
+						<td>
+						</td>		        	    
+					</tr>
+				</table>
+			</div>				
+			<div id="buscarExamenesACotizar">
+			</div>
+			<div id="indicacionesExamen">
+			</div>
+			<div id="Grilla">
+			</div>
+			<div id="Medico">
+			</div>
+
+		    <table border="0"  align="center" style="width: 883px" class="tabla">
+	            <tr>
+	        	    <th colspan="9" style="width: 1056px">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">QUIEN SOLICITA LOS EXAMENES?</b>
+	        	        </center>
+	        	    </th>
+		        </tr>   			    	
+		        <tr>
+		            <td>
+		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="0">Examenes Solicitado Doctor(a) <br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir Nombre Doctor)</b><br>  
+		    	    </td>     
+		            <td>
+		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="1">Examenes Solicitado Paciente<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">SI SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b><br> 
+		    	    </td>     
+		            <td>
+		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="2">Examenes Solicitado Paciente<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">NO TRAE DOCTOR O NO SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b><br> 
+		    	    </td>     
+		            <td>
+		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="3">Examenes Solicitado Empresa Crédito<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">NO TRAE DOCTOR O NO SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b> 
+		    	    </td>     
+		        </tr>   
+		   </table>	
+		    <div id="RegistroMedico" style="display:none">
+    		    <table border="0"  align="center" style="width: 883px" class="tabla">
+    	            <tr>
+    	        	    <th colspan="9" style="width: 1056px">
+    	        	        <center>
+    	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Registro del Medico</b>
+    							<a href="http://web2-lab.com/videos/BusquedaRegistroMedicos.wmv"  title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+    	        	        </center>
+    	        	    </th>
+    		        </tr>   			    	
+    		        <tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		                &nbsp;* Medico
+    		    	    </td>     	                
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+							<a href="javascript:modificarCorreoElectronicoMedico();" title="CorreoElectronicoMedico" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal"><b id="idTextCorreoElectronicoMedico" onClick="modifyCorreoElectronico();">Cambiar Correo Electronico</b></a>			
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="width: 10px">
+    			            <input type="hidden" id="idEstado" value="0" />
+    		                <input type="hidden" id="hdnkMedico" value="0" />		            	
+    		                <input type="text" id="txtCodigoMedico" STYLE="font-size: 10px;" onKeyPress="numero();" onkeyup="consultaMedicoGrid(window.document.frmDatosOrdenFundacion);" value="0" size="15"/>
+    		    	    </td>     
+    		            <td>
+    						<input type="text" id="txtCorreoElectronicoMedico" STYLE="font-size: 14px;" onblur="javascript:iscorrectEmail();" size="23"/>
+    		    	    </td>     
+    		        </tr>   
+
+					<tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		                &nbsp;* Apellido Paterno Medico
+    		    	    </td>     	                
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		                &nbsp;* Apellido Materno Medico
+    		    	    </td>     
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		                &nbsp;* Nombre(s) Medico
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="width: 187px">
+    		                <input type="text" id="txtApellidoPaternoMedico" STYLE="font-size: 12px;" onKeyPress="mayusculaIgnorandoCaracteres();" onkeyup="consultaMedicoGrid(window.document.frmDatosOrdenFundacion);"  size="35"/>
+    		    	    </td>     
+    		            <td style="width: 158px">
+    		                <input type="text" id="txtApellidoMaternoMedico" STYLE="font-size: 12px;" onKeyPress="mayusculaIgnorandoCaracteres();" onkeyup="consultaMedicoGrid(window.document.frmDatosOrdenFundacion);"  size="35" />
+    		    	    </td>     
+    		            <td>
+    		                <input type="text" id="txtNombreMedico" STYLE="font-size: 12px;" onKeyPress="mayusculaIgnorandoCaracteres();" onkeyup="consultaMedicoGrid(window.document.frmDatosOrdenFundacion);"  size="35" />
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td>
+    		    	    </td>     
+    		            <td>
+    		                <input type="radio" name="radCorreoElectronicoMedico" value="0" checked>NO ACEPTO<br>
+    		    	    </td>     
+    		            <td>
+    		                <input type="radio" name="radCorreoElectronicoMedico" value="1">SI ACEPTO<br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">Consulta Resultados Dr</b>
+    		    	    </td>     
+    		            <td>
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		    	    </td>     
+    		        </tr>   
+    		        <tr>
+    		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    		    	    </td>     
+    		        </tr>   
+    				<tr>
+    		            <td>
+    		    			<input type="button" id="idLimpiarMedico" value="Limpiar" onClick="limpiaMedico();" class="boton">
+    	        	    </td>     
+    		            <td>
+    		    			<input type="button" id="idGuardarNuevoMedico" value="Guardar Medico" onClick="altaMedico();" class="boton">
+    	        	    </td>     
+    		        </tr>   		        
+    		    </table>	        				
+			</div>
+		    <table border="0"  align="center" style="width: 883px" class="tabla">
+
+		        <tr>
+		        	<td style="height: 26px">
+		                <strong>Observaciones</strong>
+					</td>
+					<td colspan="2" style="height: 26px">					
+						<input type="text" id="txtObservaciones" maxlength="100" style="width: 317px"  onKeyPress="mayuscula();">
+					</td>
+				</tr>		        
+		    </table>	        							
+			<div id="MedicoBusqueda">
+			</div>
+	        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+	            <tr>
+	        	    <th colspan="6">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Cotizacion Factura</b>
+	        	        </center>
+	        	    </th>
+		        </tr>   
+	    		<tr>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						<b style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">Admisi&oacute;n</b>
+					</th>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						<b style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">Factura</b>
+					</th>						
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						<b style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">Fecha Entrega</b>
+	    			</th>
+					<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						<b style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">Persona Entrega</b>
+	    			</th>
+					<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						<b style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">Sucursal Entrega</b>
+					</th>
+				</tr>
+	           	<tr>
+	    			<td align="center" valign="top">
+	    				<input type="text" name="txtAdmision" class="textflat" value="0" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			
+	    			</td>
+	    			<td align="center" valign="top">
+	    				<input type="text" name="txtOrden" class="textflat"  readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			    			
+	    			</td>
+	    			<td align="center" valign="top">
+					    <div id="CalendarioFechaEntrega">
+		                    <input type="text" name="txtFechaEntrega" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);"  onChange="javascript:actualizarFechaEntrega();this.value=validaFormatoFecha(this.value);">		
+					        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmDatosOrdenFundacion.txtFechaEntrega); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+					            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+					        </a>	
+					    </div>									    
+	    			</td>
+	    			<td align="center" valign="top">
+						<input type="text" id="txtEntregaResultadoA" onKeyPress="mayuscula();" size="35"/>
+	                    <input id="chkEntregaResultados" type="checkbox" style="width: 20px" onClick="actualizarEntregaResultado();" style="display:none" />&nbsp;
+	                </td>
+	    			<td align="center" valign="top">
+		                <select id="selSucursales"  onchange="javascript:return true;">
+							#foreach($objSucursal in $lstSucursales)
+								#if($objSucursal.getCmarca().getCmarca() == 1)
+									#option("$!objSucursal.getCsucursal()" "$!objSucursal.getSnombresucursal()" "$!intcSucursal")							
+								#end
+							#end
+			            </select>						
+	                </td>
+	       		</tr>	        
+	        </table>	                		
+	</div>
+    <div id="pagoOrden">                
+	        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+	            <tr>
+	        	    <th colspan="6">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Pagos</b>
+							<a href="http://web2-lab.com/videos/IngresarPago.wmv"  title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+	        	        </center>
+	        	    </th>
+		        </tr>   
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">SubTotal</b></td>
+					<td align="left">
+	    				<input type="text" id="txtSubTotal" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Descuento Paciente</b></td>
+					<td align="left">
+	    				<input type="text" id="txtDescuentoPaciente" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Descuento Empresa</b></td>
+					<td align="left">
+	    				<input type="text" id="txtDescuentoEmpresa" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Facturar Empresa</b></td>
+					<td align="left">
+	    				<input type="text" id="txtFacturarEmpresa" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>		        
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Total a pagar: </b></td>
+					<td align="left">
+	    				<input type="text" id="txtTotalPagar" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+		       	<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">A cuenta: </b></td>
+	        		<td align="left">
+	    				<input type="text" id="txtAcuenta" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/>
+	    			</td>
+	        	</tr>
+	        	<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Adeuda: </b></td>
+	        		<td align="left">
+						<input type="text" id="txtAdeudo" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/> 
+		                <input type="hidden" id="hdnAdeudo" value="0" />
+	    			</td>        		
+	        	</tr>
+			</table>
+	</div>		    	
+	<div id="RegistraUsuario" style="display:none">
+			<table border="0"  align="center" style="width: 883px" class="tabla">
+				<tr>
+					<th colspan="6">Autorizaci&oacute;n Usuario</b></th>
+				</tr>
+				<tr>
+					<td  align="center" valign="top">
+					</td>
+					<td  align="center" valign="top">
+						<b>Usuario</b><br><input type="text" id="usuarioautoriza" name="usuarioautoriza" width="15" onkeypress="javascript:validaAutetificacion();"><br>
+					</td>
+					<td  align="center" valign="top">
+						<b>Clave</b><br><input type="password" id="passwordautoriza" name="passwordautoriza" width="15" onkeypress="javascript:validaAutetificacion();"><br>
+					</td>
+
+				</tr>
+			</table>
+	</div>
+	<div id="RegistraPago" style="display:none">
+	        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+	        	<tr>
+	        		<td align="right" width="250px"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Paga:</b>
+	    				<input type="text" id="txtPago" size="10" value="$!strPaga" style="background:#E6E6FA" /><b id="idDigitos" style=" visibility:hidden; display:none; font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Digitos</b>
+	    				<input type="text" id="txtUltimosDigitos" size="4" value="" style="background:#E6E6FA" maxlength="4" onKeyPress="numero();" style='visibility:hidden;display:none;' disabled/> 
+					</td>
+					<td align="left" style="width: 67px"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Tipo Pago</b>
+		                <select id="selTipoPago" style="width: 177px" onChange="javascript:cambiaTipoPago();">
+							#foreach($objTipoPago in $lstTiposPagos)
+								#option("$!objTipoPago.getCtipopago()" "$!objTipoPago.getStipopago()" "1")							
+							#end
+			            </select>						
+					</td>	    			
+		            <td>
+		    			<input type="button" id="idGuardarPago" value="Guardar Pago" onClick="VerificaPago();" class="boton">
+	        	    </td>     					
+	        	<tr>	    			
+					<td align="left" style="width: 67px">
+<!--						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Dinero recibido:</b> -->
+					</td>
+	        		<td align="left" width="90px" colspan="1">
+<!--	    				<input type="text" id="txtDineroRecibido" value="$!strRecibido" onKeyUp="validaPago();" size="10" tabindex="3"  onkeypress="return validaEnter();"  />	    				-->
+	    			</td>
+	    			<td width="60px" align="right">
+<!--	    				<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Cambio:</b> -->
+	    			</td>
+	        		<td align="left" width="90px" colspan="2">
+<!--						<input type="text" id="txtCambio" value="$!strCambio" size="10" class="textflat" readonly="readonly" /> -->
+		 			</td>		
+	        	</tr>            
+	    	</table>		
+	</div>		    	
+</form>
+
+#if($intkOrdenSucursal)
+	<script>		
+	     mostrarFactura('$intkOrdenSucursal');
+		 adminDIV("RegistraUsuario","visible","inline");
+	     window.document.frmDatosOrdenFundacion.usuarioautoriza.focus();
+	</script>	
+#end
+#if($intkPacientePuebla)
+	<script>		
+		window.document.frmDatosOrdenFundacion.txtCodigoPaciente.value = "$!intkPacientePuebla";
+		buscarPaciente();
+	</script>	
+#end
+<script>		
+	onChangeTipoOperacion();
+	var intSucursal = window.document.frmDatosOrdenFundacion.IdSucursalActual.value;
+    if (intSucursal == 17) {
+    } else if (intSucursal == 18){
+    } else if (intSucursal == 19){
+    } else if (intSucursal == 20){
+    } else if (intSucursal == 21){
+    } else if (intSucursal == 22){
+    } else if (intSucursal == 23){
+    } else if (intSucursal == 38){
+    } else if (intSucursal == 39){
+    } else {
+    	eliminarElemento("buttonHojaClinicaPuebla");	
+    	eliminarElemento("buttonFormatoPuebla");	
+    }	
+</script>	
+#if($intkPaciente)
+	<script>		
+		 consultaExpedienteClinico();
+	</script>	
+#end
+#if($intkPacienteECEEmpresa)
+	<script>		
+		 consultaExpedienteClinico();
+	</script>	
+#end
+#if($intcConvenioMarca)
+	<script>		
+	     valorCombo(document.getElementById("selConvenios"),'$intcConvenioMarca');
+	</script>	
+#end
+

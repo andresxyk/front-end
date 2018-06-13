@@ -1,0 +1,147 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/cxc/CuentasxCobrarPagos.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/CuentasxCobrarMayoreo.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ( $titlePage = "Registro Pago Factura") 
+
+#set ($lstTiposPagoFactura = $CatalogosTool.obtenAll("TipoPagoFactura","0"))
+#set ($intkFactura = $data.getParameters().getString('kFactura') )
+#set ($sformatFactura = $data.getParameters().getString('formatFactura') )
+#set ($uActividad = $data.getParameters().getString('uActividad') )
+
+
+<form name="frmPagoFactura" method="post" action="$strLigaActual" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridRegistroPago"> 
+    	<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
+    		<tr>
+    			<td>
+    				<b>Factura</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtNumeroFactura" value="$sformatFactura" STYLE="font-size: 20px;" size="10" />
+    				<input type="hidden" id="txtkFactura" name="txtkFactura" value="$intkFactura">	
+                    <input type="hidden" id="strNumeroFactura" value="$sformatFactura" />
+    			</td>			
+    	        <td>
+    		        <a href="javascript:doNothing()" onclick="javascript:reimprimirFacturaPDF();">
+    		            <img alt='Factura - PDF' id="imgFechaDeposito" width="70" height="70" border='0' src='$content.getURI('images/PDFicon.png')' />
+    		        </a>	
+    			</td>			
+    	        <td>
+    		        <a href="javascript:doNothing()" onclick="javascript:reimprimirFacturaXML();">
+    		            <img alt='Factura - XML' id="imgFechaDeposito" width="70" height="70" border='0' src='$content.getURI('images/XMLicon.png')' />
+    		        </a>	
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+    				<b>Total Factura</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtTotalFactura" value="0" STYLE="font-size: 15px;" size="10" />
+    				<input type="hidden" id="hidTotalFactura" name="hidTotalFactura" >	
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+    				<b>Anticipo Factura</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtAnticipoFactura" value="0" STYLE="font-size: 15px;" size="10" />
+    				<input type="hidden" id="hidAnticipoFactura" name="hidAnticipoFactura" >	
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+    				<b>Saldo Factura</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtSaldoFactura" value="0" STYLE="font-size: 15px;" size="10" />
+    				<input type="hidden" id="hidSaldoFactura" name="hidSaldoFactura" >	
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+    				<b>Importe Pago:</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtImportePago" value="0" STYLE="font-size: 30px;" onKeyPress="montos();" size="5" onChange="javascript:validapagoFactura();" onFocus="javascript:validapagoFactura();"/>
+    			</td>			
+    		</tr>
+            <tr>
+    			<td>
+    				<b>Fecha Deposito:</b> 				
+    			</td>
+    	        <td>
+                    <input type="text" name="txtFechaDeposito" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);validafechafrm(document.frmPagoFactura.txtFechaDeposito);" onFocus="javascript:validafechafrm(document.frmPagoFactura.txtFechaDeposito);" />		
+    		        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPagoFactura.txtFechaDeposito); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+    		            <img alt='Seleccione una fecha' id="imgFechaDeposito" border='0' src='$content.getURI('images/icono_calend.gif')' />
+    		        </a>	
+    			</td>			
+    		</tr>
+            <tr>
+    			<td>
+    				<b>Institucion Deposito:</b> 				
+    			</td>
+    	        <td>
+    				<select id="selTipoPago" style="background:#E6E6FA" >
+    					#foreach($objTipoPago in $lstTiposPagoFactura)
+    						#option("$!objTipoPago.getCtipopago()" "$!objTipoPago.getStipopago()" "0")							
+    					#end
+    				</select>	
+    			</td>			
+    		</tr>
+    	</table>               
+		<input type="button" value="Registrar Pago" name="Registrar Pago" class="boton" onclick="pagoFactura();">
+		<input type="button" value="Nueva Factura" name="Nueva Factura" class="boton" onclick="nuevoFactura();">
+    </div> 
+    <div id="gridBuscarFactura"> 
+    	<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
+    		<tr>
+    			<td>
+    				<b>Folio Factura:</b>				
+                </td>
+    	        <td>
+                    <input type="text" id="txtFolioFactura" value="0" STYLE="font-size: 30px;" onKeyPress="buscarFolioKey();" size="5" />
+    			</td>			
+    		</tr>
+    	</table>               
+		<input type="button" value="Buscar Folio" name="Buscar Folio" class="boton" onclick="buscarFolio();">
+    </div> 
+	<div id="gridEstadoFactura" style="display:none">
+		<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
+			<tr>
+				<td>
+    				<b>Cambio de status:</b>				
+                </td>
+				<td>
+    				<select id="selEstadoFactura" style="background:#E6E6FA" onChange="actualizaFactura(this.value);">
+    					<option value="0">Seleccionar</option>
+						<option value="66">Juridico</option>
+						<option value="67">Incobrable</option>
+    				</select>	
+    			</td>	
+				
+			</tr>
+		</table>
+    </div>
+    <div id="gridPagos"> 
+    </div> 	
+</form> 
+<script>
+		 window.onload = init;		
+</script>	

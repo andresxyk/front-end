@@ -1,0 +1,373 @@
+<HTML>
+<HEAD>
+<TITLE>Insert Image</TITLE>
+<!--This html file is used insert images in the html file.
+this is called from the ShowEditor.htm file when pressing the InsertImage button
+we have to enter image source,alternate text,hyperlink,width,height, alignment
+and horizontal and vertical spacing for that corresponding image.
+we can select the image by pressing the Browse button.
+this will invoke the image manager.
+-->
+<style>
+  body, .button{background: buttonface;font-family:"MS Sans Serif";font-size:9pt;margin:0px;}
+  .text {font-family:"MS Sans Serif";font-size:9pt;padding:5px 0px 5px 0px;}
+.Preview
+{
+	border-right: #000000 1px solid;
+	padding-right: 5px;
+	border-top: #000000 1px solid;
+	padding-left: 5px;
+	padding-bottom: 5px;
+	overflow: scroll;
+	border-left: #000000 1px solid;
+	width: 100%;
+	padding-top: 5px;
+	border-bottom: #000000 1px solid;
+	height: 100%;
+	background-color: #ffffff;
+}
+
+</style>
+<SCRIPT ID=clientEventHandlersJS LANGUAGE=javascript>
+
+
+// Gets the image if there is one selected.
+var Limage ;
+
+var objEditArea=window.opener.getEditArea();
+var sel="";
+
+if(navigator && navigator.userAgent && navigator.userAgent.indexOf && navigator.userAgent.indexOf('Gecko') != -1 || navigator.userAgent.indexOf("Netscape")!= -1)
+{
+	e = window.opener.document.getElementById("editArea");
+	img2 =e.contentWindow.document.getElementsByTagName("IMG")
+	Limage =img2.item(0);
+	//alert("Limage=="+Limage);
+
+}
+else
+{
+	sel = objEditArea.document.selection.createRange();
+	if (sel.type != 'Text')
+	{
+		if (sel.length == 1)
+		{
+			if (sel.item(0).tagName == "IMG") Limage = sel.item(0);
+		}
+	}
+}
+
+// this var is used to update the existing image
+var imageSource = Limage ;
+
+// Gets a copy of the image (for image size purposes)
+var imageOriginal ;
+if (Limage != null)
+{
+	imageOriginal = new Image() ;
+	imageOriginal.src = Limage.src ;
+}
+else
+	imageOriginal = null ;
+
+// Get the IMG tag.
+function getImageHtml()
+{
+	return '<IMG'
+				+ attr("src", txtImageSource.value)
+				+ attr("alt", txtAlt.value)
+				+ attr("align", document.image.cmbAlign[document.image.cmbAlign.selectedIndex].value)
+				+ ((txtWidth.value)  ? attr("width" , txtWidth.value)  : "")
+				+ ((txtHeight.value) ? attr("height", txtHeight.value) : "")
+				+ ((txtVSpace.value) ? attr("vspace", txtVSpace.value) : "")
+				+ ((txtHSpace.value) ? attr("hspace", txtHSpace.value) : "")
+				+ ((txtBorder.value) ? attr("border", txtBorder.value) : attr("border",0))
+				+ '/>' ;
+}
+
+// Returns a formatted image attribute. Used by getImageHtml().
+function attr(name, value)
+{
+	if (!value || value == "") return "" ;
+	return ' ' + name + '="' + value + '"' ;
+}
+
+// Update any image (the selected or preview one)
+function updateImage(imgTarget)
+{
+
+	if (document.image.txtImageSource.value == "")
+		imgTarget.style.display = "none" ;
+	else
+	{
+		//imgTarget.style.removeAttribute("display") ;
+		imgTarget.style.visibility == "visible";
+		imgTarget.src = document.image.txtImageSource.value ;
+		setAttribute(imgTarget, "alt"   , document.image.txtAlt.value) ;
+		setAttribute(imgTarget, "width" , document.image.txtWidth.value) ;
+		setAttribute(imgTarget, "height", document.image.txtHeight.value) ;
+		setAttribute(imgTarget, "vspace", document.image.txtVSpace.value) ;
+		setAttribute(imgTarget, "hspace", document.image.txtHSpace.value) ;
+		setAttribute(imgTarget, "border", document.image.txtBorder.value) ;
+		setAttribute(imgTarget, "align" , document.image.cmbAlign.options[ document.image.cmbAlign.selectedIndex ].value) ;
+	}
+}
+
+function setAttribute(element, attribute, value)
+{
+	if (value == null || value == "")
+		element.removeAttribute(attribute, 0) ;			// 0 = case insensitive
+	else
+		element.setAttribute(attribute, value, 0) ;		// 0 = overwrite
+}
+
+// Fired when any field change to update the preview image.
+function updatePreview()
+{
+	updateImage(document.image.imgPreview);
+}
+
+// Fired when the user press the OK button
+function ok()
+{
+	if ( txtImageSource.value.length == 0 )
+	{
+		cancel() ;
+		return ;
+	}
+
+	if ( imageSource == null )
+		window.returnValue = getImageHtml() ;
+	else
+	{
+		updateImage(imageSource ) ;
+		window.returnValue = null ;
+	}
+	window.close() ;
+}
+
+// Fired when the user press the CANCEL button.
+function cancel()
+{
+	window.returnValue = null ;
+	window.close() ;
+}
+
+// Fired when the user load the window. It sets the fields with the
+// actual values if an image is selected in the editor.
+function setDefaults()
+{
+	if (Limage == null) return ;
+
+	if (Limage.getAttribute("src",2)    != null) document.image.txtImageSource.value    = Limage.getAttribute("src",2) ;
+	if (Limage.getAttribute("alt",2)    != null) document.image.txtAlt.value    = Limage.getAttribute("alt",2) ;
+	if (Limage.getAttribute("width",2)  != null) document.image.txtWidth.value  = Limage.getAttribute("width",2) ;
+	if (Limage.getAttribute("height",2) != null) document.image.txtHeight.value = Limage.getAttribute("height",2) ;
+	if (Limage.getAttribute("vspace",2) != null) document.image.txtVSpace.value = Limage.getAttribute("vspace",2) > 0 ? Limage.getAttribute("vspace",2) : "" ;
+	if (Limage.getAttribute("hspace",2) != null) document.image.txtHSpace.value = Limage.getAttribute("hspace",2) > 0 ? Limage.getAttribute("hspace",2) : "" ;
+	if (Limage.getAttribute("border",2) != null) document.image.txtBorder.value = Limage.getAttribute("border",2) ;
+
+	if (Limage.getAttribute("align") != null)
+	{
+		for (var i = 0 ; i < document.image.cmbAlign.options.length ; i++)
+		{
+			if (document.image.cmbAlign.options[i].value == Limage.getAttribute("align"))
+			{
+				document.image.cmbAlign.options[i].selected = true ;
+				break ;
+			}
+		}
+	}
+
+	updatePreview() ;
+}
+
+// Fired when the width or height input texts change
+function sizeChanged(axe)
+{
+	// Verifies if the aspect ration has to be mantained
+	if (imageOriginal && chkLockRatio.checked)
+	{
+		if ((axe) == "Width")
+		{
+			if (txtWidth.value != "")
+			{
+				if (! isNaN(txtWidth.value))
+					txtHeight.value = Math.round( imageOriginal.height * ( txtWidth.value  / imageOriginal.width ) ) ;
+			}
+			else
+				txtHeight.value = "" ;
+		}
+		else
+			if (txtHeight.value != "")
+			{
+				if (! isNaN(txtHeight.value))
+					txtWidth.value  = Math.round( imageOriginal.width  * ( txtHeight.value / imageOriginal.height ) ) ;
+			}
+			else
+				txtWidth.value = "" ;
+	}
+
+	updatePreview() ;
+}
+
+
+  function isInt() {
+	// acception only numbers not other characters
+    return ((event.keyCode >= 48) && (event.keyCode <= 57))
+  }
+<!--
+function OK_onclick() {
+
+//return value as a Array. this array elements are retreived in the ShowEditor html file.
+var vArr=new Array();		// to return the image properties to the showEditor.htm file
+if(document.image.txtImageSource.value != "")
+{
+	vArr["Source"]=document.image.txtImageSource.value;		//image file name. it should not be emtpy
+	vArr["Alternate"]=document.image.txtAlt.value;		//image alternate text, ie. displayed when the image not available at that position
+	vArr["HyperLink"]=document.image.txtHyperlink.value;		//hyperlink for this image. speficy if necessary otherwise leave it as emtpy
+	vArr["Border"]=document.image.txtBorder.value;				//images border size. def. value =0
+	vArr["Alignment"]=document.image.cmbAlign.value;		//image alignment
+	vArr["Height"]=document.image.txtHeight.value;				//image height. def. value is image height
+	vArr["Width"]=document.image.txtWidth.value;				//image width. def. value is image width
+	vArr["Horizontal"]=document.image.txtHSpace.value;		//image horizontal spacing. def. value is 0
+	vArr["Vertical"]=document.image.txtVSpace.value;			//image vertical spaceng. def. value is 0
+	window.opener.insertImage_child(vArr);
+	window.close();					//close the window.
+}
+else
+{
+	alert ("Please select the Image ");
+}
+}
+
+function setImage(img_name)
+{
+document.image.txtImageSource.value = img_name;
+updatePreview() ;
+}
+
+
+function CANCEL_onclick() {
+	//to close the window.
+	window.close();
+}
+
+function txtImageSource_onkeypress() {
+event.returnValue=false;//to disable the keypress event. not allow user to type anything in it
+}
+var InsertImages1;
+var child_InsertImages1 = false;
+
+function window_onload() {
+ 	document.image.txtImageSource.disabled=true; ////to disable the txtImageSource text box. not allow user to type anything in it
+ 	setDefaults();
+}
+
+function Browse_onclick() {
+//here we have to include the file that is used to upload image, select image and list image.
+//we can select and insert a image.
+//we can upload a new image into server.
+//we can select all available images.
+
+	var str="";		//to store the return image file name with path.
+//InsertImage.jsp
+var inner_window_width=250;
+var inner_window_height=300;
+var shell_window_top=(window.screen.availHeight/2)-(inner_window_height/2);
+var shell_window_left=(window.screen.availWidth/2)-(inner_window_width/2);
+child_InsertImages1 = true;
+	// PLEASE REPLACE THE CODE FROM THE DOCUMENT EDITOR MANUAL & PASTE THE RELAVENT EXTENSION ImageManager_mozilla.XXX
+
+//InsertImages1 = window.open('samples/jsp/ImageManager_mozilla.jsp', 'InsertImages1','top='+shell_window_top+',left='+shell_window_left+',width=440, height=415, toolbar=no, location=no, directories=no, status=no, menubar=no, scrollbars=no, copyhistory=no, resizable=no');
+InsertImages1 = window.open('samples/jsp/ImageManager.jsp','InsertImages1','top='+shell_window_top+',left='+shell_window_left+',width=440, height=415,status=no, menubar=no, scrollbars=yes, copyhistory=no, resizable=no');
+
+/*
+//ori	if(str!=null) {							// retun value is not null
+//new
+
+		if (str!=null) {
+           if (str=="r")
+      	    {
+                str="";
+                //insertImage();
+					Browse_onclick();
+	          }
+//new
+		 else
+				  {	//new
+					txtImageSource.value=str;			//assign image source's value as returned image soruce
+			 }
+		//txtImageSource.focus();				//set focus on the imageSource text box. com 12/08
+	}
+*/
+}
+
+function cleanUp()
+{
+	if(child_InsertImages1)
+	{
+		InsertImages1.close();
+	}
+
+	window.opener.child_InsertImages = false;
+}
+
+
+
+
+//-->
+</SCRIPT>
+
+</HEAD>
+<BODY bgcolor="#c0c0c0" LANGUAGE=javascript onload="return window_onload()" onUnload="cleanUp()">
+<form name="image" method="post" action="">
+
+<FIELDSET ALIGN=center style="HEIGHT: 70px; WIDTH: 444px"><LEGEND>Source</LEGEND>
+	 &nbsp;Image Source&nbsp;:&nbsp;&nbsp;
+	<input id="txtImageSource" size=31 tabindex="0" style="HEIGHT: 22px; WIDTH: 231px LANGUAGE=javascript onkeypress="return txtImageSource_onkeypress()">&nbsp;<INPUT name=Browse style="HEIGHT: 28px; WIDTH: 79px" tabIndex=1 type=button value=Browse LANGUAGE=javascript onclick="return Browse_onclick()" size=27><BR>
+	&nbsp; Alternate Text&nbsp; :&nbsp;&nbsp; <input id="txtAlt" tabindex="2" style="HEIGHT: 22px; LEFT: 90px; TOP: 43px; WIDTH: 312px" size="38" maxLength=50><BR>
+<!--
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; HyperLink&nbsp; &nbsp;:&nbsp;&nbsp; -->
+<input type ="hidden" id="txtHyperlink" tabindex="2" style="HEIGHT: 22px; LEFT: 90px; TOP: 67px; WIDTH: 314px" size="38" maxLength=150>
+</FIELDSET>
+<FIELDSET align=center style="HEIGHT: 70px; WIDTH: 444px"> <LEGEND>Image Properties</LEGEND>&nbsp;Border Thickness :<INPUT id=txtBorder size=2
+style="HEIGHT: 22px; LEFT: 189px; TOP: 104px; WIDTH: 57px" tabIndex=3 value=0 LANGUAGE=javascript onkeyup="updatePreview();" maxLength=2>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Alignment&nbsp;
+:&nbsp;&nbsp;
+<SELECT id=cmbAlign size=1 style="HEIGHT: 22px; WIDTH: 151px" tabIndex=4 onchange="updatePreview();">
+<option  value="left">Left</option>
+<option value="absBottom">Abs Bottom</option>
+<option value="absMiddle">Abs Middle</option>
+<option value="baseline">Baseline</option>
+<option value="bottom">Bottom</option>
+<option value="middle">Middle</option>
+<option value="right">Right</option>
+<option value="textTop">Text Top</option>
+<option value="top">Top</option>
+<OPTION value=Default>Default</OPTION>&nbsp;
+</SELECT>
+<BR>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Width(%):<INPUT id=txtWidth size=3
+style="HEIGHT: 22px; LEFT: 116px; TOP: 44px; WIDTH: 59px" tabIndex=5 LANGUAGE=javascript onkeyup="updatePreview();" maxLength=3>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Height(%)&nbsp;
+:&nbsp;&nbsp;
+<INPUT id=txtHeight size=3 tabIndex=6 onkeyup="updatePreview();" maxLength=3>
+</FIELDSET>
+<FIELDSET align=center style="HEIGHT: 145px; LEFT: 76px; TOP: 179px; WIDTH: 444px"><LEGEND>Spacing</LEGEND>
+
+<TABLE cellSpacing=0 cellPadding=0 width=430 border=0 height=125>
+<TBODY>
+<TR>
+<TD width=120><font size=1>Horizontal&nbsp;&nbsp;:&nbsp;<INPUT language=javascript onkeyup="updatePreview();" id=txtHSpace tabIndex=7 maxLength=2 size=3><BR>Vertical&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; :&nbsp;<INPUT language=javascript onkeyup="updatePreview();" id=txtVSpace tabIndex=8 maxLength=2 size=3> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TD>
+<TD height=75>&nbsp;<SPAN color="white"><font size=1>Preview</font></span>
+<DIV class=Preview><IMG id="imgPreview" src="images/spacer.gif"> <font size=1>your content your content your content your content your content your content your content your content your content your content your content your content your content your content your content youryour content your content your content your </DIV></SPAN></TD></TR></TBODY></TABLE>
+
+</FIELDSET>
+<FIELDSET style="HEIGHT: 30px; WIDTH: 444px"
+align=center>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; <INPUT language=javascript id=OK style="HEIGHT: 28px; LEFT: 195px; TOP: 224px; WIDTH: 71px" onclick="return OK_onclick()" tabIndex=9 type=button value=OK size=23>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<INPUT language=javascript id=CANCEL style="HEIGHT: 28px; LEFT: 206px; TOP: 13px; WIDTH: 76px" onclick="return CANCEL_onclick()" tabIndex=10 type=button value=Cancel id=Cancel>
+</FIELDSET>
+</form>
+</BODY>
+</HTML>

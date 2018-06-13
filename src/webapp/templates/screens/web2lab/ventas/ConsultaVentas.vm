@@ -1,0 +1,427 @@
+#set ($titlePage = "Consulta Ventas" )
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/ventas/ConsultaVentasForm.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/CuentasxCobrarMayoreo.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ($intcCliente = $data.getSession().getAttribute('cClienteMarca') )
+
+#set ($ligaAct = $link.setPage("web2lab,comer,ClientesDatos.vm").setAction("fundacion.DatosOrden").toString())
+
+#set ($ligaActPago = $link.setPage("web2lab,cxc,RegistroPagoFactura.vm").toString())
+
+#set ($ligaReportes = $link.setPage("web2lab,cxc,ReporteFacturasPagos.vm").toString())
+
+#if($intcCliente)
+    <script>
+    		 window.onload = initEmpresas;		
+    </script>	
+#else
+    <script>
+    		 window.onload = init;		
+    </script>	
+#end
+
+#set ($lstTipoEmpresa = $CatalogosTool.obtenAll("TipoPersona","0"))
+#set ($lstTipoClientes = $CatalogosTool.obtenAll("TipoCliente","0"))
+#set ($lstTipoConvenio = $CatalogosTool.obtenAll("TipoConvenio","0"))
+
+#set ($lstGirosClientes = $CatalogosTool.obtenAll("GiroCliente","0"))
+
+#set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
+#set ($lstClasificacionComercial = $CatalogosTool.obtenAll("ClasificacionComercial","0"))
+
+#set ( $actLnk = $link.setPage("web2lab,comer,ClientesDatos.vm"))
+#set ( $actLnk = $link.setAction("reportes.ReporteAction").toString())
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
+
+<form name="frmAdminClientes" action="$ligaAct" method="post" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="hdenRutaPago" name="hdenRutaPago" value="$ligaActPago">
+	<input type="hidden" id="hdenRutaReportes" name="hdenRutaReportes" value="$ligaReportes">
+	<div id="TableConsultas">
+        <table  border="0"  align="center" width="100%" class="tabla" >	        
+    		<tr>
+                <td>
+    		        <a href="javascript:doNothing()" onclick="javascript:cleanCliente();">
+    		            <img alt='Limpiar Pantalla' id="idCleanCliente" width="30" height="30" border='0' src='$content.getURI('images/icoLimpiar.png')' />
+    		        </a>	
+        	    </td>
+                <td>Reportes
+    		        <a href="javascript:doNothing()" onclick="javascript:showReporteFacturaPagos();">
+    		            <img alt='Reportes Factura y Pagos - PDF' id="idReportesPDF" width="30" height="30" border='0' src='$content.getURI('images/icoReportes.png')' />
+    		        </a>	
+        	    </td>  
+    		</tr>
+    	</table>    
+	</div>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>				
+			<td align="left" width="25%">
+				<b>*Cliente</b>
+				<input type="text" id="txtCliente" value="0" onKeyPress="numero();" size="5"  onkeyup="consultaClienteGrid(window.document.frmAdminClientes);">
+				<b>*Pre-Alta</b>	
+				<input type="text" id="txtPrealta" value="0" style="background:#E6E6FA" onKeyPress="numero();" size="5">
+			</td>			
+			<td>
+				<b>Mnem&oacute;nico:</b>
+			</td>			
+			<td>
+				<input type="text" id="txtMNEMONICO" value="" onKeyPress="mayuscula();" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);" size="30" >
+			</td>			
+			<td>
+				*RFC:
+			</td>			
+			<td>
+				<input type="text" id="txtRFC" value="" style="background:#E6E6FA" onKeyPress="validaRFC(window.document.frmAdminClientes);" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);"  onblur="validaRFC(window.document.frmAdminClientes);" size="13" maxlength="13" >
+			</td>
+			<td>				
+				<select id="selTipoPersona" style="background:#E6E6FA" onChange="javascript:window.document.frmAdminClientes.txtRFC.value='';" >
+					#foreach($objTipoEmpresa in $lstTipoEmpresa)
+						#option("$!objTipoEmpresa.getCtipopersona()" "$!objTipoEmpresa.getStipopersona()" "0")							
+					#end
+				</select>	
+			</td>			
+		</tr>
+		<tr>
+			<td align="left" width="25%">
+				<b>*Raz&oacute;n Social:</b><br>
+				<input type="text" id="txtRazonSocial" value="" style="background:#E6E6FA" onKeyPress="mayuscula();" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);" size="70" >
+			</td>
+			<td colspan="4" align="left">
+				<b>Nombre Comercial</b><br>
+				<input type="text" id="txtNombreComercial" value="" onKeyPress="mayuscula();" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);" size="70" >
+			</td>
+			<td colspan="4" align="left">
+			</td>
+		</tr>
+	</table>
+	<div id="gridbusquedaClientes">                
+	</div>            		        					
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+    	        </center>
+    	    </th>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" style="width: 490px" onKeyPress="mayuscula();VerificaModificacion_KeyPress();"   />
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" style="width: 157px" onKeyPress="mayuscula();VerificaModificacion_KeyPress();" onkeyup="consultaDireccionGrid(window.document.frmAdminClientes);"  />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" style="width: 180px" onKeyPress="mayuscula();VerificaModificacion_KeyPress();" onkeyup="consultaDireccionGrid(window.document.frmAdminClientes);"  />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Estado
+    	    </td>
+            <td style="width: 158px">
+            	<select id="selEstado" style="width: 177px" >
+					#foreach($objEstado in $lstEstados)
+						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+					#end
+				</select>    	    
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" onKeyPress="javascript:return numero();VerificaModificacion_KeyPress();" onkeyup="consultaDireccionGrid(window.document.frmAdminClientes);" />
+    	    </td>
+        </tr>   
+    </table>
+	<div id="gridbusquedaDireccion">                
+	</div>            		        				
+
+
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+            <td>
+       	    </td>     
+        </tr>   
+    </table>	                
+    <div id="datosAdicionalesCliente" style="display:none">
+        <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+            <tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Adicionales</b>
+        	        </center>
+        	    </th>
+            </tr>   
+    		<tr>
+    			<td align="right">
+    				<b>Tipo Cliente:</b> 
+    			</td>
+    			<td align="left">
+    				<select id="selTipoCliente" style="background:#E6E6FA" >
+    					#foreach($objTipoCliente in $lstTipoClientes)
+    						#option("$!objTipoCliente.getCtipocliente()" "$!objTipoCliente.getStipocliente()" "0")									
+    					#end
+    				</select>	
+    			</td>
+    			<td align="right">
+    				<b>Giro de la Empresa:</b> 
+    			</td>
+    			<td align="left">
+    				<select name="selGiro" style="background:#E6E6FA">
+    					#foreach($objGiroCliente in $lstGirosClientes)
+    						#option("$!objGiroCliente.getCgirocliente()" "$!objGiroCliente.getSgirocliente()" "0")			
+    					#end
+    				</select>	
+    			</td>
+    		</tr>			
+    		<tr>
+    			<td align="right">
+    				<b>Zona Asignada:</b> 
+    			</td>
+    			<td align="left">
+    				<select id="selZonaAsignada" style="background:#E6E6FA" >
+    					<option value="0">Selecciona </option>								
+    					#foreach($objZonaAsignada in $lstZonaAsignada)
+    						#option("$!objZonaAsignada.getCrutaejecutivoventa()"  "$!objZonaAsignada.getCruta() - $!objZonaAsignada.getSrutaejecutivoventa()" "0")			
+    					#end
+    				</select>	
+    			</td>
+    			<td align="right">
+    				<b>Estado del Cliente:</b> 
+    			</td>
+    			<td align="left">
+    				<b><font color="$339933" size=2 aling="center">
+                    <input type="text" id="txtEstadoCliente" />
+    				</font></b>
+    			</td>
+    		</tr>
+    	</table>
+        <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+    			<tr>
+    				<td align="center">
+    					<b>Observaciones:</b>
+    				</td>
+    				<td align="center">
+    					<textarea name="txtObservacion" cols="80" rows="3" onKeyPress="mayuscula();"  onblur="VerificaModificacion();"></textarea>
+    				</td>
+    			</tr>			
+    			<tr>
+    	            <td>
+    	    			<input type="button" id="idGuardarCliente" value="Guardar" onClick="VerificaModificacion();" class="boton">
+    	    	    </td>
+    			</tr>
+    	</table>
+	</div>	
+    <div id="gridprogressbar">                
+        <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+            <td>
+        		<p align=center><img src="$content.getURI("images/ajax-loader.gif")" >	
+            </td>
+    	</table>
+	</div>            	 
+	<div id="gridbusquedaConvenios">                
+	</div>            		        						
+	<div id="gridbusquedaFacturas">                
+	</div>            		        						
+	<div id="gridConvenios">                
+	    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		        <tr>
+		    	    <th colspan="6">
+		    	        <center>
+		    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Convenios</b>
+		    	        </center>
+		    	    </th>
+		        </tr>   
+		<table border="0"  align="center" style="width: 880px">
+			<tr>
+	    	    <th colspan="6">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos del Convenio</b>
+	    	         </center>
+	    	    </th>     
+	    	</tr>
+		    <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;Convenio 
+		        </td> 
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;*Nombre Convenio
+	    	    </td>  
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;*Clasificación de convenio
+	    	  	</td>			
+	        </tr> 
+			<tr>
+				<td style="width: 187px">
+			     	<input type="text" id="txtConvenio" value="0" size="7">
+				</td>
+				<td style="width: 187px">
+				    <input type="text" id="txtNombreConvenio" size="30" onKeyPress="mayuscula();"/>
+		        </td>
+				<td style="width: 187px">            
+					<select id="selTipoConvenio" style="width: 177px">
+						<option value="0">Selecciona </option>								
+						#foreach($objTipoConvenio in $lstTipoConvenio)
+							#option("$!objTipoConvenio.getCtipoconvenio()"  "$!objTipoConvenio.getCdescripciontipoconvenio()" "0")							
+						#end
+					</select>
+	    	    </td>
+			</tr>
+			<tr>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                &nbsp;* Fecha de inicio del convenio
+	    	    </td>     
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                &nbsp;* Fecha de fin del convenio
+	    	    </td>  
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;* Tipo de convenio
+	    	  	</td>		
+			</tr>
+			<tr>
+				<td style="width: 187px">
+                    <input type="text" name="txtFechaInicio" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">					        
+			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmAdminClientes.txtFechaInicio); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+				</td>
+				<td style="width: 187px">
+                    <input type="text" name="txtFechaFin"    size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		       
+			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmAdminClientes.txtFechaFin); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+			    </td>
+			    <td style="width: 250px">
+						<input type="radio" name="radTipoConv" onClick="TipoConvenio(0);" >% Descuento Clasificacion Comercial	
+	   	        		<input type="radio" name="radTipoConv" onClick="TipoConvenio(1);" >% Decuento X Examen
+				</td>
+			</tr>
+			<tr>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                &nbsp; Estado del Convenio: 
+	    	    </td>     
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	    	    </td>     
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                <b id="idTextEnvioInternet">Expediente Clinico Electrónico - </b> <b id="idTextCorreoElectronico"></b> 
+	    	    </td>     
+			</tr>
+			<tr>
+				<td style="width: 187px">
+			     	<input type="text" id="txtEstadoConvenio" value="0" size="7">
+		            <input type="hidden" id="hdnEstadoConvenio" value="0" />
+				</td>
+	            <td>
+					<input type="button" id="idEstado" value="Cambiar Estado" onClick="changeEstadoConvenio();" class="boton">
+	    	    </td>				
+	            <td>
+                    <input type="checkbox" id="optResultado" name="optResultado" onClick="onCorreoElectronico(this);">
+                    <input type="text" id="txtCorreoElectronico" size="30"  onblur="javascript:if(iscorrectEmail()){VerificaModificacion_ClickCorreoElectronico();}" onChange="onChangeUpdatePaciente();"/><b id="idTextResetPassword" onClick=""onCorreoElectronico(window.document.frmAdminClientes.optResultado);";">Reset Password</b>		
+	    	    </td>				
+			</tr>
+	    </table>
+		<div id="gridPorDepto"> 
+			<table align="center" style="width: 883px" class="tabla">
+				<tr>
+					<th colspan="6">
+						<center>
+							<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Convenio por Depto</b>
+						</center>
+					</th>     
+				</tr>
+				<tr>
+				   <td align="center" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						&nbsp;Porcentaje
+					</td>
+					<td align="center" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						&nbsp;Departamento
+					</td>
+				</tr>
+				<tr align="center">
+				    <td align="center">
+						<input type="text" id="txtPorcentaje" onKeyPress="numero();" onblur="AltaPorcentaje();" value="0" size="3" />
+					</td>
+					<td align="center">
+						<select id="selTipoComercial" style="background:#E6E6FA" >
+							#foreach($objClasificacionComercial in $lstClasificacionComercial)
+								#option("$!objClasificacionComercial.getCclasificacioncomercial()" "$!objClasificacionComercial.getSclasificacioncomercial()" "0")									
+							#end
+						</select>	
+					</td>
+				</tr>
+			</table>          
+		</div>            		        				
+	    <div id="gridPorExamen">                
+		    <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+		        <tr>
+		    	    <th colspan="9" style="width: 1056px">
+		    	        <center>
+		    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Convenio por Examen</b>
+		    	        </center>
+		    	    </th>
+		        </tr>   
+				<tr>
+					<td colspan="9" style="width: 1036px" align="left">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">C&oacute;digo Examen o Perfil:</b>
+		                &nbsp; &nbsp;
+		                <input type="text" id="txtExamenesACotizar" style="width: 580px" onKeyPress="mayuscula();newExamen();numero();" onkeyup="newExamen();"/>
+		                <input type="hidden" id="hdnExamenesCotizados" value="0" />
+					 </td>
+				</tr>
+				<tr>
+					<td colspan="9" style="width: 1036px" align="left">
+						<b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Nombre Examen o Perfil:</b>
+		                &nbsp; &nbsp;
+		                <input type="text" id="txtNombreExamenesACotizar" style="width: 580px" onKeyPress="mayuscula();newNombreExamen();" onkeyup="newNombreExamen();"/>
+		                <input type="hidden" id="hdnNombreExamenesCotizados" value="0" />
+					 </td>
+				</tr>
+			</table>    
+		</div>            		        				
+		<div id="buscarExamenesACotizar">
+		</div>	
+		<div id="ExamenesCotizados">
+		</div>	
+	    <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+			<tr>
+	            <td>
+	    			<input type="button" id="idGuardarActualizarConvenio" value="Guardar" onClick="convenioModificacion();" class="boton">
+	    	    </td>
+	            <td>
+	    			<input type="button" id="idImprimeReporte" value="Imprime Reporte" onclick="return imprimirReporte('$ligaReporte','ReporteConvenio')" class="boton">
+	    	    </td>     
+			</tr>
+		</table>    
+	</div>            		        						
+</form>
+#if($intcCliente)
+	<script>
+		showclienteEmpresas("$!intcCliente");
+	</script>	
+#end

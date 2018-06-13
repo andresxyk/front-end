@@ -1,0 +1,63 @@
+<script language="javascript" SRC='$content.getURI("javascript/web2lab/RegistraPagos.js")'></script>
+<script language="javascript" SRC='$content.getURI("javascript/generales.js")'></script>
+<script language="JavaScript" SRC='$content.getURI("javascript/web2lab/RegistroCaja.js")'></script>
+$data.setLayoutTemplate("web2lab/SoloPlecaAP.vm")
+#set ( $actLnk = $link.setPage("web2lab,seguridad,Autoriza.vm"))
+#set ( $actLnk = $link.setAction("seguridad.BAutorizaAction").toString())
+#set ( $concilia = $data.getParameters().getString("concilia") )
+<form method="post" action="$actLnk" name="frmAut">
+	<input type="hidden" name="hdnConcilia" value="$!concilia">
+	<table border="0" cellspacing="2" cellpadding="3" width="100%">
+		#if( $bolAutoriza == "true")
+			<!--tr>			
+				<td colspan="2>
+			   	    <font color = "red"></font>	<b><font color="red">&nbsp;$!mensaje </font></b>		
+				</td>
+			</tr>
+			</table-->
+			#if ( $bolConcilia )
+				#set($liga = $link.setPage("web2lab,web2lab,ConciliacionCaja.vm").toString() )
+				<script>
+					concilia('$liga');
+				</script>
+				<!-- input type="button" class="boton" value="Conciliar" name="eventSubmit_doConciliacion" onclick="concilia('$liga');" -->
+			#else
+				<!-- input type="button" class="boton" value="Autoriza pago" name="cmdAutoriza" onclick="autorizaPago();" -->
+				<script>
+					calculaCambio();
+					if(confirm('El cambio es: $'+window.opener.document.frmRegPagos.txtCambio.value)){
+						autorizaPago();
+					}
+					window.close();
+				</script>
+			#end
+		#else
+		<tr>
+			<td colspan="2>
+				<font color = "red"></font>	<b><font color="red">&nbsp;$!mensaje </font></b>		
+			</td>
+		</tr>
+		<tr>
+			<td>
+               Usuario: 
+            </td>
+			<td>
+                <input type="text" name="username" value="">
+            </td>
+        </tr>
+        <tr>
+			<td>
+               Contraseña: 
+            </td>
+            <td>
+               <input type="password" name="password" value="">
+            </td>
+        </tr>	
+	</table>                  
+    <input type="submit" class="boton" value="Aceptar" name="eventSubmit_doPerform" style="width:100px"/>                 
+	<input type="button" class="boton" value="Cancelar" name="cerrar" onclick="window.close();" style="width:100px"/>
+		#end
+	<script>
+		window.document.frmAut.username.focus();
+    </script>
+</form>

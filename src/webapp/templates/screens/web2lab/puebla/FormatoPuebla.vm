@@ -1,0 +1,796 @@
+#set ($titlePage = "Formato Puebla" )
+#set ($intkPaciente = $data.getParameters().getString('kPaciente') )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+#set ($intGrupo = $data.getSession().getAttribute("idgrupo") )
+#set ($cSucursalDfuno ="24")
+#set ($cSucursalDfdos ="25")
+#set ($cSucursalDftres ="26")
+
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/puebla/HojaInterpretacion.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/Puebla.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#if($intkPaciente)
+	<script>		
+		 window.onload = init;		
+		 buscarPacienteECE("$!intkPaciente");
+	</script>	
+#end
+
+
+#set ($strLigaPaciente = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
+#set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
+
+<form name="frmPantallaPuebla" action="" method="post" >
+	<input type="hidden" id="idUsuario"  value="$data.getUser().getId()">
+	<input type="hidden" id="kcuestionariopacienteinterpretacionpuebla" value="0">
+	<input type="hidden" id="kordensucursal"  value="$!intkOrdenSucursal">
+    <table border="0" align="center" style="width: 980px" frame="border">
+    	<tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">IDENTIFICACI&Oacute;N DE LA PACIENTE</b>
+    	         </center>
+    	    </th>     
+        </tr>
+     	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Paciente
+            </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" value="0" STYLE="font-size: 30px;" size="5" />
+            </td>  
+			<td>
+			</td>    	    
+			<td onclick="viewPacienteCaptura('$strLigaPaciente',window.document.frmPantallaPuebla.txtCodigoPaciente.value);"  style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+				<a href="" onclick="return false;" title="Datos Paciente" style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal"><< Regresar Datos del Paciente</a>
+			</td>    	    
+    	</tr>  
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Apellido Paterno 
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Apellido Materno 
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Nombre(s) 
+    	    </td> 	       
+        </tr> 	
+        <tr>
+            <td >
+                <input type="text" id="txtApellidoPaterno"  size="35"/>
+    	    </td>     
+            <td >
+                <input type="text" id="txtApellidoMaterno"  size="35" />
+    	    </td>     
+            <td >
+                <input type="text" id="txtNombre"  size="35" />
+    	    </td>	    
+    	</tr>
+     	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp; Fecha nacimiento
+    	    </td>     
+            <td style="width: 187px">
+    		    <div id="CalendarioNac">
+                    <input type="text" name="txtFechaNacimiento" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onFocus="javascript:obtenerEdadfrm(window.document.frmHojaClinica);" onChange="javascript:this.value=validaFormatoFecha(this.value); obtenerEdadfrm(window.document.frmHojaClinica);">		
+    		    </div>				
+            </td>     
+            <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
+                <b>Edad (años-meses-dias)</b
+    	    </td>     
+            <td style="width: 158px">
+                <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                <input type="text"  id="txtEdadDescompuesta" style="font-size: 19px;" value="$!objDemPaciente.getIStrAnios()" class="textflat" disabled>&nbsp;
+    	    </td>     
+        </tr> 
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Tel&eacute;fono
+    	    </td>     
+            <td style="width: 250px">
+                <input type="text" id="txtTelefono" size="30"/>
+            </td>     
+        </tr>
+    	<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" style="width: 490px" />
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" style="width: 157px"/>
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" style="width: 180px" />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Estado
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtEstado" />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" />
+    	    </td>
+        </tr>   	
+    </table>
+   <div id="DatosPuebla">
+    	<table border="0" align="center" style="width: 980px" frame="border">
+    		<tr>
+    			<th colspan="6">
+    				<center>
+    					<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">IDENTIFICACI&Oacute;N DE LA UNIDAD</b>
+    				</center>
+    			</th>     
+    		</tr>
+    		<tr align="left">
+    			<td >
+    				INSTITUCI&Oacute;N 
+    			</td>  
+    			<td>
+    				ENTIDAD 
+    			</td> 
+    			<tr align="left">
+					#if ($intGrupo == $cSucursalDfuno) 
+            			<td >
+            				<input type="text" id="txtInstitucion" value="SECRETARIA DE SALUD DEL DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>					
+					#elseif ($intGrupo == $cSucursalDfdos)
+            			<td >
+            				<input type="text" id="txtInstitucion" value="SECRETARIA DE SALUD DEL DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>											
+					#elseif ($intGrupo == $cSucursalDftres)
+            			<td >
+            				<input type="text" id="txtInstitucion" value="SECRETARIA DE SALUD DEL DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>											
+					#else
+						<td >
+							<input type="text" id="txtInstitucion" value="SSEP" STYLE="font-size: 14px;" size="35"/>
+						</td>
+					#end
+					
+					#if ($intGrupo == $cSucursalDfuno) 
+            			<td >
+            				<input type="text" id="txtEntidad" value="DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>							
+					#elseif ($intGrupo == $cSucursalDfdos)
+            			<td >
+            				<input type="text" id="txtEntidad" value="DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>												
+					#elseif ($intGrupo == $cSucursalDftres)
+            			<td >
+            				<input type="text" id="txtEntidad" value="DISTRITO FEDERAL" STYLE="font-size: 14px;" size="35"/>
+            			</td>																
+					#else
+						<td >
+            				<input type="text" id="txtEntidad" value="PUEBLA" STYLE="font-size: 14px;" size="35"/>
+            			</td>
+					#end
+				</tr>
+    		</tr>  
+    		<tr align="left">
+    			<td>
+    				CLUES
+    			</td>     	                
+    			<td >
+    				JURISDICCI&Oacute;N
+    			</td>     
+    		</tr>  
+    		<tr align="left">
+    			<td >
+    				<input type="text" id="txtClues" value="" onKeyPress="mayuscula();" STYLE="font-size: 14px;" size="35" />
+    			</td>      	                
+    			<td >
+    				<select name="cboJurisdiccion">
+    					<option value="0" selected>Seleccionar</option>
+    					<option value="1">01 HUAUCHINANGO</option>
+    					<option value="2">02 CHIGNAUAPAN</option>
+    					<option value="3">03 ZACAPOAXTLA</option>
+    					<option value="4">04 LIBRES</option>
+    					<option value="5">05 CHOLULA</option>
+    					<option value="6">06 PUEBLA</option>
+    					<option value="7">07 IZUCAR</option>
+    					<option value="8">08 ACATLAN</option>
+    					<option value="9">09 TEPEACA</option>
+    					<option value="10">10 TEHUACAN</option>
+    				</select>										
+    			</td>     
+    		</tr>   
+    		<tr align="left">
+    			<td>
+    				MUNICIPIO
+    			</td>     	                
+    			<td >
+    				UNIDAD M&Eacute;DICA
+    			</td>     
+    		</tr>  
+    		<tr align="left">
+    			<td >
+    				<input type="text" id="txtMunicipio" value="" STYLE="font-size: 14px;" size="35" onKeyPress="mayuscula();"/>
+    			</td>     	                
+    			<td >
+    				<input type="text" id="txtUnidadMed" value="SUBROGACION OLAB" STYLE="font-size: 14px;" size="35" />
+    			</td>     
+    		</tr>     
+    	</table>
+        <table border="0" align="center" style="width: 980px" frame="border">
+    		<tr>
+    			<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    				Entidad de Nacimiento
+    			</td>	            
+    			<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    				CURP
+    			</td>
+    			<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    				Derechohabiencia
+    			</td>			
+    		</tr>
+    		<tr>
+    			<td>
+                	<select id="selEntidadNacimiento" style="width: 177px">
+    					#foreach($objEstado in $lstEstados)
+    						#option("$!objEstado.getSdistinct()" "$!objEstado.getSdistinct()" "0")							
+    					#end
+    				</select>    	    					
+    				<input type="hidden" id="txtClaveInstitucional" value=""/>
+    			</td>
+    			<td>
+    				<input type="text" id="txtCurp" value="" style="width: 115px" onKeyPress="mayuscula();"/>
+    			</td>
+    			<td>
+    				<select name="cboDerechoHabiencia">
+    					<option value="1">SEGURO POPULAR</option>
+    					<option value="2">IMSS</option>
+    					<option value="3">ISSSTE</option>
+    					<option value="4">PEMEX</option>
+    					<option value="5">SEDENA</option>
+    					<option value="6">SEDEMAR</option>
+    					<option value="7">IMSS OPORTUNIDADES</option>
+    					<option value="8">NINGUNA</option>
+    					<option value="9">OTRO</option>
+    				</select>					
+    			</td>
+    		</tr> 
+        </table>
+    	<table border="0" align="center" style="width: 980px" frame="border">
+    		<tr>
+    			<th colspan="6">
+    				<center>
+    					<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">ANTECEDENTES</b>
+    				</center>
+    			</th>     
+    		</tr>
+    		<tr>
+    			<td style="width: 167px">
+    				<b> De mastograf&iacute;a</b>
+    			</td>
+    			<td>
+    				<strong>Fecha de &uacute;ltima mastograf&iacute;a</strong>
+    			</td>
+    			<td>
+    				<strong>Resultado BIRADS</strong>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>
+    				<input type="radio" name="radMastoAnterior" value="1">SI &nbsp;
+    				<input type="radio" name="radMastoAnterior" value="2" checked>NO 
+    			</td>
+    			<td>
+    				<div id="CalendarioNac">
+                        		<input type="text" name="txtFechaUltMasto" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);" >		
+    							<a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPantallaPuebla.txtFechaUltMasto); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+    								<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+    							</a>	
+    			   	 </div>	
+    			</td>
+    			<td >
+    				<input type="text" id="txtBiradsAnt" value="" style="width: 40px" />
+    			</td>
+    		</tr>
+    	</table>	
+   </div>		
+   <div id="DatosPuebla2">		
+    	<table border="0" align="center" style="width: 980px" frame="border">
+    		<tr>
+    			<th colspan="6">
+    				<center>
+    				<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">MASTOGRAF&Iacute;A</b>
+    				</center>
+    			</th>     
+    		</tr>
+    		<tr>
+    			<td style="width: 167px">
+    				<b> Modalidad de mastograf&iacute;a</b>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>
+    				<strong>TAMIZAJE</strong>
+    			</td>
+    			<td>
+    				<strong>DIAGN&Oacute;STICA</strong>
+    			</td>
+    			<td>
+    				<strong>Fecha de toma de la mastograf&iacute;a</strong>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td >
+    				<select name="cboTamizaje">
+    					<option value="0"></option>
+    					<option value="11" selected>INVITACION ORGANIZADA</option>
+    					<option value="12">DERIVADA POR PERSONA DE SALUD</option>
+    					<option value="13">ESPONTANEA (DE LA MUJER)</option>
+    				</select>					
+    			</td>
+    			<td>
+    				<select name="cboDiagnostica">
+    					<option value="0"></option>
+    					<option value="21">POR SINTOMATOLOGIA CLINICA</option>
+    					<option value="22">CONTROL PATOLOGIA BENIGNA</option>
+    					<option value="23">CONTROL PATOLOGIA MALIGNA</option>
+    				</select>					
+    			</td>
+    			<td>
+    				<div id="CalendarioNac">
+                        	<input type="text" name="txtFechaToma" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);" >		
+    							<a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPantallaPuebla.txtFechaToma); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+    								<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+    							</a>	
+    			   	 </div>	
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>
+    				<strong>Mastograf&iacute;a t&eacute;cnicamente adecuada</strong>
+    			</td>
+    			<td >
+    				<select name="cboMastoAdecuada" OnChange="javascript:MastografiaAdecuadaOnChange();">
+    					<option value="1" selected>SI</option>
+    					<option value="2">NO</option>
+    				</select>					
+    			</td>
+    			<td>
+    				<table>
+    					<tr>
+    						<td>
+    							Imagen incompleta de la mama
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkImagenIncompleta">
+    						</td>
+    					</tr>
+    					<tr>
+    						<td>
+    							Bajo contraste
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkBajoContraste">
+    						</td>
+    					</tr>
+    					<tr>
+    						<td>
+    							Baja Resolucion
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkBajaResolucion">
+    						</td>
+    					</tr>
+    					<tr>
+    						<td>
+    							Artefactos
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkArtefactos">
+    						</td>
+    					</tr>
+    					<tr>
+    						<td>
+    							Mal posicionamiento
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkMalPosicionamiento">
+    						</td>
+    					</tr>
+    					<tr>
+    						<td>
+    							Otros
+    						</td>
+    						<td>
+    							<input type="checkbox" id="chkOtros">
+    						</td>
+    					</tr>
+    				</table>
+    			</td>
+    		</tr>
+		</table>
+	</div>
+	<div id="DatosInterpretacion">
+		<table border="0" align="center" style="width: 980px" frame="border">
+			<tr>
+				<th colspan="6">
+					<center>
+						<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">&nbsp;&nbsp;</b>
+					</center>
+				</th>     
+			</tr>
+			<tr>
+				<td>
+					<strong>Fecha de interpretaci&oacute;n de la mastograf&iacute;a </strong>
+				</td>
+				<td>
+					<strong>Fecha de informe a la mujer </strong>
+				</td>	
+			</tr>	
+			<tr>
+				<td valign="top">
+					<div id="CalendarioNac">
+                    		<input type="text" name="txtFechaInterpretacion" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);" >		
+							<a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPantallaPuebla.txtFechaInterpretacion); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+								<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+							</a>	
+					</div>	
+				</td>
+				<td valign="top">
+					<div id="CalendarioNac">
+                    		<input type="text" name="txtFechaInforme" size="12" value="$!strFecFormat" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);" >		
+							<a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPantallaPuebla.txtFechaInforme); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+								<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+							</a>	
+					</div>		
+				</td>  
+			</tr>
+			<tr>
+				<td>
+					<strong>
+						Resultado y hallazgos de la mastograf&iacute;a
+					</strong>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<table border="1" cellspacing="5" width="170"  frame="border">
+						<tr>
+							<td>
+								HALLAZGOS
+							</td>
+							<td>
+								DER
+							</td>
+							<td>
+								IZQ
+							</td>
+						</tr>
+						<tr>
+							<td>
+								1.Tumor
+							</td>
+							<td>
+								<input type="checkbox" id="chkTumorDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkTumorIzq">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								2.Asimetr&iacute;a
+							</td>
+							<td>
+								<input type="checkbox" id="chkAsimetriaDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkAsimetriaIzq">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								3.Deformidad
+							</td>
+							<td>
+								<input type="checkbox" id="chkDeformidadDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkDeformidadIzq">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								4.Calcificaci&oacute;n
+							</td>
+							<td>
+								<input type="checkbox" id="chkCalcificacionDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkCalcificacionIzq">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								5.Denisidad Asim&eacute;trica
+							</td>
+							<td>
+								<input type="checkbox" id="chkDensidadDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkDensidadIzq">
+							</td>
+						</tr>
+						<tr>
+							<td>
+								6.Otros
+							</td>
+							<td>
+								<input type="checkbox" id="chkOtrosDer">
+							</td>
+							<td>
+								<input type="checkbox" id="chkOtrosIzq">
+							</td>
+						</tr>
+					</table>
+				</td>	
+				<td valign="top">
+					<table border="1" cellspacing="5" width="290"  frame="border">
+						<tr>
+							<td>
+								LECTOR
+							</td>
+							<td>
+								RESULTADO
+							</td>
+							<td>
+								RFC
+							</td>
+						</tr>
+						<tr>
+							<td>
+								UNO
+							</td>
+							<td>
+                				<select name="cboResultadoUno" OnChange="javascript:UnoOnChange();">
+                					<option value="-1" selected>Selecciona</option>
+                					<option value="0">BIRADS 0</option>
+                					<option value="1">BIRADS 1</option>
+                					<option value="2">BIRADS 2</option>
+                					<option value="3">BIRADS 3</option>
+                					<option value="4">BIRADS 4</option>
+                					<option value="5">BIRADS 5</option>
+                				</select>													
+							</td>
+							<td>
+                				<select name="cboRfcUno">
+                					<option value="" selected>Selecciona</option>
+                					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
+                					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
+                					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
+                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option>
+									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
+									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
+									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
+									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+            						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
+            						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
+            						<option value="AIAE801108CK3">Dr. Emmanuel Avila Anguiano</option>
+                				</select>													
+							</td>
+						</tr>
+						<tr>
+							<td>
+								DOS
+							</td>
+							<td>
+                				<select name="cboResultadoDos" OnChange="javascript:DosOnChange();">
+                					<option value="-1" selected>Selecciona</option>
+                					<option value="0">BIRADS 0</option>
+                					<option value="1">BIRADS 1</option>
+                					<option value="2">BIRADS 2</option>
+                					<option value="3">BIRADS 3</option>
+                					<option value="4">BIRADS 4</option>
+                					<option value="5">BIRADS 5</option>
+                				</select>													
+							</td>
+							<td>
+                				<select name="cboRfcDos">
+                					<option value="" selected>Selecciona</option>
+                					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
+                					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
+                					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
+                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option>
+									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
+									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
+									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
+									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+            						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
+            						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
+                				</select>													
+							</td>
+						</tr>
+						<tr>
+							<td>
+								DECISI&Oacute;N
+							</td>
+							<td>
+                				<select name="cboResultadoDesicion" OnChange="javascript:TresOnChange();">
+                					<option value="-1" selected>Selecciona</option>
+                					<option value="0">BIRADS 0</option>
+                					<option value="1">BIRADS 1</option>
+                					<option value="2">BIRADS 2</option>
+                					<option value="3">BIRADS 3</option>
+                					<option value="4">BIRADS 4</option>
+                					<option value="5">BIRADS 5</option>
+                				</select>													
+							</td>
+							<td>
+                				<select name="cboRfcDesicion">
+                					<option value="" selected>Selecciona</option>
+                					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
+                					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
+                					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
+                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option> 
+									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
+									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
+									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
+									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+            						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
+            						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
+                				</select>													
+							</td>
+						</tr>
+					</table>
+				</td>	 
+			</tr>
+			<tr>
+				<td >
+					<strong> Observaciones</strong>
+				</td>		
+			</tr>
+			<tr>
+				<td >					
+					<input type="text" id="txtObservaciones" maxlength="100" style="width: 317px"  onKeyPress="mayuscula();">
+				</td>
+			</tr>
+		</table>
+		<table border="0" align="center" style="width: 980px" frame="border">
+			<tr>
+				<th colspan="6">
+					<center>
+						<b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">CONDUCTA A SEGUIR</b>
+					 </center>
+				</th>     
+			</tr>
+			<tr>
+				<td>
+					<tr>
+						<td>	
+							Referencia a Ginecolog&iacute;a
+						</td>
+						<td>
+							<input type="checkbox" id="chkRefeGineco">
+						</td>
+						<td>
+							<strong>Referencia a Evaluaci&oacute;n Diagn&oacute;stica a Unidad</strong>
+						</td>
+						<td>
+							<strong>Fecha de referencia</strong>
+						</td>
+					</tr>
+					<tr>
+						<td>
+							Repetir por estudio inadecuado
+						</td>
+						<td>
+							<input type="checkbox" id="chkRepeticionEst">
+						</td>
+						<td>
+							<input type="text" id="txtReferenciaEva" style="width: 250px" onKeyPress="mayuscula();" />	
+						</td>
+						<td>
+							<div id="CalendarioNac">
+								<input type="text" name="txtFechaReferencia" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);" >		
+									<a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPantallaPuebla.txtFechaReferencia); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+										<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+									</a>	
+							</div>	
+						</td>
+					</tr>
+				</td>		
+			</tr>
+			<tr>
+				<td>
+					Pr&oacute;xima detecci&oacute;n por Masotgraf&iacute;a en 2 A&Ntilde;OS
+				</td>
+				<td>
+					<input type="checkbox" id="chkProxMasto">
+				</td>
+			</tr>	
+		</table>		
+		<table border="0" align="center" style="width: 980px" frame="border">
+			<tr>
+				<td>
+					<strong>Nombre Radi&oacute;logo</strong>
+				</td>
+				<td>
+    				<select name="cboRFCRadiologo">
+    					<option value="" selected>Selecciona</option>
+    					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
+    					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
+    					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
+                		<option value="VEGL680928">Dr. Luis Enrique Vega García</option> 
+						<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
+						<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
+						<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
+						<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
+						<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
+						<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
+						<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
+						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
+    				</select>													
+				</td>
+			</tr>
+		</table>		
+	</div>	
+   <div id="divboton">	
+		<table border="0" align="right" style="width: 980px" frame="border">
+    		<tr>
+    			<td style="width: 200px" colspan="2">
+    				<input type="button" class="boton" onClick="actualizaInterpretacion();" value="Guardar Formato">
+    			</td>
+    			<td style="width: 158px" colspan="2">
+    				<input type="button" class="boton" id="butImprimirFormato"  value="Imprimir Formato" onClick="imprimirInterpretacion();">
+    			</td>
+    		</tr>
+    	</table>
+	</div>	
+</form>
+<script>		
+		frmPantalla = window.document.frmPantallaPuebla;
+		document.getElementById('txtClaveInstitucional').className = 'textflat';
+		frmPantalla.txtClaveInstitucional.disabled = true;
+
+		document.getElementById('txtEntidad').className = 'textflat';
+		frmPantalla.txtEntidad.disabled = true;
+		
+		document.getElementById('txtUnidadMed').className = 'textflat';
+		frmPantalla.txtUnidadMed.disabled = true;
+
+		document.getElementById("cboTamizaje").disabled = false;		
+		document.getElementById("cboDiagnostica").disabled = false;		
+
+</script>	

@@ -1,0 +1,101 @@
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/EditaRolUsuario.js")"></SCRIPT> 
+#set ($objRole = $CSeguridadTool.getRole())
+#set ( $strLigaActual  = $link.setPage("web2lab,seguridad,AsignaPermisosRol.vm"))
+#set ( $strLigaActual  = $link.setAction("seguridad.BRoleAction").toString())
+#set ( $title = "Security: Permisos para el rol $role.Name")
+#set ( $titlePage = "Permisos para el rol: $!objRole.Name")
+#set ( $permisosSinAsig = $CSeguridadTool.getPermisosSinAsig("$objRole.Name"))
+#set ( $permisosAsig = $CSeguridadTool.getPermisosAsig("$objRole.Name"))
+#set ( $strLigaRegresar = $link.setPage("web2lab,seguridad,Roles.vm").toString())
+<form method="post"  action="$strLigaActual" name="frmPermAsig" onsubmit='selectAll("frmPermAsig","cboPermisosAsig","cboPermisosSinAsig");'>
+	<input type="hidden" name="hdnNombre" value="$objRole.Name">
+    <!-- table border="0" cellspacing="0" cellpadding="0" class="tabla" width="100%" >
+    
+	#foreach ($objPermisos in $CSeguridadTool.getPermisos())    
+	    #if ($objRole.Permissions.contains($objPermisos))
+	        #set ($checked = "checked")
+	    #else
+	        #set ($checked = "")
+		#end
+		#if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+        <tr class="$t">
+            <td align="center">$objPermisos.Name</td>
+            <td>
+                <input type="checkbox" name="${objRole.Name}${objPermisos.Name}" $checked>
+            </td>
+        </tr>
+	#end
+    </table>
+    <table border="0"  class="tabla"  width="100%">
+    <td>
+        <input type="hidden" name="hdnNombre" value="$objRole.Name">
+        <input type="submit" name="eventSubmit_doPermisos" class="boton" value="Actualizar"/>
+        <!-- input type="submit" name="eventSubmit_doPermissions" value="Update"/ >
+        <input type="submit" name="eventSubmit_doCancel" class="boton" value="Cancelar"/>
+    </td>   
+    </table -->
+	<table class="tabla" border="0" width="100%">
+		<tr>
+			<td align="left" colspan="3">				
+		       		#if($bolActualizado)
+						<img align="middle" src="$content.getURI('images/icon_success_sml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="blue" aling="center">&nbsp; Los permisos del rol: $!objRole.Name, se actualizaron con &eacute;xito.</font></b>
+					#else
+						&nbsp;
+					#end	
+			</td>		
+		</tr>
+		<tr>
+			<td align="right"><b>Permisos asignados</b></td>
+			<td align="center">&nbsp;</b></td>
+			<td align="left"><b>Permisos sin asignar</b></td>			
+		</tr>		
+		<tr>
+			<td align="right" colspan="3">&nbsp;</td>	
+		</tr>		
+		<tr>
+			<td align="right">
+				<select name="cboPermisosAsig" size="10"  multiple>
+					#foreach($permAsig in $permisosAsig)
+						<option value="${objRole.Name}${permAsig.Name}">$permAsig.getName()</option>
+					#end					
+				</select>					
+			</td>			
+			<td align="center">
+				<table border="0" class="tabla" width="100%">
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdAsigna" value=" << " class="boton" onclick='return editaRoles("frmPermAsig","cboPermisosSinAsig","cboPermisosAsig");'>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdElimina" value=" >> " class="boton" onclick='return editaRoles("frmPermAsig","cboPermisosAsig","cboPermisosSinAsig");'>
+						</td>
+					</tr>						
+				</table>
+			</td>
+			<td align="left">
+				<select name="cboPermisosSinAsig" size="10"  multiple>
+					#foreach($permSinAsig in $permisosSinAsig)
+						<option value="${objRole.Name}${permSinAsig.Name}">$permSinAsig.getName()</option>						
+					#end										
+				</select>					
+			</td>
+		</tr>
+		<tr>
+			<td align="center" colspan="3">&nbsp;</td>		
+		</tr>
+		<tr>
+			<td align="center" colspan="3">
+				<input type="submit" name="eventSubmit_doPermisos" value="Actualizar" class="boton">
+				<input type="button" name="cmdCancelar" value="Regresar" class="boton" onclick="location.href='$strLigaRegresar'">
+			</td>		
+		</tr>
+		<tr>
+			<td align="center" colspan="3">&nbsp;</td>		
+		</tr>
+	</table>
+</form>
+
+

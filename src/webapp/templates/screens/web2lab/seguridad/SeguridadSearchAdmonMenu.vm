@@ -1,0 +1,16 @@
+#set ( $permisos = $SeguridadMenuTool.getPermisosMenu())
+<table border="0" cellspacing="2" cellpadding="3">
+          <tr>
+           <th>Permisos:</th>
+          	<td>
+	      		<select name="perms_menu">
+	                #option("" "Seleccione" "")
+	                #foreach($permiso in $permisos)
+						<option value="$permiso.getValue(1).asInt()">
+							$permiso.getValue(2).asString()
+						</option>
+	                #end
+	             </select>
+             </td>
+          </tr>
+</table>          

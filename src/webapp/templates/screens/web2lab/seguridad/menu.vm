@@ -1,0 +1,47 @@
+$page.setTitle("Security: Menu")
+#set ($titlePage = "Menu")
+#set ( $actLnk = $link.setPage("web2lab,seguridad,SeguridadPermissionSearch.vm").toString())
+       <form method="post" action="$actLnk" name="forma">
+          <table border="0" cellspacing="2" cellpadding="3">
+          <tr>
+          	<td>
+	          <th>menu</th>
+	        </td>
+	      </tr>
+          <tr>
+            <td>
+            	<a href="$link.setPage('web2lab,seguridad,SeguridadPermissionForm.vm')">Permisos </a>
+            </td>
+            <tr>
+            #set($idGrupo = 0)
+            #set($menu = $SeguridadMenuTool.getOpcionMenu())
+            #foreach($item in $menu)
+            	#if($item.IdGRupoMenu != $idGrupo)
+	            	#if ($velocityCount > 1 )
+	    	        	</table>
+	    	        	</td>
+	    	        #end
+	    	        <td>
+            	<table>
+            		<tr>
+            			<td>
+            			<a href="$link.setPage($item.Liga)">
+            				$item.DescPermiso
+            			</a>
+            			</td>
+            		</tr>
+            		#set($idGrupo = $item.IdGRupoMenu)
+            	#else
+            		<tr>
+            			<td>
+            			<a href="$link.setPage($item.Liga)">
+            				$item.DescPermiso
+            			</a>
+            			</td>
+            		</tr>
+            	#end
+            	
+            #end
+          </tr>
+          </table>
+       </form>

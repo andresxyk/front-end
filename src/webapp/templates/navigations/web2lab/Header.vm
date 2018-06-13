@@ -1,0 +1,10 @@
+<tr>
+	<td class="titulologin">
+		&nbsp;$!titlePage
+		<div align="right">
+			#set ( $strLigaLog = $link.setPage("web2lab,seguridad,ExpedienteElectronico.vm"))
+			#set ( $strLigaLog = $link.setAction("seguridad.BLogoutAction").toString())
+			<a href="$!strLigaLog"><font color="#FFFFFF">Salir</font></a>
+		</div>
+	</td>
+</tr>

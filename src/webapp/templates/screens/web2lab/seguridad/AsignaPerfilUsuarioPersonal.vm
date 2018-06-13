@@ -1,0 +1,77 @@
+#set ( $ObjAccesos = $CSeguridadTool.getACL())
+#set ( $strUser = $data.getParameters().getString("txtNombreUsuario"))
+#set ( $strLigaActual  = $link.setPage("web2lab,seguridad,EditaRolUsuarioPersonal.vm"))
+#set ( $strLigaActual  = $link.setAction("seguridad.BUserAction").toString())
+#set ( $strLigaEliminar  = $link.setPage("web2lab,seguridad,AsignaPerfilUsuarioPersonal.vm"))
+#set ( $strLigaEliminar  = $link.setAction("seguridad.BUserAction").toString())
+#set ( $strLigaRegresar  = $link.setPage("web2lab,seguridad,UsuariosPersonal.vm").toString())
+#set ($userId = $data.getParameters().getString("userId"))
+<script>
+function validaSelect(select)
+{
+	
+	if(select.value == "")
+	{
+		alert('Seleccione un grupo por favor.');
+		return false;
+	}
+	else
+	{
+		return true;
+	}	
+}
+</script>
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/EditaRolUsuario.js")"></SCRIPT> 
+<form name="frmAsignaPerfil" method="post" action="$strLigaActual">	
+	<input type="hidden" name="hdnUsuario" value="$strUser">
+	 <table class="tabla" width="100%">
+		<tr>
+			<td align="center"><b>Grupos</b></td>
+			<td align="center">&nbsp;</b></td>
+			<td align="center"><b>Grupos Asignados</b></td>			
+		</tr>		
+		<tr>
+			<td align="right" colspan="3">&nbsp;</td>	
+		</tr>		
+		<tr>
+			<td align="center">		
+				<select name="cboGrupos" size="10">
+					#foreach($objGrupo in $CSeguridadTool.getGruposNoAsignados("$strUser"))
+						<option value="$objGrupo.Name">$objGrupo.Name</option>
+					#end					
+				</select>
+			</td>
+			<td align="center">
+				<table border="0" class="tabla" width="100%">
+					<tr>
+						<td align="center">
+							<input type="submit" name="eventSubmit_doEditagruporol" value=" >> " class="boton" onclick="return validaSelect(document.frmAsignaPerfil.cboGrupos)">
+						</td>
+						
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="submit" name="eventSubmit_doEliminargrupo" value=" << " class="boton" onclick="document.frmAsignaPerfil.action='$strLigaEliminar'; return validaSelect(document.frmAsignaPerfil.cboGruposAsignados)">
+						</td>
+					</tr>						
+				</table>
+			</td>
+			<td align="left">
+				<select name="cboGruposAsignados" size="10" multiple>
+					#foreach($objAsignadoGrupo in $CSeguridadTool.getGruposAsignados("$strUser"))
+						<option value="$objAsignadoGrupo.Name">$objAsignadoGrupo.Name</option>
+					#end										
+				</select>					
+			</td>
+		</tr>
+		<tr>			
+			<td colspan="2">&nbsp;</td>
+		</tr>				
+		<tr>			
+			<td colspan="2" align="center">
+				<input type="button" name="cmdCancelar" value="Regresar" class="boton" onclick="location.href='$strLigaRegresar'">
+				&nbsp;<input type="submit" name="eventSubmit_doEditagruporol2" value="Editar" class="boton" onclick="return validaSelect(document.frmAsignaPerfil.cboGruposAsignados)">
+			</td>
+		</tr>			
+	 </table>	 
+</form>      

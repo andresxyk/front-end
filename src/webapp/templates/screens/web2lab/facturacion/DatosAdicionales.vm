@@ -1,0 +1,123 @@
+#set ($titlePage = "Datos Adicionales" )
+#set ($strLigaDiagnostico = $link.setPage("web2lab,ap,Diagnostico.vm").toString())
+#set ($intkPaciente = $data.getSession().getAttribute('kPaciente') )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+#set ($intuOrden = $data.getParameters().getString('uOrden') )
+#set ($intkPacienteECEEmpresa = $data.getParameters().getString('kPacienteECE') )
+#set ($intcConvenioECEEmpresa = $data.getParameters().getString('cConvenioECE') )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/DatosAdicionales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosAdicionales.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/PacienteMayoreo.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosOrden.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosExamen.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/CotizacionOrdenes.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+
+#if($intkPaciente)
+	<script>		
+		 window.onload = initConsulta;		
+		 buscarPacienteECE("$!intkPaciente");
+	</script>	
+#elseif($intkPacienteECEEmpresa)
+	<script>		
+		 window.onload = initConsulta;		
+		 buscarPacienteECEEmpresa("$!intkPacienteECEEmpresa","$!intcConvenioECEEmpresa");
+	</script>	
+#else
+	<script>		
+		 window.onload = init;		
+	</script>	
+#end
+
+#if($intuOrden)
+	<script>		
+	     DatosOrden.getkPaciente('$intcSucursal','$intuOrden',getkPaciente_CallBack);
+	</script>	
+#end
+	
+
+#set ($lstConvenios = $CatalogosTool.obtenAll("DatoAdicional","621"))
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($ligaCreaDatoAdicional = $link.setPage("web2lab,facturacion,AltaDatoAdicional.vm").toString())
+
+<form name="frmDatosAdicionales" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdenRutaDatoAdicional" name="hdenRutaDatoAdicional" value="$ligaCreaDatoAdicional">
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="5">Datos Adicionales</th></tr>
+		<tr>
+		</tr>
+		<tr>
+			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Busqueda
+    	    </td>
+			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">  
+    	    </td>  
+		</tr>
+		<tr>
+		</tr>
+		<tr>
+			<td>
+				<input type="text" id="txtBusqueda" size="12" onKeyPress="numero();buscarPaciente();" />
+			</td>
+			<td>
+                <input type="radio" name="radTipo" value="0"  checked>Orden
+        		<input type="radio" name="radTipo" value="1" >Paciente					
+    	    </td>
+			<td>
+				<input type="button" id="idLimpiar" value="Limpiar" onClick="limpiar();" class="boton">
+            </td>
+		</tr>
+		
+			
+		
+	</table>
+	<div id="gridPaciente" style="display:none"> 
+		<table border="0"  align="center" style="width: 883px">
+			<tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    &nbsp; Apellido Paterno 
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    &nbsp; Apellido Materno 
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    &nbsp; Nombre(s) 
+        	    </td> 	       
+			</tr> 	
+			<tr>
+                <td >
+                    <input type="text" id="txtApellidoPaterno"  size="46"/>
+        	    </td>     
+                <td >
+                    <input type="text" id="txtApellidoMaterno"  size="46" />
+        	    </td>     
+                <td >
+                    <input type="text" id="txtNombre"  size="46" />
+        	    </td>	    
+			</tr>
+		</table>
+	</div>
+	<div id="gridbusquedaPacientes">                
+	</div> 
+</form>
+
+<SCRIPT language="javascript" for=window event=onload>
+	document.getElementById("txtBusqueda").focus();
+</SCRIPT>

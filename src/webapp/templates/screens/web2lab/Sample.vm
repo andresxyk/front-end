@@ -1,0 +1,101 @@
+     <div id="bodycol">
+      <div id="apphead"><h2>My title: <em>Launch torpedo</em></h2></div>
+      <div id="projecthome" class="app">
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+          <td title="View category list"><a href="#">Categories</a></td>
+          <th title="View project list">Projects</th>
+          <td title="View category list"><a href="#">Leanest tabset ever</a></td>
+         </tr>
+        </table>
+       </div>
+       <div class="colbar">
+        <form action="#" method="get">
+         <input type="checkbox" name="mode" id="mode" value="Nested" onclick="this.form.submit();" /> <label for="mode">View sub projects</label> <noscript><input type="submit" value="Refresh" /></noscript>
+        </form>
+       </div>
+       <table border="1" cellspacing="2" cellpadding="3" width="100%">
+        <tr>
+         <th>Name</th>
+         <th>Summary</th>
+         <th>Categories</th>
+        </tr>
+        <tr class="a">
+         <td><a href="#">Chunk</a></td>
+         <td>A project for HTML documents and information</td>
+         <td>none</td>
+        </tr>
+        <tr class="b">
+         <td><a href="#">Testproject</a></td>
+         <td>Test project for beta test</td>
+         <td>none</td>
+        </tr>
+        <tr class="a">
+         <td><a href="#">Applethrasher</a></td>
+         <td>A project for HTML documents and information</td>
+         <td>none</td>
+        </tr>
+       </table>
+       <div id="framework" class="h3">
+        <h3>Framework</h3>
+        <div class="axial">
+         <table border="0" cellspacing="2" cellpadding="3">
+          <tr>
+           <th>Name for system mail</th>
+           <td>
+            <input type="text" name="#" value="SourceCast" size="30" maxlength="50" />
+            <p>Name from which system email should be sent</p>
+           </td>
+          </tr>
+          <tr>
+           <th>Display timezone</th>
+           <td>
+            <input type="text" name="#" value="GMT" size="10" maxlength="10" />
+            <p>The timezone to use for displaying times and dates</p>
+           </td>
+          </tr>
+          <tr>
+           <th>Logging level</th>
+           <td>
+            <div><input type="radio" name="#" checked="checked" /> DEBUG</div>
+            <div><input type="radio" name="#" value="INFO" /> INFO</div>
+            <div><input type="radio" name="#" value="WARN" /> WARN</div>
+            <div><input type="radio" name="#" value="ERROR" /> ERROR</div>
+            <p>The verbosity of logging produced by system operation and events</p>
+           </td>
+          </tr>
+          <tr>
+           <th>User cache size</th>
+           <td>
+            <input type="text" name="#" value="1" size="3" maxlength="3" />
+            <p>The size of the site-wide user cache, expressed as a fraction of the total number of users on the site</p>
+           </td>
+          </tr>
+          <tr>
+           <td>&#160;</td>
+           <td><input type="submit" name="Button" value="Make changes" /></td>
+          </tr>
+         </table>
+        </div>
+       </div>
+       <div class="h3" id="mimes">
+        <h3>Expiring mimes want to, no?</h3>
+         <p class="tasknav"><a href="#">Edit this project</a> | <a href="#">Add extra flavor</a> | <a href="#">Congeal actionables</a></p>
+         <p>
+          <acronym title="Cascading Style Sheets">CSS</acronym> came late to the TLA party. It competes with Christ Saves Souls and <a href="http://www.reprod-ent.com/bullserv.html#only">Certified Semen Services</a>, but Cascading Style Sheets is more than a religion or animal husbandry commodity: much more. It is a way out of the bloated, murky HTML generation and maintenance business. It is a way to cut the transmission times of your screens to perhaps 30% what they are now, depending on how bad you've been. It is a way to stop using HTML tables except for train schedule-style tabular data. No more font tags, no more spacer GIFs, no more GIFs of text. And still look good - better even than with all the painful crufty techniques just mentioned.
+         </p>
+         <div class="h4" id="waitmore">
+          <h4>But wait there's more</h4>
+          <p>This project branding information used to affect the appearance of the site. Its project branding information used to affect the appearance of the site. His project branding information used to affect the appearance of the site. Tis project branding information used to affect the appearance of the site. </p>
+          <p>Now enriched with solid gold.</p>
+         </div>
+         <div class="h4" id="feedingtime">
+          <h4>Feeding time at the Zoo</h4>
+          <p class="tasknav"><a href="#">Edit this project</a> | <a href="#">Add extra flavor</a> | <a href="#">Congeal actionables</a></p>
+          <p>This project branding information used to affect the appearance of the site.</p>
+          <p>Now enriched with solid gold.</p>
+         </div>
+       </div>
+      </div>
+     </div>

@@ -1,0 +1,94 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
+#set ($titlePage = "Roles")
+#set ( $strLigaActual = $link.setPage("web2lab,seguridad,Roles.vm"))
+#set ( $strLigaActual = $link.setAction("seguridad.BRoleAction").toString())
+#set ( $strCargarPagina  = $link.setPage("web2lab,seguridad,Roles_Form.vm").toString())
+#set($bolbuscaRole=($!CSeguridadTool.getTxtRole()!="" || $!CSeguridadTool.getChkSel()!=""))
+#if ($bolbuscaRole)
+	#set($objRoles = $CSeguridadTool.getRolesPorCriteria())	
+#end
+<SCRIPT LANGUAGE="JavaScript">function goToURL() { window.location = "$strCargarPagina"; }</script>
+<form method="post" action="$strLigaActual" name="frmRoles" >
+	<table width="100%" class="tabla">
+		<tr>
+       		<td>
+		    	#if($!bolModif == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de rol exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El rol: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
+				#end	
+				#if($!bolModif == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de rol fallida"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El rol: $!strMensajeModif, Ya existe y no se actualiz&oacute;.</font></b>
+				#end
+			</td>
+		</tr>		
+		<tr>
+       		<td>
+		   		#if($!bolBorrado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Eliminación de rol exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El rol: $!strMensajeBorrado, se elimin&oacute; con &eacute;xito.</font></b>
+				#end	
+			</td>
+		</tr>
+		<tr>
+       		<td>
+		   		#if($!bolActualizado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de rol exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; Los permisos del rol: $!strActualizado, se actualizaron  con &eacute;xito.</font></b>
+				#end	
+			</td>
+		</tr>
+		#if(!$objRoles && $bolbuscaRole)
+    		<tr>
+       			<td>
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No existen resultados"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">No existen resultados para ese criterio de b&uacute;squeda</font></b>					
+				</td>
+			</tr>
+		#end
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">		
+        <tr>
+            <td>
+           	    Nombre del rol:
+            </td>
+            <td>
+                <input type="text" name="txtRoleNombre" value="$!strRoleVuel" onKeyUp="cambiaMay('frmRoles', 'txtRoleNombre');"> 
+            </td>
+        </tr>        
+        <tr>
+            <td colspan="2">
+           	    <input type="checkbox" name="chkSeleccionaTodo">Buscar todos
+            </td>           
+        </tr>        		
+        <tr>
+            <th align="left">Role</th>          
+            <th align="left">Acciones</th>          
+        </tr>
+		##set($objRoles = $CSeguridadTool.getRolesPorCriteria())		
+		#foreach ( $objRol in $objRoles)
+		    #set ( $strLigaDetalle = $link.setPage("web2lab,seguridad,Roles_Form.vm"))
+		    #set ( $strLigaDetalle = $link.addQueryData("strNombreRole",$objRol.Name))
+		    #set ( $strLigaDetalle = $link.addQueryData("strModo","modify").toString())
+		    ##set ( $strLigaPermisosDeRol = $link.setPage("web2lab,seguridad,Roles_PermisosForm.vm"))
+			#set ( $strLigaPermisosDeRol = $link.setPage("web2lab,seguridad,AsignaPermisosRol.vm"))
+		    #set ( $strLigaPermisosDeRol = $link.addQueryData("strNombreRole",$objRol.Name))
+		    #set ( $strLigaPermisosDeRol = $link.addQueryData("strModo","modify").toString())			    
+		    #set ( $strLigaBorra = $link.setPage("web2lab,seguridad,Roles_Form.vm"))
+		    #set ( $strLigaBorra = $link.addQueryData("strNombreRole",$objRol.Name))
+		    #set ( $strLigaBorra = $link.addQueryData("strModo","delete").toString())
+		    #if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+		        <tr class="$t">
+				    <td>$!objRol.Name</td>		          
+				    <td>
+					    <a href="$strLigaDetalle">Actualizar</a>			           
+					    <a href="$strLigaPermisosDeRol">Permisos</a>			           
+					    <a href="$strLigaBorra">Eliminar</a>
+				    </td>		         
+				</tr>			
+    	#end    		     	
+    </table>
+    <input type="submit" name="onSubmit_doPerform" class="boton" value="Buscar" onClick="return validaSeg('frmRoles','txtRoleNombre','chkSeleccionaTodo'); "/>
+    <input type="button"  onClick="goToURL()" class="boton" value="Crear Nuevo">
+</form>        

@@ -1,0 +1,53 @@
+$page.setTitle("WEB2LAB")
+$page.setHttpEquiv("Content-Style-Type","text/css")
+$page.addStyleSheet($content.getURI("css/web2lab.css"))
+$page.setTitle("WEB2LAB")
+$page.setHttpEquiv("Content-Style-Type","text/css")
+$page.addStyleSheet($content.getURI("css/marcas/login.css"))
+##$page.addStyleSheet($content.getURI("css/web2lab.css"))
+##$page.addStyleSheet($content.getURI("css/azul.css"))
+$page.addBodyAttribute("marginheight","0")
+$page.addBodyAttribute("topmargin","0")
+$page.addBodyAttribute("leftmargin","0")
+$page.addBodyAttribute("marginwidth","0")
+## build the HTML, HEAD, and BODY tags dynamically
+
+##$page.DefaultDoctype
+<html>
+#TurbineHtmlHead()
+<body #TurbineHtmlBodyAttributes() class="fondo">
+<script>
+//<--
+	javascript:window.history.forward(1);
+//-->
+</script>
+<table width="200" align="center" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td><img src="$content.getURI("images/logoOlab.jpg")" width="850" height="150"></td>
+	</tr>
+	<tr class="fondo"> 
+		<td>
+            <table width="100%" border="0" cellspacing="0" class="fondo">
+            	<tr>
+            		<td width="20%" valign="top">$navigation.setTemplate("/web2lab,LeftcolSinMenu.vm")</td>
+            		<td width="5%"></td>
+            		<td width="75%" valign="top">
+            			<table width="100%" border="0" cellspacing="5" class="fondo">
+            				$navigation.setTemplate("/web2lab,HeaderSinLogout.vm")
+            				<tr>
+            					<td>$screen_placeholder</td>
+            				</tr>
+            			</table>
+            		</td>
+            	</tr>
+            </table> 
+		</td>
+	</tr>
+	$navigation.setTemplate("/web2lab,Footer.vm")
+</table>
+</body>
+</html>
+
+
+
+

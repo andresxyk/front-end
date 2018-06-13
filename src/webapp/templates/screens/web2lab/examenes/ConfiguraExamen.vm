@@ -1,0 +1,64 @@
+$data.setLayoutTemplate("/web2lab/Default.vm")
+
+#set ( $strLigaActual = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamen.vm") )
+#set ( $strLigaActual = $link.setAction("carpermor.examenes.BConfiguraExamenAction").toString() )
+
+#set ( $cExamen = $data.getParameters().getString("cexamen") )
+#set ( $claboratorioexamen = $data.getParameters().getString("claboratorioexamen") )
+#if($cExamen || $claboratorioexamen)
+	$!CConfiguraExamenTool.setExamenConfiguradoToSession("$!cExamen", "$!claboratorioexamen")
+	#set( $aStrMensaje = "El examen "+ $cExamen +" a sido seleccionado para configuraci&oacute;n." )
+#end
+#set($objSesionActual = $data.getSession())
+#set ($objConfExamenBean = $objSesionActual.getAttribute("aObjConfExamenBean") )
+#set ($titlePage = "Configuraci&oacute;n del examen <br>$!objConfExamenBean.getObjDExamen().getStituloimpresion()" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/carpermor/examenes/ConfiguraExamen.js")"></script>
+
+<form name="frmConfiguraExamen" action="$strLigaActual" method="post" >
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="center">
+				#set ( $strDatosGenerales = $link.setPage("proa2milv2,carpermor,examenes,DatosGenerales.vm").toString() )
+				#set ( $strDatosLaboratorio = $link.setPage("proa2milv2,carpermor,examenes,DatosLaboratorio.vm").toString() )
+				#set ( $strCodigosResultado = $link.setPage("proa2milv2,carpermor,codigos,AsignaCodigosResultado.vm").toString() )
+				#set ( $strDatosMuestra = $link.setPage("proa2milv2,carpermor,examenes,DatosMuestra.vm").toString() )
+				#set ( $strImportanciaClinica = $link.setPage("proa2milv2,carpermor,examenes,ImportanciaClinica.vm").toString() )
+				<div id="menu">
+					<div class="outer"><a href="$strDatosGenerales"><span>Datos generales</span></a></div>
+					<div class="outer"><a href="$strDatosLaboratorio"><span>Datos de laboratorio</span></a></div>
+					<div class="outer"><a href="$strCodigosResultado"><span>C&oacute;digos de resultado</span></a></div>
+					<div class="outer"><a href="$strDatosMuestra"><span>Datos de la muestra</span></a></div>
+					<div class="outer"><a href="$strImportanciaClinica"><span>Importancia clinica</span></a></div>					
+				</div>
+			</td>							
+		</tr>	
+		<tr>
+			<td colspan="4">
+				<input type="hidden" name="hdnSiguientePantalla">
+				#if($aStrMsjError)							
+					<img align="middle" src="$content.getURI('images/icon_error_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">$aStrMsjError</font></b>				
+				#elseif($aStrMensaje)							
+					<img align="middle" src="$content.getURI('images/icon_success_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$339933" aling="center">$aStrMensaje</font></b>				
+				#end					
+			</td>
+		</tr>		
+	</table>	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr><td colspan="2">&nbsp;</td></tr>
+		<tr><td colspan="2">&nbsp;</td></tr>				
+		<tr>
+			<td align="center">
+				<input type="submit" value="Configurar examen" name="eventSubmit_doGuardaexamen" class="boton">
+			</td>
+			<td align="center">
+				<input type="submit" value="Cancelar" name="eventSubmit_doCancelar" class="boton">
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>		
+	</table>		
+</form>
+	

@@ -1,0 +1,341 @@
+$data.setLayoutTemplate("/web2lab/Default.vm")
+
+#set ( $objSesionActual = $data.getSession() )
+#set ( $objConfExamenBean = $objSesionActual.getAttribute("aObjConfExamenBean") )
+#set ( $titlePage = "Datos de Laboratorio del examen <br>$!objConfExamenBean.getObjDExamen().getStituloimpresion()" )
+#if($objConfExamenBean)
+	#set( $DExamen = $objConfExamenBean.getObjDExamen() )
+	#set( $ingresos = $objConfExamenBean.getCodigosIngreso())
+#end
+#set ( $strLigaActual = $link.setPage("proa2milv2,carpermor,examenes,DatosLaboratorio.vm") )
+#set ( $strLigaActual = $link.setAction("carpermor.examenes.BConfiguraExamenAction").toString() )
+#set ( $objTipoEstudios = $CConfiguraExamenTool.getCTipoEstudios() )
+#set ( $objCodigosIngreso = $CConfiguraExamenTool.getCCodigosIngreso() )
+
+#set ( $strIdCLaboratorio = $objSesionActual.getAttribute("strClaboratorio"))
+#set ( $objNotas = $CIngresaCodigosLabTool.getCNotasByLaboratorioDepartamento("$!strIdCLaboratorio", "") )
+
+<style type="text/css">
+.tableBorder {
+ font-size: 11px;
+ color: #000000;
+ line-height: normal;
+ font-family: Arial, Helvetica, sans-serif;
+ background-color : #DFEAF7;
+ border-color: darkblue;
+ border-style: solid;
+}    
+.selector { width: 150px; }
+</style>
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/carpermor/examenes/DatosLaboratorio.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+
+<form name="frmDatosLaboratorio" action="$strLigaActual" method="post" >
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td colspan="4">
+				<input type="hidden" name="hdnSiguientePantalla">
+				#if($aStrMsjError)							
+					<img align="middle" src="$content.getURI('images/icon_error_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">$aStrMsjError</font></b>				
+				#elseif($aStrMensaje)							
+					<img align="middle" src="$content.getURI('images/icon_success_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$339933" aling="center">$aStrMensaje</font></b>				
+				#end					
+			</td>
+		</tr>				
+		<tr>
+			<td align="right" width="50%">
+				<b>Explosionar:</b> 
+			</td>
+			<td width="50%">
+				#if( $DExamen.isBexplosiona() )
+					<input type="checkbox" name="chkExplosionar" checked >
+				#else
+					<input type="checkbox" name="chkExplosionar" >
+				#end
+				<script language="JavaScript">
+					document.getElementById('chkExplosionar').focus();
+				</script>			
+			</td>
+		</tr>	
+		<tr>
+			<td align="right" width="50%">
+				<b>Turno del d&iacute;a:</b> 
+			</td>
+			<td width="50%">
+				<input type="text" name="txtTurnoDia" value="$!DExamen.getUturno()" style="background:#E6E6FA">
+				<b>Horas:<b>
+			</td>	
+		</tr>
+		<!--
+		<tr>
+			<td align="right">
+				<b>Tiempo de entrega:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtTiempoEntrega" value="" >
+				<b>D&iacute;as:<b>
+			</td>	
+		</tr>
+		<tr>
+			<td align="right">
+				<b>Tiempo max de laboratorio:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtTiempoLaboratorio" value="" >
+				<b>D&iacute;as:<b>
+			</td>	
+		</tr>
+		-->
+		<tr>
+			<td align="right" width="50%">
+				<b>Tiempo anal&iacute;tico:</b> 
+			</td>
+			<td width="50%">
+				<input type="text" name="txtTiempoAnalitico" value="$!DExamen.getUtiempoproceso()" style="background:#E6E6FA">
+				<b>Horas:<b>
+			</td>	
+		</tr>		
+		<tr>
+			<td align="right" width="50%">
+				<b>Permitir urgencia:</b> 
+			</td>
+			<td width="50%">
+				#if( $DExamen.isBurgente() )
+					<input type="checkbox" name="chkUrgencia" onClick="permitirUrgencia()" checked>
+				#else
+					<input type="checkbox" name="chkUrgencia" onClick="permitirUrgencia()">
+				#end				
+			</td>
+		</tr>	
+		#if( $DExamen.isBurgente() )		
+			<tr id="hrsUrgencia" style="display:block">
+				<td align="right" id="tiempoUrgencia" width="50%">
+					<b>Tiempo de proceso de urgencia:</b>
+				</td>
+				<td width="50%">
+					<input type="text" name="txtHorasUrgencia" 
+						value="$!DExamen.getUtiempourgente()" style="background:#E6E6FA">
+				</td>
+			</tr>
+		#else
+			<tr id="hrsUrgencia" style="display:none">
+				<td align="right" id="tiempoUrgencia" width="50%">
+					<b>Tiempo de proceso de urgencia:</b>
+				</td>
+				<td width="50%">
+					<input type="text" name="txtHorasUrgencia" 
+						value="$!DExamen.getUtiempourgente()" style="background:#E6E6FA">					
+				</td>
+			</tr>			
+		#end
+		<tr><td>&nbsp;</td></tr>		
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td valign="top" align="center">
+				<b>Notas de trabajo:</b> 
+			</td>
+			<td valign="top">
+				<b>D&iacute;as de proceso:</b> 
+			</td>						
+		</tr>
+		<tr>
+			<td align="center">							
+				<select name="cboNota" class="selector" onChange="desplegarNota();">
+					<option > Selecciona </option>
+						#foreach($objNota in $objNotas)
+							#if( "$DExamen.getCnota().getCnota()" == "$objNota.getCnota()" )
+    							<option value="$objNota.getCnota()" selected > 
+    								$objNota.getSnota()
+    							</option>	
+							#else
+    							<option value="$objNota.getCnota()" > 
+    								$objNota.getSnota()
+    							</option>									
+							#end							
+						#end			
+				</select><br><br>
+				<textarea name="txtNotasTrabajo" cols="40" rows="10" readonly>$!DExamen.getCnota().getSnota()</textarea>
+			</td>			
+			<td>
+				<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+					#if( $DExamen.isBlunes() )
+						<tr><td><input type="checkbox" name="chkLunes" checked><b>Lunes</b></td></tr>
+					#else
+						<tr><td><input type="checkbox" name="chkLunes" ><b>Lunes</b></td></tr>
+					#end
+					#if( $DExamen.isBmartes() )					
+						<tr><td><input type="checkbox" name="chkMartes" checked><b>Martes</b></td></tr>
+					#else
+						<tr><td><input type="checkbox" name="chkMartes" ><b>Martes</b></td></tr>						
+					#end
+					#if( $DExamen.isBmiercoles() )										
+						<tr><td><input type="checkbox" name="chkMiercoles" checked><b>Mi&eacute;rcoles</b></td></tr>
+					#else
+						<tr><td><input type="checkbox" name="chkMiercoles" ><b>Mi&eacute;rcoles</b></td></tr>						
+					#end
+					#if( $DExamen.isBjueves() )															
+						<tr><td><input type="checkbox" name="chkJueves" checked><b>Jueves</b></td></tr>
+					#else
+						<tr><td><input type="checkbox" name="chkJueves" ><b>Jueves</b></td></tr>
+					#end
+					#if( $DExamen.isBviernes() )																				
+						<tr><td><input type="checkbox" name="chkViernes" checked><b>Viernes</b></td></tr>					
+					#else
+						<tr><td><input type="checkbox" name="chkViernes" ><b>Viernes</b></td></tr>					
+					#end
+					#if( $DExamen.isBsabado() )																									
+						<tr><td><input type="checkbox" name="chkSabado" checked><b>S&aacute;bado</b></td></tr>		
+					#else
+						<tr><td><input type="checkbox" name="chkSabado" ><b>S&aacute;bado</b></td></tr>		
+					#end
+					#if( $DExamen.isBdomingo() )																														
+						<tr><td><input type="checkbox" name="chkDomingo" checked><b>Domingo</b></td></tr>							
+					#else
+						<tr><td><input type="checkbox" name="chkDomingo" ><b>Domingo</b></td></tr>
+					#end						
+				</table>
+			</td>
+		</tr>		
+		<tr><td colspan="2">&nbsp;</td></tr>
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="right" width="50%">
+				<b>Fecha inicio:</b>
+			</td>
+			<td width="50%">
+				<input type="text" name="txtFechaInicio" value="$!CUtilTool.getFecha($!DExamen.getDinicio())" onChange="javascript:this.value=validaFormatoFecha(this.value); javascript:validaFecha()"  onFocus="javascript:validaFecha();">		
+				<a href="javascript:doNothing()" onClick="javascript:setDateField(document.frmDatosLaboratorio.txtFechaInicio);
+					top.newWin =  ventanaNormal('$content.getURI('javascript/carpermor/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+				<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;<td></tr>		
+	</table>	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr><td align="center">
+    	<table border="0" cellspacing="2" cellpadding="3" width="90%" class="tableBorder">
+    		<tr><th colspan="3" align="center"><b>C&oacute;digos de ingreso</b></th></tr>
+    		<tr>
+    			<td align="right">
+    				<b>C&oacute;digos de ingreso:</b> 
+    			</td>
+    			<td>
+    				<select name="cboCodigosIngreso">
+    					<option > Selecciona </option>
+						#foreach($objCodigoIngreso in $objCodigosIngreso)
+							<option value="$!objCodigoIngreso.getCingreso()" > 
+								$!objCodigoIngreso.getScodigoingreso()
+							</option>
+						#end
+    				</select>	
+    			</td>
+    			<td align="center">
+    				<input type="button" value="Agregar" name="Agregar" class="boton" 
+						onClick="asignaCodigosIngreso('codigosingreso');">
+    			</td>
+    		</tr>
+    		<tr>
+    			<td colspan="3" align="center">
+					<DIV STYLE="font-size: 11px;
+                		color: #000000;
+                		line-height: normal;
+                		font-family: Arial, Helvetica, sans-serif;
+                		background-color : #DFEAF7;
+                		overflow: auto; 
+                		width: 550px; 
+                		height: 150; 
+                		border-left: 1px gray solid; 
+                		border-right: 1px gray solid;
+                		border-bottom: 1px gray solid; 
+                		border-top: 1px gray solid; 
+                		padding: 0px; 
+                		margin: 0px"> 	
+    				<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla" id="codigosingreso">
+						<COL WIDTH="15%"><COL WIDTH="45%"><COL WIDTH="20%"><COL WIDTH="20%">
+                		<tr>
+                			<th align="center" width="15%" nowrap>No.</th>
+                			<th align="center" width="45%" nowrap>C&oacute;digo de ingreso</th>
+                			<th align="center" width="20%" nowrap>Imprimir</th>
+							<th align="center" width="20%" nowrap>Obligatorio</th>
+                			<th align="center" width="20%" nowrap>Eliminar</th>	
+                		</tr>						
+						#set( $intCont = 0 )
+##						#set( $objCodigosAsignados = $objConfExamenBean.getIObjCodigosIngreso() )
+##						#foreach( $objCodigoAsignado in $objCodigosAsignados )
+##							#set( $intCont = $velocityCount )
+##							<tr>
+##								<td>$velocityCount</td>
+##								<td>
+##									<input type="hidden" name="hdnCCodigoIngreso$velocityCount" value="$!objCodigoAsignado.getIIntCIngreso()">
+##									<input type="hidden" name="hdnSCodigoIngreso$velocityCount" value="$!objCodigoAsignado.getIStrSCodigoIngreso()">
+##									$!objCodigoAsignado.getIStrSCodigoIngreso()
+##								</td>				
+##								<td>
+##									#if( $objCodigoAsignado.getIBolImprimir() )
+##										<input type="checkbox" name="chkImprimir$velocityCount" checked> 
+##									#else
+##										<input type="checkbox" name="chkImprimir$velocityCount" >
+##									#end									
+##								</td>
+##								<td>
+##									<input type="checkbox" name="chkEliminar$velocityCount" >
+##								</td>
+##							</tr>
+##						#end
+#######################################################################################################<B> </B>##						
+						#foreach($coding in $ingresos)
+							#set( $intCont = $velocityCount )
+							#set( $imprime = "")
+							#set( $obliga = "")
+							<tr>
+								<td align="center">$velocityCount</td>
+								<td>
+									<input type="hidden" name="hdnCExamenIngreso$velocityCount" value="$!coding.getCexameningreso()">
+									<input type="hidden" name="hdnCCodigoIngreso$velocityCount" value="$!coding.getCcodigoingreso().getCingreso()">
+									<input type="hidden" name="hdnSCodigoIngreso$velocityCount" value="$!coding.getCcodigoingreso().getScodigoingreso()">
+									$!coding.getCcodigoingreso().getScodigoingreso()
+								</td>				
+								<td align="center">
+									#if( $coding.isBimprime() )
+										#set( $imprime = "checked")
+									#end
+									<input type="checkbox" name="chkImprimir$velocityCount" value="true" $imprime>
+								</td>
+								<td align="center">
+									#if( $coding.isBobligatorio() )
+										#set( $obliga = "checked")
+									#end
+									<input type="checkbox" name="chkObligatorio$velocityCount" value="true" $obliga> 
+								</td>
+								<td align="center">
+									<input type="checkbox" name="chkEliminar$velocityCount" value="true">
+								</td>
+							</tr>
+						#end
+						<COL WIDTH="15%"><COL WIDTH="45%"><COL WIDTH="20%"><COL WIDTH="20%">
+    				</table>
+					</DIV>
+    			</td>
+    		</tr>			
+    	</table>	
+		<td></tr>
+		<tr><td>&nbsp;<input type="hidden" name="hdnNumCodigosIngreso" value="$intCont" ></td></tr>
+	</table>	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="center">
+				<input type="submit" value="Guardar" name="eventSubmit_doDatoslaboratorio" class="boton"
+					onClick="return validaCampos();">
+			</td>
+			<td align="center">
+				<input type="submit" value="Regresar" name="eventSubmit_doRegresar" class="boton">
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;<td></tr>		
+	</table>	
+</form>

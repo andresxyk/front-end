@@ -1,0 +1,464 @@
+<HTML>
+<HEAD>
+<TITLE>Html Editor</TITLE>
+
+
+<SCRIPT language=javascript>
+
+var browser_type = 0;
+var dyna=1;
+var framename="";
+var default_font="";
+var default_fontsize="";
+var qry_string="";
+var hid_out_content=new Array();
+
+var l_str_sendBody="";
+
+
+var temp_str_cnt = "";
+var temp_str_cnt1 = "";
+var imgflag = 1 ;
+var tableflag = 1 ;
+var clearflag = 1 ;
+var cutflag = 1 ;
+var undoflag = 1 ;
+var alignflag = 1 ;
+var bulletflag= 1 ;
+var indentflag =1 ;
+var linkflag = 1 ;
+var symbolsflag = 1 ;
+var ruleflag = 1 ;
+var helpflag = 1 ;
+var font_typeflag = 1 ;
+var font_styleflag = 1 ;
+var fore_colorflag = 1 ;
+var showhtmlflag = 1 ;
+var iconspath = "images";  	//for default path
+
+var clean_html_flag = 1 ;
+var spellcheck_flag = 1 ;
+var css_flag = 1 ;
+var unlink_flag = 1 ;
+var remove_flag = 1 ;
+var spell_check_file = "samples/jsp/spell.jsp";
+var save_url= "samples/jsp/file_save.jsp";
+
+function setConfig(img_flag,table_flag,clear_flag,cut_flag,undo_flag,align_flag,bullet_flag,indent_flag,link_flag,symbols_flag,rule_flag,help_flag,font_type_flag,font_style_flag,fore_color_flag,showhtml_flag,clean_html,spellcheck_flag,css_flag,unlink_flag,remove_flag,editor_width,editor_height,icons_path,button_color,frame_color,font_name,font_size)
+{
+
+	if(img_flag==null)
+		document.form1.img_flag.value="1";
+	else
+		document.form1.img_flag.value= img_flag;
+
+	if(table_flag==null)
+		document.form1.table_flag.value="1";
+	else
+		document.form1.table_flag.value= table_flag;
+
+	if(clear_flag==null)
+		document.form1.clear_flag.value="1";
+	else
+		document.form1.clear_flag.value= clear_flag;
+	if(cut_flag==null)
+		document.form1.cut_flag.value="1";
+	else
+		document.form1.cut_flag.value= cut_flag;
+	if(undo_flag==null)
+		document.form1.undo_flag.value="1";
+	else
+		document.form1.undo_flag.value= undo_flag;
+	if(align_flag==null)
+		document.form1.align_flag.value="1";
+	else
+		document.form1.align_flag.value= align_flag;
+	if(bullet_flag==null)
+		document.form1.bullet_flag.value="1";
+	else
+		document.form1.bullet_flag.value= bullet_flag;
+	if(indent_flag==null)
+		document.form1.indent_flag.value="1";
+	else
+		document.form1.indent_flag.value= indent_flag;
+	if(link_flag==null)
+		document.form1.link_flag.value="1";
+	else
+		document.form1.link_flag.value= link_flag;
+	if(symbols_flag==null)
+		document.form1.symbols_flag.value="1";
+	else
+		document.form1.symbols_flag.value= symbols_flag;
+	if(rule_flag==null)
+		document.form1.rule_flag.value="1";
+	else
+		document.form1.rule_flag.value= rule_flag;
+	if(help_flag==null)
+		document.form1.help_flag.value="1";
+	else
+		document.form1.help_flag.value= help_flag;
+	if(font_type_flag==null)
+		document.form1.font_type_flag.value="1";
+	else
+		document.form1.font_type_flag.value= font_type_flag;
+	if(font_style_flag==null)
+		document.form1.font_style_flag.value="1";
+	else
+		document.form1.font_style_flag.value= font_style_flag;
+	if(fore_color_flag==null)
+		document.form1.fore_color_flag.value="1";
+	else
+		document.form1.fore_color_flag.value= fore_color_flag;
+
+	if(showhtml_flag==null)
+		document.form1.showhtml_flag.value="1";
+	else
+		document.form1.showhtml_flag.value= showhtml_flag;
+
+	if(icons_path==null)
+		document.form1.icons_path.value="images";
+	else
+		document.form1.icons_path.value= icons_path;
+	if(editor_width==null)
+		document.form1.editor_width.value="775";
+	else
+		document.form1.editor_width.value= editor_width;
+	if(editor_height==null)
+		document.form1.editor_height.value="450";
+	else
+		document.form1.editor_height.value= editor_height;
+
+	if(button_color==null)
+		document.form1.hid_color.value="#a0c4de";
+	else
+		document.form1.hid_color.value= button_color;
+
+	if(frame_color==null)
+		document.form1.hid_frame_color.value="#b0c4de";
+	else
+		document.form1.hid_frame_color.value= frame_color;
+
+	if(font_name==null)
+		document.form1.font_name.value="arial";
+	else
+		document.form1.font_name.value= font_name;
+
+	if(font_size==null)
+		document.form1.font_size.value="3";
+	else
+		document.form1.font_size.value= font_size;
+
+	default_font=document.form1.font_name.value;
+	default_fontsize=document.form1.font_size.value;
+
+	if(clean_html==null)
+		document.form1.clean_html_flag.value="1";
+	else
+		document.form1.clean_html_flag.value= clean_html;
+
+	if(spellcheck_flag==null)
+		document.form1.spellcheck_flag.value="1";
+	else
+		document.form1.spellcheck_flag.value= spellcheck_flag;
+
+	if(css_flag==null)
+		document.form1.css_flag.value="1";
+	else
+		document.form1.css_flag.value= css_flag;
+
+	if(unlink_flag==null)
+		document.form1.unlink_flag.value="1";
+	else
+		document.form1.unlink_flag.value= unlink_flag;
+
+	if(remove_flag==null)
+		document.form1.remove_flag.value="1";
+	else
+		document.form1.remove_flag.value= remove_flag;
+
+	document.form1.spell_check_file.value	= spell_check_file;
+	//document.form1.output_file.value		= output_file;
+	document.form1.save_url.value			= save_url;
+
+
+	qry_string='&img_flag='+img_flag+'&table_flag='+table_flag+'&clear_flag='+clear_flag+'&cut_flag='+cut_flag+'&undo_flag='+undo_flag+'&align_flag='+align_flag+'&bullet_flag='+bullet_flag+'&indent_flag='+indent_flag+'&link_flag='+link_flag+'&symbols_flag='+symbols_flag+'&rule_flag='+rule_flag+'&help_flag='+help_flag+'&font_type_flag='+font_type_flag+'&font_style_flag='+font_style_flag+'&fore_color_flag='+fore_color_flag+'&showhtml_flag='+showhtml_flag+'&spellcheck_flag='+spellcheck_flag+'&icons_path='+icons_path+'&editor_width='+editor_width+'&editor_height='+editor_height+'&button_color='+button_color+'&frame_color='+frame_color+'&frame_color='+frame_color+'&font_name='+font_name+'&font_size='+font_size+'&clean_html='+clean_html+'&cssurl='+document.form1.cssurl.value+'&css_flag='+css_flag+'&unlink_flag='+unlink_flag+'&remove_flag='+remove_flag+'&flg=1';
+	setEditor();
+
+}
+function setDefault()
+{
+	document.form1.img_flag.value			= "1";
+	document.form1.table_flag.value			= "1";
+	document.form1.clear_flag.value			= "1";
+	document.form1.cut_flag.value			= "1";
+	document.form1.undo_flag.value			= "1";
+	document.form1.align_flag.value			= "1";
+	document.form1.bullet_flag.value		= "1";
+	document.form1.indent_flag.value		= "1";
+	document.form1.link_flag.value			= "1";
+	document.form1.symbols_flag.value		= "1";
+	document.form1.rule_flag.value			= "1";
+	document.form1.help_flag.value			= "1";
+	document.form1.font_type_flag.value		= "1";
+	document.form1.font_style_flag.value	= "1";
+	document.form1.fore_color_flag.value	= "1";
+	document.form1.showhtml_flag.value		= "1";
+	document.form1.css_flag.value			= "1";
+	document.form1.spellcheck_flag.value	= "1";
+	document.form1.clean_html_flag.value	= "1";
+	document.form1.remove_flag.value		= "1";
+	document.form1.unlink_flag.value		= "1";
+
+	document.form1.icons_path.value			= "images";
+	document.form1.editor_width.value		= "775";
+	document.form1.editor_height.value		= "450";
+	document.form1.hid_color.value			= "c9c9c9";
+	document.form1.hid_frame_color.value	= "c0c0c0";
+	document.form1.font_name.value			= "arial";
+	document.form1.font_size.value			= "3";
+
+	document.form1.spell_check_file.value	= spell_check_file;
+	//document.form1.output_file.value		= output_file;
+	document.form1.save_url.value			= save_url;
+
+
+	default_font=document.form1.font_name.value;
+	default_fontsize=document.form1.font_size.value;
+
+	qry_string='&clean_html='+document.form1.clean_html_flag.value+'&img_flag='+document.form1.img_flag.value+'&table_flag='+document.form1.table_flag.value+'&clear_flag='+document.form1.clear_flag.value+'&cut_flag='+document.form1.cut_flag.value+'&undo_flag='+document.form1.undo_flag.value+'&align_flag='+document.form1.align_flag.value+'&bullet_flag='+document.form1.bullet_flag.value+'&indent_flag='+document.form1.indent_flag.value+'&link_flag='+document.form1.link_flag.value+'&symbols_flag='+document.form1.symbols_flag.value+'&rule_flag='+document.form1.rule_flag.value+'&help_flag='+document.form1.help_flag.value+'&font_type_flag='+document.form1.font_type_flag.value+'&font_style_flag='+document.form1.font_style_flag.value+'&fore_color_flag='+document.form1.fore_color_flag.value+'&showhtml_flag='+document.form1.showhtml_flag.value+'&spellcheck_flag='+document.form1.spellcheck_flag.value+'&editor_width='+document.form1.editor_width.value+'&editor_height='+document.form1.editor_height.value+'&icons_path='+document.form1.icons_path.value+'&font_name='+document.form1.font_name.value+'&font_size='+document.form1.font_size.value+'&button_color='+document.form1.hid_color.value+'&frame_color='+document.form1.hid_frame_color.value+'&cssurl='+document.form1.cssurl.value+'&css_flag='+document.form1.css_flag.value+''+'&unlink_flag='+document.form1.unlink_flag.value+''+'&remove_flag='+document.form1.remove_flag.value+'&flg=1';
+
+	setEditor();
+}
+
+function setEditor()
+{
+	var browser_message = "Not Supported";
+	framename="frame"+dyna;
+	editorwidth=parseInt(document.form1.editor_width.value);
+	editorheight=parseInt(document.form1.editor_height.value);
+
+	var editor="";
+	editor='<IFRAME name = "'+framename+'" id="'+framename+'" src="editor.html?hid=hid_'+framename+qry_string+'" scrolling=no width='+(editorwidth)+' height='+(editorheight)+' frameborder=0 ></IFRAME> ';
+	document.write('<input type="hidden" value="'+framename+'" name="hid_out_content'+dyna+'">');
+
+	if(navigator.userAgent.indexOf("Netscape")!= -1 )
+	{
+		if(navigator.userAgent.indexOf("7") != -1)
+		{
+			document.write(editor);
+			browser_type=2;
+		}
+		else
+		{
+			document.write(browser_message);
+			browser_type =1;
+			submit ="";
+		}
+	}
+	else if(navigator && navigator.userAgent && navigator.userAgent.indexOf && navigator.userAgent.indexOf('Gecko') != -1)
+	{
+		 document.write(editor);
+		 browser_type=2;
+	}
+	else if(navigator.userAgent.indexOf("MSIE")!= -1)
+	{
+		document.write(editor);
+		browser_type=3;
+	}
+	else if(navigator.userAgent.indexOf("Opera")!= -1)
+	{
+		document.write(browser_message);
+		browser_type =4;
+		submit ="";
+	}
+	else
+	{
+		document.write(browser_message);
+		browser_type =5;
+		submit ="";
+	}
+	dyna=dyna+1;
+	document.write('<input id="hid_'+framename+'" name="hid_'+framename+'" value="" type="hidden">');
+
+}
+
+
+function setContent(input_content)
+{
+	var str=escape(default_font);
+	var default_setting='<Font face='+default_font+' size='+default_fontsize+'>';
+	var input_content =default_setting+input_content;
+	temp_str_cnt = input_content;
+	temp_str_cnt1 = input_content;
+ 	var   temp_str_qt = /"/gi;  //for replacing quote
+    var   temp_str_quot = "&quot;";  //for replacing quote
+    var   temp_str_amp = /&/gi;  //for replacing &
+    var   temp_str_amph = "&amp;";  //for replacing &amp
+
+    temp_str_cnt1 = temp_str_cnt1.replace( temp_str_amp, temp_str_amph ); //replacing & with &amp;
+    temp_str_cnt1 = temp_str_cnt1.replace( temp_str_qt, temp_str_quot ); // replacing " with &quot;
+    document.form1.sendBody.value=temp_str_cnt1 ;
+	document.form1.font_name.value=default_font ;
+	document.form1.font_size.value=default_fontsize ;
+
+	var str=eval("document.form1.hid_"+framename);
+	str.value=temp_str_cnt1 ;
+}
+
+
+
+function finish()
+{
+	var css='<link rel="stylesheet" href="../dhtml/text.css" type="text/css">';
+	var len=document.form1.elements.length;
+	var final_content="";
+	var arrIN=document.getElementsByTagName("input");
+
+	var arrIF=document.getElementsByTagName("iframe");
+
+	var index=0;
+	var count=0;
+	var ii=1;
+	for(var j = 0 ; j<len  ; j++)
+	{
+		if(arrIN.item(j).name.indexOf('hid_out_content')>=0)
+		{
+			if(! getContent(eval(arrIF[index].id)) ==false)
+			{
+				var str=arrIF[index].id;
+				arrIN.item(j).value=getContent(eval(arrIF[index].id));
+				hid_out_content[count]=getContent(eval(arrIF[index].id));
+				var content=eval("document.form1.hid_out_content"+ii);
+				content.value=hid_out_content[count];
+				final_content=final_content+hid_out_content[count]+"<BR><HR>";
+				index++;
+				count++;
+				ii++;
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+	}
+	if(navigator.userAgent.indexOf("MSIE")!= -1)
+	{
+		var url=document.frame1.cssurl;
+		var csstag='<link type="text/css" rel="stylesheet" href="'+url+'">';
+		document.write(csstag+final_content);
+	}
+	else
+	{
+		document.write(final_content);
+	}
+}
+
+function getContent(l_obj_frame)
+{
+	  //for checking the html mode
+	if (!l_obj_frame.isHTMLMode())
+		return;
+	var content1 =	"";
+	if(browser_type ==3)
+	{
+		content1 = l_obj_frame.htmlContent();
+	}
+	else if(browser_type ==2)
+	{
+		l_obj_frame.close_child();
+		content1 =	l_obj_frame.htmlContent();
+	}
+		return content1 ;
+
+}
+
+
+</script>
+</HEAD>
+
+<BODY topmargin="0" leftmargin="0" onafterprint="return window_onafterprint()" LANGUAGE="javascript">
+<form name="form1" method="post" action ="">
+<center>
+   HTML EDITOR
+   <table border="0" width="760" cellspacing="0" cellpadding="2" style="HEIGHT: 151px; WIDTH: 760px">
+       <tr>
+			<td width="100%" valign="center" align="middle">
+
+
+	<input 		id="img_flag" 			name="img_flag"			value=""     	type="hidden">
+	<input 		id="table_flag" 		name="table_flag"		value=""     	type="hidden">
+	<input 		id="clear_flag" 		name="clear_flag"		value=""     	type="hidden">
+	<input 		id="cut_flag" 			name="cut_flag"			value=""     	type="hidden">
+	<input 		id="undo_flag" 			name="undo_flag"		value=""     	type="hidden">
+	<input 		id="align_flag" 		name="align_flag"		value=""     	type="hidden">
+	<input 		id="bullet_flag"		name="bullet_flag"		value=""     	type="hidden">
+	<input 		id="indent_flag" 		name="indent_flag"		value=""     	type="hidden">
+	<input 		id="link_flag" 			name="link_flag"		value=""     	type="hidden">
+	<input 		id="symbols_flag" 		name="symbols_flag"		value=""     	type="hidden">
+	<input 		id="rule_flag" 			name="rule_flag"		value=""     	type="hidden">
+	<input 		id="help_flag" 			name="help_flag"		value=""     	type="hidden">
+	<input 		id="font_type_flag" 	name="font_type_flag"	value=""     	type="hidden">
+	<input 		id="font_style_flag" 	name="font_style_flag"	value=""     	type="hidden">
+	<input 		id="fore_color_flag" 	name="fore_color_flag"	value=""     	type="hidden">
+	<input 		id="showhtml_flag" 		name="showhtml_flag"	value=""     	type="hidden">
+	<input 		id="clean_html_flag"	name="clean_html_flag"	value=""     	type="hidden">
+	<input 		id="spellcheck_flag" 	name="spellcheck_flag"	value=""     	type="hidden">
+	<input 		id="css_flag" 			name="css_flag"			value=""     	type="hidden">
+	<input 		id="unlink_flag" 		name="unlink_flag"		value=""     	type="hidden">
+	<input 		id="remove_flag" 		name="remove_flag"		value=""     	type="hidden">
+	<input 		id="icons_path" 		name="icons_path"		value=""  		type="hidden">
+	<input 		id="editor_width" 		name="editor_width"		value=""     	type="hidden">
+	<input 		id="editor_height" 		name="editor_height"	value=""     	type="hidden">
+	<input 		id="font_list" 			name="font_list"		value=""     	type="hidden">
+	<input 		id="hid_color" 			name="hid_color"		value="" 		type="hidden">
+	<input 		id="hid_frame_color" 	name="hid_frame_color"	value="" 		type="hidden">
+	<input 		id="hid_css" 			name="hid_css"			value=""     	type="hidden">
+	<input 	 	id="sendBody" 			name="sendBody"			value=""     	type="hidden">
+	<input 		id="font_name" 			name="font_name"		value=""     	type="hidden">
+	<input 		id="font_size" 			name="font_size"		value=""     	type="hidden">
+
+	<input 		id="link_name" 			name="link_name"		value="www.akmin.com,www.sitegalore.com,www.sitegaloreplus.com"     	type="hidden">
+	<input 		id="def_link_name" 		name="def_link_name"	value="www.sitegaloreplus.com"     	type="hidden">
+	<input 		id="css_list"	 		name="css_list"			value="header1,header2,text,pageheader,boldtext,tableheader1,tablecolor,italictext,textbg,tableheader2,tableheader3,graytext,smalltext,header3,header4,graytextbold,redtext,footertext"     	type="hidden">
+	<input 		id="cssurl" 			name="cssurl"			value="css/sample.css"     	type="hidden">
+
+	<input 		id="spell_check_file" 			name="spell_check_file"	value=""     	type="hidden">
+	<input 		id="save_url" 			name="save_url"	value=""     	type="hidden">
+
+<!-- //comments
+
+	IF you want more than editor in same page, copy the below <SCRIPT>...</SCRIPT> tags and paste it.
+
+	setConfig(img,table,clear,cut,undo,align,bullet,indent,link,symbols,rule,help,font_type,font_style,
+	fore_color,showhtml,cleanhtml,spellcheck,unlink,remove format,editor_width,editor_height,icons_path,button_color,
+	frame_color,font_name,font_size) - to configure your editor as per your input (1 for enable , 0 for disable)
+
+	color value should be in hexa format (Ex : 0-9,a-f/A-F with 6 digit. Such as 556AbD, Abcdef, 87AB34),
+	otherwise default color will be displayed.
+
+	setContent(string) - input content for your editor
+
+	setDefault() - to configure the editor as default settings
+-->
+
+<SCRIPT>
+	setConfig(1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,900,450,"images","abc4df","abc4ef","verdana",5);
+	setContent("your content 1");
+</SCRIPT>
+
+<SCRIPT>
+	setDefault();
+	setContent("your content 2");
+</SCRIPT>
+
+	<br>
+	<input 		name="clk"	value="submit" type="button" onclick ="return finish()">
+
+        </td>
+    </tr>
+	</table>
+	</center>
+</form>
+</BODY>
+</HTML>

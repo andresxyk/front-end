@@ -1,0 +1,51 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/puntos/RegistraRegalos.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/MedicosPuntos.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ( $titlePage = "Registro Regalo Medicos") 
+
+
+<form name="frmRegalosMedico" method="post" action="$strLigaActual" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
+		<tr>
+			<td>
+				<b>Nombre Regalo</b>				
+            </td>
+	        <td>
+                <input type="text" id="txtNombreRegalo" value="$sformatFactura" STYLE="font-size: 20px;" size="10" />
+			</td>			
+		</tr>
+		<tr>
+			<td>
+				<b>Costo Puntos</b>				
+            </td>
+	        <td>
+                <input type="text" id="txtTotalPuntos" value="0" STYLE="font-size: 15px;" size="10" />
+			</td>			
+		</tr>
+		<tr>
+			<td>
+				<b>Clasificacion Medico</b>				
+            </td>
+	        <td>
+                <input type="text" id="txtClasificacionMedico" value="0" STYLE="font-size: 15px;" size="10" />
+			</td>			
+		</tr>
+	</table>               
+    <input type="button" value="Registrar Regalo" name="Registrar Regalo" class="boton" onclick="altaRegalos();">
+</form> 
+<script>
+		 window.onload = init;		
+</script>	

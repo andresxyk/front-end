@@ -1,0 +1,212 @@
+<HTML>
+<HEAD>
+<Title>Insert Symbol</title>
+<!--This html file is used to insert other non keyboard characters.
+this is called from the ShowEditor.htm file by pressing insert special characters icon.
+we can select any given character and press ok. this character is pasted at the cursor position.
+ -->
+<script>
+function selectChar(spl_char)
+{
+	window.opener.insertSymbolText_child(spl_char);
+	window.close();
+	
+}
+
+
+function InitColorPalette() {
+  if (document.getElementsByTagName)
+    var x = document.getElementsByTagName('TD');
+  else if (document.all)
+    var x = document.all.tags('TD');
+  for (var i=0;i<x.length;i++)
+  {
+    x[i].onmouseover = over;
+    x[i].onmouseout = out;
+    x[i].onclick = click;
+  }
+}
+
+
+function over()
+{
+//alert("mouseover");
+this.style.border='1px dotted white';
+}
+
+function out()
+{
+//alert("mouseout");
+
+this.style.border='1px solid gray';
+}
+
+function click()
+{
+//alert("mouseclick");
+
+  selectChar(this.id);
+}
+function cleanUp()
+{
+//	alert("unload");
+window.opener.child_SpecialSymbols = false;
+}
+</script></head>
+<body bgcolor="white" onload="InitColorPalette()" onUnload="cleanUp()">
+<table border="1" cellpadding="1" cellspacing="1">
+<tbody>
+<b>
+<tr>
+
+</TR>
+<TR>
+	<TD id=&amp;#033;>&#033;</TD>
+	<TD id=&amp;#34;>"</TD>
+	<TD id=&amp;#35;>#</TD>
+	<TD id=&amp;#36;>$</TD>
+	<TD id=&amp;#37;>&#037;</TD>
+	<TD id=&amp;#38;>&amp;</TD>
+	<TD id=&amp;#39;>&#039;</TD>
+	<TD id=&amp;#40;>&#040;</TD>
+	<TD id=&amp;#41;>&#041;</TD>
+	<TD id=&amp;#42;>&#042;</TD>
+	<TD id=&amp;#43;>&#043;</TD>
+	<TD id=&amp;#44;>&#044;</TD>
+	<TD id=&amp;#45;>&#045;</TD>
+	<TD id=&amp;#46;>&#046;</TD>
+	<TD id=&amp;#47;>&#047;</TD>	
+	<TD id=&amp;#58;>&#058;</TD>
+	<TD id=&amp;#59;>&#059;</TD>
+	<TD id=&amp;#60;>&#060;</TD>
+	<TD id=&amp;#61;>&#061;</TD>
+	<TD id=&amp;#62;>&#062;</TD>
+	<TD id=&amp;#63;>&#063;</TD>
+	<TD id=&amp;#64;>&#064;</td>
+	<TD id=&amp;#91;>&#091;</TD>
+	<TD id=&amp;#92;>&#092;</TD>
+	<TD id=&amp;#93;>&#093;</TD>
+	<TD id=&amp;#94;>&#094;</TD>
+	<TD id=&amp;#95;>&#095;</TD>
+	<TD id=&amp;#96;>&#096;</TD>
+	<TD id=&amp;#123;>&#123;</TD>
+	<TD id=&amp;#124;>&#124;</TD>
+	<TD id=&amp;#125;>&#125;</TD>
+</TR>
+
+<TR>	
+	<TD id=&amp;#126;>&#126;</TD>	
+	
+	<TD id=&amp;#161;>&#161;</TD>
+	<TD id=&amp;#162;>&#162;</TD>
+	<TD id=&amp;#163;>&#163;</TD>
+	<TD id=&amp;#164;>&#164;</TD>
+	<TD id=&amp;#165;>&#165;</TD>
+	<TD id=&amp;#166;>&#166;</TD>
+	<TD id=&amp;#167;>&#167;</TD>
+	<TD id=&amp;#168;>&#168;</TD>
+	<TD id=&amp;#169;>&#169;</TD>
+	<TD id=&amp;#170;>&#170;</TD>
+	<TD id=&amp;#171;>&#171;</TD>
+	<TD id=&amp;#172;>&#172;</TD>
+	<TD id=&amp;#173;>&#173;</TD>
+	<TD id=&amp;#174;>&#174;</TD>
+	<TD id=&amp;#175;>&#175;</TD>
+	<TD id=&amp;#176;>&#176;</TD>
+	<TD id=&amp;#177;>&#177;</TD>
+	<TD id=&amp;#178;>&#178;</TD>
+	<TD id=&amp;#179;>&#179;</TD>
+	<TD id=&amp;#180;>&#180;</TD>
+	<TD id=&amp;#181;>&#181;</TD>
+	<TD id=&amp;#182;>&#182;</TD>
+	<TD id=&amp;#183;>&#183;</TD>
+	<TD id=&amp;#184;>&#184;</TD>
+	<TD id=&amp;#185;>&#185;</TD>
+	<TD id=&amp;#186;>&#186;</TD>
+	<TD id=&amp;#187;>&#187;</TD>
+	<TD id=&amp;#188;>&#188;</TD>
+	<TD id=&amp;#189;>&#189;</TD>
+	<TD id=&amp;#190;>&#190;</TD>
+</TR>
+<TR>	
+
+	<TD id=&amp;#191;>&#191;</TD>
+	<TD id=&amp;#192;>&#192;</TD>
+	<TD id=&amp;#193;>&#193;</TD>
+	<TD id=&amp;#194;>&#194;</TD>
+	<TD id=&amp;#195;>&#195;</TD>
+	<TD id=&amp;#196;>&#196;</TD>
+	<TD id=&amp;#197;>&#197;</TD>
+	<TD id=&amp;#198;>&#198;</TD>
+	<TD id=&amp;#199;>&#199;</TD>
+	<TD id=&amp;#200;>&#200;</TD>
+	<TD id=&amp;#201;>&#201;</TD>
+	<TD id=&amp;#202;>&#202;</TD>
+	<TD id=&amp;#203;>&#203;</TD>
+	<TD id=&amp;#204;>&#204;</TD>
+	<TD id=&amp;#205;>&#205;</TD>
+	<TD id=&amp;#206;>&#206;</TD>
+	<TD id=&amp;#207;>&#207;</TD>
+	<TD id=&amp;#208;>&#208;</TD>
+	<TD id=&amp;#209;>&#209;</TD>
+	<TD id=&amp;#210;>&#210;</TD>
+	<TD id=&amp;#211;>&#211;</TD>
+	<TD id=&amp;#212;>&#212;</TD>
+	<TD id=&amp;#213;>&#213;</TD>
+	<TD id=&amp;#214;>&#214;</TD>
+	<TD id=&amp;#215;>&#215;</TD>
+	<TD id=&amp;#216;>&#216;</TD>
+	<TD id=&amp;#217;>&#217;</TD>
+	<TD id=&amp;#218;>&#218;</TD>
+	<TD id=&amp;#219;>&#219;</TD>
+   <TD id=&amp;#220;>&#220;</TD>
+   <TD id=&amp;#221;>&#221;</TD>
+</TR>
+<TR>		
+	
+	<TD id=&amp;#222;>&#222;</TD>
+	<TD id=&amp;#223;>&#223;</TD>
+	<TD id=&amp;#224;>&#224;</TD>
+	<TD id=&amp;#225;>&#225;</TD>
+	<TD id=&amp;#226;>&#226;</TD>
+	<TD id=&amp;#227;>&#227;</TD>
+	<TD id=&amp;#228;>&#228;</TD>
+	<TD id=&amp;#229;>&#229;</TD>
+	<TD id=&amp;#230;>&#230;</TD>
+	<TD id=&amp;#231;>&#231;</TD>
+	<TD id=&amp;#232;>&#232;</TD>
+	<TD id=&amp;#233;>&#233;</TD>
+	<TD id=&amp;#234;>&#234;</TD>
+	<TD id=&amp;#235;>&#235;</TD>
+	<TD id=&amp;#236;>&#236;</TD>
+	<TD id=&amp;#237;>&#237;</TD>
+	<TD id=&amp;#238;>&#238;</TD>
+	<TD id=&amp;#239;>&#239;</TD>
+	<TD id=&amp;#240;>&#240;</TD>
+	<TD id=&amp;#241;>&#241;</TD>
+	<TD id=&amp;#242;>&#242;</TD>
+	<TD id=&amp;#243;>&#243;</TD>
+	<TD id=&amp;#244;>&#244;</TD>
+	<TD id=&amp;#245;>&#245;</TD>
+	<TD id=&amp;#246;>&#246;</TD>
+	<TD id=&amp;#247;>&#247;</TD>
+	<TD id=&amp;#248;>&#248;</TD>
+	<TD id=&amp;#249;>&#249;</TD>
+	<TD id=&amp;#250;>&#250;</TD>
+   <TD id=&amp;#251;>&#251;</TD>
+	<TD id=&amp;#252;>&#252;</TD>
+</TR>
+<TR>		
+
+	<TD id=&amp;#253;>&#253;</TD>
+	<TD id=&amp;#254;>&#254;</TD>
+	<TD id=&amp;#255;>&#255;</TD>   
+   
+   <TD id=&amp;#153;>&#153;</TD>   
+   <TD id=&amp;#612;>&#612;</TD>   
+   <TD id=&amp;#8482;>&#8482;</TD>   
+</TR>
+</b>
+
+</tbody></table>
+</body></html>

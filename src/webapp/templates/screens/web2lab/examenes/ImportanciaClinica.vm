@@ -1,0 +1,57 @@
+
+$data.setLayoutTemplate("/web2lab/Default.vm")
+#set ( $strLigaActual = $link.setPage("proa2milv2,carpermor,examenes,ImportanciaClinica.vm") )
+#set ( $strLigaActual = $link.setAction("carpermor.examenes.BConfiguraExamenAction").toString() )
+
+#set ( $objSesionActual = $data.getSession() )
+#set ( $objConfExamenBean = $objSesionActual.getAttribute("aObjConfExamenBean") )
+#if($objConfExamenBean)
+	#set ($DExamen = $objConfExamenBean.getObjDExamen())
+#end
+
+#set ( $titlePage = "Importancia cl&iacute;nica del Examen <br>$!objConfExamenBean.getObjDExamen().getStituloimpresion()" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/carpermor/examenes/ConfiguraExamen.js")"></script>
+
+<form name="frmImportanciaClinica" action="$strLigaActual" method="post" >
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td>
+				#if($aStrMsjError)							
+					<img align="middle" src="$content.getURI('images/icon_error_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">$aStrMsjError</font></b>				
+				#elseif($aStrMensaje)							
+					<img align="middle" src="$content.getURI('images/icon_success_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$339933" aling="center">$aStrMensaje</font></b>				
+				#end					
+			</td>
+		</tr>			
+		<tr><td>&nbsp;<td></tr>
+		<tr><td>&nbsp;<td></tr>		
+	</table>	
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr><th>Consultar la importancia cl&iacute;nica:</th></tr>
+		<tr>
+			<td align="center"><textarea name="txtImportanciaClinica" cols="75" rows="8" style="background:#E6E6FA" readonly>$!DExamen.getCexamen().getSimplicacionclinica()</textarea></td>
+			<script language="JavaScript">
+				document.getElementById('txtImportanciaClinica').focus();
+			</script>
+		</tr>
+		<tr><td>&nbsp;<td></tr>		
+		<tr><td>&nbsp;<td></tr>						
+	</table>		
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="center">
+##				<input type="submit" value="Guardar" name="eventSubmit_doImportanciaclinica" class="boton"
+##					onClick="return importanciaClinica();">
+			</td>
+			<td align="center">
+				<input type="submit" value="Regresar" name="eventSubmit_doRegresar" class="boton">
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;<td></tr>		
+	</table>		
+</form>
+	

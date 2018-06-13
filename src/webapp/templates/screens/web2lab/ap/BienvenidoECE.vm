@@ -1,0 +1,52 @@
+#set ($cMarca =$data.getUser().getConfirmed())	
+#set ($ligaReporte = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
+#set ($intkPaciente = $data.getParameters().getString('kPaciente') )
+
+<form method="post" name="departamentosForm">
+<table width="750" border="0" cellspacing="0" class="fondo">
+  <tr> 
+    #if ($!cMarca == "82")	
+		<td width="550" bgcolor="7FA9E0">&nbsp;</td>
+	#elseif($!cMarca == "219")
+		<td width="550" bgcolor="66724D">&nbsp;</td>
+	#elseif($!cMarca == "158")
+		<td width="550" bgcolor="FDE5CC">&nbsp;</td>
+	#end								
+  </tr>
+  <tr> 
+    <td><img src="$content.getURI('images/clear(1).gif')" width="550" height="5"></td>
+  </tr>
+  <tr> 
+    <td align="center"><img src="$content.getURI("images/bienvenido.jpg")" width="550" height="207"></td>
+  </tr>
+  <tr> 
+    <td><img src="$content.getURI("images/clear(1).gif")" width="550" height="5"></td>
+  </tr>
+  <tr> 
+    <td >
+		<table width="100%" border="0" cellspacing="0">
+			<tr>
+                #if ($!cMarca == "82")	
+					<td width="100%" bgcolor="93C86D">&nbsp;</td>
+            	#elseif($!cMarca == "219")
+					<td width="100%" bgcolor="66724D">&nbsp;</td>
+            	#elseif($!cMarca == "158")
+					<td width="100%" bgcolor="FBD8B3">&nbsp;</td>
+				#end								
+        </tr>
+      </table></td>
+  </tr>
+  <tr>
+    <td><img src="$content.getURI("images/clear(1).gif")" width="550" height="5"></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="$content.getURI("images/pleca.jpg")" width="550" height="104"></td>
+  </tr>
+</table>
+
+</form>
+<script>		
+	var strliga = "$!ligaReporte";
+	var strPaciente = "$!intkPaciente";
+	window.location.href = (strliga + "?kPaciente=" + strPaciente);
+</script>	

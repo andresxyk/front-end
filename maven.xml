@@ -1,0 +1,30 @@
+<project default="war:webapp"
+  xmlns:j="jelly:core"
+  xmlns:u="jelly:util"
+  xmlns:ant="jelly:ant"
+  xmlns:m="maven-1.0-beta-10">
+  <postGoal name="war:webapp">
+    <mkdir dir="target/web2labportal/logs" />
+    <chmod file="target/web2labportal/logs" perm="og+w" type="dir" />
+  </postGoal>
+  <goal name="init"
+        description="Initialize the application">
+    <attainGoal name="torque:create-db"/>
+    <copy todir="target/sql" filtering="no" overwrite="yes" verbose="true" >
+        <fileset dir="src/sql">
+            <include name="*-data.sql"/>
+            <include name="*-schema.sql"/>
+            <include name="sqldb.map"/>
+        </fileset>
+    </copy>
+    <attainGoal name="torque:insert-sql"/>
+    <attainGoal name="war:webapp"/>
+  </goal>
+  <postGoal name="java:compile">
+    <copy todir="${maven.build.dest}" >
+        <fileset dir="src/l10n">
+            <include name="*.properties"/>
+        </fileset>
+    </copy>
+  </postGoal>
+</project>

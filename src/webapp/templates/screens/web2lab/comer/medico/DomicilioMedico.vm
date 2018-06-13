@@ -1,0 +1,88 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+
+#set ( $titlePage = "Alta o Mantenimiento Direcciones Medico") 
+
+#set ($intcMedico = $data.getParameters().getString('cMedico') )
+
+#set ($intcdireccionmedico = $data.getParameters().getString('cdireccionmedico') )
+
+#set ($lstReferenciaDireccion = $CatalogosTool.obtenAll("ReferenciaDireccion","0"))
+
+<form name="frmDomicilioMedico">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridConfirmacion"> 
+        <table border="0"  align="center" style="width: 100%">	        
+            <tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+        	        </center>
+        	    </th>
+            </tr>   
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Calle
+        	    </td>	            
+                <td colspan="5">
+                    <input type="text" id="txtCalle" style="width: 490px" onKeyPress="mayuscula();"   />
+        	    </td>
+            </tr>   
+            <tr>
+                <input type="hidden" id="hdnCodigoPostal" value="0"/>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Colonia
+        	    </td>
+                <td style="width: 158px">
+                    <input type="text" id="txtColonia" style="width: 157px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);"  />
+        	    </td>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Delegaci&oacute;n o Municipio
+        	    </td>
+                <td style="width: 158px">
+                    <input type="text" id="txtDelegacionMunicipio" style="width: 180px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);"  />
+        	    </td>
+            </tr>   
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Estado
+        	    </td>
+                <td style="width: 158px">
+                	<select id="selEstado" style="width: 177px" >
+    					#foreach($objEstado in $lstEstados)
+    						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+    					#end
+    				</select>    	    
+        	    </td>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    C&oacute;digo Postal
+        	    </td>
+                <td>
+                    <input type="text" id="txtCodigoPostal" onKeyPress="javascript:return numero();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);" />
+        	    </td>
+            </tr>   
+        </table>
+        <table border="0"  align="center" style="width: 883px">	        
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Tipo de Direcci&oacute;n
+        	    </td>	            
+                <td>
+                    <select id="selReferenciaDireccion" style="width: 177px" >
+    					<option value="0">Selecciona </option>								
+    					#foreach($objReferenciaDireccion in $lstReferenciaDireccion)
+    						#option("$!objReferenciaDireccion.getCreferenciadireccion()" "$!objReferenciaDireccion.getSreferenciadireccion()" "0")							
+    					#end
+    				</select>
+        	    </td>
+            </tr>   
+        </table>
+    </div> 
+</form>

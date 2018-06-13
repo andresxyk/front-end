@@ -1,0 +1,139 @@
+#set ($titlePage = "Consulta de Ordenes para Empresas" )
+#set ($intcConvenio = $data.getParameters().getString('cConvenio'))
+#set ($intcConvenioMarca = $data.getSession().getAttribute('cConvenioMarca') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/ece_empresas/BusquedaPacientesEmpresa.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set($ligaDaosOrden = $link.setPage("web2lab,tool,ConsultaOrdenDetalles.vm").toString())
+
+#if($intcConvenioMarca)
+	#set ($intcConvenio = $data.getSession().getAttribute('cConvenioMarca'))
+#else
+	#set ($intcSucursal = $data.getSession().getAttribute("idgrupo"))
+#end
+
+<form name="frmConsultaPacientesEmpresa" method="post" >	
+	<input type="hidden" id="ligaDatosOrden" name="ligaDatosOrden" value="$!ligaDaosOrden">	
+	<input type="hidden" id="cConvenio" name="cConvenio" value="$!intcConvenio">	
+	<input type="hidden" id="idMarca" name="idMarca" value="$data.getUser().getConfirmed()">			
+    <table border="0"  align="center" width='100%'>
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Administracion</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td>
+				<input type="button" id="idLimpiarPantalla" name="idLimpiarPantalla" value="Limpiar Pantalla" onClick="limpiaPantalla();" class="boton">
+    	    </td>     
+        </tr>   
+    </table>	        
+    <table border="0"  align="center" width='100%'>
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Busqueda por Datos del Paciente</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Paciente
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Apellido Paterno
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;Apellido Materno
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;Nombre(s)
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">                
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" name="txtCodigoPaciente" value="0" onKeyPress="numero();" onChange="consultaPacienteGrid(window.document.frmConsultaPacientesEmpresa);" size="35" />
+    	    </td>     
+            <td style="width: 187px">
+                <input type="text" id="txtApellidoPaterno" name="txtApellidoPaterno" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaPacientesEmpresa);" size="35"/>
+    	    </td>     
+            <td style="width: 158px">
+                <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaPacientesEmpresa);"  size="35" />
+    	    </td>     
+            <td>
+                <input type="text" id="txtNombre" name="txtNombre" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaPacientesEmpresa);" size="35" />
+    	    </td>     
+            <td>
+				<input type="button" id="idBuscarOrdenesPaciente" name="idBuscarOrdenesPaciente" value="Buscar Orden" onClick="buscarOrdenesConvenioPaciente($!intcConvenio);" class="boton">
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Fecha Inicial
+    	    </td>     
+            <td style="width: 187px">
+			    <div id="CalendarioNac">
+                    <input type="text" name="txtFechaInicial" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaPacientesEmpresa.txtFechaInicial); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' id="imgFechaInicial" border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+			    </div>				
+	        </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Fecha Termino
+    	    </td>     
+            <td style="width: 187px">
+			    <div id="CalendarioNac">
+                    <input type="text" name="txtFechaTermino" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaPacientesEmpresa.txtFechaTermino); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' id="imgFechaTermino" border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+			    </div>				
+	        </td>     
+            <td>
+                #if($intcConvenioMarca)
+					<input type="button" id="idLoadPantalla" name="idLoadPantalla" value="Executar Consulta" onClick="buscarOrdenesConvenio($!intcConvenio);" class="boton">
+                #elseif ($intcConvenio)
+					<input type="button" id="idLoadPantalla" name="idLoadPantalla" value="Executar Consulta" onClick="buscarOrdenesConvenio($!intcConvenio);" class="boton">
+				#else
+					<input type="button" id="idLoadPantalla" name="idLoadPantalla" value="Executar Consulta" onClick="buscarOrdenesSucursal($!intcSucursal);" class="boton">
+                #end			
+##				<input type="button" id="idLoadPantalla" name="idLoadPantalla" value="Executar Consulta" onClick="buscarOrdenesConvenio($!intcConvenio);" class="boton">
+    	    </td>     
+        </tr>   
+    </table>	        
+    <table border="0"  align="center" width='100%'>
+        <tr>
+            <td style="width: 187px">
+                <input type="hidden" id="txtCodigoConPro" name="txtCodigoConPro" value="0" onKeyPress="numero();" onkeyup="consultaConvenioGrid(window.document.frmConsultaPacientesEmpresa);" size="35" />
+    	    </td>     
+            <td style="width: 187px">
+                <input type="hidden" id="txtNombreConPro" name="txtNombreConPro" onKeyPress="mayuscula();" onkeyup="consultaConvenioGrid(window.document.frmConsultaPacientesEmpresa);" size="117"/>
+    	    </td>     
+        </tr>   
+    </table>	        
+	<div id="Busqueda">
+	</div>
+	<div id="OrdenesBusqueda">
+	</div>
+</form>
+<script>
+	window.onload = init;			    		 	
+	window.document.frmConsultaPacientesEmpresa.txtCodigoConPro.value = "$!intcConvenio";
+//	buscarOrdenesConvenio("$!intcConvenio"); 
+</script>	

@@ -1,0 +1,28 @@
+#set ($titlePage = "Datos de la Orden para Facturar" )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/facturacionsucursales/BuscarOrdenFacturar.js")"></script>
+
+#set ( $strLigaDatosOrden = $link.setPage("web2lab,tool,ConsultaOrdenDetalles.vm").toString())
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+
+<form name="frmDatosOrdenFactuacion" action="" method="post" >		
+    <table border="0"  align="center" style="width: 883px">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Buscar Consecutivo</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Ingreso
+    	    </td>     	                
+            <td>
+                <input type="text" id="txtAdmision" value="0" STYLE="font-size: 30px;" onKeyPress="numero();visualizaDatosOrden('$strLigaDatosOrden','FacturarOrden');" size="7" />
+    	    </td>     
+        </tr>   
+    </table>	        
+</form>

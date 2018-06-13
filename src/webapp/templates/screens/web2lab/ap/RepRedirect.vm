@@ -1,0 +1,9 @@
+$data.setLayoutTemplate("web2lab/SoloPlecaB.vm")
+#if($reporte)
+	$data.getResponse().sendRedirect("$reporte")
+#else
+	<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No se ha generado el Reporte"/>
+	<font size='3' color='red'>No se puede imprimir el reporte</font><br>
+	<input type='button' value='Cerrar' class='boton' style= 'width:100px' onclick='window.close()'/>
+#end
+web2lab

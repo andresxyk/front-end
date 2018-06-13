@@ -1,0 +1,54 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+#set ($titlePage = "Tomar Ticket" )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+#set($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tiemposmovimientos/TomarTicketIPad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/Tickets.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<form name="frmTomarTicket" action="" method="post">
+<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">
+<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+<!--		<table bgcolor="#F3E2A9" border="0"  align="center" style="width:1699px" > -->
+		<table bgcolor="#F3E2A9" border="0"  align="center" style="width:100%" >
+				<tr>
+			<td align="center" colspan="2">
+				&nbsp;
+			</td>
+		</tr>
+		<tr>
+			<td bgcolor="#F3E2A9" style="height:234px" >
+				<input type='button' name='bntEntrega' onClick="javascript:crearTicket('RE');" value='1.- Realización de Estudios.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>
+			<td  bgcolor="#F3E2A9" style="height:234px">
+				<input type='button' id='btnCotizacion'onClick="javascript:crearTicket('CO');" value='2. Cotización e Informes.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>		
+		</tr>
+		<tr>
+			<td bgcolor="#F3E2A9" style="height:234px">
+				<input type='button' id='btnCita' onClick="javascript:crearTicket('CI');" value='3.- Cita ya Programada.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>
+			<td  bgcolor="#F3E2A9" style="height:234px">
+				<input type='button' id='btnCaja' onClick="javascript:crearTicket('EN');" value='4. Entrega de Resultados.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>
+		</tr>		
+		<tr>
+			<td bgcolor="#F3E2A9" style="height:234px">
+				<input type='button' id='btnOrdenConSaldo' onClick="javascript:crearTicket('CA');" value='5.- Orden con Saldo.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>
+			<td  bgcolor="#F3E2A9" style="height:234px">
+				<input type='button' id='btnEntregaMuestra' onClick="javascript:crearTicket('CB');" value='6. Entrega de Muestra.' style='width:620px; height:234px; font-size: 50px; line-height: normal;'> 			
+			</td>
+		</tr>		
+	</table>
+</form>

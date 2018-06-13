@@ -1,0 +1,232 @@
+
+<html>
+<head>
+	<title>Image Upload</title>
+<script>
+
+// Trim function to trim the leading and trailing spaces.
+function trim(l_str)
+{
+   var l_str_string = new String(l_str); // local variable to store the string
+   var l_int_length = l_str_string . length; // local variable to store the length of string
+   var l_str_temp = new String(''); // local variable to store the string
+   var l_b_flag = true; // local variable to store the boolean value
+
+   for(l_int_i = 0; l_int_i <= l_int_length - 1; ++l_int_i) // start of for loop to check for space from first
+   {
+      if (l_b_flag == true && l_str_string.charAt(l_int_i) == ' ') // checks for space
+      {
+         l_b_flag = true;
+      } // end of check space if
+      else
+      {
+         l_b_flag = false;
+         l_str_temp = l_str_string.substring(l_int_i);
+         break;
+      } // end of check space else
+      if (l_int_i == l_int_length - 1) // checks for length
+      {
+         return l_str_temp;
+      } // end of length check if
+   } // end of chack space from first for loop
+
+   l_int_length = l_str_temp.length;
+   l_b_flag = true;
+
+   for(l_int_i = l_int_length - 1; l_int_i >= 0; l_int_i--) // start of for loop to check for space from the last
+   {
+      if (l_b_flag == true && l_str_temp.charAt(l_int_i) == ' ') // check for space
+      {
+         l_b_flag = true;
+      } // end of check space if
+      else
+      {
+         l_b_flag = false;
+         l_str_string = l_str_temp.substring(0, l_int_i + 1);
+         break;
+      } // end of check space else
+   } // end of chack space from last for loop
+   return l_str_string;
+} // end of trim function
+
+
+// function to remove the double quotes
+function removeDoubleQuotes(l_str_string)
+{
+   if (l_str_string.substring(0,1) == '"' && l_str_string.substring(l_str_string.length - 1, l_str_string.length) == '"')
+   { // checks for double quotes
+      l_str_string = l_str_string.substring(1);
+      l_str_string = l_str_string.substring(0,l_str_string.length-1);
+   } // end of double quotes check if
+   return l_str_string;
+} // end of removeDoubleQuotes function
+
+
+function checkImageName(l_frm_control)
+{
+   var l_str_filename = l_frm_control.value;
+   var l_str_filename = removeDoubleQuotes(l_str_filename);
+   var l_int_dot_pos = l_str_filename.lastIndexOf('.');
+   var l_b_alpha; // boolean variable to check for alphanumeric value
+   var l_str_ext = l_str_filename.substring(l_int_dot_pos + 1);
+
+   if ((trim(l_str_filename)).length == 0) // check for not null function
+   {
+		alert("File name not entered. Please enter the file name");
+      return false;
+   } // end of checknotnull if
+
+
+   if (l_int_dot_pos == -1) // checks for dot opertor
+   {
+      alert('Atleast one .(dot) symbol should be entered. Please verify the value you have entered.');
+      l_frm_control.select();
+      return false;
+   } // end of dot operator check if
+
+   if(l_str_filename.match(/[*]/))
+   {
+      alert('Astrisk (*) not allowed. Please verify the value you have entered.');
+      l_frm_control.select();
+      return false;
+   } // end of dot operator check if
+
+   // checks for the allowed image format
+   if (!(l_str_ext == 'gif' || l_str_ext == 'jpg' || l_str_ext == 'jpeg' || l_str_ext == 'GIF' || l_str_ext == 'JPG' || l_str_ext == 'JPEG' || l_str_ext == 'png' || l_str_ext == 'PNG'))
+   {
+      alert('Only Gif, Png, Jpg and Jpeg images can be uploaded. Please verify the image you have selected.');
+      l_frm_control.select();
+      return false;
+   } // end of allowed image format check if
+
+
+		var file_separator = '';
+	if(l_str_filename.lastIndexOf('/') != -1)
+	{
+		file_separator = '/';
+	}
+	if(l_str_filename.lastIndexOf('\\') != -1)
+	{
+			file_separator = '\\';
+	}
+	if(file_separator.length > 0)
+	{
+		if(l_str_filename.substring(l_str_filename.lastIndexOf(file_separator)).match(/[ ]/))
+		{
+      	alert('Spaces not allowed in file name. Please verify the value you have entered');
+      	l_frm_control.select();
+      	return false;
+		}
+	}
+
+  /*if (!(l_str_filename.substring(l_int_dot_pos + 1).indexOf('.') == -1)) // checks for consecutive dot operator
+   {
+      alert('One and only one . (dot) symbol should be entered. Please verify the value you have entered.');
+      l_frm_control.select();
+		l_frm_control.focus();
+      return false;
+   } // end of consecutive dot operator
+
+
+   if (l_int_dot_pos == 0 || l_int_dot_pos == l_str_filename.length - 1) // checks for the dot opertor position
+   {
+      alert('. (dot) symbol should be preceded and succeeded by alphabets or numbers. Please verify the value you have entered.');
+      l_frm_control.select();
+		l_frm_control.focus();
+      return false;
+   } // end of dot operator position check if
+
+   l_b_alpha = false;
+
+   // checks for allowed characters
+   if(l_str_filename.match(/[^\/:.a-z0-9A-Z -_]/))   //for checking the allowed chars
+	{
+      alert('Only alphabets, numbers, back slash,forward slash,under score,colon, and dot can be entered. Please verify the value you have entered.');
+      l_frm_control.select();
+      l_frm_control.focus();
+		return false;
+   }
+   for(l_int_i = 0; l_int_i < l_int_dot_pos; l_int_i++) // start of for loop
+   {
+
+      if (l_b_alpha == false && ((l_str_filename.charCodeAt(l_int_i) >= 97 && l_str_filename.charCodeAt(l_int_i) <= 123) ||  (l_str_filename.charCodeAt(l_int_i) >= 65 && l_str_filename.charCodeAt(l_int_i) <= 91)  || (l_str_filename.charCodeAt(l_int_i) >= 48 && l_str_filename.charCodeAt(l_int_i) <= 57)))
+      { // checks for atleast for one alphabet
+         l_b_alpha = true;
+      } // end of alphabet check if
+
+      if (l_str_filename.charAt(l_int_i) == '_') // checks for underscore
+      {
+         if (!(((l_str_filename.charCodeAt(l_int_i + 1) >= 97 && l_str_filename.charCodeAt(l_int_i + 1) <= 123) ||  (l_str_filename.charCodeAt(l_int_i + 1) >= 65 && l_str_filename.charCodeAt(l_int_i + 1) <= 91) || (l_str_filename.charCodeAt(l_int_i + 1) >= 48 && l_str_filename.charCodeAt(l_int_i + 1) <= 57)) && ((l_str_filename.charCodeAt(l_int_i - 1) >= 97 && l_str_filename.charCodeAt(l_int_i - 1) <= 123) ||  (l_str_filename.charCodeAt(l_int_i - 1) >= 65 && l_str_filename.charCodeAt(l_int_i - 1) <= 91) || (l_str_filename.charCodeAt(l_int_i - 1) >= 48 && l_str_filename.charCodeAt(l_int_i - 1) <= 57))))
+         { // checks for consecutive characters
+            alert('Special characters except slashes should be preceded and succeeded by numbers. Please verify the value you have entered.');
+            l_frm_control.select();
+				l_frm_control.focus();
+            return false;
+         } // end of consecutive character check if
+      } // end of underscore check if
+      if (l_str_filename.charAt(l_int_i) == ':') // checks for semicolon
+      {
+         if (l_str_filename.charAt(l_int_i + 1) == "\\") // checks for forward slash
+         {
+            if (!(((l_str_filename.charCodeAt(l_int_i - 1) >= 97 && l_str_filename.charCodeAt(l_int_i - 1) <= 123) ||  (l_str_filename.charCodeAt(l_int_i - 1) >= 65 && l_str_filename.charCodeAt(l_int_i - 1) <= 91) || (l_str_filename.charCodeAt(l_int_i - 1) >= 48 && l_str_filename.charCodeAt(l_int_i - 1) <= 57)) ))
+            { // checks for consecutive characters
+               alert('Special characters except slashes should be preceded and succeeded by numbers. Please verify the value you have entered.');
+               l_frm_control.select();
+					l_frm_control.focus();
+               return false;
+            } // end of consecutive character check if
+         } // end of forward slash if
+         else if (l_str_filename.charAt(l_int_i + 1) == "/") // checks for backward slash
+         {
+         } // end of backward slash if
+         else
+         {
+            if (!(((l_str_filename.charCodeAt(l_int_i + 1) >= 97 && l_str_filename.charCodeAt(l_int_i + 1) <= 123) ||  (l_str_filename.charCodeAt(l_int_i + 1) >= 65 && l_str_filename.charCodeAt(l_int_i + 1) <= 91) || (l_str_filename.charCodeAt(l_int_i + 1) >= 48 && l_str_filename.charCodeAt(l_int_i + 1) <= 57)) && ((l_str_filename.charCodeAt(l_int_i - 1) >= 97 && l_str_filename.charCodeAt(l_int_i - 1) <= 123) ||  (l_str_filename.charCodeAt(l_int_i - 1) >= 65 && l_str_filename.charCodeAt(l_int_i - 1) <= 91) || (l_str_filename.charCodeAt(l_int_i - 1) >= 48 && l_str_filename.charCodeAt(l_int_i - 1) <= 57))))
+            { // checks for consecutive characters
+               alert('Special characters except slashes should be preceded and succeeded by numbers. Please verify the value you have entered.');
+               l_frm_control.select();
+					l_frm_control.focus();
+               return false;
+            } // end of consecutive character check if
+         } // end of forward and backward slash if
+      } // end of semicolon check if
+      if (l_str_filename.charAt(l_int_i) == '\\') // checks for forward slash
+      {
+      } // end of forward slash check if
+
+      if (l_str_filename.charAt(l_int_i) == '/' && l_str_filename.charAt(l_int_i + 1) == '/' && l_str_filename.charAt(l_int_i + 2) == '/' && l_str_filename.charAt(l_int_i + 3) == '/')
+      { // checks for maximum allowed forward slash
+         alert('Forward slash can be entered consecutively for a maximum of 3 times only. Please verify the value you have entered.');
+         l_frm_control.select();
+			l_frm_control.focus();
+         return false;
+      } // end of maximum allowed forward slash if
+   } // end of for loop
+
+   if (l_b_alpha == false) // checks for alphanumeric value
+   {
+      alert('A mandatory field has not been filled. Please enter an appropriate value.');
+      l_frm_control.select();
+		l_frm_control.focus();
+      return false;
+   } // end of alphanumeric value check if */
+   return true;
+} // end of checkImageName function
+
+
+
+</script>
+</head>
+
+<body>
+<form name="uploader" action="samples/jsp/upload_action.jsp" method="post" ENCTYPE="multipart/form-data" onsubmit = "javascript:return checkImageName(document.uploader.file)" >
+
+
+<input type="file" name="file" ACCEPT="image/jpeg" >
+<input type="submit" name="submit1" value="Upload" >
+<input type="button" name="cancel" value="Cancel" onClick="window.close();" >
+</form>
+
+</body>
+</html>
+

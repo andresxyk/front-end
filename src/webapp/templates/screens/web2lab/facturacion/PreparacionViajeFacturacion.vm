@@ -1,0 +1,119 @@
+<SCRIPT language="javascript" SRC="$content.getURI('javascript/generales.js')"></SCRIPT>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/PreparacionViaje.js")"></script>
+
+<script>
+    window.onload = init; 
+</script>	
+	
+#set ($titlePage = "Preparación de viaje para el departamento de Facturación" )
+#set ($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+#set ($ligaDaosOrden = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
+#set ($dteFecActual = $CUtilTool.getFechaActual() )
+#set ($objSesion = $data.getSession() )
+#set ($strDepartamento = $objSesion.getAttribute("grupo") )
+#set ($strNombre = $objSesion.getAttribute("strNombreCompleto") )
+#set ($IdUsuarioSesion = $objSesion.getAttribute("IdUsuarioSesion") )
+
+#set ($strIdUnidad = $data.getSession().getAttribute("strIdUnidadActual"))
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+#set ($lstViajes = $CatalogosTool.viajesFacturacion())
+	
+<form name="frmPrepViajeFacturacion" method="post" action="$ligaAct" >	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" name="hdnIdUsuario" value="$!IdUsuarioSesion" >					
+	<input type="hidden" id="ligaDatosOrden" name="ligaDatosOrden" value="$!ligaDaosOrden">			
+	<input type="hidden" name="hdnLiberar" value="0" >					
+	<table width="100%" class="tabla" border="0">
+		<tr>			
+   			<th align="center" colspan="4">
+   				Estadistica de Viajes
+   			</th>
+   		</tr>
+		<tr>	
+			<td>
+				<input type="button" onclick="return sinViajeOrden();" value="Ordenes sin Viaje" name="Ordenes sin Viaje" class="boton" style="width:150px">
+			</td>	
+    		<td>
+				<input type="button" onclick="return enViajeOrdenNoFac();" value="Ordenes en Viaje y no a Recibido Facturacion" name="Ordenes en Viaje y no a Recibido Fac" class="boton" style="width:300px">
+    		</td>
+			<td>
+                <select id="selOrdenar" style="width: 200px" >
+					<option VALUE="1">Consecutivo</option>
+					<option VALUE="2">Alfabéticamente Nombre Paciente</option>
+					<option VALUE="3">Convenio</option>
+					<option VALUE="4">Viaje</option>
+	            </select>						
+			</td>
+		</tr>
+	</table>
+	<table width="100%" class="tabla" border="0">
+		<tr>			
+   			<th align="center" colspan="4">
+   				Creacion del Viaje
+   			</th>
+   		</tr>
+		<tr>
+			<td align="right">
+				<b>Unidad:</b>
+			</td>	
+			<td>
+				<input type="text" name="txtUnidadQ"  value="$!strDepartamento" size="30" DISABLED>
+				<input type="hidden" name="txtUnidadH" value="$!intcSucursal" size="30">
+			</td>
+    		<td>
+##				<input type="button" onclick="return sinViajeOrden();" value="Ordenes sin Viaje" name="Ordenes sin Viaje" class="boton" style="width:150px">
+    		</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<b>Responsable:</b>
+			</td>	
+			<td>
+				<input type="text" name="txtResponsableQ" value="$!strNombre" size="30" DISABLED>
+				<input type="hidden" name="txtResponsable" value="$!strNombre" size="30">
+			</td>
+    		<td>
+				<input type="button" onclick="return cerrarViaje();" value="Cerrar Viaje" name="Cerrar Viaje" class="boton" style="width:150px">
+    		</td>
+		</tr>
+		<tr>
+			<td align="right">		
+				<b>Viajes:</b> 					
+			</td>	
+			<td>
+    			<select name="cboViajes" onChange="buscarViajeSelect();">
+    				<option value="-1" selected>Sin Viaje</option>
+    				#foreach($objViaje in $lstViajes)
+						#option("$!objViaje.getKviajefacturacion()" "$!objViaje.getKviajefacturacion()" "0")							
+    				#end					
+    			</select>
+				<input type="button" onclick="return reimprimirEtiquetaViaje();" value="Reimprimir Etiqueta" name="Reimprimir Etiqueta" class="boton" style="width:150px">
+			</td>
+		</tr>
+	</table>
+	<div id="OrdenesBusqueda">
+	</div>		
+	<table border="0" cellspacing="0" cellpadding="0" width="100%" class="tabla" id="TabMan" style="display:block">
+		<tr>			
+   			<th align="left" colspan="4">
+   				Ingresar Orden al Nuevo Viaje
+   			</th>
+   		</tr>
+		<tr>
+			<td align="center">
+				<input type="text" id="txtNumOrden" name="txtNumOrden" onKeyPress="mayuscula();agregaOrden();" size="10" style="width:100px;">
+			</td>
+		</tr>	   			   			
+		<tr>
+			<td align="center">
+				<select name="cboMuestras" size="10" style="width:100px;">
+				</select>
+			</td>
+		</tr>	   			   			
+   	</table>
+</form>

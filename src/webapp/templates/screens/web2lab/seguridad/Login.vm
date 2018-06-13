@@ -1,0 +1,46 @@
+$data.setLayoutTemplate("web2lab/DefaultLogin.vm")
+#set ( $titlePage = "Autentificación" )
+#set ( $actLnk = $link.setPage("web2lab,ap,PantallaInicio.vm"))
+#set ( $actLnk = $link.setAction("seguridad.LoginExpedienteClinicoElectronicoAction").toString())
+<form method="post" action="$actLnk" name="login">        
+    <table width="100%" border="0" cellspacing="2" cellpadding="3">
+		<tr class="titulologin">
+			<th></th>
+		</tr>
+		<tr>
+			<td><img src="$content.getURI("images/OrangeBack.jpg")" width="500" height="300"></td>		
+			<td>
+				<table width="200" align="left">
+				<tr>
+				<td><b>Usuario:</b><br><input type="text" name="username" id="username" value=""></td>
+				</tr>
+				<tr>
+	           		 <td><b>Contraseña:</b><br><input type="password" name="password" id="password" value=""></td>
+				</tr>
+##				<tr>
+##				<td><input type="submit" class="boton" value="Entrar" name="eventSubmit_doPerform" style="width:100px"/></td>
+##				</tr>
+			   </table>				
+			</td>	
+		</tr>
+		<tr>
+			<td>
+				<input type="checkbox" name="chkCamContras" id="chkCamContras" value="1">
+				<label for="chkCamContras" class="titulotabla">Cambiar contrase&ntilde;a</label>
+			</td>
+			<td  style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<a href="http://web2-lab.com/videos/Logueo.wmv" onclick="http://web2-lab.com/videos/Logueo.wmv" title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+			</td>    	    
+		</tr>
+		<tr>
+			<td colspan="2>
+				<font color="red">&nbsp;<b>$!mensaje</b></font>
+			</td>
+		</tr>   
+	</table>                  
+	<input type="submit" class="boton" value="Entrar" name="eventSubmit_doPerform" style="width:100px"/>                 
+	<input type="button" class="boton" value="Salir" name="cerrar" onclick="window.close();" style="width:100px"/>                 
+</form>     
+<SCRIPT language="javascript" for=window event=onload>
+	document.getElementById("username").focus();
+</SCRIPT>

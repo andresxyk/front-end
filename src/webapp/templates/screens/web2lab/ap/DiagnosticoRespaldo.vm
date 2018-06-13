@@ -1,0 +1,501 @@
+#set ( $titlePage = "Diagnostico de los examenes" )
+#set ($lstMucosasAtroficas = $CatalogosTool.obtenAll("MucosaAtrofica","0"))
+#set ($intkPaciente = $data.getParameters().getString('kPaciente'))
+#set ($intkOrdenFundacion = $data.getParameters().getString('kOrdenFundacion') )
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/fundacion/CuestionarioDiagnostico.js")"></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#if($intkPaciente)
+	<script>	
+	     DatosPaciente.buscarPaciente('$intkPaciente','','','',intibuscarPaciente_CallBack);		
+	     	
+	     function intibuscarPaciente_CallBack(data)
+	     {
+            var frmPantalla = window.document.frmDiagnostico;
+			txtCodigoPaciente = frmPantalla.txtCodigoPaciente;
+			hdnkPaciente = frmPantalla.hdnkPaciente;		
+			txtApellidoPaterno = frmPantalla.txtApellidoPaterno;
+			txtApellidoMaterno = frmPantalla.txtApellidoMaterno;
+			txtNombre = frmPantalla.txtNombre;
+			txtFechaNacimiento = frmPantalla.txtFechaNacimiento;
+			txtTelefono = frmPantalla.txtTelefono;
+		 	hdnkPaciente.value = data.kpacientefundacion;
+            disableTextBox(txtCodigoPaciente,'txtCodigoPaciente',"    " + data.kpacientefundacion,17);
+            disableTextBox(txtApellidoPaterno,'txtApellidoPaterno',"    " + data.sappaterno,17);
+            disableTextBox(txtApellidoMaterno,'txtApellidoMaterno',"    " + data.sapmaterno,17);
+            disableTextBox(txtNombre,'txtNombre',"    " + data.snombre,17);
+            disableTextBox(txtTelefono,'txtTelefono',"    " + data.stelefono,17);
+            disableTextBox(txtFechaNacimiento,'txtFechaNacimiento',"    " + data.snacimiento,17);
+			obtenerEdadfrm(window.document.frmDiagnostico);
+		    adminDIV("divDiagnostico","visible","inline");		    
+		 }	 
+	</script>	
+#end
+
+<script>
+	    window.onload = init;
+
+		function init() 
+		{
+		    DWRUtil.useLoadingMessage();
+		    adminDIV("divDiagnostico","hidden","none");
+		}
+		
+		function buscarPaciente() {		
+            var frmPantalla = window.document.frmDiagnostico;
+			txtCodigoPaciente = frmPantalla.txtCodigoPaciente;
+			if (txtCodigoPaciente.value != "" && txtCodigoPaciente.value > 0) {
+				hdnkPaciente = frmPantalla.hdnkPaciente;		
+				txtApellidoPaterno = frmPantalla.txtApellidoPaterno;
+				txtApellidoMaterno = frmPantalla.txtApellidoMaterno;
+				txtNombre = frmPantalla.txtNombre;		 
+		     	DatosPaciente.buscarPaciente(txtCodigoPaciente.value,
+										  txtApellidoPaterno.value,
+										  txtApellidoMaterno.value,
+										  txtNombre.value,
+										  buscarPaciente_CallBack);
+	        } else {
+				alert('Ingrese un codigo de Paciente, por favor');
+			}
+		 }	
+			
+	     function buscarPaciente_CallBack(data)
+	     {
+            var frmPantalla = window.document.frmDiagnostico;
+			txtCodigoPaciente = frmPantalla.txtCodigoPaciente;
+			hdnkPaciente = frmPantalla.hdnkPaciente;		
+			txtApellidoPaterno = frmPantalla.txtApellidoPaterno;
+			txtApellidoMaterno = frmPantalla.txtApellidoMaterno;
+			txtNombre = frmPantalla.txtNombre;
+			txtFechaNacimiento = frmPantalla.txtFechaNacimiento;
+			txtTelefono = frmPantalla.txtTelefono;
+		 	hdnkPaciente.value = data.kpacientefundacion;
+            disableTextBox(txtCodigoPaciente,'txtCodigoPaciente',"    " + data.kpacientefundacion,17);
+            disableTextBox(txtApellidoPaterno,'txtApellidoPaterno',"    " + data.sappaterno,17);
+            disableTextBox(txtApellidoMaterno,'txtApellidoMaterno',"    " + data.sapmaterno,17);
+            disableTextBox(txtNombre,'txtNombre',"    " + data.snombre,17);
+            disableTextBox(txtTelefono,'txtTelefono',"    " + data.stelefono,17);
+            disableTextBox(txtFechaNacimiento,'txtFechaNacimiento',"    " + data.snacimiento,17);
+			obtenerEdadfrm(window.document.frmDiagnostico);
+		    adminDIV("divDiagnostico","visible","inline");		    
+		 }	 
+		 
+		 function consultaPacienteGrid() {		
+            var frmPantalla = window.document.frmDiagnostico;
+            if (frmPantalla.hdnkPaciente.value < 1) {
+				txtApellidoPaterno = frmPantalla.txtApellidoPaterno;
+				txtApellidoMaterno = frmPantalla.txtApellidoMaterno;
+				txtNombre = frmPantalla.txtNombre;		 
+				if (txtApellidoMaterno.value == "" && txtApellidoPaterno.value == "" && txtNombre.value == "") {
+				 	codeDIVHTML("gridbusquedaPacientes","");
+				    adminDIV("gridbusquedaPacientes","hidden","none");
+				} else {
+				 	DatosPaciente.consultaPacienteGrid(txtApellidoPaterno.value,
+											        txtApellidoMaterno.value,
+											        txtNombre.value,
+											         consultaPacienteGrid_CallBack);
+				}
+			}
+		 }	
+			
+	     function consultaPacienteGrid_CallBack(data)
+	     {
+		    adminDIV("gridbusquedaPacientes","visible","inline");
+		 	codeDIVHTML("gridbusquedaPacientes",data);
+		 }	 
+		 
+		 function registroAceptado(registro){
+            var frmPantalla = window.document.frmDiagnostico;
+		 	frmPantalla.txtCodigoPaciente.value = registro;
+		 	frmPantalla.hdnkPaciente.value = registro;		 	
+		 	buscarPaciente();		 	
+		 	codeDIVHTML("gridbusquedaPacientes","");
+		    adminDIV("gridbusquedaPacientes","hidden","none");
+		 }
+				 		 
+</script>	
+
+<form name="frmDiagnostico" action="" method="post">
+    <table border="0" align="center" style="width: 980px" frame="border">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Personales</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Paciente
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" value="0" STYLE="font-size: 19px;" onChange="buscarPaciente();" size="1" />
+                <input type="hidden" id="hdnkPaciente" value="0" />
+    	    </td>     
+        </tr>   
+        <tr>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Paterno
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Materno
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Nombre(s)
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="width: 187px">
+                <input type="text" id="txtApellidoPaterno" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35"/>
+    	    </td>     
+            <td style="width: 158px">
+                <input type="text" id="txtApellidoMaterno" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+            <td>
+                <input type="text" id="txtNombre" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+        </tr>   
+    </table>	        
+	<div id="gridbusquedaPacientes">                
+	</div>            		        				
+    <table border="0" align="center" style="width: 980px" frame="border">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Complementarios</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Fecha nacimiento
+    	    </td>     
+            <td style="width: 187px">
+			    <div id="CalendarioNac">
+		                    <input type="text" name="txtFechaNacimiento" size="12">		
+			    </div>				
+	        </td>     
+            <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
+                <b>Edad (años-meses-dias)</b
+    	    </td>     
+            <td style="width: 158px">
+                <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                <input type="text"  id="txtEdadDescompuesta" style="font-size: 19px;" value="$!objDemPaciente.getIStrAnios()" class="textflat" disabled>&nbsp;
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Tel&eacute;fono
+    	    </td>     
+            <td style="width: 187px">
+                <input type="text" id="txtTelefono" size="20"/>
+   	        </td>     
+        </tr>   
+    </table>	        
+	<div id="divDiagnostico">                    	
+	    <!-- Diagnostico -->	    
+	    <table border="1" align="center" style="width: 980px" frame="border">
+	        <th colspan="5">
+				Diagnostico
+			</th>
+			<tr>
+				<td colspan="2" align="center" style="height: 26px">
+					<B>Mucosa atr&oacutefica</B>
+				</td>
+				<td colspan="2" align="center" style="height: 26px">
+					<select id="selMucosaAtrofica" style="width: 210px">
+						<option value="0" selected>Seleccionar</option>				           
+	    				#foreach($objMucoAtrofica in $lstMucosasAtroficas )
+							#option("$!objMucoAtrofica.getCmucosaAtrofica()" "$!objMucoAtrofica.getCmucosaAtrofica() - $!objMucoAtrofica.getSmucosaAtrofica()" "0")							
+	    				#end					
+					</select>
+				</td>
+			</tr>
+	        <!-- Colposcopico -->
+			<tr>
+	            <td rowspan="3" style="width: 207px" align="center">
+					<B> * Colposcopico</B>
+	            </td>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkColpoSano">Sano
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkColpoLEIBG">LEIBG
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkColpoLEIAG">LEIAG
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkColpoCancer">Cancer
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkColpoBacteriana">Bacteriana
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkColpoMicotica">Micotica
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkColpoParasitaria">Parasitaria
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkColpoMiomaedocervical">Miomaedocervical
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="height: 37px;" align="left" colspan="2">
+					<input type="checkbox" id="chkColpoCondilomatosis">Condilomatosis Acuminada Cervical
+				</td>
+	        </tr>
+	        <!-- Vulvar -->
+			<tr>
+	            <td rowspan="3" style="width: 207px" align="center">
+					<B> * Vulvar </B>
+	            </td>
+	            <td style="width: 559px" align="left">
+	                <input type="checkbox" id="chkVulvaBerruga">Berruga Comun
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkVulvaBartho">Bartho Linitis
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkVulvaPapilomatosis">MicroPapilomatosis
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkVulvaMolusco">Molusco Contagioso
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkVulvaNevos">Nevos
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkVulvaQuiste">Quiste seb&aacuteceo
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkVulvaVPH">MicroPapilomatosis por VPH
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkVulvaVulvitis">Vulvitis
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="width: 559px; height: 24px;" align="left">
+	                Condilomatosis Acuminada
+	            </td>
+	            <td style="width: 436px; height: 24px;" align="left">
+	    			<input type="checkbox" id="chkVulvaPerianal">Perianal
+	    		</td>
+	            <td style="width: 422px; height: 24px;" align="left">
+					<input type="checkbox" id="chkVulvaVaginal">Vaginal
+				</td>
+	            <td style="width: 400px; height: 24px;" align="left">
+					<input type="checkbox" id="chkVulvaVulvar">Vulvar
+				</td>
+	        </tr>
+	        <!-- Papanicolao -->
+			<tr>
+	            <td rowspan="4" style="width: 207px" align="center">
+					<B> * Papanicolaou</B>
+				</td>
+	            <td style="width: 559px; height: 24px;" align="left">
+	                <input type="checkbox" id="chkPapaLEIBG">LEIBG
+				</td>
+	            <td style="width: 436px; height: 24px;" align="left">
+					<input type="checkbox" id="chkPapaLEIAG">LEIAG
+				</td>
+	            <td style="width: 422px; height: 24px;" align="left">
+					<input type="checkbox" id="chkPapaCarciInSitu">Carcinoma In Situ
+				</td>
+	            <td style="width: 348px; height: 24px;" align="left">
+					<input type="checkbox" id="chkPapaCarciMicroinvasor">Carcinoma Microinvasor
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkPapaCarcinomaInvasor">Carcinoma Invasor
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkPapaAdenoInSitu">Adenocarcionoma In Situ
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkPapaAdenoInvasor">Adenocarcionoma Invasor
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkPapaCarciEpidermoide">Carcinoma Epidermoide
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkPapaASCUS">ASCUS
+				</td>
+	            <td style="width: 436px" align="left">
+	    			<input type="checkbox" id="chkPapaASCH">ASC-H
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkPapaCandida">Candida
+				</td>
+	            <td style="width: 400px" align="left">
+					<input type="checkbox" id="chkPapaTrichomona">Trichomona
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+	    			<input type="checkbox" id="chkPapaActinomyces">Actinomyces
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkPapaVaginosis">Vaginosis Bacteriana
+				</td>
+	        </tr>
+	        <!-- Bipsia Cervix -->
+			<tr>
+	            <td rowspan="3" style="width: 207px" align="center">
+					<B> * Bipsia Cervix </B>
+	            </td>
+	            <td style="width: 559px" align="left">
+	                <input type="checkbox" id="chkCervixLEIBG">LEIBG
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkCervixLEIAG">LEIAG
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkCervixCarciInSitu">Carcinoma In Situ
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkCervixCarciMicroinvasor">Carcinoma Microinvasor
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkCervixCarciInvasor">Carcinoma Invasor
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkCervixAdenoInSitu">Adenocarcionoma In Situ
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkCervixAdenoInvasor">Adenocarcionoma Invasor
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkCervixCarciEpidermoide">Carcinoma Epidermoide
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkCervixCondiloma">Condiloma Acuminado
+				</td>
+	            <td style="width: 436px" align="left">
+	    			<input type="checkbox" id="chkCervixPolipo">Polipo
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkCervixAguda">Cervixitis Aguda
+				</td>
+	            <td style="width: 400px" align="left">
+					<input type="checkbox" id="chkCervixCronica">Cervixitis Cronica
+				</td>
+	        </tr>
+	        <!-- Conoterapia -->
+			<tr>
+	            <td rowspan="3" style="width: 207px" align="center">
+					<B> * Cono </B>
+	            </td>
+	            <td style="width: 559px" align="left">
+	                <input type="checkbox" id="chkConoLEIBGsin">LEIBG sin borde QX Positivo
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkConoLEIAGsin">LEIAG sin borde QX Positivo
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkConoLEIBGcon">LEIBG con borde QX Positivo
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkConoLEIAGcon">LEIAG con borde QX Positivo
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkConoCarcinoma">Carcinoma Invasor
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkConoAdenosin">Adenocarcionoma In Situ sin borde QX Positivo
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkConoAdenocon">Adenocarcionoma In Situ con borde QX Positivo
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkConoAdenoInvasor">Adenocarcionoma Invasor
+				</td>
+	        </tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkConoAguda">Cervixitis Aguda
+				</td>
+	            <td style="width: 436px" align="left">
+	    			<input type="checkbox" id="chkConoCronica">Cervixitis Cronica
+				</td>
+	        </tr>
+	        <!-- Biopcia de Tegidos Blandos -->
+			<tr>
+	            <td rowspan="2" style="width: 207px" align="center">
+					<B> * Biopcia de Tegidos Blandos </B>
+	            </td>
+	            <td style="width: 559px" align="left">
+	                <input type="checkbox" id="chkBlandosCondiloma">Condiloma Acuminado
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkBlandosNivu">Nivu
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkBlandosMolusco">Molusco Contagioso
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkBlandosBerruga">Berruga Comun
+				</td>
+			</tr>
+	        <tr>
+	            <td style="width: 559px" align="left">
+					<input type="checkbox" id="chkBlandosNevo">Nevo
+				</td>
+	        </tr>
+	        <!-- Biopcia de Vagina -->
+			<tr>
+	            <td style="width: 207px" align="center">
+					<B> * Biopcia de Vagina </B>
+	            </td>
+	            <td style="width: 559px" align="left">
+	                <input type="checkbox" id="chkVaginaCondiloma">Condiloma Acuminado
+				</td>
+	            <td style="width: 436px" align="left">
+					<input type="checkbox" id="chkVaginaPolipo">Polipo
+				</td>
+	            <td style="width: 422px" align="left">
+					<input type="checkbox" id="chkVaginaNiva">Niva
+				</td>
+	            <td style="width: 348px" align="left">
+					<input type="checkbox" id="chkVaginaProceso">Proceso Inflamatorio
+				</td>
+			</tr>
+			<tr>
+	        	<td style="width: 158px">
+				</td>
+	        	<td style="width: 158px">
+				</td>
+	        	<td style="width: 158px">
+					<input type="submit" class="boton" value="Enviar datos">
+				</td>
+	        	<td style="width: 158px">
+					<input type="Reset" class="boton"  value="Borrar todo">
+				</td>
+			</tr>		
+	    </table>    
+	</div>
+</form>

@@ -1,0 +1,262 @@
+.datosCorrectos{
+    border: 2px solid #00CC00;
+}
+
+.warning{
+    color: #72BF7B;
+}
+
+.datosReq{
+   border: 2px solid #72BF7B;
+}
+
+.center{
+	text-align:center;
+}
+.right{
+	float: right;
+	text-align: right;
+}
+.left{
+	float: left;
+	text-align: left;
+}
+
+.right input,
+.right select,
+.right textarea,
+.right button,
+.left textarea,
+.left input,
+.left select,
+.left button,
+#facturas input,
+#facturas button{
+	width: 80%;
+	border-radius: 5px;
+	padding: 3px;
+	border: 1px solid #A9A;
+	text-align: left;
+	margin-bottom: 5px;
+}
+
+select#estado {
+	height: 27px;
+}
+
+.ladda-button {
+	background: #119EBB;
+}
+
+.ladda-button:hover {
+	background: #119EBB;
+}
+
+.ladda-button[disabled],
+.ladda-button[data-loading] {
+	background: #72BF7B;
+}
+
+.mensaje {
+	text-align: left;
+	color: #119EBB;
+	width: 80%;
+	margin: 20px auto;
+	border: 1px solid #119EBB;
+	border-radius: 5px;
+	background: #F5FEEE;
+	padding: 10px 25px;
+}
+
+.checkbox {
+	float: right;
+	width: 28px;
+	height: 28px;
+	background: rgba(248, 152, 34, .7);
+	margin: 0;
+	display: inline-block;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+
+	position: relative;
+}
+
+.checkbox label {
+	cursor: pointer;
+	position: absolute;
+	width: 20px;
+	height: 20px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	left: 4px;
+	top: 4px;
+
+	background: rgba(224,27,38,0.05);
+}
+
+.checkbox label:after{
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+	filter: alpha(opacity=0);
+	opacity: 0;
+	content: '';
+	position: absolute;
+	background: rgba(224,27,38,0.85);
+
+	width: 12px;
+	height: 12px;
+	top: 4px;
+	left: 4px;
+
+	-webkit-border-radius: 50px;
+	-moz-border-radius: 50px;
+	border-radius: 50px;
+	transition: opacity 500ms, left 500ms, top 500ms, width 500ms, height 500ms;
+	-webkit-transition: opacity 500ms, left 500ms, top 500ms, width 500ms, height 500ms;
+	-moz-transition: opacity 500ms, left 500ms, top 500ms, width 500ms, height 500ms;
+	-o-transition: opacity 500ms, left 500ms, top 500ms, width 500ms, height 500ms;
+}
+
+.checkbox label:hover::after, .checkbox input:hover + label::after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=30)";
+	filter: alpha(opacity=30);
+	opacity: 0.3;
+}
+
+.checkbox input {
+	position: absolute;
+	left: 5px;
+	top: 5px;
+	width: 18px;
+	height: 17px;
+	z-index: 2;
+	opacity: 0;
+	cursor: pointer;
+}
+
+.checkbox input:checked + label:after {
+	-ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+	filter: alpha(opacity=100);
+	opacity: 1;
+	width: 16px;
+	height: 16px;
+	top: 2px;
+	left: 2px;
+}
+
+#rfc {
+	-moz-user-select': -moz-none;
+	-moz-user-select: none;
+	-o-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+@media screen and (max-width: 46.5em) {
+	.column {
+		width: 100%;
+		min-width: auto;
+		min-height: auto;
+		padding: 2em;
+		font-size: 90%;
+	}
+
+	.column:first-child {
+		text-align: center;
+		box-shadow: inset 0 -1px 0 rgba(0,0,0,0.1);
+	}
+}
+
+@media screen and (max-width: 745px) {
+	div#notification-shape {
+		top: 50%;
+		margin-top: -100px;
+		left: 50%;
+		margin-left: -100px;
+	}
+
+	.small {
+		width: 100%;
+	}
+
+	.column.image {
+		padding: 0;
+		margin-bottom: 20px;
+	}
+
+	.formError .formErrorContent {
+		font-size: 1.25em;
+	}
+
+	.magnify {width: 90%; margin: auto; position: relative;}
+	.column p {
+		width: 100%;
+	}
+
+	#facturas input, .right input, .right select, .right textarea, .left textarea, .left input, .left select{
+		line-height: 2em;
+		font-size: 1.25em;
+		width: 100%;
+	}
+
+	.column {
+		padding: 0 2em 0;
+		min-height: 150px;
+	}
+
+	.column:first-child {
+		box-shadow: none;
+	}
+
+	.formError.inline {
+		float: left;
+		width: 100%;
+		margin-bottom: 5px;
+	}
+
+	select#estado {
+		height: 2em;
+	}
+
+	.row > div {
+		width: 100%;
+		margin-bottom: 15px;
+	}
+
+	.row:first-child {
+		padding-bottom: 0;
+	}
+
+	.row:last-child {
+		padding-top: 0;
+	}
+
+	.mensaje {
+		width: 90%;
+	}
+}
+
+@media screen and (max-width: 25em) {
+
+	.codrops-header h1 {
+		font-size: 2.5em;
+	}
+
+	.codrops-top a {
+		font-size: 1.6em;
+		border: 2px solid black;
+		border-color: initial;
+		padding: 0.5em;
+		border-radius: 3px;
+	}
+
+	.codrops-icon span {
+		display: none;
+	}
+
+}

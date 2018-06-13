@@ -1,0 +1,26 @@
+#set ($titlePage = "Monitoreo Turnos" )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tiemposmovimientos/MonitoreoTurnos.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/Tickets.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+	<script>		
+		 window.onload = init;		
+	</script>
+	
+<form name="frmMonitoreoTurnos" action="" method="post">
+    <input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table bgcolor="#F3E2A9" border="0"  align="center" style="width: 900px">
+	</table>
+	<div id="divProcesoTickets">						
+	</div>
+</form>
+<script>
+ 	monitoreoTurnos();
+</script>

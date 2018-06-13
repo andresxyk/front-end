@@ -1,0 +1,52 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/CambioFechaTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/TomaMuestraAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ( $titlePage = "Cambio Fecha Toma Muestra") 
+
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+#set ($intcExamen = $data.getParameters().getString('cExamen') )
+
+<form name="frmCambioFechaTomaMuestra">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="intkOrdenSucursal" name="intkOrdenSucursal" value="$!intkOrdenSucursal">	
+	<input type="hidden" id="intcExamen" name="intcExamen" value="$!intcExamen">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridConfirmacion"> 
+    	<table border="0" width="100%" class="tabla">
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Nueva Fecha de Toma de Muestra
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" name="txtNuevaFechaToma" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+		        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmCambioFechaTomaMuestra.txtNuevaFechaToma); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+		            <img alt='Seleccione una fecha' id="imgFechaNacimiento" border='0' src='$content.getURI('images/icono_calend.gif')' />
+		        </a>	
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Numero de Empleado
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoEmpleado" value="" STYLE="font-size: 30px;" onKeyPress="executaCambio();"  size="5" />
+    	    </td>     
+    	</table>               
+    </div> 
+</form>
+<script>
+	window.onload = init;			    		 
+	document.getElementById('txtNuevaFechaToma').focus();		    		 
+</script>	

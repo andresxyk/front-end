@@ -1,0 +1,23 @@
+#set ($titlePage = "Mostrar Turno" )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tiemposmovimientos/MonitoreoBitacora.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/MonitoreoBitacora.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<form name="frmMostrarBitacora" action="" method="post">
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">
+	<div id="gridmostrarBitacora"> 
+	</div> 
+</form>
+<script>
+ 	monitoreoBitacora();
+</script>

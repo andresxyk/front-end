@@ -1,0 +1,41 @@
+#set ($titlePage = "Envio Correo Marketing" )
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/marketing/enviocorreomarketing.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/CorreoPromociones.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ($lstSucursales = $CatalogosTool.obtenAll("Sucursal","0"))
+#set ($lstPromocionesMarketing = $CatalogosTool.obtenAll("PromocionMarketing","0"))
+
+<form name="frmEnvioCorreoMarketing" action="" method="post" >		
+    <table border="0"  align="center" style="width: 883px">
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Promocion
+    	    </td>     	                
+            <td style="width: 188px">
+            	<select id="selPromocion" style="width: 220px" >
+					#foreach($objPromocion in $lstPromocionesMarketing)
+						#option("$!objPromocion.getCpromocionenviomarketing()" "$!objPromocion.getSsubject()" "0")							
+					#end
+				</select>    	    
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Sucursal
+    	    </td>
+            <td style="width: 120px">
+            	<select id="selSucursal" style="width: 157px" >
+    				<option value="-1" selected>Todas Sucursales</option>
+					#foreach($objSucursal in $lstSucursales)
+						#option("$!objSucursal.getCsucursal()" "$!objSucursal.getSnombresucursal()" "0")							
+					#end
+				</select>    	    
+    	    </td>
+            <td>
+				<input type="button" id="idEnviaCorreoElectronico" name="idEnviaCorreoElectronico" value="Enviar Correo" onClick="envioCorreoPromocion();" class="boton">
+    	    </td>     
+        </tr>   
+    </table>	        
+</form>

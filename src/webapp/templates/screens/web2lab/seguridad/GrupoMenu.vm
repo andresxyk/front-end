@@ -1,0 +1,68 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
+<SCRIPT language="javaScript" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+$page.setTitle("Seguridad: Lista de Grupos del menu")  
+#set ($titlePage = "Grupos del Menu") 
+#set ( $strLigaActual = $link.setPage("web2lab,seguridad,GrupoMenu.vm"))
+#set ( $strLigaActual = $link.setAction("seguridad.BGrupoMenuAction").toString())
+#set ( $strCargarPagina  = $link.setPage("web2lab,seguridad,GrupoMenu_Form.vm").toString())
+#set($objGrupos = $CSeguridadTool.getGrupoMenu())
+<SCRIPT LANGUAGE="JavaScript">function goToURL() { window.location = "$strCargarPagina"; }</script>
+<form method="post" action="$strLigaActual" name="frmGrupoMenu">
+	<table width="100%" class="tabla">
+		<tr>
+       		<td>
+		    	#if($!bolModif == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de grupo exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El grupo: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
+				#end
+				#if($!bolModif == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de grupo fallida"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El grupo: $!strMensajeModif, Ya existe y no se actualiz&oacute;.</font></b>
+				#end	
+			</td>
+		</tr>
+		#if($objGrupos.size() == 0)
+		     <tr>
+       			<td>
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No existe resultados"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">No existen resultados para ese criterio de b&uacute;squeda</font></b>					
+				</td>
+			</tr>
+		#end
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+        <tr>
+            <td>
+           	    Grupo:
+            </td>
+            <td>
+                <input type="text" name="txtGrupoMenu" value="$!strGruMeVuel" onKeyUp="cambiaMay('frmGrupoMenu','txtGrupoMenu');">
+            </td>
+        </tr> 
+        <tr>
+            <td colspan="2">
+           	    <input type="checkbox" name="chkSeleccionaTodo">Buscar Todos
+            </td>           
+        </tr>
+        <tr>
+            <th align="left">Grupo</th>          
+            <th align="left">Acciones</th>          
+        </tr>
+		#foreach ( $objGrupo in $objGrupos)
+		    #set ( $strLigaDetalle = $link.setPage("web2lab,seguridad,GrupoMenu_Form.vm"))
+		    #set ( $strLigaDetalle = $link.addQueryData("strNombre",$objGrupo.getValue(2).asString()))
+		    #set ( $strLigaDetalle = $link.addQueryData("strModo","modify").toString())			    
+		    #if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+		        <tr class="$t">
+				    <td>$objGrupo.getValue(2).asString()
+				    </td>		          
+				    <td>
+					    <a href="$strLigaDetalle">Actualizar</a>			           
+					           
+					</td>		         
+				</tr>		         		            
+		#end		
+    </table>                 
+    <input type="submit" name="onSubmit_doPerform" value="Buscar" class="boton" onClick="return validaSeg('frmGrupoMenu','txtGrupoMenu','chkSeleccionaTodo');" />
+    <input type="button"  onClick="goToURL()" value="Crear Nuevo" class="boton">
+</form> 

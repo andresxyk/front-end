@@ -1,0 +1,399 @@
+<!DOCTYPE dwr PUBLIC
+    "-//GetAhead Limited//DTD Direct Web Remoting 1.0//EN"
+    "http://www.getahead.ltd.uk/dwr/dwr10.dtd">
+<dwr>
+  <allow>
+
+    <create creator="new" javascript="CorreoPromociones">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.marketing.CorreoPromocionesAjax"/>
+      <include method="envioPromocionEmail"/>            
+    </create>
+
+    <create creator="new" javascript="DatosCorteCaja">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosCorteCajaAjax"/>
+      <include method="guardarGasto"/>            
+    </create>
+    
+    <create creator="new" javascript="DatosReportesAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosReportesAjax"/>
+      <include method="createFileFOPOrden"/>            
+    </create>
+  
+    <create creator="new" javascript="DatosOrden">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosOrdenAjax"/>
+      <include method="setPago"/>            
+      <include method="consultaOrdenesGrid"/>            
+      <include method="consultaOrdenesCuestionarioGrid"/>            
+      <include method="getOrden"/>            
+      <include method="getOrdenFac"/>            
+      <include method="getOrdenTipo"/>            
+      <include method="getkPaciente"/>            
+      <include method="getOrdenbyAdmision"/>            
+      <include method="registraResultados"/>            
+      <include method="actualizarFechaCompromiso"/>            
+    </create>
+
+    <create creator="new" javascript="Tickets">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.tiemposmovimientos.TicketsAjax"/>
+      <include method="nuevoTicket"/>    
+      <include method="nuevoTicketZPL"/>        
+<!--      <include method="buscarTicketNuevos"/>    -->          
+      <include method="llamarTicket"/>            
+      <include method="buscarTicketLlamados"/>            
+      <include method="atendiendoTicket"/>            
+      <include method="atendidoTicket"/>            
+      <include method="cancelarTicket"/>            
+      <include method="buscarTicket"/>            
+      <include method="cerrarTicket"/>    
+      <include method="cerrarTicketAnteriores"/>        
+      <include method="buscarTicketNuevosHTML"/>            
+    </create>
+
+
+    <create creator="new" javascript="FacturacionAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.FacturacionDatosAjax"/>
+      <include method="validaOrden"/>
+      <include method="validaOrdenViaje"/>
+      <include method="sinViajeOrden"/>
+      <include method="enViajeOrdenNoFac"/>
+      <include method="getOrdenesNewViaje"/>
+      <include method="upFiltro"/>
+      <include method="upFiltroOrden"/>
+      <include method="upListaFacturar"/>
+      <include method="upMensajeFacSuc"/>
+      <include method="cerrarViaje"/>
+      <include method="buscarViaje"/>
+      <include method="reimprimirEtiquetasViaje"/>
+    </create>
+
+    <create creator="new" javascript="MantenimientoOrdenFacturacion">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.MantenimientoOrdenFacturacionAjax"/>
+    </create>
+
+    <create creator="new" javascript="CuentasxCobrarMayoreo">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.CuentasxCobrarMayoreoAjax"/>
+      <include method="pagoFactura"/>
+      <include method="getPagoFactura"/>
+      <include method="buscaFacturaFolio"/>
+      <include method="actualizarFactura"/>
+      <include method="reversarPago"/>
+      <include method="getCcliente"/>
+      
+    </create>
+
+    <create creator="new" javascript="ReportesExcel">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.ReportesExcelAjax"/>
+    </create>
+
+    <create creator="new" javascript="LaboratorioAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.laboratorio.LaboratorioAjax"/>
+      <include method="validaOrden"/>
+      <include method="sinViajeOrden"/>
+      <include method="getOrdenesNewViaje"/>
+      <include method="upFiltro"/>
+      <include method="upFiltroOrden"/>
+      <include method="upListaFacturar"/>
+      <include method="upMensajeFacSuc"/>
+      <include method="cerrarViaje"/>
+      <include method="buscarViaje"/>
+    </create>
+
+    <create creator="new" javascript="TomaMuestraAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.laboratorio.TomaMuestraAjax"/>
+      <include method="showOrdenesTomaMuestra"/>
+      <include method="inicioTomaMuestra"/>
+      <include method="terminoTomaMuestra"/>
+      <include method="cambioFechaTomaMuestra"/>
+      <include method="tomaMuestraPendiente"/>
+      <include method="tomarHoyMuestraPendiente"/>
+    </create>
+
+
+    <create creator="new" javascript="OrdenFacturarAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.sucursales.FacturarElectronicaSucursalAjax"/>
+    </create>
+
+    <create creator="new" javascript="ToolFacSucursalesAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.sucursales.ToolFacturarcionSucursalesAjax"/>
+    </create>
+
+    <create creator="new" javascript="FacturacionMayoreoAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.FacturarElectronicaMayoreoAjax"/>
+    </create>
+
+    <create creator="new" javascript="DatosExamen">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosExamenAjax"/>
+      <include method="newExamen"/>
+      <include method="persistentesExamenes"/>            
+      <include method="persistentesExamenesFac"/>            
+      <include method="altaOrdenExamenes"/>      
+      <include method="actualizaOrdenExamenes"/>      
+      <include method="eliminarExamen"/>      
+      <include method="cancelarExamen"/>                 
+      <include method="cancelarFactura"/>                 
+      <include method="newExamenOrden"/>                 
+      <include method="imprimeEtiquetasExamenes"/>       
+      <include method="imprimeEtiquetasExamenesLaboratorio"/>       
+      <include method="imprimeEtiquetasExamenesGabinetes"/>       
+      <include method="consultaExamenesGrid"/>                             
+      <include method="informacionExamenes"/>                             
+      <include method="guardarDatosAdicionales"/>                             
+      <include method="imprimeEtiquetaMuestra"/>                             
+    </create>
+
+    <create creator="new" javascript="CotizacionOrdenes">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.CotizacionOrdenesAjax"/>
+      <include method="guardarCotizacion"/>
+      <include method="consultaCotizacionesGrid"/>
+      <include method="expedientePacienteCotizacion"/>
+    </create>
+    
+    <create creator="new" javascript="DatosPaciente">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosPacienteAjax"/>
+      <include method="buscarPaciente"/>
+      <include method="buscarPacienteVitaMedica"/>
+      <include method="buscarPacienteMetroWebService"/>
+      <include method="consultaPacienteGrid"/>      
+      <include method="consultaPacienteConvenioGrid"/>
+      <include method="consultaPacienteGridNewFacturacion"/>    
+      <include method="actualizaPaciente"/>
+      <include method="ressetPasswordECE"/>
+      <include method="validaAutetificacion"/>
+    </create>
+
+    <create creator="new" javascript="PacienteMayoreo">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.mayoreo.PacienteMayoreoAjax"/>
+      <include method="buscarPacienteMetro"/>
+    </create>
+
+    <create creator="new" javascript="DatosPago">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosPagoAjax"/>
+      <include method="setPago"/>            
+      <include method="showOrdenesSinPago"/>            
+      <include method="setInicioTicket"/>            
+      <include method="setTerminoAtencionTicket"/>            
+    </create>
+
+    <create creator="new" javascript="ToolsAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.tools.ToolsAjax"/>
+      <include method="consultaDireccionGrid"/>                 
+      <include method="validaAutetificacion"/>
+    </create>
+
+    <create creator="new" javascript="DatosMedico">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosMedicoAjax"/>
+      <include method="validaAutetificacion"/>
+      <include method="consultaMedicosGrid"/>      
+      <include method="buscarMedico"/>      
+      <include method="buscarMedicoClave"/>      
+      <include method="buscarMedicoZona"/>            
+      <include method="buscarMedicoEspecialidad"/>            
+      <include method="actualizaMedico"/>            
+      <include method="actualizaCorreoElectronicoMedico"/>            
+      <include method="altaMedicoBasico"/>            
+      <include method="buscarMedicosOrdenes"/>            
+      <include method="cambiarMedicoOrden"/>            
+    </create>
+
+    <create creator="new" javascript="MedicosPuntos">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.medicos.puntos.MedicosPuntosAjax"/>
+      <include method="altRegaloMedicos"/>
+    </create>
+
+    <create creator="new" javascript="Puebla">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.puebla.PueblaAjax"/>
+      <include method="persistirCuestionario"/>
+      <include method="buscarCuestionario"/>
+      <include method="imprimirCuestionario"/>
+      <include method="persistirFormato"/>
+      <include method="buscarFormato"/>
+      <include method="imprimirFormato"/>
+    </create>
+
+    <create creator="new" javascript="DatosCuestionario">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosCuestionarioAjax"/>
+    </create>
+
+    <create creator="new" javascript="DatosCliente">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosClienteAjax"/>
+    </create>
+
+    <create creator="new" javascript="ViajeFacturacion">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.ViajeFacturacionAjax"/>
+      <include method="buscarViajeOrdenes"/>
+      <include method="buscarViajeOrdenesNewIndividual"/>
+      <include method="buscarViajeOrdenesNewPaciente"/>
+      <include method="levantarIncidenciaOrden"/>
+      <include method="levantarIncidenciaViaje"/>
+      <include method="actualizarOrdenesBatch"/>
+    </create>
+
+	<!-- Modificacion Bibiana 06112012 -->
+
+	<create creator="new" javascript="Facturacion">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.FacturacionAjax"/>
+      <include method="setRecalculo"/>
+    </create>
+    
+    <create creator="new" javascript="DatosAdicionales">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.DatosAdicionalesAjax"/>
+      <include method="ordenGrid"/>
+      <include method="pacienteGrid"/>
+      <include method="getDatoAdicional"/>
+      <include method="persistirDatoAdicional"/>
+    </create>
+    
+    <create creator="new" javascript="NotasdeCredito">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.NotasdeCreditoAjax"/>
+      <include method="getFacturasConvenio"/>
+      <include method="getFacturasConvenioAsignacion"/>
+      <include method="getFacturasConvenioElegidas"/>
+      <include method="getFacturasConvenioElegidasAsignacionBloque"/>
+      <include method="creaNota"/> 
+      <include method="asignarBloqueaFactura"/>
+      <include method="getCambioDeBloque"/>      
+    </create>
+    
+     <create creator="new" javascript="BusquedaFacturas">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.BusquedaFacturasAjax"/>
+      <include method="buscarFacturas"/>
+      <include method="buscarFacturaAjuste"/>
+    </create>
+    
+    <create creator="new" javascript="FacturaElectronicaEmpresaAjax">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.FacturaElectronicaEmpresasAjax"/>
+      <include method="eliminaPreciosActual"/> 
+      <include method="obtenerRfc"/> 
+      <include method="pruebaLog"/>
+      <include method="crearFacturaEmpresa"/>
+    </create>
+    
+     <create creator="new" javascript="MonitoreoBitacora">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.tiemposmovimientos.MonitoreoBitacoraAjax"/>
+    </create>
+    
+	<!-- Fin -->
+
+    <create creator="new" javascript="DatosFiscales">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.tool.DatosFiscalesAjax"/>
+    </create>
+
+    <create creator="new" javascript="DatosDiagnostico">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.capturaorden.DatosDiagnosticoAjax"/>
+    </create>
+  
+    <create creator="new" javascript="Seguridad">
+      <param name="class" value="mx.com.web2lab.ajax.dwr.seguridad.SeguridadAjax"/>
+      <include method="validaSesion"/>
+      <include method="getUser"/>
+    </create>
+    
+    <!-- Excepciones convertidas -->
+    <convert converter="bean" match="mx.com.web2lab.backend.util.exceptions.AjaxDwrException"/>
+    
+    <!-- Beans convertidos -->    
+    <!-- Fundacion -->    
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.ap.PacienteBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.ap.OrdenBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.ap.PagoPacienteBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.comer.MedicoBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.comer.ClienteBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.comer.ConvenioBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.comer.MetricasClieConBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.comer.PagoFacturaBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.facturacion.DatosFiscalesBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.facturacion.electronica.FacturaElectronicaBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.hbm.om.ap.medico.puntos.CRegalo"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.hbm.om.tiemposmovimientos.TTicketSucursal"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.puebla.CuestionarioPantallaBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.puebla.CuestionarioPantallaInterpretacionBean"/>
+    <convert converter="bean" match="mx.com.web2lab.backend.beans.facturacion.BuscarOrdenesViajeBean"/>
+    <convert converter="bean" match="org.apache.turbine.om.security.User"/>
+        
+  </allow>
+  <signatures>
+	  <![CDATA[
+	  import mx.com.web2lab.backend.util.beans.fundacion.BPacienteCuestionarioBean;
+	  import mx.com.web2lab.backend.util.beans.fundacion.BOrdenDiagFundacionBean;
+	  import mx.com.web2lab.backend.beans.ap.PacienteBean;
+	  import mx.com.web2lab.backend.beans.ap.OrdenBean;
+	  import mx.com.web2lab.backend.beans.ap.PagoPacienteBean;
+	  import mx.com.web2lab.backend.beans.comer.ClienteBean;
+	  import mx.com.web2lab.backend.beans.comer.ConvenioBean;
+	  import mx.com.web2lab.backend.beans.comer.MedicoBean;
+	  import mx.com.web2lab.backend.beans.comer.MetricasClieConBean;
+	  import mx.com.web2lab.backend.beans.comer.PagoFacturaBean;
+	  import mx.com.web2lab.backend.beans.facturacion.DatosFiscalesBean;
+	  import mx.com.web2lab.backend.beans.facturacion.electronica.FacturaElectronicaBean;
+	  import mx.com.web2lab.backend.hbm.om.ap.medico.puntos.CRegalo;
+	  import mx.com.web2lab.backend.beans.puebla.CuestionarioPantallaBean;
+	  import mx.com.web2lab.backend.beans.puebla.CuestionarioPantallaInterpretacionBean;
+	  import mx.com.web2lab.backend.beans.facturacion.BuscarOrdenesViajeBean;
+	  import org.apache.turbine.om.security.User;
+	  
+	  DatosCuestionarioAjax.consultaCuestionario(BPacienteCuestionarioBean objCuestionarioRequest);
+	  DatosCuestionarioAjax.guardaCuestionario(BPacienteCuestionarioBean objCuestionarioRequest);
+	  DatosDiagnosticoAjax.consultaDiagnostico(BOrdenDiagFundacionBean objDiagnosticoRequest);
+	  DatosDiagnosticoAjax.guardaDiagnostico(BOrdenDiagFundacionBean objDiagnosticoRequest);	  
+	  DatosPacienteAjax.consultaPacienteGrid(PacienteBean objPacienteBean);
+	  DatosPacienteAjax.consultaPacienteConvenioGrid(PacienteBean objPacienteBean);
+	  DatosPacienteAjax.consultaPacienteGridNewFacturacion(PacienteBean objPacienteBean);
+	  DatosPacienteAjax.actualizaPaciente(PacienteBean objPacienteBean);
+	  DatosPacienteAjax.buscarPaciente(PacienteBean objPacienteBean);
+	  DatosPacienteAjax.buscarPacienteVitaMedica(PacienteBean objPacienteBean);
+	  DatosAdicionalesAjax.ordenGrid(OrdenBean objOrdenBean);
+	  DatosAdicionalesAjax.pacienteGrid(PacienteBean objPacienteBean);	  
+	  DatosClienteAjax.buscarCliente(ClienteBean objClienteBean);
+	  DatosClienteAjax.buscarClienteVentas(ClienteBean objClienteBean);
+	  DatosClienteAjax.buscarClienteCxC(ClienteBean objClienteBean);
+	  DatosClienteAjax.antiguedadSaldosCxC(String strNoSe);
+	  DatosClienteAjax.buscarClientes(ClienteBean objClienteBean);
+	  DatosClienteAjax.actualizaCliente(ClienteBean objClienteBean);
+	  DatosClienteAjax.actualizaConvenio(ConvenioBean objConvenioBean);
+	  DatosClienteAjax.actualizaConvenioPasswordECE(ConvenioBean objConvenioBean);
+	  DatosClienteAjax.buscarConvenios(ConvenioBean objConvenioBean);
+	  DatosClienteAjax.buscarConvenio(ConvenioBean objConvenioBean);
+	  DatosClienteAjax.buscarConvenioExamen(ConvenioBean objConvenioBean,String strExamenes,int intTypeBusqueda);
+	  DatosClienteAjax.buscarConvenioExamenAdministrador(ConvenioBean objConvenioBean,String strExamenes);
+	  DatosClienteAjax.buscarConveniosOrdenes(ConvenioBean objConvenioBean,String strFechaInicio, String strFechaTermino);	  
+	  DatosClienteAjax.buscarOrdenesConvenioPaciente(ConvenioBean objConvenioBean,String strFechaInicio, String strFechaTermino, int kPaciente);	  
+	  DatosClienteAjax.buscarOrdenesConvenioECE(ConvenioBean objConvenioBean,String strFechaInicio, String strFechaTermino, int kPaciente);	  
+	  DatosClienteAjax.buscarOrdenesSucursalECE(int cSucursal,String strFechaInicio, String strFechaTermino, int kPaciente, int uFechaRegistro);	  
+	  DatosClienteAjax.estatusAltas();	  
+	  DatosClienteAjax.showEstadistica(int uTipoControl);	  
+	  DatosClienteAjax.altaPorcentajeClasificacionConvenio(int uConvenio,int uClasificacion, double pDescuento);	  
+	  DatosClienteAjax.altaPorcentajeExamenConvenio(int uConvenio,int uExamen, double pDescuento);	  
+	  DatosClienteAjax.actualizarPorcentajeExamenConvenio(int kConvenioDetalle,int uConvenio,int uExamen, double pDescuento);	  
+	  DatosClienteAjax.eliminarExamenConvenio(int kConvenioDetalle,int uConvenio,int uExamen, double pDescuento);	  
+	  DatosClienteAjax.actualizarPorcentajeClasificacionConvenio(int kClasificacion,int uConvenio,int uClasificacion,double pDescuento);	  
+	  DatosClienteAjax.buscarViajeOrdenes(int kviajesucursal);	  
+	  DatosClienteAjax.buscarFacturacionOrden(int kadmision);	  
+	  DatosMedicoAjax.actualizaMedico(MedicoBean objMedicoBean);
+	  DatosMedicoAjax.buscarMedicosOrdenes(MedicoBean objMedicoBean,String strFechaInicio, String strFechaTermino);
+	  PueblaAjax.persistirCuestionario(CuestionarioPantallaBean objCuestionarioPantallaBean);
+	  PueblaAjax.buscarCuestionario(CuestionarioPantallaBean objCuestionarioPantallaBean);
+	  PueblaAjax.imprimirCuestionario(CuestionarioPantallaBean objCuestionarioPantallaBean);
+	  PueblaAjax.persistirFormato(CuestionarioPantallaInterpretacionBean objCuestionarioPantallaInterpretacionBean);
+	  PueblaAjax.buscarFormato(CuestionarioPantallaInterpretacionBean objCuestionarioPantallaInterpretacionBean);
+	  PueblaAjax.imprimirFormato(CuestionarioPantallaInterpretacionBean objCuestionarioPantallaInterpretacionBean);
+	  MedicosPuntosAjax.altRegaloMedicos(CRegalo objRegalo);
+	  DatosOrdenAjax.setPago(PagoPacienteBean objPago);
+	  DatosFiscalesAjax.showDatosFiscales(DatosFiscalesBean objDatosFiscalesBean);
+	  DatosFiscalesAjax.crearDatosFiscales(DatosFiscalesBean objDatosFiscalesBean, int intUser);
+	  DatosFiscalesAjax.crearDatosFiscalesFacturacionElectronicaInternet(DatosFiscalesBean objDatosFiscalesBean, int intUser);
+	  DatosFiscalesAjax.getOneDatoFiscal(DatosFiscalesBean objDatosFiscalesBean);	  
+	  FacturarElectronicaSucursalAjax.crearOrdenFacturarElectronica(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico);
+	  FacturarElectronicaSucursalAjax.crearOrdenFacturar(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico);
+	  CuentasxCobrarMayoreoAjax.pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago);
+	  CuentasxCobrarMayoreoAjax.getPagoFactura(int kFactura);	  
+	  CuentasxCobrarMayoreoAjax.buscaFacturaFolio(int cFolio);	  
+	  SeguridadAjax.getUser(String username);
+	  ViajeFacturacionAjax.buscarViajeOrdenes(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);
+	  ViajeFacturacionAjax.buscarViajeOrdenesNewIndividual(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);
+	  ViajeFacturacionAjax.buscarViajeOrdenesNewPaciente(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean,int kpaciente);
+	  ViajeFacturacionAjax.levantarIncidenciaOrden(int kadmision,int cincidencia,int UserId);
+	  ViajeFacturacionAjax.levantarIncidenciaViaje(int kviaje,int cincidencia,int UserId);	  
+	  ViajeFacturacionAjax.actualizarOrdenesBatch(String strAcciones,String strBloques);	  
+	  ]]>
+	</signatures>
+</dwr>

@@ -1,0 +1,22 @@
+#set ($searchLnk = $link.setPage("helice,SearchResults.vm").toString())
+
+  <div id="breadcrumbs">
+   <table border="0" cellspacing="0" cellpadding="4" width="100%">
+    <tr>
+     <td>
+
+     </td>
+     <td>
+     <!--
+      <div id="search" align="right">
+       <form action="$searchLnk" method="get">
+        $l10n.SITE_SEARCH:
+        <input type="text" name="query" size="10" />
+        <input type="submit" name="Button" value="Go" />-->
+       </form>
+      </div>
+     </td>
+    </tr>
+   </table>
+  </div>
+

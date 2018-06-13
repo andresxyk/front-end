@@ -1,0 +1,136 @@
+<SCRIPT language="javascript" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+#set ( $titlePage = "Consulta Examenes/Perfiles/Paquetes" )
+#set ( $cotizacion = $BCotizadorTool.getCotizacionAplicada())
+#set ( $strLigaActual = $link.setPage("proa2milv2,capermor,examenes,ConsultaExamenPerfil.vm").toString())
+#set ( $strLigaBack = $link.setPage("proa2milv2,capermor,ordenes,CapturaOrden.vm").toString())
+#set ( $txtNombre = $data.getParameters().getString('txtNombre', ''))
+#set ( $txtCodigo = $data.getParameters().getString('txtCodigo', ''))
+#set ( $txtMnemonico = $data.getParameters().getString('txtMnemonico', ''))
+#set ( $cunidad = $data.getSession().getAttribute("strIdUnidadActual"))
+#set ( $clab = $data.getSession().getAttribute("strIdCLab"))
+#if(($txtNombre && $txtNombre!="") || ($txtCodigo && $txtCodigo!=""))
+	#set($objLista = $BCotizadorTool.getExamenesPerfiles())
+#end
+<SCRIPT language="javascript" for=window event=onload>
+	window.frmConsExamen.txtCodigo.focus();
+</SCRIPT>
+<form name="frmConsExamen" method="post" action="$strLigaActual" >
+<input type="hidden" name="hdnCLaboratorio" value="$!clab">
+<table border="0" width="100%" class="tabla" border="0">
+	<tr>
+		<td>
+		#if(($txtNombre && $txtNombre != "") || ($txtCodigo && $txtCodigo != ""))  
+			#if(!$objLista || $objLista.size()==0)							
+				<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="busqueda inv&aacute;lida"/>&nbsp;&nbsp;
+				<b><font color="$ff0030" aling="center">No existen resultados para el criterio de b&uacute;squeda</font></b>				
+			#end
+		#end
+		</td>
+	</tr>
+	<tr>
+		<td>
+        	<table border="0" width="100%" class="tabla" border="0">
+        		<tr>
+        			<td align="right"><b>C&oacute;digo:</b></td>
+        			<td><input type="text" name="txtCodigo" value="$!txtCodigo" size="20"></td>
+        		</tr>
+        		<tr>
+        			<td align="right"><b>Nombre:</b></td>
+        			<td><input type="text" name="txtNombre" value="$!txtNombre"  onKeyPress="mayuscula();" size="50"></td>
+        		</tr>
+        		<tr>
+        			<td align="right"><b>Nem&oacute;nico:</b></td>
+        			<td><input type="text" name="txtMnemonico" value="$!txtMnemonico" onKeyPress="mayuscula();" size="20"></td>
+        		</tr>	
+        		<tr>
+        			<td></td>
+        			<td colspan="2">
+        				<input type="submit" name="eventSubmit_doBuscar" value="Buscar" class="boton" style="width:100px">
+        				<input type="button" name="cotizar" value="Regresar" class="boton" style="width:100px" onclick="location.href='$!strLigaBack'">
+        			</td>
+        		</tr>
+        	</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+    	<table class="tabla" width="100%" border="0">
+    		#if($objLista && $objLista.size()>0)
+    		<tr>
+    			<th onclick="desplegar('tabla1', 'tabla', 'table');return false;" onmouseover="this.style.cursor='hand'" onmouseout="this.style.cursor='default'"><a href="" onclick="return false;">VER EXAMENES</a></th>
+    			<th onclick="desplegar('tabla2', 'tabla', 'table');return false;" onmouseover="this.style.cursor='hand'" onmouseout="this.style.cursor='default'"><a href="" onclick="return false;">VER PERFILES</a></th>
+    		</tr>
+    		#end
+    	</table>
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#if($!objLista && $!objLista.size()>0)	
+			<!-- seccion de examenes -->
+			<table id="tabla1" width="100%" class="tabla" border="0" style="display:block">
+				<tr><td>
+					<tr><th colspan="6">Examenes</th></tr>
+					<tr>
+						<th>C&oacute;digo</th>
+    					<th>Examen</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>	
+					#foreach($objExamen in $objLista)
+						#if($objExamen.isPerfil().toString()=="false")
+     						#set ( $cexamen = $!objExamen.getcExamen())
+     						#set ( $sexamen = $!objExamen.getsExamen())
+    						#set ( $clabexamen= $!objExamen.getcLaboratorioExamen() )
+     						#if ( $t == "azul2") #set ( $t = "azul") #else #set($t = "azul2") #end
+     						<tr class="$t">
+    							<td>$!cexamen</td>
+    							<td>$!sexamen</td>
+    							#set ( $strLigaCot = $link.setPage("proa2milv2,carpermor,ordenes,CapturaOrden.vm").addQueryData("txtCodigoCotizar","$!cexamen").toString())
+         						#set ( $strLigaPerf = $link.setPage("proa2milv2,chopo,MostrarPerfiles.vm").addQueryData("cexamen","$cexamen").addQueryData("sexamen","$sexamen").addQueryData("clab","$clab").toString())
+    							<td align="center"><a href="$strLigaCot" title="Cotizar Examen">Cotizar</a></td>
+    							<td align="center"><a href="" onclick="abrirVentana('$strLigaPerf','perfiles');return false;" title="Ver Perfiles">Perfiles</a></td>
+    						</tr>
+						#end
+					#end
+				</td></tr>
+			</table>
+			#end
+		</td>
+	</tr>
+	<tr>
+		<td>
+			#if($!objLista && $!objLista.size()>0)
+			<!-- seccion de perfiles -->
+			<table id="tabla2" width="100%" class="tabla" border="0" style="display:block">
+				<tr><td>
+					<tr><th colspan="6">Perfiles</th></tr>
+					<tr>
+						<th>C&oacute;digo</th>
+    					<th>Perfil</th>
+						<th>&nbsp;</th>
+						<th>&nbsp;</th>
+					</tr>	
+					#foreach($perfil in $objLista)
+						#if($perfil.isPerfil().toString()=="true")
+     						#set ( $cperfil = $!perfil.getcExamen())
+     						#set ( $sperfil = $!perfil.getsExamen())
+    						#set ( $clabexamen= "$!perfil.getcLaboratorioExamen()" )
+     						#if ( $t == "azul2") #set ( $t = "azul") #else #set($t = "azul2") #end
+     						<tr class="$t">
+    							<td>$!cperfil</td>
+    							<td>$!sexamen</td>
+        						#set ( $strLigaCot = $link.setPage("proa2milv2,chopo,Cotizador.vm").addQueryData("cPerfil","$!cperfil").toString())
+         						#set ( $strLigaPerf = $link.setPage("proa2milv2,chopo,MostrarExamenes.vm").addQueryData("cperfil","$!cperfil").addQueryData("sperfil","$!sperfil").addQueryData("clab","$!clab").toString())
+    							<td align="center" onclick="javascript:location.href='$strLigaCot'"><a href="" onclick="return false;" title="Cotizar Perfil">Cotizar</a></td>
+    							<td align="center"><a href="" onclick="abrirVentana('$strLigaPerf','examenes');return false;" title="Ver Examenes">Examenes</a></td>
+    						</tr>
+						#end
+					#end
+				</td></tr>
+			</table>
+			#end
+		</td>
+	</tr>
+</table>
+</form>

@@ -1,0 +1,121 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/cxc/ReporteFacturasPagos.js")"></script>
+
+#set ( $titlePage = "Reporte de Facturas y Pagos") 
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
+
+#set ($lstConvenios = $CatalogosTool.obtenAll("Convenio","691"))
+
+
+<form name="frmReportesPagoFactura" method="post" action="$strLigaActual" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridRegistroPago"> 
+    	<table border="0" width="100%" class="tabla">
+    		<tr>
+    			<td>
+    				<b>Fecha Inicio:</b> 				
+    			</td>
+    			<td>
+    				<b>Fecha Final:</b> 				
+    			</td>
+    		</tr>
+            <tr>
+    	        <td>
+                    <input type="text" name="txtFechaInicio" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);validafechafrm(document.frmReportesPagoFactura.txtFechaInicio);" onFocus="javascript:validafechafrm(document.frmReportesPagoFactura.txtFechaInicio);" />		
+    		        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmReportesPagoFactura.txtFechaInicio); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+    		            <img alt='Seleccione una fecha' id="imgFechaDeposito" border='0' src='$content.getURI('images/icono_calend.gif')' />
+    		        </a>	
+    			</td>			
+    	        <td>
+                    <input type="text" name="txtFechaFinal" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);validafechafrm(document.frmReportesPagoFactura.txtFechaFinal);" onFocus="javascript:validafechafrm(document.frmReportesPagoFactura.txtFechaFinal);" />		
+    		        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmReportesPagoFactura.txtFechaFinal); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+    		            <img alt='Seleccione una fecha' id="imgFechaDeposito" border='0' src='$content.getURI('images/icono_calend.gif')' />
+    		        </a>	
+    			</td>			
+    		</tr>
+    		<tr>
+                <td>Convenio: 
+                    <select id="selConvenios" style="width: 500px">
+    					<option value="0">Todos los Convenios</option>
+    					#foreach($objConvenio in $lstConvenios)
+    						<option style="font-size:16;font-weight: bold" value="$!objConvenio.getCconvenio()" >$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()</option>
+    					#end
+    	            </select>						
+        	    </td>     
+    			<td>Tipo Reporte
+                    <select id="selTipoReporte" style="width: 60px">
+    					<option value="1">PDF</option>
+    					<option value="0">Excel</option>
+    	            </select>						
+    			</td>
+    		</tr>	
+    		
+    	</table>  
+		<table border="0" width="100%" class="tabla">
+			<tr>
+    			<td>
+					Facturas
+				</td>
+				<td>
+					Notas
+				</td>	
+				<td>
+					Pagos
+				</td>
+				<td>
+					Pendientes Sucursal
+				</td>
+				<td>
+					Pendientes Facturación
+				</td>
+				<td>
+					Refacturaciones
+				</td>
+			</tr>
+			<tr>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repFacturas('$ligaReporte','ReportesFacturas');">
+    		            <img alt='Reporte Facturas - PDF' id="idReporteFacturas" width="50" height="50" border='0' src='$content.getURI('images/icoFactura.png')' />
+    		        </a>							
+        	    </td>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repNotas('$ligaReporte','ReportesNotas');">
+    		            <img alt='Reporte Notas - PDF' id="idReporteNotas" width="50" height="50" border='0' src='$content.getURI('images/icoNota.jpg')' />
+    		        </a>							
+        	    </td>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repPagos('$ligaReporte','ReportesPagos');">
+    		            <img alt='Reporte Pagos - PDF' id="idReportePagos" width="50" height="50" border='0' src='$content.getURI('images/icoPagos.png')' />
+    		        </a>							
+    			</td>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repPendienteSucursal('$ligaReporte','ReportesPendienteSucursal');">
+    		            <img alt='Reporte Pendiente Sucursal - PDF' id="idReportePendienteSucursal" width="50" height="50" border='0' src='$content.getURI('images/icoRecibo.jpg')' />
+    		        </a>							
+    			</td>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repPendienteFacturacion('$ligaReporte','ReportesPendienteFacturacion');">
+    		            <img alt='Reporte Pendiente Facturacion - PDF' id="idReportePendienteFacturacion" width="50" height="50" border='0' src='$content.getURI('images/icoRecibo.jpg')' />
+    		        </a>							
+    			</td>
+				<td>
+    		        <a href="javascript:doNothing()" onclick="javascript:repRefacturas('$ligaReporte','ReportesRefaacturas');">
+    		            <img alt='Reporte Refacturas - PDF' id="idReporteRefacturas" width="50" height="50" border='0' src='$content.getURI('images/icoFactura.png')' />
+    		        </a>							
+        	    </td>
+			</tr>
+		</table>
+    </div> 
+</form> 

@@ -1,0 +1,124 @@
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/EditaRolUsuario.js")"></SCRIPT> 
+#set ( $IdUsuario = $data.getParameters().getString("txtIdUsuario"))
+#set ( $NombreUsuario = $data.getParameters().getString("txtNombreUsuario"))
+#set ( $GrupoUsuario = $data.getParameters().getString("txtGroupId"))
+#set ( $RolUsuario = $data.getParameters().getString("txtRoleId"))
+#set ( $strLigaRegresar  = $link.setPage("web2lab,seguridad,Usuarios.vm").toString())
+#set ($strLigaActual  = $link.setPage("web2lab,seguridad,AsignaRolUsuario.vm"))
+#set ($strLigaActual  = $link.setAction("seguridad.BUserAction").toString())
+
+<script>
+function validaSelect(select)
+{
+	
+	if(select.value == "")
+	{
+		alert('Seleccione un grupo por favor.');
+		return false;
+	}
+	else
+	{
+		return true;
+	}	
+}
+</script>
+
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/EditaRolUsuario.js")"></SCRIPT> 
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/web2lab/IsDate.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+
+<form name="frmEditaRolUsuario" method="post" action="$strLigaActual" onsubmit='selectAll("frmEditaRolUsuario","cboRolesAsig","cboRolesSinAsig");'>
+	<input type="hidden" name="hdnIdUsuario" value="$IdUsuario">
+	<input type="hidden" name="hdnNombreUsuario" value="$NombreUsuario" >
+	<input type="hidden" name="hdnGrupoUsuario" value="$GrupoUsuario" >
+	<input type="hidden" name="hdnRolUsuario" value="$RolUsuario" >
+	 <table class="tabla" width="100%">
+		<tr>
+			<td align="left" colspan="3">
+		       		#if($bolActualizado)
+						<img align="middle" src="$content.getURI('images/icon_success_sml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="blue" aling="center">&nbsp;Se ha actualizado con éxito¡¡</font></b>
+					#else
+						&nbsp;
+					#end	
+			</td>		
+		</tr>
+			<tr>
+				<td>
+					<b>El Usuario $!NombreUsuario tiene el rol de :</b>
+					#foreach($objAsignadoRol in $CSeguridadTool.getRolesAsignados("$NombreUsuario"))
+						<option value="$objAsignadoRol.GroupId">$objAsignadoRol.Name</option>
+						<input type="hidden" name="hdnUnidadOrigen" value="$objAsignadoGrupo.Name" >
+				    #end
+				</td>
+			</tr>
+		<tr>
+			<td align="center">
+				<b>Roles</b>
+			</td>
+			<td align="center">
+				&nbsp;
+			</td>
+			<td align="left">
+				<b>Nuevo Rol</b>
+			</td>
+		</tr>						
+		<tr>
+			<td  colspan="3"></td>	
+		</tr>		
+		<tr>
+			<td align="center">		
+				<select name="cboRolesSinAsig" size="10">
+					#foreach($objRol in $CSeguridadTool.getRolesNoAsignados("$NombreUsuario"))
+						<option value="$objRol.GroupId">$objRol.Name</option>
+					#end					
+				</select>
+			</td>
+			<td align="center">
+				<table border="0" class="tabla" width="100%">
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdAsigna" value=" << " class="boton" onclick='return editaRoles("frmEditaRolUsuario","cboRolesAsig","cboRolesSinAsig");'>
+						</td>
+					</tr>
+					<tr>
+						<td align="center">
+							<input type="button" name="cmdElimina" value=" >> " class="boton" onclick='return editaRoles("frmEditaRolUsuario","cboRolesSinAsig","cboRolesAsig");'>
+						</td>
+					</tr>								
+				</table>
+			</td>
+			<td >
+				<select name="cboRolesAsig" size="10" multiple>											
+				</select>					
+			</td>
+		</tr>
+		<tr>&nbsp;</tr>
+		<tr>&nbsp;</tr>
+		<tr>
+			  <td>
+				<b>Fecha inicial:</b>&nbsp; 
+				<input type="text" name="txtini" size="12"  style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+				<a href="javascript:doNothing()" onClick="javascript:setDateField(document.frmEditaRolUsuario.txtini);
+					top.newWin =  ventanaNormal('$content.getURI('javascript/web2lab/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+				<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>
+			   </td>
+				
+			   <td>
+				<b>Fecha final:</b>&nbsp;
+				<input type="text" name="txtfin" size="12"  style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+				<a href="javascript:doNothing()" onClick="javascript:setDateField(document.frmEditaRolUsuario.txtfin);
+					top.newWin =  ventanaNormal('$content.getURI('javascript/web2lab/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+				<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>
+				
+			   </td>
+			   <td>
+				<input type="submit" name="eventSubmit_doEditarol" value="Actualizar" class="boton">
+				<input type="button" name="cmdCancelar" value="Regresar" class="boton" onclick="location.href='$strLigaRegresar'">
+			  </td>				
+		</tr>
+				
+	 </table>	 
+		
+</form>

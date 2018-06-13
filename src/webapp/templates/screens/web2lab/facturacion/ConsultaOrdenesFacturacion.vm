@@ -1,0 +1,232 @@
+#set ($titlePage = "Consulta de Ordenes" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/RecepcionViajeFacturacion.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ViajeFacturacion.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+
+
+#if($intkPaciente)
+       <script>            
+            DatosPaciente.buscarPaciente('$intkPaciente','','','',buscarPaciente_CallBack);          
+       </script>    
+#end
+
+
+<script>
+              window.onload = init;            
+           
+              
+              function buscarOrden(){
+                    limpiaPantalla();
+            var frmPantalla = window.document.frmDatosOrdenFundacion;
+                    var motivo = "";            
+                    motivo = prompt("Cual es la orden a buscar?", "");
+                    if ((motivo != "") && (motivo != null)) {
+                     DatosOrden.getkPaciente(frmPantalla.IdSucursalActual.value,motivo,getkPaciente_CallBack);
+              } else {
+                    alert("Se requiere un numero de orden, no puedo proceder con la busqueda!!!!");
+              }
+              }                           
+              
+              function getkPaciente_CallBack(data) {
+                    DatosPaciente.buscarPaciente(data,buscarPaciente_CallBack);        
+              }
+</script>    
+#set($ligaDaosOrden = $link.setPage("web2lab,tool,ConsultaOrdenDetalles.vm").toString())
+#set ($lstConvenios = $CatalogosTool.obtenAll("Convenio","691"))
+#set ($lstSucursales = $CatalogosTool.obtenAll("Sucursal","0"))
+
+<form name="frmConsultaOrdenes" method="post" >       
+       <input type="hidden" id="ligaDatosOrden" name="ligaDatosOrden" value="$!ligaDaosOrden">       
+       <input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">  
+    <table border="0"  align="center" width="100%">
+           <th>
+           </th>     
+        <tr>
+            <td>
+               <center>
+                    <input type="button" name="agregar" value="Limpia Pantalla" onClick="limpiaPantalla();" class="boton">
+                </center>
+           </td>                           
+       </tr>   
+    </table>         
+    <table border="0"  align="center" width="100%">
+        <tr>
+           <th colspan="6">
+               <center>
+                   <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Busqueda por Datos del Paciente</b>
+                </center>
+           </th>     
+       </tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Apellido Paterno
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Apellido Materno
+           </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Nombre(s)
+           </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">                
+           </td>     
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                <input type="text" id="txtApellidoPaterno" name="txtApellidoPaterno" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaOrdenes);" size="35"/>
+           </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                <input type="text" id="txtApellidoMaterno" name="txtApellidoMaterno" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaOrdenes);"  size="35" />
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                <input type="text" id="txtNombre" name="txtNombre" onKeyPress="mayuscula();" onkeyup="consultaPacienteGrid(window.document.frmConsultaOrdenes);" size="35" />
+           </td>     
+            <td>
+           </td>     
+        </tr>   
+    </table>         
+    <table   border="0" class="tabla" width="100%">  
+       <tr><th colspan="4">Consulta - Seleccione el Rango de Fechas</th></tr>
+             <tr>
+                    <td><b>Desde:</b><br><input type="text" name="txtDeFecha" 
+                                  #if($!fechaDesde != "") 
+                           value="$!fechaDesde" 
+                    #else
+                           value="$CatalogosTool.getFecha()"
+                    #end
+                                  size="13" onChange="javascript:this.value=validaFormatoFecha(this.value);">
+                           <a href="javascript:doNothing()" onClick="javascript:setDateField(document.frmConsultaOrdenes.txtDeFecha);top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')" align="bottom">
+                           <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>                            
+                    </td>
+                    <td><b>Hasta:</b><br><input type="text" name="txtAFecha" 
+                                  #if($!fechaHasta != "")
+                           value="$!fechaHasta"
+                    #else 
+                           value="$CatalogosTool.getFecha()"
+                    #end
+                                  size="13" onChange="javascript:this.value=validaFormatoFecha(this.value);">
+                           <a href="javascript:doNothing()" onClick="javascript:setDateField(document.frmConsultaOrdenes.txtAFecha);top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')" align="bottom">
+                           <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>
+                    </td>
+                           <td>Estado Registro-Consulta
+                                  <select id="selEstadoRegistroConsulta" style="width: 110px"> 
+                                  <option value="0" selected>TODOS</option>
+                                  <option value="28">CERRADO</option>
+                                  <option value="36">RECIBIDA</option>
+                                  <option value="37">LISTA FACTURAR</option>
+                                  <option value="38">RETENIDA</option>
+                                  <option value="48">NO FACTURABLE</option>
+                                  <option value="54">CAPTURA_PUEBLA</option>
+                                  <option value="56">INTERPRETADA_PUEBLA</option>
+                                  <option value="57">FACTURAR_PUEBLA</option>
+                         </select>                                                                                      
+                           </td>
+                    </tr>
+       </table>
+    <table border="0"  align="center" width="100%">
+             <tr>
+            <td style="width: 187px">CONVENIO: 
+                <select id="selConvenios" style="width: 600px">
+                                  <option value="0">Seleccionar</option>
+                                  #foreach($objConvenio in $lstConvenios)
+                                        <option style="font-size:16;font-weight: bold" value="$!objConvenio.getCconvenio()" >$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()</option>
+                                  #end
+                   </select>                                       
+           </td>     
+             </tr>  
+             <tr>
+            <td style="width: 187px">SUCURSAL
+                <select id="selSucursales" style="width: 600px">
+                                  <option value="0">Seleccionar</option>
+                                  #foreach($objSucursal in $lstSucursales)
+                                        <option style="font-size:16;font-weight: bold" value="$!objSucursal.getCsucursal()" >$!objSucursal.getSnombresucursal()  -  $!objSucursal.getCsucursal()</option>
+                                  #end
+                   </select>                                       
+           </td>     
+             </tr>  
+    </table>         
+    <table border="0"  align="center" style="width: 1000px">
+        <tr>
+           <th colspan="6">
+               <center>
+                   <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Busqueda por Viaje</b>
+                </center>
+           </th>     
+       </tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Numero del Viaje
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Numero Consecutivo
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                           Factura
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                           Actualizacion Rapida (Estado -  Bloque)
+           </td>                           
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+           </td>                           
+        </tr>   
+        <tr>
+                    <td style="width: 187px">
+                <input type="text" id="txtViaje" name="txtViaje" value="0" onKeyPress="numero();cleanTextAdmision();cleanTextFactura();buscarOrdenesTeclado();" size="6" maxlength="12" />
+           </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                <input type="text" id="txtAdmision" name="txtAdmision" value="0" onKeyPress="numero();cleanTextViaje();cleanTextFactura();buscarOrdenesTeclado();" size="8" maxlength="12" />
+           </td>                           
+            <td style="width: 187px">
+                <input type="text" id="txtFactura" name="txtFactura" value="0" onKeyPress="numero();cleanTextViaje();cleanTextAdmision();buscarOrdenesTeclado();" size="8" maxlength="12" />
+           </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">                   
+                                  <select id="selActualiza" style="width: 110px"> 
+                                  <option value="0">NO ACTUALIZAR</option>
+                                  <option value="36">RECIBIDA</option>
+                                  <option value="37">LISTA FACTURAR</option>
+                                  <option value="38">RETENIDA</option>
+                         </select>                                                     
+                       <select id="selGrupo" style="width: 80px">
+                                      <option value="0">Seleccionar</option>
+                                  <option value="1">1</option>
+                                  <option value="2">2</option>
+                                  <option value="3">3</option>
+                                  <option value="4">4</option>
+                                  <option value="5">5</option>
+                                  <option value="6">6</option>
+                                  <option value="7">7</option>
+                                  <option value="8">8</option>
+                                  <option value="9">9</option>
+                                  <option value="10">10</option>
+                                  <option value="11">11</option>
+                                  <option value="12">12</option>
+                                  <option value="13">13</option>
+                                  <option value="14">14</option>
+                                  <option value="15">15</option>
+                                  <option value="16">16</option>
+                                  <option value="17">17</option>
+                                  <option value="18">18</option>
+                                  <option value="19">19</option>
+                                  <option value="20">20</option>
+                         </select>                                       
+           </td>                                             
+            <td>
+                           <input type="button" id="idBuscarOrdenes" name="idBuscarOrdenes" value="Buscar" onClick="buscarOrdenes();" class="boton">
+           </td>     
+        </tr>   
+    </table>         
+       <div id="Busqueda">
+       </div>
+       <div id="OrdenesBusqueda">
+       </div>
+</form>

@@ -1,0 +1,93 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<script language="JavaScript" src="$content.getURI("javascript/seguridad/validaseguridad.js")"></script>  
+$page.setTitle("Seguridad: Lista de grupos")   
+#set ($strLigaAct = $link.setPage("web2lab,seguridad,Grupos.vm"))
+#set ( $strLigaAct  = $link.setAction("seguridad.BGrupoAction").toString())
+#set ($strCargaPag = $link.setPage("web2lab,seguridad,Grupos_Form.vm").toString())
+#set ($titlePage = "Busqueda de grupos")
+#set($bolBuscaGrupo=($!CSeguridadTool.getTxtGrupo()!="" || $!CSeguridadTool.getChkSelTodos()!=""))
+#if ($bolBuscaGrupo)
+	#set($objGrupos = $CSeguridadTool.getGrupoPorCriterio())
+#end
+<SCRIPT LANGUAGE="JavaScript">function irAurl() { window.location = "$strCargaPag"; }</script>
+	<form method="post" action="$strLigaAct" name="frmBusGrupo">
+		<table width="100%" class="tabla">
+				#if(!$objGrupos && $bolBuscaGrupo)
+					<tr>
+						<td>
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No existen resultados"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">No existen resultados para ese criterio de b&uacute;squeda</font></b>					
+						</td>
+					</tr>
+				#end
+				<tr>
+    				<td>
+    					#if($!bolNoBorro == "true")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No se puede eliminar este grupo"/>&nbsp;&nbsp;
+    						<font color="$ff0030">&nbsp; Existen relaciones para el grupo $!strGrupoNoBorrado, y no podr&aacute; ser eliminado</font>
+    					#end
+    				</td>
+				</tr>
+				<tr>
+					<td>
+						#if($!bolModif == "true")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de grupo exitosa"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">&nbsp; El grupo: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>						
+						#end
+					</td>
+				</tr>
+				<tr>
+					<td>
+						#if($!bolModif == "false")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de grupo fallida"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">&nbsp; El grupo: $!strMensajeModif, Ya existe y no se actualiz&oacute;.</font></b>
+						#end
+					</td>
+				</tr>
+				<tr>
+					<td>
+						#if($!bolBorrado == "true")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Eliminación de grupo exitosa"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">&nbsp; El grupo: $!strGrupoBorrado, se elimin&oacute; con éxito.</font></b>
+						#end	
+					</td>
+				</tr>
+		
+		</table>
+		<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+			<tr>
+				<td>Grupo:</td>
+           		<td>
+           			<input type="text" name="txtNombreGrupo" value="$!strNomGrupo" onKeyUp="cambiaMay('frmBusGrupo', 'txtNombreGrupo');">
+				</td>				
+        	</tr>        
+        	<tr>
+           		<td colspan="2">
+           	  		<input type="checkbox" name="chkSelTodos">Buscar todos
+           		</td>           
+        	</tr>
+         	<tr>
+          		<th>Grupo</th>          
+          		<th colspan="2">Acciones</th>          
+         	</tr>
+         	##set($objGrupos = $CSeguridadTool.getGrupoPorCriterio())
+         		#foreach ( $objGrupo in $objGrupos)
+         			#set ( $strLigadetalle = $link.setPage("web2lab,seguridad,Grupos_Form.vm"))
+			    	#set ( $strLigadetalle = $link.addQueryData("strNombreGrupo",$objGrupo.Name))
+			    	#set ( $strLigadetalle = $link.addQueryData("strModo","modificar").toString())			    
+			    	#set ( $strLigaborra = $link.setPage("web2lab,seguridad,Grupos_Form.vm"))
+			    	#set ( $strLigaborra = $link.addQueryData("strNombreGrupo",$objGrupo.Name))
+			    	#set ( $strLigaborra = $link.addQueryData("strModo","eliminar").toString())
+					#if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+		         	<tr class="$t">
+		          		<td>$!objGrupo.Name</td>		          
+		          		<td>
+			           		<a href="$strLigadetalle">Actualizar</a>			           
+			           		<a href="$strLigaborra">Eliminar</a>
+			      		</td>		         
+		         	</tr>		         
+		     	#end		     	
+        </table>                 
+        <input type="submit" name="onSubmit_doPerform" class="boton" value="Buscar" onClick="return validaSeg('frmBusGrupo','txtNombreGrupo','chkSelTodos')"/>
+        <input type="button"  onClick="irAurl()" value="Crear Nuevo" class="boton">
+    </form>        

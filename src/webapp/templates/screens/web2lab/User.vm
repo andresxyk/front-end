@@ -1,0 +1,43 @@
+#set($titlePage = "PRUEBAS UTILIZANDO HIBERNATE" )
+
+<form name="BarCode" action="$link.setAction("web2lab.UserAction").setPage("web2lab,User.vm")" method="post">
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+    <tr>
+       <td colspand="3"><b>$!result<b></td>
+    </tr>
+    <tr>
+       <td>ID USUARIO:</td>
+       <td colspan="2"><input type="text" name="IdUsuario"></td>
+    </tr>
+    <tr>
+       <td>NOMBRE:</td>
+       <td colspan="2"><input type="text" name="Nombre"></td>
+    </tr>
+    <tr>
+       <td>TELEFONO:</td>
+       <td colspan="2"><input type="text" name="Telefono"></td>
+    </tr>
+    <tr>
+       <td>EDAD:</td>
+       <td colspan="2"><input type="text" name="Edad"></td>
+    </tr>
+    <tr>
+       <td><input type="submit" value="Buscar" name="eventSubmit_doSelect"></td>
+       <td><input type="submit" value="Insertar" name="eventSubmit_doInsert"></td>
+       <td><input type="submit" value="Eliminar" name="eventSubmit_doDelete"></td>
+    </tr>   
+    <tr>
+       <td>ID &nbsp;&nbsp; NOMBRE</td>
+       <td>TELEFONO</td>
+       <td>EDAD</td>
+    </tr>
+#foreach($usuario in $users)
+    <tr>
+       <td>$usuario.getIdUsuario() &nbsp;&nbsp; $usuario.getNombre()</td>
+       <td>$usuario.getTelefono()</td>
+       <td>$usuario.getEdad() </td>
+    </tr>
+#end
+    </table>
+</form>
+

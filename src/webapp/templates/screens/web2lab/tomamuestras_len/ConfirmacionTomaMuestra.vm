@@ -1,0 +1,50 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/ConfirmacionTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/TomaMuestraAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ( $titlePage = "Confirmacion Toma Muestra") 
+
+#set($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+
+#set ($intcExamen = $data.getParameters().getString('cExamen') )
+
+#set ($bolTipoExamen = $data.getParameters().getString('bolTipoExamen') )
+
+
+<form name="frmConfirmacionTomaMuestra">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="intkOrdenSucursal" name="intkOrdenSucursal" value="$!intkOrdenSucursal">	
+	<input type="hidden" id="intcExamen" name="intcExamen" value="$!intcExamen">	
+	<input type="hidden" id="hdlTipoExamen" name="hdlTipoExamen" value="$!bolTipoExamen">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridConfirmacion"> 
+    	<table border="0" width="100%" class="tabla">
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Numero de Empleado
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoEmpleado" value="" STYLE="font-size: 30px;" onKeyPress="executaZebra();"  size="5" />
+    	    </td>     
+    	</table>               
+    </div> 
+</form>
+<script>
+	window.onload = init;			    		 
+	document.getElementById('txtCodigoEmpleado').focus();		    		 
+</script>	

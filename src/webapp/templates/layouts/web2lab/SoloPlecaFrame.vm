@@ -1,0 +1,29 @@
+$page.setTitle("WEB2LAB")
+$page.setHttpEquiv("Content-Style-Type","text/css")
+##$page.addStyleSheet($content.getURI("css/web2lab.css"))
+#set ($cMarca =$data.getUser().getConfirmed())	
+#if ($!cMarca == "1")	
+	$page.addStyleSheet($content.getURI("css/marcas/olab.css"))
+#elseif($!cMarca == "4")
+	$page.addStyleSheet($content.getURI("css/marcas/azteca.css"))
+#elseif($!cMarca == "5")
+	$page.addStyleSheet($content.getURI("css/marcas/condesa.css"))
+#end								
+$page.addAttribute("marginheight","0")
+$page.addAttribute("topmargin","0")
+$page.addAttribute("leftmargin","0")
+$page.addAttribute("marginwidth","0")
+$page.addAttribute("class","composite")
+<html>
+###TurbineHtmlHead()
+##<!--<body #TurbineHtmlBodyAttributes() class="fondo">	-->
+<body class="fondo">
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="fondo">
+  <tr> 
+    <td>
+      $screen_placeholder
+    </td>
+  </tr>
+</table>
+</body>
+</html>

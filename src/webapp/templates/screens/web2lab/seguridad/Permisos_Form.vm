@@ -1,0 +1,76 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
+#set ( $gStrModo = $CSeguridadTool.getModo() )
+#set ( $gObjPermiso = $CSeguridadTool.getPermiso() )
+##set ( $strLigaActual = $link.setPage("web2lab,seguridad,Permisos_Form.vm"))
+##set ( $strLigaActual  = $link.setAction("seguridad.BPermissionAction").toString())
+##set ( $strCargapagina = $link.setPage("web2lab,seguridad,Permisos.vm").toString())
+
+
+#set ( $strLigaAct = $link.setPage("web2lab,seguridad,Permisos.vm"))
+#set ( $strLigaAct = $link.setAction("seguridad.BPermissionAction").toString())
+#set ( $strCargapagina = $link.setAction("seguridad.BPermissionAction").setPage("web2lab,seguridad,Permisos_Form.vm").toString())
+
+#if ($gStrModo == "modify")
+    #set ($titlePage = "Modifica Permiso")
+#elseif ($gStrModo == "delete")
+    #set ($titlePage = "Elimina Permiso")
+#else
+    #set ($gStrModo = "insert")
+    #set ($titlePage = "Ingresa un Permiso")
+#end
+
+
+
+<script language="JavaScript" src="$content.getURI("javascript/seguridad/validaseguridad.js")"></script>
+<SCRIPT LANGUAGE ="JavaScript">
+
+	function irAurl() { 
+		window.document.frmPermisosForma.action = "$strCargapagina";
+	}
+</script>
+  
+<form method="post" action="$strLigaAct" name="frmPermisosForma" onsubmit= "return validaVacios('frmPermisosForma', 'txtNombre', 'PermissionNombre');" >
+	<table width="100%" class="tabla">
+		<tr>   
+             <td>
+				#if($!bolCreado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Alta de permiso exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El permiso: $!strMensaje, se dio de alta con &eacute;xito.</font></b>
+				#elseif($!bolCreado == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Permiso existente"/>&nbsp;&nbsp;
+					<b><font color="$ff0030">&nbsp; El Permiso: $!strMensaje ya existe.</font></b>
+				#end
+			</td>
+        </tr>
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+        <tr>
+            <th>Nombre del permiso</th>
+            <td>
+			#if ($gStrModo != "delete")
+				<input type="text" name="txtNombre" value="$!gObjPermiso.Name" onKeyUp="cambiaMay('frmPermisosForma', 'txtNombre');">
+                <input type="hidden" name="hndNombreAnterior" value="$!gObjPermiso.Name">
+			#else
+                <input type="hidden" name="hndNombre" value="$!gObjPermiso.Name">
+                $!gObjPermiso.Name
+			#end	
+            </td>
+            <td>
+         </tr>
+    </table>
+	#if ($gStrModo == "modify")
+    <input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar" />
+	#elseif ($gStrModo == "delete")
+    <input type="submit" name="eventSubmit_doBorra" class="boton" value="Eliminar" onClick="return confirm('Confirma eliminar Permiso');"/>
+	#else      
+	
+    <input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onClick="irAurl()"/>
+	#end
+	#if($!bolCreado == "true")
+		<input type="button"  name="" value="Regresar" class="boton" onClick="location.href='$strLigaAct'">
+	#else
+    	<input type="button" name="eventSubmit_doCancela" class="boton" value="Cancelar" onClick="location.href='$strLigaAct'"/>     
+    #end
+     
+</form>

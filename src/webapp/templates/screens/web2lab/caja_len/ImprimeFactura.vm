@@ -1,0 +1,127 @@
+#set ($titlePage = "Facturacion Pacientes" )
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/CapturaImprimeFactura.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ($ligaAct = $link.setPage("web2lab,comer,ClientesDatos.vm").setAction("fundacion.DatosOrden").toString())
+
+#set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
+
+<script>
+		 window.onload = init;		
+</script>	
+
+
+<form name="frmImprimeFactura" action="$ligaAct" method="post" >
+    <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Factura de la Orden</b>
+    	        </center>
+    	    </th>
+        </tr>   
+		<tr>
+			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Admisi&oacute;n</th>
+			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;">Orden</th>
+			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Nombre Paciente</th>
+		</tr>
+       	<tr>
+			<td align="center" valign="top">
+				<input type="text" id="txtAdmision" name="txtAdmision" class="textflat"  readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			
+			</td>
+			<td align="center" valign="top">
+				<input type="text" id="txtOrden" name="txtOrden" class="textflat"  readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			    			
+			</td>
+			<td align="center" valign="top">
+				<input type="text" id="txtNombrePaciente" name="txtNombrePaciente" class="textflat"  readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			    			
+			</td>
+   		</tr>	        
+    </table>	                			
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="left">
+				<b>*Raz&oacute;n Social:</b><br>
+				<input type="text" id="txtRazonSocial" value="" style="background:#E6E6FA" onKeyPress="mayuscula();" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);" size="70" >
+			</td>
+		</tr>
+		<tr>
+			<td align="left">
+				<b>*RFC:</b><br>
+				<input type="text" id="txtRFC" value="" style="background:#E6E6FA" onKeyPress="validaRFC(window.document.frmAdminClientes);" onkeyup="consultaClienteGrid(window.document.frmAdminClientes);"  onblur="validaRFC(window.document.frmAdminClientes);" size="13" maxlength="13" >
+			</td>
+		</tr>
+	</table>
+	<div id="gridbusquedaClientes">                
+	</div>            		        					
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+    	        </center>
+    	    </th>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" style="width: 490px" onKeyPress="mayuscula();"   />
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" style="width: 157px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmImprimeFactura);"  />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" style="width: 180px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmImprimeFactura);"  />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Estado
+    	    </td>
+            <td style="width: 158px">
+            	<select id="selEstado" style="width: 177px" >
+					#foreach($objEstado in $lstEstados)
+						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+					#end
+				</select>    	    
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" onKeyPress="javascript:return numero();" onkeyup="consultaDireccionGrid(window.document.frmImprimeFactura);" />
+    	    </td>
+        </tr>   
+    </table>
+	<div id="gridbusquedaDireccion">                
+	</div>            		        				
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+            <td>
+       	    </td>     
+        </tr>   
+    </table>	                
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+			<tr>
+	            <td>
+	    			<input type="button" id="idGuardarCliente" value="Guardar Datos" onClick="VerificaModificacion();" class="boton">
+	    	    </td>
+			</tr>
+	</table>
+</form>

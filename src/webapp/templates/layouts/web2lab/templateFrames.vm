@@ -1,0 +1,12 @@
+#set ($cMarca =$data.getUser().getConfirmed())	
+<html>
+<head>
+	<link rel="stylesheet" href="$content.getURI("css/web2lab.css")" type="text/css" media="all" />
+    <script><!--
+    	javascript:window.history.forward(1);
+    //--></script>
+</head>
+<body>
+		$screen_placeholder
+</body>
+</html>

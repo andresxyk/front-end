@@ -1,0 +1,40 @@
+#set ($titlePage = "Creacion de Previos" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturaElectronicaEmpresaAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+#set ($lstConvenios = $CatalogosTool.obtenAll("ConvenioCredito","601"))
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+<form name="frmReportesConvenios" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="5">Generación de Reportes</th></tr>
+		
+		<tr>
+			<td>
+				<input type="button" id="idGenerarReporte" name="idGenerarReporte" value="Generar Reporte" onClick="GeneracionReporteConvenio();" class="boton">
+			</td>			
+		</tr>				
+		<tr>
+		</tr>
+		<tr>
+		</tr>
+	</table>	
+</form>

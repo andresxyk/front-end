@@ -1,0 +1,36 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+
+
+#set ($titlePage = "Alta Notas de Credito" )
+#set ($strKfacturas = $data.getParameters().getString('strKfacturas') )
+#set ($montoTotalNota = $data.getParameters().getString('montoTotalNota') )
+#set ($cConvenio = $data.getParameters().getString('cConvenio') )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/NotadeCredito.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/NotasdeCredito.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+
+<form name="frmAltaNotaCredito" action="$ligaAct" method="post" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">
+	<input type="hidden" id="hdnFacturas" name="hdnFacturas" value="$!strKfacturas">	
+	<input type="hidden" id="hdnMontoNota" name="hdnMontoNota" value="$!montoTotalNota">
+	<input type="hidden" id="hdnCconvenio" name="hdnCconvenio" value="$!cConvenio">
+		
+	<table	border="0" class="tabla" width="100%">	
+		<tr><th colspan="5">Generación de Notas de Crédito</th></tr>
+	</table>
+	<div id="gridFactuasElegidas"> 
+	</div>
+</form>
+#if($strKfacturas)
+	<script>		
+	     mostrarFacturas('$strKfacturas');
+	</script>	
+#end	

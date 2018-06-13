@@ -1,0 +1,39 @@
+#set ($titlePage = "Cancelacion de Facturacion Mayoreo" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/CancelacionFacturacion.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/MantenimientoOrdenFacturacion.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+<form name="frmFacturaCancelar" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="4">Cancelacion Facturacion</th></tr>
+        <tr>
+            <td>
+                <input type="text" id="txtIdFactura" value="0" STYLE="font-size: 30px;" onKeyPress="numero();" size="10" />
+    	    </td>     
+            <td>
+				<select id="selInformacionCopiar" style="width: 200px"> 
+					<option value="1">Informacion Facturacion</option>
+					<option value="0">Informacion Sucursales</option>
+	            </select>								
+    	    </td>     			
+            <td>
+				<input type="button" id="idCancelaFactura" name="idCancelaFactura" value="Cancela Factura" onClick="CancelacionFacturacion();" class="boton">
+    	    </td>     
+        </tr>   
+	</table>
+</form>

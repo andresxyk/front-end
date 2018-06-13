@@ -1,0 +1,115 @@
+$data.setLayoutTemplate("/web2lab/Default.vm")
+
+##Obtiene el bean de session que a su vez contiene el bean de DExamen
+#set ( $objSesionActual = $data.getSession() )
+#set ( $titlePage = "Configuración Exámenes Gabinetes <br>" )
+
+#set ($lstDepartamentos = $CatalogosTool.obtenAll("Departamento","0"))
+#set ($lstIndicaciones = $CatalogosTool.obtenAll("CondicionPreanalitica","0"))
+		
+<style type="text/css">
+.tableBorder {
+ font-size: 11px;
+ color: #000000;
+ line-height: normal;
+ font-family: Arial, Helvetica, sans-serif;
+ background-color : #DFEAF7;
+ border-color: darkblue;
+ border-style: solid;
+}    
+.selector { width: 150px; }
+.selector350 { width: 350px; }
+</style>
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/examenes/configuracion/ConfiguracionExamenGabinetes.js")"></script>
+
+<form name="frmConfiguracionExamen" action="" method="post" >
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">	
+		<tr>
+			<td align="right">
+				<b>C&oacute;digo de examen:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtClaveExamen" size="10" onkeyup="consultaExamenesGrid();">
+			</td>	
+			<td align="right">
+				<b>Nombre del Examen:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtNombreExamen" onKeyPress="mayuscula();" size="70" onkeyup="consultaExamenesGrid();">
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<b>Mn&oacute;nico:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtMnemonico" onKeyPress="mayuscula();">
+			</td>
+			<td align="right">
+				<b>G&eacute;nero:</b> 
+			</td>
+			<td>
+				<select name="cboGeneroExamen" class="selector" >
+					<option value="1">AMBOS</option>
+					<option value="2">MASCULINO</option>
+					<option value="3">FEMENINO</option>
+				</select>	
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="right">
+				<b>Departamento:</b> 
+			</td>
+			<td>
+				<select name="cboDepartamento" class="selector" onChange="consultaExamenesGrid();" style="background:#E6E6FA;width: 500px">
+					#foreach($objDepartamento in $lstDepartamentos)
+						#option("$!objDepartamento.getCdepartamento()" "$!objDepartamento.getCdepartamento() - $!objDepartamento.getSdepartamento()" "0")							
+					#end
+				</select>	
+				
+			</td>
+        </tr>
+		<tr>
+			<td align="right">
+				<b>Indicaciones para el paciente:</b> 
+			</td>
+			<td>			
+				<select name="cboIndicacionesPaciente" class="selector" onChange="asignaInstrucciones();" style="background:#E6E6FA;width: 500px">
+					#foreach($objIndicacion in $lstIndicaciones)
+						#option("$!objIndicacion.getCcondicionpreanalitica()" "$!objIndicacion.getCcondicionpreanalitica() - $!objIndicacion.getScondicionpreanalitica()" "0")							
+					#end
+				</select>	
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+			</td>
+			<td>			
+				<textarea name="txtIndicacionesPaciente" cols="75" rows="8" readonly></textarea>
+			</td>
+		</tr>		
+		<tr><td>&nbsp;</td></tr>
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="center">
+				<input type="submit" value="Guardar" name="eventSubmit_doDatosgenerales" class="boton"
+					onClick="return validaCampos();">
+			</td>
+			<td align="center">
+				<input type="submit" value="Regresar" name="eventSubmit_doRegresar" class="boton">
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>		
+	</table>		
+	<div id="idShowGridExamenes">
+	</div>	
+</form>
+<script>
+	tooltips();
+</script>
+	

@@ -1,0 +1,77 @@
+$data.setLayoutTemplate("web2lab/DefaultLogin.vm")
+#set ($objSesion = $data.getSession())
+#set ($departamentos = $objSesion.getAttribute("objTurbineGroup"))
+#set ($existeLab = $objSesion.getAttribute("existeLab"))
+#set ($existeUnidad = $objSesion.getAttribute("existeUnidad"))
+##set ($logoutLnk = $link.setPage("web2lab,seguridad,Login.vm"))
+#set ($logoutLnk = $link.setAction("seguridad.BLogoutAction").toString())
+#if($existeLab)
+	#set ($actLnk = $link.setPage("web2lab,web2lab,Homeweb2lab.vm"))
+	#set ($head = "Selecciona un departamento de trabajo")
+	#set ($boton = "Seleccionar departamento")
+	#set ($titlePage = "Departamentos asignados" )
+	#set ($uniDep = "un departamento")
+#end
+#if($existeUnidad)
+	#set ($actLnk = $link.setPage("web2lab,ap,PantallaInicio.vm"))
+	#set ($head = "Selecciona una unidad de trabajo")
+	#set ($boton = "Seleccionar unidad")
+	#set ($titlePage = "Unidades asignadas" )
+	#set ($uniDep = "una unidad")
+#end
+<!-- $actlink -->
+#if($actLink == "")
+	##Invocacion incorrecta, valores de relleno
+	#set ($actLnk = $link.setPage("web2lab,seguridad,Login.vm"))
+	#set ($head = "Repita el login")
+	#set ($boton = "Repetir Login")
+	#set ($titlePage = "Por favor, Registrese de nueva cuenta" )
+	#set ($uniDep = "")
+#end
+#set ( $actLnk = $link.setAction("seguridad.BActivaDepartamentoAction").toString())
+
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="javascript">
+// funcion que valida que se seleccione una unidad o depto
+function validaDepto(){
+	forma =  window.document.departamentosForm;
+	radio = "departamento";
+	selRegistro = selectedRadio(forma, radio);
+	if(selRegistro == null || selRegistro == ''){
+		alert("Debe de seleccionar " + "$uniDep");
+		return false;
+	}else {
+		return true;
+	}
+}
+</SCRIPT>
+
+<form method="post" name="departamentosForm" action="$actLnk" onsubmit="javascript: return validaDepto();">
+#if($existeUnidad)
+	 <input type="Hidden" name="existeUnidad" value="true">
+#end
+#if($existeLab)
+	 <input type="Hidden" name="existeLab" value="true">
+#end
+
+ <table border="0"  cellspacing="1"  width="100%" class="tabla">
+     <tr>
+        <td>&nbsp;</td>
+		<td><b>$!head</b></td>
+     </tr>
+    #foreach($departamento in $departamentos)
+    <tr>
+        <td align="right">
+	       	<input type="radio" name="departamento" id="depto$velocityCount" value="$!departamento.CLabDepto">
+	       	<input type="hidden" name="sdepartamento$!departamento.CLabDepto" value="$!departamento.GroupName">
+	    </td>
+	    <td>
+    	   	<label for="depto$velocityCount" >$!departamento.GroupName</label> 
+        </td>
+    </tr>
+    #end
+	<tr>
+    	<td colspan="2"><input type="submit" name="eventSubmit_doDepartamento" value="$!boton" class="boton"></td>
+    </tr>
+ </table>
+</form>

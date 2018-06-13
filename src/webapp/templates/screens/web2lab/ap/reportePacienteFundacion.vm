@@ -1,0 +1,160 @@
+<script language='javascript' src="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+<script type='text/javascript' src='/web2lab/dwr/interface/DatosCorteCaja.js'></script>
+<script type='text/javascript' src='/web2lab/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2lab/dwr/util.js'></script>
+
+#set($titlePage = "Reportes")
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
+
+#set($fechaDesde = $data.getParameters().getString("txtDeFecha"))
+#set($fechaHasta = $data.getParameters().getString("txtAFecha"))
+#set ($lstConvenio = $CatalogosTool.obtenAll("Convenio","0"))
+#set ($lstExamenes = $CatalogosTool.obtenAll("Examen","0"))
+
+#set ($lstCortesCaja = $CatalogosTool.obtenAll("$data.getSession().getAttribute('idgrupo')","500"))
+
+<script>
+	    window.onload = init;		
+	
+		function init() 
+		{
+		    DWRUtil.useLoadingMessage();
+		}
+	
+		function guardarGastos() {
+            var frmPantalla = window.document.reporte;
+			if (confirm("Estas seguro de guardar el Gasto?")) {
+	    		DatosCorteCaja.guardarGasto(frmPantalla.txtMontoGasto.value,frmPantalla.txtDescripcionGasto.value,frmPantalla.idUsuario.value,guardarGastos_CallBack);
+			}
+		}
+		
+		function guardarGastos_CallBack(data){
+			alert(data);
+		}
+		
+</script>	
+
+<form method="post" name="reporte" action="$strLiga">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="4">Reporte - Seleccione el Rango de Fechas</th></tr>
+    		<tr>
+    			<td><b>Desde:</b><br><input type="text" name="txtDeFecha" 
+					#if($!fechaDesde != "") 
+            			value="$!fechaDesde" 
+            		#else
+            			value="$CatalogosTool.getFecha()"
+            		#end
+					size="13" onChange="javascript:this.value=validaFormatoFecha(this.value);">
+    				<a href="javascript:doNothing()" onClick="javascript:setDateField(document.reporte.txtDeFecha);top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')" align="bottom">
+    				<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>    				
+    			</td>
+    			<td><b>Hasta:</b><br><input type="text" name="txtAFecha" 
+					#if($!fechaHasta != "")
+            			value="$!fechaHasta"
+            		#else 
+            			value="$CatalogosTool.getFecha()"
+            		#end
+					size="13" onChange="javascript:this.value=validaFormatoFecha(this.value);">
+    				<a href="javascript:doNothing()" onClick="javascript:setDateField(document.reporte.txtAFecha);top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')" align="bottom">
+    				<img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')'></a>
+    			</td>
+			</tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr>
+				<td >
+	                <select id="selReporte" style="width: 210px">
+							<option value="1">Ordenes por Entregar</option> 
+							<option value="2">Registro Pacientes</option> 
+							<option value="3">Diario de Ventas</option> 
+							<option value="4">Ordenes x (Convenio o Promocion)</option> 
+							<option value="5">Ordenes Canceladas</option> 
+							<option value="6">Ordenes Adeudo</option> 
+							<option value="7">Ordenes A quien Corresponda o Medicos Nuevos</option> 							
+							<option value="8">Ordenes Entregadas</option> 
+							<option value="9">Ordenes Registrada Entregadas</option> 
+							<option value="10">Ordenes No Entregadas</option> 
+							<option value="11">Detalle de Examenes con Muestras</option> 
+							<option value="12">Paciente primera vez</option> 
+							<option value="13">Paciente subsecuentes</option> 
+							<option value="14">Detalle Paciente primera vez</option> 
+							<option value="15">Detalle Paciente subsecuentes</option> 
+							<option value="16">Estadistica de Sucursal</option> 
+		            </select>					
+					<input type="button" onclick="return repFundacionSelect('$ligaReporte','ImprimePacientesFundacion')" value="Executa Reporte" name="Executa Reporte" class="boton" style="width:200px">
+				</td>
+			</tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr>
+				<td>
+	                <select id="selComunidad" style="width: 177px">
+	    				#foreach($objConvenio in $lstConvenio )
+							#option("$!objConvenio.getCconvenio()" "$!objConvenio.getSconvenio() - $!objConvenio.getCconvenio()" "0")							
+	    				#end					
+		            </select>
+					<input type="button" onclick="return repOrdenTipoComunidadFundacion('$ligaReporte','ImprimeOrdenesTipoComunidad')" value="Ordenes x Convenio" name="Ordenes x Convenio" class="boton" style="width:200px">
+				</td>
+			</tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+    		<tr>
+				<td>
+                    <select id="selCatalogoExamenes" onChange="newExamen(this);" style="width: 350px">
+        				#foreach($objExamen in $lstExamenes )
+							#option("$!objExamen.getCexamen()" "$!objExamen.getCexamen() - $!objExamen.getSexamen()" "1")							
+        				#end					
+                    </select>
+					<input type="button" onclick="return repTipoExamenFundacion('$ligaReporte','ImprimeTipoExamenComunidad')" value="Tipo Examen" name="Tipo Examen" class="boton" style="width:200px">
+				</td>
+			</tr>
+    		<tr><td></td></tr>
+    		<tr><td></td></tr>
+	</table>
+    <table align="center" border="0" class="tabla" width="100%">	
+    	<tr><th colspan="3">Gastos</th></tr>
+    		<tr align="center">
+				<td align="center">
+	                Monto <input type="text" id="txtMontoGasto"  onKeyPress="javascript:return montos();" size="10" />
+				</td>
+				<td align="center">
+	                Descripcion <input type="text" id="txtDescripcionGasto" onKeyPress="mayuscula();" size="10" />
+				</td>
+				<td align="center">
+					<input type="button" value="Guardar Gasto" name="Guardar Gasto" class="boton" onClick="guardarGastos();" style="width:200px">
+				</td>
+			</tr>
+	</table>
+    <table align="center" border="0" class="tabla" width="100%">	
+    	<tr><th colspan="2">Corte de Caja Actual Previo y Definitivo</th></tr>
+    		<tr align="center">
+				<td align="center">
+					<input type="button" onclick="return repCorteCajaPrevio('$ligaReporte','CorteCaja')" value="Corte Caja Previo Actual" name="adeudos" class="boton" style="width:200px">
+				</td>
+				<td align="center">
+					<input type="button" onclick="return repCorteCajaDefinitivo('$ligaReporte','CorteCaja')" value="Corte Caja Definitivo Actual" name="adeudos" class="boton" style="width:200px">
+				</td>
+			</tr>
+	</table>
+    <table align="center" border="0" class="tabla" width="100%">	
+    	<tr><th colspan="0">Corte de Caja Anteriores- Seleccione el numero de Corte, para cortes anteriores</th></tr>
+    		<tr align="center">
+				<td align="center">
+	                <select id="selCortesCaja" style="width: 157px">
+	    				#foreach($objCorteCaja in $lstCortesCaja)
+							#option("$!objCorteCaja.getKcortecaja()" "$!objCorteCaja.getUcortecajasucursal() - $!objCorteCaja.getDregistro()" "0")							
+	    				#end					
+		            </select>
+					<input type="button" onclick="return repCorteCajaBackup('$ligaReporte','CorteCaja')" value="Copia del Corte Caja Anterior" name="adeudos" class="boton" style="width:200px">
+				</td>
+			</tr>			
+	</table>
+</form>

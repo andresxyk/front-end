@@ -1,0 +1,28 @@
+#set ($strLigaInserta = $link.setPage("web2lab,seguridad,Ligas_AdmonMenu.vm"))
+#set ($strLigaInserta = $link.addQueryData("strModo", "insertar" ).toString())
+#set ($strLigaModifica = $link.setPage("web2lab,seguridad,Ligas_AdmonMenu.vm"))
+#set ($strLigaModifica = $link.addQueryData("strModo", "modificar" ).toString())
+#set ($titlePage = "Administracion de menus")              
+<script>
+	function abreLiga(strModo){
+		switch(strModo){
+			case 'i' :
+				window.location.href="$strLigaInserta";	
+				break;
+			case 'm' :
+				window.location.href="$strLigaModifica";
+				break;	
+		}	
+		
+    }
+</script>
+<form method="post" action="" name="frmLigasmenu">	
+	<input type="button" name="cmdInsertar"  class="boton" value="Nuevo" onclick="javascritp:abreLiga('i')">
+	<input type="button" name="cmdModificar"  class="boton" value="Modificar" onclick="javascritp:abreLiga('m')">
+</form>
+
+
+	
+
+
+

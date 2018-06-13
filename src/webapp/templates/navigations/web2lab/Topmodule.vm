@@ -1,0 +1,30 @@
+     <div id="topmodule">
+      <table border="0" cellspacing="0" cellpadding="3">
+       <tr>
+        <td id="issueid">
+         <form action="#" method="get">
+          <input type="hidden" name="nextTemplate" value="ViewIssue.vm" /> <input type="text" name="id" size="15" maxlength="255" tabindex="1" /> <input type="submit" value="Issue Id" name="eventSubmit_doGonext" tabindex="2" />
+         </form>
+        </td>
+        <td>
+         <form action="#" method="get">
+          <input type="hidden" name="nextTemplate" value="Index.vm" />
+          <select name="go" tabindex="3" onchange="this.form.submit();">
+           <option value="AdvancedQuery.vm">
+            Select query...
+           </option>
+           <option value="AdvancedQuery.vm">
+            Advanced
+           </option>
+           <option value="Search.vm">
+            Custom
+           </option>
+          </select>
+          <input type="hidden" value="foo" name="eventSubmit_doSelectquery" />
+          <noscript><input type="submit" value="Go" name="foo" tabindex="4" /></noscript>
+         </form>
+        </td>
+       </tr>
+      </table>
+     </div>
+

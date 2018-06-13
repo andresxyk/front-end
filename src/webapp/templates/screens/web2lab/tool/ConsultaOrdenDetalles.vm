@@ -1,0 +1,974 @@
+#set ($titlePage = "Consulta Detalle de las Ordenes" )
+#set ($strLigaDiagnostico = $link.setPage("web2lab,ap,Diagnostico.vm").toString())
+#set ($intkPaciente = $data.getParameters().getString('kPaciente') )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+#set ($intuTipoLlamado = $data.getParameters().getString('uTipoLlamado') )
+
+#set ($intuOrden = $data.getParameters().getString('uOrden') )
+
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($lstTipoEmpresa = $CatalogosTool.obtenAll("TipoPersona","0"))
+
+#set($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/CapturaOrdenExamen.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/CapturaOrdenFactura.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/CapturaOrdenPaciente.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/CapturaOrden.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/ExpedienteEmpresa.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/consultaorden/Tools.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/reportes.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/DatosFiscales.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosOrden.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosExamen.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/OrdenFacturarAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosFiscales.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolFacSucursalesAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/MantenimientoOrdenFacturacion.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
+
+
+#if($intkPaciente)
+	<script>		
+	     DatosPaciente.buscarPaciente('$intkPaciente','','','',buscarPaciente_CallBack);		
+	</script>	
+#end
+
+<script>
+//		 window.onload = init;		
+	    
+		 function visualizaDiagnostico(kOrdenFundacion){
+		 	viewDiag('$strLigaDiagnostico','DiagnosticoFactura',kOrdenFundacion);
+		 }		
+		 
+		 function buscarOrden(){
+		 	limpiaPantalla();
+            var frmPantalla = window.document.frmConsultaOrden;
+			var motivo = "";            
+			motivo = prompt("Cual es la orden a buscar?", "");
+			if ((motivo != "") && (motivo != null)) {
+	    		DatosOrden.getkPaciente(frmPantalla.IdSucursalActual.value,motivo,getkPaciente_CallBack);
+	    	} else {
+	    		alert("Se requiere un numero de orden, no puedo proceder con la busqueda!!!!");
+	    	}
+		 }				  
+		 
+		 function getkPaciente_CallBack(data) {
+		 	DatosPaciente.buscarPaciente(data,buscarPaciente_CallBack);		
+		 }
+</script>	
+
+#if($intuOrden)
+	<script>		
+	     DatosOrden.getOrdenbyAdmision('$intkOrdenSucursal',getkPaciente_CallBack);
+	</script>	
+#end
+
+#set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
+#set ($lstTiposPagos = $CatalogosTool.obtenAll("TipoPago","0"))
+#set ($lstConvenios = $CatalogosTool.obtenAll("Convenio","691"))
+#set ($ligaAct = $link.setPage("web2lab,ap,DatosOrden.vm").setAction("fundacion.DatosOrden").toString() )
+
+<form name="frmConsultaOrden" action="$ligaAct" method="post" >	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="idUsuarioPago" name="idUsuarioPago" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="idMarca" name="idMarca" value="$data.getUser().getConfirmed()">			
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+	
+    <table border="0"  align="center" style="width: 883px">
+        <tr align="center">
+            <td align="center">
+				<img src="$content.getURI("images/sinFoto.png")" width="150" height="150"> 
+    	    </td>     
+        </tr>   
+    </table>	        
+	<div id="consultaExpedienteEmpresas" style="display:none">                
+        <table border="0"  align="center" style="width: 883px">
+            <tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Expediente Médico</b>
+        	         </center>
+        	    </th>     
+        	</tr>
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Numero de Empleado
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Número de Seguro Social
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        	    </td>     
+            </tr>   
+            <tr>
+                <td>
+                    <input type="text" id="txtNoEmpleado" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="mayuscula();" size="10" MAXLENGTH=10/>
+        	    </td>     
+                <td>
+                    <input type="text" id="txtNoSeguroSocial" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" size="11" MAXLENGTH=11/>
+        	    </td>     
+                <td>
+        	    </td>     
+            </tr>   
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			        <a href="javascript:doNothing()" onclick="javascript:agregarOption(document.frmConsultaOrden.selDepartamento);" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			            Departamento
+			        </a>	                    
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal" >
+			        <a href="javascript:doNothing()" onclick="javascript:agregarOption(document.frmConsultaOrden.selPuesto);" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			            Puesto
+			        </a>	                    
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			        <a href="javascript:doNothing()" onclick="javascript:agregarOption(document.frmConsultaOrden.selClinica);" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			            Clínica
+			        </a>	                                        
+        	    </td>     
+            </tr>   
+            <tr>
+                <td>
+                	<select id="selDepartamento" style="background:#E6E6FA">
+    					<option value="0">No existe</option>
+                	</select>
+        	    </td>     
+                <td>
+                	<select id="selPuesto" style="background:#E6E6FA">
+						<option value="0">No existe</option>
+                	</select>
+        	    </td>     
+                <td>
+                	<select id="selClinica" style="background:#E6E6FA">
+						<option value="0">No existe</option>
+                	</select>
+        	    </td>     
+            </tr>   
+			 <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Talla (1.00 - 2.20) mts
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Peso (25.00 - 150.00) kg	
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    IMC
+        	    </td>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Cintura (30 - 200) cm
+        	    </td>     
+            </tr>   
+            <tr>
+                <td>
+                    <input type="text" id="txtTalla" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="montos();" onblur="formatDouble(this);validaTextNumerico(this,1.0,2.20,'Talla');" size="5" MAXLENGTH=4/>mts
+        	    </td>     
+                <td>
+                    <input type="text" id="txtPeso" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="montos();" onblur="formatDouble(this);if(validaTextNumerico(this,25.00,150.00,'Peso')){calculaIndice();}" size="8" MAXLENGTH=7/>kg
+        	    </td>     
+                <td>
+                    <input type="text" id="txtImc" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" size="10" />
+        	    </td>
+				<td>
+                    <input type="text" id="txtCintura"  style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,30,200,'Cintura');" size="4" MAXLENGTH=3/>cm
+        	    </td>      
+            </tr>
+			<tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Información Médica</b>
+        	         </center>
+        	    </th>     
+        	</tr>
+			<tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    TA Sistólica (60–250)
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    TA Diastólica (40–250)
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Glucosa en Sangre (10–1500)
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Colesterol (50–1000)
+        	    </td>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Trigliceridos (50–1000)
+        	    </td>     
+			</tr>   
+			<tr>
+                <td>
+					<input type="text" id="txtSistolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,60,250,'Sistólica');" size="4" MAXLENGTH=3/>
+        	    </td>     
+                <td>
+					<input type="text" id="txtDiastolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,40,250,'Diastólica');" size="4" MAXLENGTH=3/>
+        	    </td>     
+                <td>
+                    <input type="text" id="txtDod"  style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,10,1500,'Glucosa en Sangre');" size="5" MAXLENGTH=4/>
+        	    </td>     
+                <td>
+                    <input type="text" id="txtColes"  style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,50,1000,'Colesterol');" size="5" MAXLENGTH=4 />
+        	    </td>
+				<td>
+                    <input type="text" id="txtTrigliceridos"  style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="numero();" onblur="validaTextNumerico(this,50,1000,'Trigliceridos');" size="5"  MAXLENGTH=4 />
+        	    </td>      
+            </tr>
+			<tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Control Vacunas</b>
+        	         </center>
+        	    </th>     
+        	</tr>
+			<tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    TOXOIDE TETANICO-DIFTERICO
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        	    </td>     	                
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    NEUMO (Espirómetro Compu) Normal
+        	    </td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        	    </td>     	                
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Catálogo de Vacunas
+        	    </td>     
+            </tr>   
+			<tr>
+				<td>
+                    <table>
+						<tr>
+							<td>
+								1°&nbsp;<input type="checkbox" id="chktetdif1">
+							</td>
+							<td>
+                                <input type="text" name="txtFechaTetDif1" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+            			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaOrden.txtFechaTetDif1); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+            			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+            			        </a>	
+            				</td>	
+						</tr>
+						<tr>
+            				<td>
+            					2°&nbsp;<input type="checkbox" name="chktetdif2">
+            				</td>
+            				<td>
+                                <input type="text" name="txtFechaTetDif2" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+            			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaOrden.txtFechaTetDif2); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+            			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+            			        </a>	
+            				</td>
+						</tr>
+						<tr>
+            				<td>
+            					Rf&nbsp;<input type="checkbox" name="chktetdif3">
+            				</td>
+            				<td>
+                                <input type="text" name="txtFechaTetDif3" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+            			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaOrden.txtFechaTetDif3); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+            			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+            			        </a>	
+            				</td>
+						</tr>
+            			<tr>
+            				<td>
+            					Dv&nbsp;<input type="checkbox" name="chktetdif4">
+            				</td>
+            				<td>
+                                <input type="text" name="txtFechaTetDif4" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+            			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaOrden.txtFechaTetDif4); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+            			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+            			        </a>	
+            				</td>
+            			</tr>
+		      		</table>	
+				</td>    
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        	    </td>     	                
+				<td>
+                    <table>
+            			<tr>
+            				<td>
+            					Obstructivo&nbsp;
+            				</td>
+            				<td>
+            					<select id="selObstructivo" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+                						<option value="0">No existe</option>
+                						<option value="1">G1</option>
+                						<option value="2">G2</option>
+                						<option value="3">G3</option>
+                				</select>
+            				</td>	
+            			</tr>
+            			<tr>
+            				<td>
+            					Restrictivo&nbsp;
+            				</td>
+            				<td>
+            					<select id="selRestrictivo" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+                						<option value="0">No existe</option>
+                						<option value="1">G1</option>
+                						<option value="2">G2</option>
+                						<option value="3">G3</option>
+                					</select>
+            				</td>	
+            			</tr>
+            			<tr>
+            				<td>
+            					Mixto&nbsp;
+            				</td>
+            				<td>
+            					<select id="selMixto" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+                						<option value="0">No existe</option>
+                						<option value="1">G1</option>
+                						<option value="2">G2</option>
+                						<option value="3">G3</option>
+                					</select>
+            				</td>			
+						</tr>
+					</table>	
+				</td>     
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+        	    </td>     	                
+				<td>
+					<table>
+    					<tr>
+    						<td>
+            			        <a href="javascript:doNothing()" onclick="javascript:agregarOption(document.frmConsultaOrden.selNombreVacuna);" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+            			            Nombre&nbsp;
+            			        </a>	                                                    					
+            				</td>
+            				<td>
+            					<select id="selNombreVacuna" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+                						<option value="0">No existe</option>
+                				</select>
+            				</td>
+            			</tr>
+						<tr>
+    						<td>
+            					1 vez&nbsp;
+            				</td>
+            				<td>
+            					<input type="radio" name="rad1">
+            				</td>
+            			</tr>
+						<tr>
+    						<td>
+            					2 veces al año&nbsp;
+            				</td>
+            				<td>
+            					<input type="radio" name="rad2">
+            				</td>
+            			</tr>
+						<tr>
+    						<td>
+            					1 vez al año&nbsp;
+            				</td>
+            				<td>
+            					<input type="radio" name="rad3">
+            				</td>
+            			</tr>
+					</table>	
+				</td>
+		    </tr>
+			<tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">DOCMA y DOCACU</b>
+        	         </center>
+        	    </th>     
+        	</tr>
+			<tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Reporte de Mastografía
+        	    </td>     	                
+			</tr>   
+			<tr>
+                <td>
+                    Fecha &nbsp;
+                    <input type="text" name="txtFechaMasto" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmConsultaOrden.txtFechaMasto); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+        	    </td>     
+                <td>
+                    Resultados Masto:&nbsp;
+					<select id="selResultado" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+                		<option value="0">No existe</option>
+    					<option value="1">Rad-0</option>
+    					<option value="2">Rad-I</option>
+    					<option value="3">Rad-II</option>
+    					<option value="4">Rad-III</option>
+                	</select>
+        	    </td>          
+                <td>
+					#set ( $strLigaDiagnostico = $link.setPage("web2lab,ap,Diagnostico.vm").toString())
+			        <a href="javascript:doNothing()" onclick="visualizaDiagnostico('$strLigaDiagnostico','DiagnosticoOrden');"  style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+						DOCACU
+			        </a>	
+				</td>    	    
+            </tr>
+        </table>	        
+	</div>            		        				
+	<table border="0"  align="center" style="width: 883px">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Personales</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Codigo Paciente
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" value="0" class="textflat" readonly="readonly" style="color: black; font-weight : bold; text-align : center;"  STYLE="font-size: 30px;" onKeyPress="numero();" onChange="buscarPaciente();" size="5" />
+                <input type="hidden" id="hdnkPaciente" value="0" />
+    	    </td>     
+        </tr>   
+        <tr>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Paterno
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Materno
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Nombre(s)
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="width: 187px">
+                <input type="text" id="txtApellidoPaterno"  class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="mayuscula();" size="35"/>
+    	    </td>     
+            <td style="width: 158px">
+                <input type="text" id="txtApellidoMaterno"  class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+            <td>
+                <input type="text" id="txtNombre"  class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+        </tr>   
+    </table>	        
+	<div id="gridbusquedaPacientes">                
+	</div>            		        				
+    <table border="0"  align="center" style="width: 883px">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Complementarios</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                &nbsp;* Fecha nacimiento
+    	    </td>     
+            <td style="width: 187px">
+			    <div id="CalendarioNac">
+                    <input type="text" name="txtFechaNacimiento" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;" onblur="VerificaModificacion();"
+                    onKeyup="javascript:agregaDiag(this);" onFocus="javascript:obtenerEdadfrm(window.document.frmConsultaOrden);" onChange="javascript:this.value=validaFormatoFecha(this.value); obtenerEdadfrm(window.document.frmConsultaOrden);">		
+			    </div>				
+	        </td>     
+            <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
+                <b>Edad (años-meses-dias)</b
+    	    </td>     
+            <td style="width: 158px">
+                <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                <input type="text"  id="txtEdadDescompuesta"  class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;" >&nbsp;
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Tel&eacute;fono
+    	    </td>     
+            <td style="width: 250px">
+                <input type="text" id="txtTelefono" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="javascript:return numero();"  size="30"/>
+   	        </td>     
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Sexo
+    	    </td>     
+            <td style="width: 187px">
+					<input type="radio" name="radSexo" value="0" >Femenino
+					<input type="radio" name="radSexo" value="1" >Masculino
+   	        </td>        	        
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Correo Electronico
+    	    </td>     
+            <td style="width: 187px">
+                <input type="text" id="txtCorreoElectronico" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" size="30" />
+   	        </td>     
+        </tr>   
+    </table>	        
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+            <td>
+       	    </td>     
+        </tr>   
+    </table>	        
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+					<a href="http://web2-lab.com/videos/DireccionPaciente.wmv" title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>    	            
+    	        </center>
+    	    </th>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" style="width: 490px" onKeyPress="mayuscula();"/>
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" style="width: 157px" onKeyPress="mayuscula();"  />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();"  />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Estado
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtEstado" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();"  />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="javascript:return numero();"/>
+    	    </td>
+        </tr>   
+    </table>
+	<div id="gridbusquedaDireccion">                
+	</div>            		        				
+    <table border="0"  align="center" style="width: 883px">	        
+        <tr>
+            <td>
+       	    </td>     
+        </tr>   
+    </table>	                
+    <div id="cotizaExamenes">                
+			<div id="cotizaExamenesSeccion">    	
+		        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+			        <tr>
+			            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+			                Convenio
+			    	    </td>	            
+			            <td colspan="5">
+			                <input type="text" id="txtConvenio" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" style="width: 490px" onKeyPress="numero();"/>
+			    	    </td>
+			        </tr>   
+				</table>
+			</div>				
+			<div id="buscarExamenesACotizar">
+			</div>
+			<div id="Grilla">
+			</div>
+			<div id="Medico">
+			</div>
+		    <table border="0"  align="center" style="width: 883px">
+	            <tr>
+	        	    <th colspan="9" style="width: 1056px">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Registro del Medico</b>
+							<a href="http://web2-lab.com/videos/BusquedaRegistroMedicos.wmv"  title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+	        	        </center>
+	        	    </th>
+		        </tr>   			    	
+		        <tr>
+		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+		                &nbsp;* Codigo Medico
+		    	    </td>     	                
+		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+		                &nbsp;* Apellido Paterno Medico
+		    	    </td>     	                
+		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+		                &nbsp;* Apellido Materno Medico
+		    	    </td>     
+		            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+		                &nbsp;* Nombre(s) Medico
+		    	    </td>     
+		        </tr>   
+		        <tr>
+		            <td style="width: 187px">
+		                <input type="hidden" id="hdnkMedico" value="0" />		            	
+		                <input type="text" id="txtCodigoMedico" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;" onKeyPress="numero();" value="0" size="10"/>
+		    	    </td>     
+		            <td style="width: 187px">
+		                <input type="text" id="txtApellidoPaternoMedico" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();" size="35"/>
+		    	    </td>     
+		            <td style="width: 158px">
+		                <input type="text" id="txtApellidoMaternoMedico" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();" size="35" />
+		    	    </td>     
+		            <td>
+		                <input type="text" id="txtNombreMedico" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();" size="35" />
+		    	    </td>     
+		        </tr>   
+		        <tr>
+		        	<td style="height: 26px">
+		                <strong>Observaciones</strong>
+					</td>
+					<td colspan="2" style="height: 26px">					
+						<input type="text" id="txtObservaciones" STYLE="font-size: 12.7px;" maxlength="100" style="width: 317px"  onKeyPress="mayuscula();">
+					</td>
+				</tr>
+				<tr>
+		        	<td style="height: 26px">
+		                <strong>Entrega Resultado a:</strong>
+					</td>
+					<td colspan="2" style="height: 26px">					
+						<input type="text" id="txtEntregaResultadoA" onKeyPress="mayuscula();" size="35"/>
+					</td>
+				</tr>	
+		    </table>	        				
+			<div id="MedicoBusqueda">
+			</div>
+	        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+	            <tr>
+	        	    <th colspan="6">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Cotizacion Factura</b>
+	        	        </center>
+	        	    </th>
+		        </tr>   
+	    		<tr>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Admisi&oacute;n</th>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;">Factura</th>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Fecha de Entrega</th>
+	    			<th nowrap style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Entrega de Resultados</th>
+	    		</tr>
+	           	<tr>
+	    			<td align="center" valign="top">
+	    				<input type="text" name="txtAdmision" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			
+						<a href="$content.getURI("images/Examen.doc")">Resultados</a><br/>	    				
+	    			</td>
+	    			<td align="center" valign="top">
+	    				<input type="text" name="txtOrden" class="textflat"  readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;"/>    			    			
+	    			</td>
+	    			<td align="center" valign="top">
+					    <div id="CalendarioFechaEntrega">
+		                    <input type="text" name="txtFechaEntrega" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;" size="12" onKeyup="javascript:agregaDiag(this);"  onChange="javascript:this.value=validaFormatoFecha(this.value);">		
+					    </div>									    
+	    			</td>
+	    			<td align="center" valign="top">
+	                    <input id="chkEntregaResultados" type="checkbox" style="width: 20px" onClick="actualizarEntregaResultado();" />&nbsp;
+	                </td>
+	       		</tr>	        
+	        </table>	                		
+	</div>
+    <div id="pagoOrden">                
+	        <table border="0"  align="center" style="width: 883px" class="tabla" >	        
+	            <tr>
+	        	    <th colspan="6">
+	        	        <center>
+	        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Pagos</b>
+							<a href="http://web2-lab.com/videos/IngresarPago.wmv"  title="VIDEO" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">VIDEO</a>
+	        	        </center>
+	        	    </th>
+		        </tr>   
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">SubTotal</b></td>
+					<td align="left">
+	    				<input type="text" id="txtSubTotal" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Descuento Paciente</b></td>
+					<td align="left">
+	    				<input type="text" id="txtDescuentoPaciente" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Descuento Empresa</b></td>
+					<td align="left">
+	    				<input type="text" id="txtDescuentoEmpresa" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Facturar Empresa</b></td>
+					<td align="left">
+	    				<input type="text" id="txtFacturarEmpresa" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>		        
+				<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Total a pagar: </b></td>
+					<td align="left">
+	    				<input type="text" id="txtTotalPagar" class="textflat" value='0' readonly="readonly" style="color: black; font-weight : bold; text-align : center;"/>
+					</td>
+			   	</tr>
+		       	<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">A cuenta: </b></td>
+	        		<td align="left">
+	    				<input type="text" id="txtAcuenta" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/>
+	    			</td>
+	        	</tr>
+	        	<tr>
+	        		<td align="right"><b style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">Adeuda: </b></td>
+	        		<td align="left">
+						<input type="text" id="txtAdeudo" class="textflat" value='0' style="color: black; font-weight : bold; text-align : center;"/> 
+		                <input type="hidden" id="hdnAdeudo" value="0" />
+	    			</td>        		
+	        		<td>
+			    		<input type="button" id="idGenerarFactura" value="Generar Factura" onClick="beginFactura();" class="boton">
+		        	</td>     
+	        	</tr>
+			</table>						
+	</div>		    	
+	<div id="BusquedaFiscal" style="display:none">
+	    <table border="0"  align="center" style="width: 883px">	        
+            <input type="hidden" id="hdnDatosFiscales" value="0" />
+	        <tr>
+	    	    <th colspan="12">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Busqueda Fiscales</b>
+	    	        </center>
+	    	    </th>
+	        </tr>   
+			<tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<b id="idTextrfc">RFC:</b><br> 				
+    	    </td>	            
+            <td>
+				<input type="text" id="txtRFC" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();validaRFC(window.document.frmConsultaOrden);"  onblur="validaRFC(window.document.frmConsultaOrden);"  onkeyup="comparaRFC();" size="20" maxlength="13" >
+			</td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal" >
+				<b id="idTextConfirmacionrfc">RFC CONFIRMACION:</b><br> 
+    	    </td>	            
+            <td colspan="5">
+				<input type="text" id="txtConfirmarRFC" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();validaRFC(window.document.frmConsultaOrden);"  onblur="validaRFC(window.document.frmConsultaOrden);" onkeyup="comparaRFC();" size="20" maxlength="13" >
+			</td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<b>Tipo de Empresa:</b><br> 
+    	    </td>	            
+			<td align="left">
+				<select id="selTipoPersona" style="background:#E6E6FA" onChange="javascript:window.document.frmConsultaOrden.txtRFC.value='';" >
+					#foreach($objTipoEmpresa in $lstTipoEmpresa)
+						#option("$!objTipoEmpresa.getCtipopersona()" "$!objTipoEmpresa.getStipopersona()" "0")							
+					#end
+				</select>	
+			</td>			
+    		<td>
+	    		<input type="button" id="idBuscarDatosFiscales" value="Buscar Datos Fiscales" onClick="consultaDatosFiscalesGrid(window.document.frmConsultaOrden);" class="boton">
+        	</td>     
+	    </table>
+	</div>
+	<div id="DireccionFiscal" style="display:none">
+	    <table border="0"  align="center" style="width: 883px">	        
+            <input type="hidden" id="hdnDatosFiscales" value="0" />
+	        <tr>
+	    	    <th colspan="6">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Datos Fiscales</b>
+	    	        </center>
+	    	    </th>
+	        </tr>   
+			<tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+					Raz&oacute;n Social
+	    	    </td>	            
+	            <td colspan="5">
+					<input type="text" id="txtRazonSocialFiscal" value="" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="mayuscula();" size="70" >
+					<input type="hidden" id="hdnkDatoFiscal" value="0">
+				</td>
+			</tr>
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Calle
+	    	    </td>	            
+	            <td colspan="5">
+	                <input type="text" id="txtCalleFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 490px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	        </tr>   
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Colonia
+	    	    </td>
+	            <td style="width: 158px">
+	                <input type="text" id="txtColoniaFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 157px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Delegaci&oacute;n o Municipio
+	    	    </td>
+	            <td style="width: 158px">
+	                <input type="text" id="txtDelegacionMunicipioFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();validaTextos(this.value);"/>
+	    	    </td>
+	        </tr>   
+	        <tr>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                Estado
+	    	    </td>
+	            <td style="width: 158px">
+##                	<select id="selEstado" style="width: 177px" onblur="VerificaModificacion();">
+##    					#foreach($objEstado in $lstEstados)
+##    						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+##    					#end
+##    				</select>    	    					
+	                <input type="text" id="txtEstadoFiscal" style="color: black; font-size: x-small; font-weight : bold;" style="width: 180px" onKeyPress="mayuscula();"  />
+	    	    </td>
+	            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	                C&oacute;digo Postal
+	    	    </td>
+	            <td>
+	                <input type="text" id="txtCodigoPostalFiscal" style="color: black; font-size: x-small; font-weight : bold;" onKeyPress="javascript:return numero();"/>
+					<input type="hidden" id="hdnCodigoPostalFiscal" value="0">
+	    	    </td>
+	        </tr>   
+	        <tr>
+        		<td>
+    	    		<input type="button" id="idLimpiarDatosFiscales" value="Guardar Datos Fiscales" onClick="cleanDatosFiscales();" class="boton">
+            	</td>     
+        		<td>
+		    		<input type="button" id="idGuardarFactura" value="Guardar Factura" onClick="guardarFactura();" class="boton">
+	        	</td>     
+	        </tr>   
+	    </table>
+	</div>
+	<div id="gridFacturarEmpresas" style="display:none">                
+	    <table border="0"  align="center" style="width: 883px">	        
+	        <tr>
+	    	    <th colspan="6">
+	    	        <center>
+	    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Funciones Facturacion</b>
+	    	        </center>
+	    	    </th>
+	        </tr>   
+	        <tr>
+        		<td>
+    	    		<input type="button" id="idListoFacturar" value="Lista Facturar" onClick="ListaFacturar();" class="boton">
+	                <select id="selGrupo" style="width: 330px">
+    					<option value="1">1</option>
+    					<option value="2">2</option>
+    					<option value="3">3</option>
+    					<option value="4">4</option>
+    					<option value="5">5</option>
+    					<option value="6">6</option>
+    					<option value="7">7</option>
+    					<option value="8">8</option>
+    					<option value="9">9</option>
+    					<option value="10">10</option>
+    					<option value="11">11</option>
+    					<option value="12">12</option>
+    					<option value="13">13</option>
+    					<option value="14">14</option>
+    					<option value="15">15</option>
+    					<option value="16">16</option>
+    					<option value="17">17</option>
+    					<option value="18">18</option>
+    					<option value="19">19</option>
+    					<option value="20">20</option>
+		            </select>						
+            	</td>     
+        		<td>
+		    		<input type="button" id="idRetenerFacturar" value="Retener Facturar" onClick="RetenerFacturar();" class="boton">
+	        	</td>     
+        		<td>
+		    		<input type="button" id="idNoFacturar" value="No se Factura" onClick="noFacturarOrden();" class="boton">
+	        	</td>     
+        		<td>
+		            <input type="text" id="txtEstadoFacturacion" class="textflat" readonly="readonly" style="color: black; font-size: x-small; font-weight : bold; text-align : center;" value="" size="10"/>
+	        	</td>     
+	        </tr>   
+	        <tr>
+        		<td>
+	    	    </td>
+        		<td>
+	    	    </td>
+	        </tr>   
+	        <tr>
+        		<td>
+	                <select id="selConvenios" style="width: 350px" onChange="addOptionSelect(this);">
+						#foreach($objConvenio in $lstConvenios)
+							#option("$!objConvenio.getCconvenio()" "$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()" 0)	
+						#end
+		            </select>						
+	    	    </td>
+        		<td>
+					<input type="button" id="idChangeConvenio" value="Cambiar Convenio" onClick="CambiarConvenio();" class="boton">
+	    	    </td>
+	        </tr>   
+	        <tr>
+        		<td>
+	                <select id="selExamenes" style="width: 400px">
+		            </select>						
+	    	    </td>
+        		<td>
+					<input type="button" id="idAgregarExamen" value="Agregar Examen" onClick="AgregarProducto(window.document.frmConsultaOrden.selExamenes);" class="boton">
+	    	    </td>
+	        </tr>   
+	        <tr>
+        		<td>
+	                <select id="selPerfiles" style="width: 400px">
+		            </select>						
+	    	    </td>
+        		<td>
+					<input type="button" id="idAgregarPerfil" value="Agregar Perfil" onClick="AgregarProducto(window.document.frmConsultaOrden.selPerfiles);" class="boton">
+	    	    </td>
+	        </tr>   
+	        <tr>
+        		<td>
+	    	    </td>
+        		<td>
+					<input type="button" onclick="return repOrdenFactura('$ligaReporte','Factura',window.document.frmConsultaOrden.txtAdmision.value)" value="Recibo" name="recibo" class="boton" style="width:200px">
+	    	    </td>
+	        </tr>   
+	    </table>
+	</div>            		        					
+    <div id="gridprogressbar" style="display:none">                
+        <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+            <td>
+        		<p align=center><img src="$content.getURI("images/ajax-loader.gif")" >	
+            </td>
+    	</table>
+	</div>            	 	
+	<div id="gridbusquedaDatosFiscales" style="display:none">                
+	</div>            		        					
+	<div id="RegistraUsuario" style="display:none">
+	</div>		    		
+	<div id="RegistraPago" style="display:none">		
+	</div>		    	
+</form>
+
+#if($intkOrdenSucursal)
+	<script>		
+	     mostrarFactura('$intkOrdenSucursal');
+		 adminDIV("RegistraUsuario","visible","inline");
+	</script>	
+#end

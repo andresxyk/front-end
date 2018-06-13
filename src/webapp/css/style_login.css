@@ -1,0 +1,157 @@
+@charset "utf-8";
+/* CSS Document */
+html {
+	margin:0;
+	padding:0;
+	}
+
+body {
+	margin:0;
+	padding:0;
+	font-family:Arial, Helvetica, sans-serif;
+	}
+
+/* HEADER */	
+#header {
+	position:relative;
+	margin:0 auto;
+	width:892px;
+	height:140px;
+	top:0px;
+	background-color:#e0962f;
+	background-image:url(../images/cab.png);
+}
+#container {
+	position:relative;
+	margin:0 auto;
+	margin-top:0px;
+	width:892px;
+	height:737px;
+	top:0px;
+	background-color:#6c6d6f;
+}
+#containerbco {
+	position:relative;
+	margin-top:0px;
+	margin-left:0px;
+	width:851px;
+	height:668px;
+	top:13px;
+	background-color:#FFF;
+}
+#redes {
+	position:relative;
+	float:right;
+	margin-right:82px;
+	width:132px;
+	height:32px;
+	bottom:-18px;
+	text-align:right;
+	/*background-color:#39C;*/
+}
+#paciente {
+	position:relative;
+	margin:0 auto;
+	top:22px;
+	width:779px;
+	height:354px;
+	/*background-color:#C00;*/
+	background-image:url(../images/paciente.png);
+}
+#autentificacion {
+	position:relative;
+	margin-left:35px;
+	width:374px;
+	height:106px;
+	top:40px;
+	/*background-color:#39C;*/
+}
+.autentificacion_txt {
+	position: relative;
+	color: #6c6d6f;
+	font: 18px Arial, Helvetica, sans-serif;
+	font-weight:bold;
+	text-align: left;
+}
+.form_txt {
+	position: relative;
+	color: #6c6d6f;
+	font: 14px Arial, Helvetica, sans-serif;
+	text-align: left;
+}
+#formaction {
+	position:absolute;
+	float:left;
+	margin-left:525px;
+	width:250px;
+	height:133px;
+	top:0px;
+	text-align:right;
+	/*background-color:#93C;*/
+}
+#regresar {
+	position:relative;
+	margin-left:35px;
+	width:779px;
+	height:101px;
+	top:100px;
+	/*background-color:#39C;*/
+}
+#regresar2 {
+	position:relative;
+	margin-left:0px;
+	width:362px;
+	height:36px;
+	top:66px;
+	/*background-color:#06C;*/
+	/*background-image:url(../images/regresar_a_olab.jpg);*/
+}
+#queremossaber {
+	position:relative;
+	float:right;
+	margin-left:400px;
+	width:130px;
+	height:101px;
+	top:-35px;
+	/*background-color:#93C;*/
+	background-image:url(../images/queremos_saber_home.jpg);
+}
+form {
+		width: 250px;
+			}
+	label {
+		font-size: 14px;
+		font-family: arial, sans-serif;
+		list-style-type: none;
+		color: #999;
+		margin-bottom: 3px;
+		letter-spacing: 0px;
+		display: block;
+	}
+	input {
+	  -webkit-transition-duration: 0.25s;
+	  	padding: 6px;
+		margin-bottom: 3px;
+		background: #b3b4b5;
+		width: 230px;
+	}
+
+	input.submit {
+	  -webkit-transition-duration: 0.25s;
+		width: 100px;
+		color: #000;
+		margin-top: 10px;
+	}
+
+	input.submit:hover {
+		-webkit-box-shadow: 0px 0px 1px #FFF;
+	} 
+
+	input.submit:active {
+		background: -webkit-gradient(linear, 0% 0%, 0% 100%, from(#781bb9), to(#963AD6));
+		background:  -moz-linear-gradient(19% 75% 90deg,#963AD6, #781bb9);
+	}
+
+	input:hover {
+		background: #CCC;
+	}

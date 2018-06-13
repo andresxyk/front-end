@@ -1,0 +1,108 @@
+#set ( $gstrModo = $data.getParameters().getString("strModo"))
+#if  ($gstrModo == "insertar")    
+	#set ( $gobjPermisos = $CMenuTool.getPermisosMenuNoEnMenuPermission())
+	#set ($titlePage = "Agrega una nueva liga")
+#else
+	#set ( $gobjPermisos = $CMenuTool.getPermisosMenuEnMenuPermission())
+	#set ($titlePage = "Modifica un menu")
+#end
+#set ( $gobjGrupos = $CMenuTool.getGruposMenu())
+#set ( $gstrLigaactual = $link.setPage("web2lab,seguridad,Ligas_Menu.vm"))
+#set ( $gstrLigaactual  = $link.setAction("seguridad.BAdmonMenuAction").toString())
+#set ( $strPagAnt = $link.setPage("web2lab,seguridad,Ligas_Menu.vm").toString())
+#set ( $strCargaPag = $link.setAction("seguridad.BAdmonMenuAction").setPage("web2lab,seguridad,Ligas_AdmonMenu.vm").toString())
+<script language="JavaScript" src="$content.getURI("javascript/seguridad/validaseguridad.js")"></script>  
+<script language="JavaScript">
+	objLigas = new Array(' - '
+	#foreach($objPermiso in $gobjPermisos)
+		,'$objPermiso.getValue(3).asString()'
+	#end
+	)
+	objPermisos = new Array(' 0 '
+	#foreach($objPermiso in $gobjPermisos)
+		,"$objPermiso.getValue(4).asString()"
+	#end
+	)
+	function getLiga(forma, campo, campo2, campo3){
+		obj_elem = eval('window.document.' + forma + '.' + campo);
+		obj_elem2 = eval('window.document.' + forma + '.' + campo2);
+		obj_elem3 = eval('window.document.' + forma + '.' + campo3);
+		obj_elem2.value = objLigas[obj_elem.selectedIndex];
+		obj_elem3.options.value = objPermisos[obj_elem.selectedIndex];
+	}
+
+	function irAurl() { 		
+		window.document.frmadmonmenu.action = "$strCargaPag";
+	}		
+</Script>
+       <form method="post" action="$gstrLigaactual" name="frmadmonmenu" #if($gstrModo == "insertar")onSubmit="return validaFrmAdmonMenu('frmadmonmenu');" #else onsubmit="return validaFrmAdmonMenu('frmadmonmenu');"#end>     
+			<table width="100%" class="tabla">
+				<tr>
+					<td>
+						#if($!bolCreado == "true")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Alta de liga exitosa"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">&nbsp; Se dio de alta la liga : $!strMensaje</font></b>
+						#end	
+					</td>
+				</tr>
+				<tr>
+					<td>
+						#if($!bolModif == "true")
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de liga exitosa"/>&nbsp;&nbsp;
+							<b><font color="$ff0030" aling="center">&nbsp; Se actualiz&oacute; la liga exitosamente</font></b>
+						#end	
+					</td>
+				</tr>
+			</table>
+          <table border="0" cellspacing="2" cellpadding="3" class="tabla" width="100%">
+          <tr>
+           <th>Permiso:</th>
+          	<td>
+          	#if  ($gstrModo == "insertar") 
+	      		<select name="cboPermisosmenu">
+	      	#else
+		      	<select name="cboPermisosmenu" onChange="getLiga('frmadmonmenu', 'cboPermisosmenu', 'txtLiga', 'cboGruposmenu')">
+	      	#end
+	                #option("" "Seleccione" "")
+	                #foreach($objPermiso in $gobjPermisos)
+						<option value="$objPermiso.getValue(1).asInt()">
+							$objPermiso.getValue(2).asString()
+						</option>
+	                #end
+	             </select>
+             </td>
+          </tr>     
+          <tr>
+           <th>Grupo:</th>
+          	<td>
+	      		<select name="cboGruposmenu">
+	                #option("" "Seleccione" "")
+	                #foreach($objGrupo in $gobjGrupos)
+						<option value="$objGrupo.getValue(1).asInt()">
+							$objGrupo.getValue(2).asString()
+						</option>
+	                #end
+	             </select>
+            </td>
+           </tr>              
+          <tr>
+           <th>Liga</th>
+           	<td>
+           	   <input type="text" name="txtLiga" value="" size='50'>
+           	</td>
+          </tr>
+                   
+          </table>
+	#if  ($gstrModo == "insertar")
+		<input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onclick="irAurl()"/>
+	#else
+		<input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar" onclick="irAurl()"/>
+	#end      
+	#if($!bolCreado == "true")
+		#set ($etiqueta = "Regresar")			
+	#else    	
+    	#set ($etiqueta = "Cancelar")			
+    #end    
+    <input type="button" name="cmd$etiqueta" value="$etiqueta" class="boton" onclick="location.href='$strPagAnt'";>              
+                 
+    </form>

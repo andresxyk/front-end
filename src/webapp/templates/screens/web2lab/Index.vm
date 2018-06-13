@@ -1,0 +1,13 @@
+     <div id="bodycol">
+      <div id="apphead"><h2>Bienvenido: <em>Control Publicitario</em></h2></div>
+       <!--  <image src="" border="0" > -->
+       #set ( $user = $data.getUserFromSession() )
+#if ($user)
+       El usuario si existe
+#else
+       El usuario no existe
+#end
+
+      <div>
+      </div>
+     </div>

@@ -1,0 +1,53 @@
+##set ($titlePage = "Datos Scotianbank" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/DatosScotianbank.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosMedico.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionMayoreoAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ($strIdUnidad = $data.getSession().getAttribute("strIdUnidadActual"))
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($IdUsuarioSesion = $objSesion.getAttribute("IdUsuarioSesion") )
+
+#set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
+#set($ligaReporte = $link.setAction("reportes.ReporteActionScotianbank").toString())
+
+#set ($ligaAct = $link.setPage("web2lab,facturacion,DatosScotianbank.vm").setAction("fundacion.DatosOrden").toString() )
+
+
+
+<form name="frmScotianbank"  method="post" >	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">				
+	<input type="hidden" id="ligaDatosOrden" name="ligaDatosOrden" value="$!ligaDaosOrden">	
+	<input type="hidden" id="strIdUnidadActual" name="strIdUnidadActual" value="$!strIdUnidad">
+	<input type="hidden" name="txtUnidadH" value="$!intcSucursal" size="30">
+	<input type="hidden" name="hdnLiberar" value="0" >		
+           
+	<table border="0" cellspacing="0" cellpadding="0" width="100%" class="tabla" id="TabMan" style="display:block">
+		<tr>			
+   			<th align="left" colspan="4">
+   				Ingresar Consecutivos para generación Datos:
+   			</th>
+   		</tr>
+		<tr>
+			<td >
+				consecutivo<input type="text" id="txtNumOrden" name="txtNumOrden" onKeyPress="numero();buscarEtiqueta('$ligaReporte','Datos');" size="10" style="width:100px;">
+			</td>
+			<td >
+				<input type="button" name="generaDatos" value="Generar Datos" onClick="return repScotianbank('$ligaReporte','Datos')" class="boton">
+			</td>
+		</tr>	
+   	</table>
+	
+</form>

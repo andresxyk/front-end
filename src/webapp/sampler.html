@@ -1,0 +1,245 @@
+<!DOCTYPE html PUBLIC "-//Tigris//DTD XHTML 1.0 Transitional//EN"
+"http://style.tigris.org/nonav/tigris_transitional.dtd">
+<html>
+ <head>
+  <style type="text/css"></style>
+  <link rel="stylesheet" type="text/css" href="css/tigris.css" />
+  <link rel="stylesheet" type="text/css" href="css/cmpt.css" />
+  <script src="http://style.tigris.org/nonav/scripts/tigris.js" type="text/javascript"></script>
+  <title>My title</title>
+  <meta http-equiv="Content-type" content="text/html" />
+  <meta http-equiv="Content-style-type" content="text/css" />
+  <meta name="keywords" content="britney spears bob dole" />
+  <meta name="description" content="Your ad here" />
+ </head>
+ <body onload="focus()" marginwidth="0" marginheight="0" class="composite">
+  <div id="banner">
+   <table border="0" cellspacing="0" cellpadding="8" width="100%">
+    <tr>
+     <td>&nbsp;
+        <!--marketing stuff here-->
+        <img src="images/LogoMex5.gif" valign="top">
+     </td>
+     <td>
+      <div id="login" align="right">
+       <div>Logged in: <strong class="username">root</strong></div>
+       <div><a href="#">Edit profile</a> | <a href="#">Logout</a> | <a href="#">Release hounds</a></div>
+      </div>
+     </td>
+    </tr>
+   </table>
+  </div>
+  <div id="breadcrumbs">
+   <table border="0" cellspacing="0" cellpadding="4" width="100%">
+    <tr>
+     <td><a href="#">Foo</a> &gt; <a href="#">Bar</a> &gt; <a href="#">Baz</a> &gt; Bat</td>
+     <td>
+      <div id="search" align="right">
+       <form action="#" method="get">
+        Site search: <input type="text" name="query" size="10" /> <input type="submit" name="Button" value="Go" />
+       </form>
+      </div>
+     </td>
+    </tr>
+   </table>
+  </div>
+  <table border="0" cellspacing="0" cellpadding="8" width="100%" id="main">
+   <tr valign="top">
+    <td id="leftcol" width="20%">
+     <div id="navcolumn">
+      <div><strong><a href="#">My start page</a></strong></div>
+      <div><strong><a href="#">Hosted&#160;projects</a></strong></div>
+      <div id="tools" class="focus">
+       <strong>Project tools</strong>
+       <div><small><a href="#">Project home</a></small></div>
+       <div><small><a href="#">Membership</a></small></div>
+       <div><small><a href="#">Mailing lists</a></small></div>
+       <div><small><a href="#">Source code</a></small></div>
+       <div><small><a href="#">Issue tracking</a></small>
+        <div><small><a href="#">Foo</a></small></div>
+        <div>
+         <small><a href="#">Bar</a></small>
+         <div><small><a href="#" class="selfref">And so on</a></small></div>
+        </div>
+        <div><small><a href="#">Baz</a></small></div>
+       </div>
+       <div><small><a href="#">File sharing</a></small></div>
+       <div><small><a href="#">News</a></small></div>
+      </div>
+      <div id="admfun">
+       <strong>Administration</strong>
+       <div><small><a href="#">Project groups</a></small></div>
+       <div><small><a href="#">Users</a></small></div>
+       <div class="heading">
+        <small><strong>User groups</strong></small>
+        <div><small><a href="#">Group one</a></small></div>
+        <div><small><a href="#">Group two</a></small></div>
+       </div>
+       <div><small><a href="#">Sessions</a></small></div>
+       <div><small><a href="#">Audit log</a></small></div>
+      </div>
+     </div>
+     <div id="helptext">
+      <table border="0" cellspacing="0" cellpadding="3" width="100%">
+       <tr><th>How do I...</th></tr>
+       <tr>
+        <td>
+         <div>
+          <a href="example_help1.html" onclick="return launch(this.href, 1)" title="Note: link may open in new window">Learn more about this project?</a>
+         </div>
+         <div>
+          <a href="example_help1.html" onclick="return launch(this.href, 1)" title="Note: link may open in new window">Join this project?</a>
+         </div>
+        </td>
+       </tr>
+      </table>
+     </div>
+    </td>
+    <td>
+     <div id="topmodule">
+      <table border="0" cellspacing="0" cellpadding="3">
+       <tr>
+        <td id="issueid">
+         <form action="#" method="get">
+          <input type="hidden" name="nextTemplate" value="ViewIssue.vm" /> <input type="text" name="id" size="15" maxlength="255" tabindex="1" /> <input type="submit" value="Issue Id" name="eventSubmit_doGonext" tabindex="2" />
+         </form>
+        </td>
+        <td>
+         <form action="#" method="get">
+          <input type="hidden" name="nextTemplate" value="Index.vm" />
+          <select name="go" tabindex="3" onchange="this.form.submit();">
+           <option value="AdvancedQuery.vm">
+            Select query...
+           </option>
+           <option value="AdvancedQuery.vm">
+            Advanced
+           </option>
+           <option value="Search.vm">
+            Custom
+           </option>
+          </select>
+          <input type="hidden" value="foo" name="eventSubmit_doSelectquery" />
+          <noscript><input type="submit" value="Go" name="foo" tabindex="4" /></noscript>
+         </form>
+        </td>
+       </tr>
+      </table>
+     </div>
+     <div id="bodycol">
+      <div id="apphead"><h2>My title: <em>Launch torpedo</em></h2></div>
+      <div id="projecthome" class="app">
+       <div class="tabs">
+        <table cellpadding="3" cellspacing="0" border="0">
+         <tr>
+          <td title="View category list"><a href="#">Categories</a></td>
+          <th title="View project list">Projects</th>
+          <td title="View category list"><a href="#">Leanest tabset ever</a></td>
+         </tr>
+        </table>
+       </div>
+       <div class="colbar">
+        <form action="#" method="get">
+         <input type="checkbox" name="mode" id="mode" value="Nested" onclick="this.form.submit();" /> <label for="mode">View sub projects</label> <noscript><input type="submit" value="Refresh" /></noscript>
+        </form>
+       </div>
+       <table border="1" cellspacing="2" cellpadding="3" width="100%">
+        <tr>
+         <th>Name</th>
+         <th>Summary</th>
+         <th>Categories</th>
+        </tr>
+        <tr class="a">
+         <td><a href="#">Chunk</a></td>
+         <td>A project for HTML documents and information</td>
+         <td>none</td>
+        </tr>
+        <tr class="b">
+         <td><a href="#">Testproject</a></td>
+         <td>Test project for beta test</td>
+         <td>none</td>
+        </tr>
+        <tr class="a">
+         <td><a href="#">Applethrasher</a></td>
+         <td>A project for HTML documents and information</td>
+         <td>none</td>
+        </tr>
+       </table>
+       <div id="framework" class="h3">
+        <h3>Framework</h3>
+        <div class="axial">
+         <table border="0" cellspacing="2" cellpadding="3">
+          <tr>
+           <th>Name for system mail</th>
+           <td>
+            <input type="text" name="#" value="SourceCast" size="30" maxlength="50" />
+            <p>Name from which system email should be sent</p>
+           </td>
+          </tr>
+          <tr>
+           <th>Display timezone</th>
+           <td>
+            <input type="text" name="#" value="GMT" size="10" maxlength="10" />
+            <p>The timezone to use for displaying times and dates</p>
+           </td>
+          </tr>
+          <tr>
+           <th>Logging level</th>
+           <td>
+            <div><input type="radio" name="#" checked="checked" /> DEBUG</div>
+            <div><input type="radio" name="#" value="INFO" /> INFO</div>
+            <div><input type="radio" name="#" value="WARN" /> WARN</div>
+            <div><input type="radio" name="#" value="ERROR" /> ERROR</div>
+            <p>The verbosity of logging produced by system operation and events</p>
+           </td>
+          </tr>
+          <tr>
+           <th>User cache size</th>
+           <td>
+            <input type="text" name="#" value="1" size="3" maxlength="3" />
+            <p>The size of the site-wide user cache, expressed as a fraction of the total number of users on the site</p>
+           </td>
+          </tr>
+          <tr>
+           <td>&#160;</td>
+           <td><input type="submit" name="Button" value="Make changes" /></td>
+          </tr>
+         </table>
+        </div>
+       </div>
+       <div class="h3" id="mimes">
+        <h3>Expiring mimes want to, no?</h3>
+         <p class="tasknav"><a href="#">Edit this project</a> | <a href="#">Add extra flavor</a> | <a href="#">Congeal actionables</a></p>
+         <p>
+          <acronym title="Cascading Style Sheets">CSS</acronym> came late to the TLA party. It competes with Christ Saves Souls and <a href="http://www.reprod-ent.com/bullserv.html#only">Certified Semen Services</a>, but Cascading Style Sheets is more than a religion or animal husbandry commodity: much more. It is a way out of the bloated, murky HTML generation and maintenance business. It is a way to cut the transmission times of your screens to perhaps 30% what they are now, depending on how bad you've been. It is a way to stop using HTML tables except for train schedule-style tabular data. No more font tags, no more spacer GIFs, no more GIFs of text. And still look good - better even than with all the painful crufty techniques just mentioned.
+         </p>
+         <div class="h4" id="waitmore">
+          <h4>But wait there's more</h4>
+          <p>This project branding information used to affect the appearance of the site. Its project branding information used to affect the appearance of the site. His project branding information used to affect the appearance of the site. Tis project branding information used to affect the appearance of the site. </p>
+          <p>Now enriched with solid gold.</p>
+         </div>
+         <div class="h4" id="feedingtime">
+          <h4>Feeding time at the Zoo</h4>
+          <p class="tasknav"><a href="#">Edit this project</a> | <a href="#">Add extra flavor</a> | <a href="#">Congeal actionables</a></p>
+          <p>This project branding information used to affect the appearance of the site.</p>
+          <p>Now enriched with solid gold.</p>
+         </div>
+       </div>
+      </div>
+     </div>
+    </td>
+   </tr>
+  </table>
+  <div id="footer">
+   <table border="0" cellspacing="0" cellpadding="4">
+    <tr>
+     <td><!--marketing stuff here--></td>
+     <td>
+      <a href="#">Domain home</a> | <a href="#">Site FAQ</a> | <a href="#">Feedback</a> | <a href="#">Terms of use</a>
+      <p><small>Copyright &#169; 1999-2002 CollabNet, Inc. CollabNet and SourceCast are trademarks of CollabNet, Inc. All other trademarks or registered trademarks are the property of their respective holders.</small></p>
+     </td>
+    </tr>
+   </table>
+  </div>
+ </body>
+</html>
+

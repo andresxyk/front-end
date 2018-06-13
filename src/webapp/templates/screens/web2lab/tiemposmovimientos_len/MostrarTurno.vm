@@ -1,0 +1,39 @@
+#set ($titlePage = "Mostrar Turno" )
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+#set ($intRol = $data.getSession().getAttribute('IdRol') )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tiemposmovimientos/MostrarTurno.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/Tickets.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<form name="frmMostrarTurno" action="" method="post">
+    <input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">
+    <embed id="IDSiguienteTurno" type="audio/x-wav" src="$content.getURI("images/siguienteTurno.wav")" autoplay="false" autostart="true" width="0" height="0">
+	<table bgcolor="#F3E2A9" border="0"  align="center" style="width: 900px">
+		<tr>
+			<td  bgcolor="#F3E2A9" align="center" colspan="3">
+				<label style="font-size: 180px; line-height: normal;" align="center" id="lblturno">TURNO XX-000</label>
+			</td>
+		</tr>		
+		<tr>
+			<td align="center">
+				<label style="font-size: 80px; line-height: normal;" align="center" id="lblcubiculo">MODULO A</label>
+			</td>
+		</tr>
+		<tr>
+			<td align="center">
+				<label style="font-size: 40px; line-height: normal; color: blue;" align="center" id="lblanterior">ANTERIOR</label>
+			</td>
+		</tr>
+	</table>
+</form>
+<script>
+ 	mostrarTurnos();
+</script>

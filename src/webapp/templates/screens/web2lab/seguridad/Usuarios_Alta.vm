@@ -1,0 +1,83 @@
+<SCRIPT language="javaScript" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT>  
+#set ( $objUsuario    = $CSeguridadTool.getUsuario())
+#set ( $strModo    = $CSeguridadTool.getModo() )
+#set ( $strLigaAct = $link.setPage("web2lab,seguridad,Usuarios.vm"))
+#set ( $strLigaAct = $link.setAction("seguridad.BUserAction").toString())
+#set ( $strCargapagina = $link.setAction("seguridad.BUserAction").setPage("web2lab,seguridad,Usuarios_Form.vm").toString())
+#set ( $strPagAnt = $link.setPage("web2lab,seguridad,Usuarios.vm").toString())
+
+#if ($strModo == "modificar")
+	#set ($titlePage = "Modificar Usuario")
+#elseif ($strModo == "eliminar")
+	#set ($titlePage = "Eliminar Usuario")
+#else
+	#set ($strModo = "insertar")
+   	#set ($titlePage = "Agregar un Nuevo Usuario")
+#end  
+<script language="JavaScript" src="$content.getURI("javascript/seguridad/validaseguridad.js")"></script>
+<script language ="JavaScript">
+
+	function irAurl() { 		
+		window.document.frmUsuario.action = "$strCargapagina";
+	}
+	
+	
+</script>
+    <form method="post" name="frmUsuario" action="$strLigaAct"  #if($strModo != "eliminar")onsubmit="return validaFormaUsuarios('frmUsuario')" #end>
+		<input type="hidden" name="hdnCambioPass" value="false">
+		<table width="100%" class="tabla">
+			<tr>
+       			<td>
+		       		#if($!bolCreado == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Alta de usuario exitosa"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensaje, se dio de alta con &eacute;xito.</font></b>
+					#end	
+				</td>
+			</tr>
+			<tr>
+       			<td>
+		       		#if($!bolUsuarioExiste == "true")
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Usuario existente"/>&nbsp;&nbsp;
+						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strUsuarioExiste, ya existe.</font></b>
+					#end	
+				</td>
+			</tr>	
+		</table>
+    	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+            <tr>
+                <th>Login</th>
+                    <td>
+					    <input type="text" name="txtusername" value="$!objUsuario.UserName" disabled>
+        			</td>
+       		</tr>							
+       		<tr>
+        		<th>Nombre</th>
+        			<td>
+         				<input type="text" name="txtfirstname" value="$!objUsuario.FirstName" onKeyUp="cambiaMay('frmUsuario','firstname');" disabled>
+        			</td>
+       		</tr>
+       		<tr>
+        		<th>Apellido</th>
+        			<td>
+         				<input type="text" name="txtlastname" value="$!objUsuario.LastName" onKeyUp="cambiaMay('frmUsuario','lastname');" disabled>
+        			</td>
+       			</tr>
+       						
+       	</table>         
+       	
+	#if ($strModo == "modificar")
+		<input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar"/>
+	#elseif ($strModo == "eliminar")
+    	<input type="submit" name="eventSubmit_doElimina" class="boton" value="Confirma Eliminar" onclick="return confirm('¿Se eliminará al usuario y todas sus relaciones?');"/>
+	#else
+    	<input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onclick="irAurl()"/>
+	#end
+	#if($!bolCreado == "true")
+		#set ($etiqueta = "Regresar")			
+	#else    	
+    	#set ($etiqueta = "Cancelar")			
+    #end    
+    <input type="button" name="cmd$etiqueta" value="$etiqueta" class="boton" onclick="location.href='$strPagAnt'";>
+</form>      
+

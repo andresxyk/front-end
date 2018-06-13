@@ -1,0 +1,92 @@
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
+<SCRIPT language="JavaScript" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
+$page.setTitle("Seguridad: Lista de Permisos")
+#set ($titlePage = "Permisos")
+#set ( $strLigaActual = $link.setPage("web2lab,seguridad,Permisos.vm"))
+#set ( $strLigaActual  = $link.setAction("seguridad.BPermissionAction").toString())
+#set ( $strCargarPagina  = $link.setPage("web2lab,seguridad,Permisos_Form.vm").toString())
+#set($bolBuscaPerm=($!CSeguridadTool.getTxtPermiso()!="" || $!CSeguridadTool.getChkSel()!=""))
+#if ($bolBuscaPerm)
+	#set($objPermisos = $CSeguridadTool.getPermisosPorCriteria())
+#end
+<SCRIPT LANGUAGE="JavaScript">function goToURL() { window.location = "$strCargarPagina"; }</script>
+<form method="post" action="$strLigaActual" name="frmPermisos">
+	<table width="100%" class="tabla">
+		<tr>
+       		<td>
+		    	#if($!bolModif == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de permiso exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El permiso: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
+				#end
+				#if($!bolModif == "false")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de permiso fallida"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El permiso: $!strMensajeModif, Ya existe y no se actualiz&oacute;.</font></b>
+				#end	
+			</td>
+		</tr>
+		<tr>
+       		<td>
+		   		#if($!bolBorrado == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Eliminación de permiso exitosa"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">&nbsp; El permiso: $!strPermisoBorrado, se elimin&oacute; con &eacute;xito.</font></b>
+				#end	
+			</td>
+		</tr>
+		<tr>
+			<td>
+				#if($!bolNoBorro == "true")
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No se puede eliminar este permiso"/>&nbsp;&nbsp;
+					<font color="$ff0030">&nbsp; Existen relaciones para el permiso $!strPermisoNoBorrado, y no podr&aacute; ser eliminado</font>
+				#end
+			</td>
+		</tr>
+		#if(!$objPermisos && $bolBuscaPerm)
+    		<tr>
+       			<td colspan="2">
+					<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="No existen resultados"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">No existen resultados para ese criterio de b&uacute;squeda</font></b>					
+				</td>
+			</tr>
+		#end
+	</table>
+    <table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+        <tr>
+            <td>
+                Nombre del permiso:
+            </td>
+            <td>
+				<input type="text" name="txtPermisoNombre" value="$!strNomPermiso" onKeyUp="cambiaMay('frmPermisos', 'txtPermisoNombre');">
+            </td>			
+        </tr>
+        <tr>
+            <td colspan="2">
+                <input type="checkbox" name="chkSeleccionaTodo">Buscar todos
+            </td>
+        </tr>
+        <tr>
+            <th align="left">Permiso</th>
+            <th align="left" colspan="2">Acciones</th>
+        </tr>
+		##set($objPermisos = $CSeguridadTool.getPermisosPorCriteria())
+		#foreach ( $objPermiso in $objPermisos)
+		    #set ( $strLigaDetalle = $link.setPage("web2lab,seguridad,Permisos_Form.vm"))
+		    #set ( $strLigaDetalle = $link.addQueryData("strNombrePermiso",$objPermiso.Name))
+		    #set ( $strLigaDetalle = $link.addQueryData("strModo","modify").toString())
+		    #set ( $strLigaBorra = $link.setPage("web2lab,seguridad,Permisos_Form.vm"))
+		    #set ( $strLigaBorra = $link.addQueryData("strNombrePermiso",$objPermiso.Name))
+		    #set ( $strLigaBorra = $link.addQueryData("strModo","delete").toString())
+		    #if ( $t == "azul2") #set ( $t = "azul") #else #set ($t = "azul2")  #end
+		        <tr class="$t">
+	                <td>
+		                $!objPermiso.Name
+		            </td>
+		            <td>
+		                <a href="$strLigaDetalle">Actualizar</a>
+		                <a href="$strLigaBorra">Eliminar</a>
+		            </td>
+		        </tr>
+		#end		
+    </table>
+    <input type="submit"  name="buscaPermiso" class="boton" value="Buscar" onClick="return validaSeg('frmPermisos','txtPermisoNombre','chkSeleccionaTodo')"/>
+    <input type="button"  onClick="goToURL()" value="Crear Nuevo" class="boton">
+</form>

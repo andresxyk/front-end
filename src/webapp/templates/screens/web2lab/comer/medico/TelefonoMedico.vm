@@ -1,0 +1,53 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+
+#set ( $titlePage = "Alta o Mantenimiento Telefonos Medico") 
+
+#set ($intcMedico = $data.getParameters().getString('cMedico') )
+
+#set ($intcdireccionmedico = $data.getParameters().getString('cdireccionmedico') )
+
+
+<form name="frmDomicilioMedico">
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+    <div id="gridConfirmacion"> 
+        <table border="0"  align="center" style="width: 100%">	        
+            <tr>
+        	    <th colspan="6">
+        	        <center>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Telefono</b>
+        	        </center>
+        	    </th>
+            </tr>   
+            <tr>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Telefono
+        	    </td>	            
+                <td colspan="5">
+                    <input type="text" id="txtTelefono" style="width: 490px" onKeyPress="mayuscula();"   />
+        	    </td>
+                <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                    Tipo de Telefono
+        	    </td>	            
+                <td>
+                    <select id="selReferenciaTelefono" style="width: 177px" >
+    					<option value="0">Selecciona </option>								
+    					<option value="1">Celular 1 </option>								
+    					<option value="1">Celular 2 </option>								
+    					<option value="1">Consultorio Particular</option>								
+    					<option value="1">Consultorio Hospital</option>								
+    					<option value="1">Clinica</option>								
+    					<option value="1">Domicilio</option>								
+    				</select>
+        	    </td>
+            </tr>   
+        </table>
+    </div> 
+</form>

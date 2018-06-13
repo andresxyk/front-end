@@ -1,0 +1,75 @@
+package mx.com.web2lab.ajax.dwr.facturacion;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import mx.com.web2lab.ajax.dwr.http.AjaxAction;
+import mx.com.web2lab.backend.beans.cotizaciones.CotizacionBean;
+import mx.com.web2lab.backend.beans.facturacion.DatosAdicionalesBean;
+import mx.com.web2lab.backend.dao.facturacion.empresas.viaje.ViajeFacturacionDao;
+import mx.com.web2lab.backend.dao.facturacion.mayoreo.BusquedaFacturaDao;
+import mx.com.web2lab.backend.dao.facturacion.mayoreo.DatosAdicionalesDao;
+import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao;
+import mx.com.web2lab.backend.hbm.HibernateUtil;
+import mx.com.web2lab.backend.hbm.om.ap.TOrdenSucursalFac;
+import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
+
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+public class BusquedaFacturasAjax extends AjaxAction {
+	/** Log de la aplicacion */
+	private static Log iObjLog = LogFactory.getLog(BusquedaFacturasAjax.class);
+	
+	public BusquedaFacturasAjax(){
+		iObjLog.debug("new: Generando nueva clase BusquedaFacturasAjax");
+	}	
+		
+public String buscarFacturas(String strFacturas){
+	String strReturn = null;
+	
+	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
+	try {
+			iObjLog.debug("Entrando a BusquedaGacturasAjax.buscarFactura");
+			strReturn=objBusquedaFactura.getBusquedaFactura(strFacturas);
+			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFactura"+strReturn);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return strReturn;
+}
+
+public String buscarFacturaAjuste(String strFacturas){
+	String strReturn = null;
+	
+	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
+	try {
+			iObjLog.debug("Entrando a BusquedaGacturasAjax.buscarFactura");
+			strReturn = objBusquedaFactura.getBusquedaFacturaAjuste(strFacturas);
+			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFactura"+strReturn);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return strReturn;
+}
+
+ /**
+     * Metodo que verifica que exista una sesion valida 
+     * @return
+     * @throws Exception
+     */
+    public boolean isSesionValida() {
+    	boolean valida = false;
+    	try{
+    		valida = super.isSesionValida(true);
+    	}catch(Exception e ){
+    		iObjLog.error("isSesionValida:No existe una sesion valida para el usuario");
+    		return valida;
+    	}
+    	return valida;
+    }
+    
+}

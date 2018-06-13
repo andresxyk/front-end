@@ -1,0 +1,93 @@
+#set ($titlePage = "Consulta de Ordenes Toma Muestra" )
+#set($ligaDaosOrden = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/OrdenesTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/ConfirmacionTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/tomamuestra/TerminoTomaMuestra.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/TomaMuestraAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosExamen.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
+
+
+#set ($ligaRutaTomaMuestra = $link.setPage("web2lab,tomamuestras,ConfirmacionTomaMuestra.vm").toString())
+#set ($ligaRutaTerminoMuestra = $link.setPage("web2lab,tomamuestras,TerminoTomaMuestra.vm").toString())
+#set ($ligaRutaNuevaFechaTomaMuestra = $link.setPage("web2lab,tomamuestras,CambioFechaTomaMuestra.vm").toString())
+
+#set ($lstEstaciones = $CatalogosTool.obtenAll("EstacionTomaTlalpan","0"))
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+
+<form name="frmOrdenesTomaMuestra" method="post" >		
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">		
+	<input type="hidden" id="ligaDatosOrden" name="ligaDatosOrden" value="$!ligaDaosOrden">	
+	<input type="hidden" id="hdenRutaTomaMuestra" name="hdenRutaTomaMuestra" value="$!ligaRutaTomaMuestra">	
+	<input type="hidden" id="hdenRutaTerminoMuestra" name="hdenRutaTerminoMuestra" value="$!ligaRutaTerminoMuestra">	
+	<input type="hidden" id="hdenRutaNuevaFechaTomaMuestra" name="hdenRutaNuevaFechaTomaMuestra" value="$!ligaRutaNuevaFechaTomaMuestra">	
+	<input type="hidden" id="ligaReporteZebra" name="ligaReporteZebra" value="$!ligaReporteZebra">	
+	<input type="hidden" id="intkOrdenSucursal" name="intkOrdenSucursal" value="0">	
+	<input type="hidden" id="intcExamen" name="intcExamen" value="0">	
+	<input type="hidden" id="hdlTipoExamen" name="hdlTipoExamen" value="0">	
+	<input type="hidden" id="txtCodigoEmpleado" name="txtCodigoEmpleado" value="0">	
+
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+    <table border="0"  align="center" style="width: 883px">
+	    <th>
+	    </th>     
+        <tr>
+            <td>
+    	        <center>
+	    			<input type="button" id="idIniciaTimer" name="idIniciaTimer" value="Inicia Tiempo" onClick="InitializeTimer();" class="boton">
+    	         </center>
+    	    </td>     	                
+            <td>
+    	        <center>
+	    			<input type="button" id="idStopTimer" name="idStopTimer" value="Detiene Tiempo" onClick="StopTheClock();" class="boton">
+    	         </center>
+    	    </td>     	                
+            <td>
+    	        <center>
+					Consecutivo u Orden Pendiente
+    	         </center>
+    	    </td>     	                
+            <td>
+    	        <center>
+					#if ($!data.getSession().getAttribute("idgrupo") == "12")	
+						<input type="text" id="txtkOrdenSucursalAnterior" value="" onKeyPress="numero();" size="7" maxlength="7" />
+					#else
+						<input type="hidden" id="txtkOrdenSucursalAnterior" value="" onKeyPress="numero();" size="7" maxlength="7" />
+					#end								
+    	         </center>
+    	    </td>     	                
+            <td>
+    	        <center>
+	                <select id="selSalaToma" style="width: 210px">
+							#foreach($objEstacion in $lstEstaciones)
+								#option("$!objEstacion.getCestaciontomatlalpan()" "$!objEstacion.getSestaciontomatlalpan()" "1")							
+							#end
+		            </select>					
+    	         </center>
+    	    </td>     	                
+    	</tr>   
+    </table>	
+	<div id="Tiempo" style="display:none">
+	    <input type="button" id="idExecute" name="idExecute" value="Ejecuta Consulta" onClick="ejecutaConsulta();" class="boton"> 
+		<select id="selTimer" style="width: 100px" >
+			<option value="3">3 Segundos</option>
+		</select>    	    
+	</div>	
+	<div id="OrdenesBusqueda">
+	</div>	
+</form>

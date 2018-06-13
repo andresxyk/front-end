@@ -1,0 +1,44 @@
+#set ($titlePage = "Buscar Facturas" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/BuscarFactura.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;		
+</script>	
+
+
+<form name="frmBusqudaFactura"  method="post" >
+	<table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="5" >Búsqueda de Facturas</th></tr>
+		<tr>
+			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Folio de Factura
+    	    </td>    
+		</tr>
+		<tr>
+			<td   align="left">
+				<input type="text" id="txtBuscarFactura" onKeyPress="numero();" /><input type="button" id="Buscar" value="Buscar" onClick="buscarFactura();" class="boton">
+			</td> 
+			<td   align="left">
+				<input type="button" id="Limpiar" value="Limpiar" onClick="limpiar();" class="boton">
+			</td>  			
+		</tr>
+		
+	</table>
+	<div id="gridbusquedaFacturas" style="display:none">
+	</div>
+</form>
+
+<SCRIPT language="javascript" for=window event=onload>
+	document.getElementById("txtBuscarFactura").focus();
+</SCRIPT>	
+	

@@ -1,0 +1,580 @@
+#set ($titlePage = "Cuestionario para pacientes" )
+#set ($intkPaciente = $data.getParameters().getString('kPaciente') )
+#set ($strLigaDiagnostico = $link.setPage("proa2milv2,fundacion,Diagnostico.vm").toString())
+#set ($strLigaPaciente = $link.setPage("proa2milv2,fundacion,DatosOrden.vm").toString())
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/fundacion/CuestionarioDiagnostico.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/fundacion/PantallaCuestionario.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/fundacion/RegistrarOrden.js")"></SCRIPT>
+<script type='text/javascript' src='/fundacionweb/dwr/interface/DatosPaciente.js'></script>
+<script type='text/javascript' src='/fundacionweb/dwr/interface/DatosCuestionario.js'></script>
+<script type='text/javascript' src='/fundacionweb/dwr/interface/DatosOrden.js'></script>
+<script type='text/javascript' src='/fundacionweb/dwr/interface/DatosCorteCaja.js'></script>
+<script type='text/javascript' src='/fundacionweb/dwr/engine.js'></script>
+<script type='text/javascript' src='/fundacionweb/dwr/util.js'></script>
+<script>
+	window.onload = init;		 		 		 	    
+	function visualizaDiagnostico(kOrdenFundacion , strFactura){
+		viewDiagCuestionario('$strLigaDiagnostico','DiagnosticoFactura',kOrdenFundacion,strFactura);
+	}		 	    
+</script>	
+
+#if($intkPaciente)
+	<script>		
+	     DatosPaciente.buscarPaciente('$intkPaciente','','','',intibuscarPaciente_CallBack);		
+	</script>	
+#end
+
+#set ($lstTratamientos = $CatalogosChopoTool.obtenAll("TratamientoDiabet","0"))
+#set ($lstLugaresPapanicolau = $CatalogosChopoTool.obtenAll("LugarPapanicolau","0"))
+#set ($lstResultadosPapanicolau = $CatalogosChopoTool.obtenAll("ResultadoPapanicolau","0"))
+#set ($lstHTA = $CatalogosChopoTool.obtenAll("HTA","0"))
+#set ($lstCervix = $CatalogosChopoTool.obtenAll("Cervix","0"))
+#set ($lstSecrecion = $CatalogosChopoTool.obtenAll("Secrecion","0"))
+#set ($lstDIU = $CatalogosChopoTool.obtenAll("Diu","0"))
+#set ($lstTiposBiopsia = $CatalogosChopoTool.obtenAll("TiposBiopsia","0"))
+#set ($lstEctropion = $CatalogosChopoTool.obtenAll("Ectropion","0"))
+
+<form name="frmCuestionario" action="" method="post" >
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="kPacienteCuestionario" name="kPacienteCuestionario" value="0">	
+    <table border="0" align="center" style="width: 980px" frame="border">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: white; font-style: normal; font-variant: normal">Datos Personales</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                Codigo Paciente
+    	    </td>     	                
+            <td style="width: 187px">
+                <input type="text" id="txtCodigoPaciente" value="0" STYLE="font-size: 19px;" onChange="buscarPaciente();" size="1" />
+                <input type="hidden" id="hdnkPaciente" value="0" />
+    	    </td>     
+			<td onclick="viewPacienteCaptura('$strLigaPaciente',window.document.frmCuestionario.hdnkPaciente.value);"  style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+				<a href="" onclick="return false;" title="Datos Paciente" style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal"><< Regresar Datos del Paciente</a>
+			</td>    	    
+        </tr>   
+        <tr>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Paterno
+    	    </td>     	                
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                &nbsp;* Apellido Materno
+    	    </td>     
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                &nbsp;* Nombre(s)
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="width: 187px">
+                <input type="text" id="txtApellidoPaterno" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35"/>
+    	    </td>     
+            <td style="width: 158px">
+                <input type="text" id="txtApellidoMaterno" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+            <td>
+                <input type="text" id="txtNombre" onkeyup="consultaPacienteGrid();" onKeyPress="mayuscula();" size="35" />
+    	    </td>     
+        </tr>   
+    </table>	        
+    <table border="0" align="center" style="width: 980px" frame="border">
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: white; font-style: normal; font-variant: normal">Datos Complementarios</b>
+    	         </center>
+    	    </th>     
+    	</tr>
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                &nbsp;* Fecha nacimiento
+    	    </td>     
+            <td style="width: 187px">
+			    <div id="CalendarioNac">
+		                    <input type="text" name="txtFechaNacimiento" size="12">		
+			    </div>				
+	        </td>     
+            <td style="font-weight: normal; font-size: 12px; color: white; font-style: normal; font-variant: normal">
+                <b>Edad (años-meses-dias)</b
+    	    </td>     
+            <td style="width: 158px">
+                <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
+                <input type="hidden" name="hdnMeses" value="$!objDemPaciente.getIStrMeses()">
+                <input type="hidden" name="hdnDias" value="$!objDemPaciente.getIStrDias()">				
+                <input type="text"  id="txtEdadDescompuesta" style="font-size: 19px;" value="$!objDemPaciente.getIStrAnios()" class="textflat" disabled>&nbsp;
+    	    </td>     
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: white; font-style: normal; font-variant: normal">
+                Tel&eacute;fono
+    	    </td>     
+            <td style="width: 187px">
+                <input type="text" id="txtTelefono" size="20"/>
+   	        </td>     
+        </tr>   
+    </table>	        
+    <div id="gridbusquedaPacientes">                
+	</div>            		        				
+	<div id="divCuestionario">      
+	    <!-- Datos Paciente -->
+	    <table border="1" align="center" style="width: 980px" frame="border">
+			<th colspan="6" style="height: 24px">
+				Datos Genericos
+			</th>
+			<tr>
+				<td style="width: 167px">
+					<b>* Menarca</b>
+				</td>
+				<td style="width: 204px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtMenarca" onKeyPress="javascript:return numero();">Años
+				</td>
+				<td style="width: 127px">
+					<strong>* Ritmo</strong>
+				</td>
+				<td style="width: 155px">
+					<input type="text" maxlength="2" style="width: 60px" name="txtDiasRitmo1" onclick="return Text1_onclick()">&nbsp;&nbsp;
+					<input type="text" maxlength="2" style="width: 60px" name="txtDiasRitmo2">
+				</td>  
+				<td>
+					<strong>* F.U.R</strong>
+				</td>
+				<td style="width: 181px">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaUltimaRegla" onChange="javascript:this.value=validaFormatoFecha(this.value);">
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaUltimaRegla); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+				</td>
+			</tr>
+			<tr>
+				<td style="height: 25px; width: 167px;">
+					<strong>* V.S.A</strong>
+				</td>
+				<td style="height: 25px; width: 204px;">
+					<input type="text" maxlength="2" style="width: 60px" id="txtVidaSexualActiva" onKeyPress="javascript:return numero();">Años
+				</td>
+				<td style="height: 25px; width: 127px;"> 
+					<strong>* Parejas sexuales</strong>
+				</td>
+				<td style="height: 25px; width: 155px;">
+					<input type="text" maxlength="2" style="width: 60px" id="txtNumeroParejasSexuales" onKeyPress="javascript:return numero();">
+				</td>  
+				<td style="height: 25px">
+					<strong>* Gestaciones</strong>
+				</td>
+				<td style="width: 181px; height: 25px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtGestaciones" onKeyPress="javascript:return numero();">
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 167px">
+					<strong>* Partos normales</strong>
+				</td>
+				<td style="width: 204px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtPartosNormales" onKeyPress="javascript:return numero();">
+				</td>
+				<td style="width: 127px">
+					<strong>* Cesáreas</strong>
+				</td>
+				<td style="width: 155px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtCesareas" onKeyPress="javascript:return numero();">
+				</td>  
+				<td>
+					<strong>* Abortos</strong>
+				</td>
+				<td style="width: 181px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtAbortos" onKeyPress="javascript:return numero();">
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 167px">
+					<strong>Primer embarazo</strong>
+				</td>
+				<td style="width: 204px">
+					<input type="text" maxlength="2" style="width: 60px" id="txtPrimerEmbarazo" onKeyPress="javascript:return numero();">Años
+				</td>
+				<td style="width: 127px">
+					<strong>* Lactancia</strong>
+				</td>
+				<td style="width: 155px">
+					<input type="radio" name="radLactancia" value="1">SI &nbsp;&nbsp;
+					<input type="radio" name="radLactancia" value="0">NO 
+				</td>  
+				<td>
+					<strong>* Climaterio</strong>
+				</td>
+				<td style="width: 181px"> 
+					<input type="text" maxlength="2" style="width: 60px" id="txtClimaterio" onKeyPress="javascript:return numero();">Años
+				</td>
+		    </tr>
+			<tr>
+				<td style="width: 30%">
+					<b>* Se a realizado Mastografias</b>
+				</td>
+				<td style="width: 20%">
+					<input type="radio" name="radMastografias" value="1">SI &nbsp;
+					<input type="radio" name="radMastografias" value="0">NO 
+				</td>
+				<td style="width: 15%">
+					<strong>En que Año?</strong>
+				</td>
+				<td style="width: 35%">
+					<input type="text" style="width: 220px" id="txtAnoMastografia" onKeyPress="mayuscula();">
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 30%">
+					<b>* Ha tenido cáncer de mama?</b>
+				</td>
+				<td style="width: 20%">
+					<input type="radio" name="radCancerMama" value="1">SI &nbsp;
+					<input type="radio" name="radCancerMama" value="0">NO 
+				</td>
+				<td style="width: 15%">
+					<strong>Cuando?</strong>
+				</td>
+				<td style="width: 35%">
+					<input type="text" style="width: 220px" id="txtCuandoCancerMama" onKeyPress="mayuscula();">
+				</td>
+			</tr>
+	    </table>              
+		<table border="1" align="center" style="width: 980px" frame="border">
+			<th colspan="6">
+				Historia de Cáncer en la Familia 
+			</th>
+			<tr>
+				<td style="width: 20%">
+					<b>Madre</b>
+				</td>
+				<td style="width: 20%">
+					<input type="text" id="txtMadre" onKeyPress="mayuscula();">
+				</td>
+				<td style="width: 5%">
+					<strong>Edad</strong>
+				</td>
+				<td style="width: 5%">
+					<input type="text" id="txtEdadMadre" onKeyPress="javascript:return numero();">
+				</td>
+			</tr>
+			<tr>
+
+				<td style="width: 20%">
+					<strong>Tias</strong>
+				</td>
+				<td style="width: 20%"> 
+					<input type="text" id="txtTias" onKeyPress="mayuscula();">
+				</td>
+				<td style="width: 5%">
+					<strong>Edad</strong>
+				</td>
+				<td style="width: 5%">
+					<input type="text" id="txtEdadTias" onKeyPress="javascript:return numero();">
+				</td>
+			</tr>
+			<tr>
+
+				<td style="width: 20%">
+					<strong>Abuelas</strong>
+				</td>
+				<td style="width: 20%"> 
+					<input type="text" id="txtAbuelas" onKeyPress="mayuscula();">
+				</td>
+				<td style="width: 5%">
+					<strong>Edad</strong>
+				</td>
+				<td style="width: 5%">
+					<input type="text" id="txtEdadAbuelas" onKeyPress="javascript:return numero();">
+				</td>
+			</tr>
+			<tr>
+				<td style="width: 15%">
+					<b>Tipo de Anticonceptivo</b>
+				</td>
+				<td style="width: 35%">
+	                    		<select id="selAnticonceptivo" style="width: 200px">
+						<option value="1">No utiliza</option>
+						<option value="2">Ritmo</option>
+						<option value="3">Local</option>
+						<option value="4">Parenteral</option>
+						<option value="5">Oral</option>
+						<option value="6">Vasectom&iacutea</option>
+						<option value="7">Parche</option>
+						<option value="8">DIU</option>
+						<option value="9">Coito interrumpido</option>
+						<option value="10">Salpingoclasia</option>
+						<option value="11">De barrera</option>
+						<option value="12">Nada</option>
+						<option value="13">Implante</option>
+						<option value="14">Preservativo</option>
+						<option value="15">Otro</option>
+	                    		</select>
+				</td>    
+				<td style="width: 15%">
+					<strong>Cuanto Tiempo</strong>
+				</td>
+				<td style="width: 35%">
+					<input type="text" id="txtAnticonceptivoTiempo" onKeyPress="javascript:return numero();">
+		        	</td>
+		    </tr>
+			<tr>
+				<td style="width: 30%">
+					<b>* Se a realizado Mastografias</b>
+				</td>
+				<td style="width: 20%">
+					<input type="radio" name="radMastografias" value="1">SI &nbsp;
+					<input type="radio" name="radMastografias" value="0">NO 
+				</td>
+				<td style="width: 15%">
+					<strong>En que Año?</strong>
+				</td>
+				<td style="width: 35%">
+					<input type="text" style="width: 220px" id="txtAnoMastografia" onKeyPress="mayuscula();">
+				</td>
+			</tr>
+
+			<tr>
+				<td style="width: 127px">
+					<strong>Lugar Papanicolau</strong>
+				</td>
+	    	    <td colspan="3">
+	                <select id="selLugarPapanicolau" style="width: 257px">
+	    				#foreach($objLugarPapanicolau in $lstLugaresPapanicolau )
+							#option("$!objLugarPapanicolau.getClugarPapanicolau()" "$!objLugarPapanicolau.getClugarPapanicolau() - $!objLugarPapanicolau.getSlugarPapanicolau()" "0")				
+	    				#end										
+	                </select>
+	            </td>
+			</tr>
+			<tr>
+	        	<td style="width: 167px; height: 13px;">
+	                <strong>* Resultado Papanicolau</strong></td><td style="width: 204px; height: 13px;">&nbsp;
+	                    <select id="selResultadoPapanicolau" style="width: 200px">
+	        				#foreach($objResultadoPapanicolau in $lstResultadosPapanicolau )
+	    						#option("$!objResultadoPapanicolau.getCresultadoPapanicolau()" "$!objResultadoPapanicolau.getCresultadoPapanicolau() - $!objResultadoPapanicolau.getSresultadoPapanicolau()" "0")	
+	        				#end										
+	                    </select>
+				</td>
+	        	<td style="width: 127px; height: 13px;">
+	                <strong>* V.P.H.</strong>
+				</td>
+				<td style="width: 155px; height: 13px;">
+					<input type="radio" name="radVPH" value="1">SI &nbsp;
+	                <input type="radio" name="radVPH" value="0">NO 
+	            </td>
+	        	<td style="height: 13px">
+	                <strong>* Fecha V.P.H.</strong>
+				</td>
+				<td style="width: 181px; height: 13px;">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaVPH"  onChange="javascript:this.value=validaFormatoFecha(this.value);">
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaVPH); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+				</td>
+			</tr>    
+	        <tr>
+	        	<td style="width: 167px"><b>* Antecedentes Heredofamiliares</b>
+	        	<td style="width: 204px">
+	        		<input type="checkbox" id="chkAnteceCervico">C&aacutencer Cervicouterino
+	        		<input type="checkbox" id="chkAnteceMama" style="font-weight: bold">C&aacutencer Mama
+				</td>
+	        	<td style="width: 127px">
+					<input type="text" maxlength="50" style="width: 124px" id="txtAnteceHereFami"  onKeyPress="mayuscula();">
+				</td>        		
+	        </tr>		
+		</table>
+	    <!-- Cirugias y tratamientos ginecologicos -->
+	    <table border="1" align="center" style="width: 980px" frame="border">
+	        <th colspan="6">
+				Cirug&iacuteas y tratamientos ginecol&oacutegicos			
+			</th>
+	        <tr>
+	        	<td>
+	    			<b>* H.T.A.</b>
+	    		</td>
+	    		<td style="width: 263px">
+	    			<select id="selHTA" style="width: 228px">
+	    				#foreach($objHTA in $lstHTA )
+	    					#option("$!objHTA.getChta()" "$!objHTA.getChta() - $!objHTA.getShta()" "0")							
+	    				#end										
+	    			</select>
+	            </td>
+	        	<td style="width: 32px">
+	                <strong>Fecha</strong>
+	    		</td>
+	    		<td style="width: 175px">	    			
+	    			<input type="text" maxlength="10" style="width: 130px" name="txtFechaHisterectomia"  onChange="javascript:this.value=validaFormatoFecha(this.value);">&nbsp;
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaHisterectomia); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+	            </td>
+	        	<td>
+	                <strong>Motivo</strong>
+	    		</td>
+	    		<td style="width: 270px">
+					#set ($lstMotivoHisterectomia = $CatalogosChopoTool.obtenAll("MotivoHisterectomia","0"))					
+					<select id="selMotivoHisterectomia" style="width: 320px">
+		    				#foreach($objMotivoHisterectomia in $lstMotivoHisterectomia )
+		    					#option("$!objMotivoHisterectomia.getCmotivohisterectomia()" "$!objMotivoHisterectomia.getCmotivohisterectomia() - $!objMotivoHisterectomia.getSmotivohisterectomia()" "0")		
+		    				#end										
+					</select>
+	    		</td>
+			</tr>
+	        <tr>
+	        	<td style="height: 26px">
+					<b> * Oforectom&iacutea </b>
+				</td>
+				<td style="width: 263px; height: 26px;">
+					<input type="checkbox" id="chkOforectomiaDerecho">Derecho 
+					<input type="checkbox" id="chkOforectomiaIzuierdo">Izquierdo 
+					<input type="checkbox" id="chkOforectomiaNo">No tiene
+				</td>
+	        	<td style="width: 32px; height: 26px;">
+	                <strong>Fecha</strong>
+				</td>
+				<td style="width: 175px; height: 26px;">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaOforectomia"  onChange="javascript:this.value=validaFormatoFecha(this.value);">&nbsp;
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaOforectomia); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+	            </td>
+	        	<td style="height: 26px">
+	                <strong>Motivo</strong>
+				</td>
+				<td style="width: 270px; height: 26px;">
+					<input type="text" id="txtMotivoOforectomia" maxlength="50" style="width: 240px"  onKeyPress="mayuscula();">
+				</td>
+			</tr>
+	        <tr>				
+	        	<td style="height: 29px">
+					<B>* E.Q.X.</B>
+				</td>
+				<td style="width: 263px; height: 29px;">
+					<input type="radio" name="radEQX" value="1">SI 
+					<input type="radio" name="radEQX" value="0">NO 
+				</td>
+	        	<td style="width: 32px; height: 29px;">
+	                <strong>Fecha</strong>
+				</td>
+				<td style="width: 175px; height: 29px;">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaEQX"  onChange="javascript:this.value=validaFormatoFecha(this.value);">&nbsp;
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaEQX); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+	            </td>
+	        	<td style="height: 29px">
+	                <strong>Motivo</strong>
+				</td>
+				<td style="width: 270px; height: 29px;">
+					#set ($lstMotivoEQX = $CatalogosChopoTool.obtenAll("MotivoEQX","0"))					
+					<select id="selMotivoEQX" style="width: 320px">
+		    				#foreach($objMotivoEQX in $lstMotivoEQX )
+		    					#option("$!objMotivoEQX.getCmotivoeqx()" "$!objMotivoEQX.getCmotivoeqx() - $!objMotivoEQX.getSmotivoeqx()" "0")							
+		    				#end										
+					</select>
+				</td>
+			</tr>
+	        <tr>
+	        	<td>
+					<B>* E.C.G.</B>
+				</td>
+				<td style="width: 263px">
+					<input type="radio" name="radElectroCoagulacion" value="1">SI 
+					<input type="radio" name="radElectroCoagulacion" value="0">NO 
+				</td>
+	        	<td style="width: 32px">
+	                <strong>Fecha</strong>
+				</td>
+				<td style="width: 175px">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaElectroCoagulacion"  onChange="javascript:this.value=validaFormatoFecha(this.value);">&nbsp;
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaElectroCoagulacion); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+	            </td>
+	        	<td>
+	                <strong>Motivo</strong>
+				</td>
+				<td style="width: 270px">
+					#set ($lstMotivoElectroCoagulacion = $CatalogosChopoTool.obtenAll("MotivoElectroCoagulacion","0"))					
+					<select id="selMotivoElectroCoagulacion" style="width: 320px">
+		    				#foreach($objMotivoElectroCoagulacion in $lstMotivoElectroCoagulacion )
+		    					#option("$!objMotivoElectroCoagulacion.getCmotivoelectrocoagulacion()" "$!objMotivoElectroCoagulacion.getCmotivoelectrocoagulacion() - $!objMotivoElectroCoagulacion.getSmotivoelectrocoagulacion()" "0")							
+		    				#end										
+					</select>
+				</td>
+			</tr>
+	        <tr>
+	        	<td>
+					<B>* Crioterapia</B>
+				</td>
+				<td style="width: 263px">
+					<input type="radio" name="radCrioterapia" value="1">SI 
+					<input type="radio" name="radCrioterapia" value="0">NO 
+				</td>
+	        	<td style="width: 32px">
+	                <strong>Fecha</strong>
+				</td>
+				<td style="width: 175px">
+					<input type="text" maxlength="10" style="width: 130px" name="txtFechaCrioterapia"  onChange="javascript:this.value=validaFormatoFecha(this.value);">&nbsp;
+			        <a href="javascript:doNothing()" onKeyup="javascript:agregaDiag(this);" onclick="javascript:setDateField(document.frmCuestionario.txtFechaCrioterapia); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
+			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
+			        </a>	
+	            </td>
+	        	<td>
+	                <strong>Motivo</strong>
+				</td>
+				<td style="width: 270px">
+					<input type="text" id="txtMotivoCrioterapia" maxlength="50" style="width: 240px"  onKeyPress="mayuscula();">
+				</td>
+			</tr>
+	        <tr>
+	        	<td style="height: 26px">
+	                <strong>* Motivo de estudio</strong>
+				</td>
+				<td colspan="2" style="height: 26px">					
+					#set ($lstMotivosEstudios = $CatalogosChopoTool.obtenAll("MotivoEstudio","0"))					
+					<select id="selMotivoEstudio" style="width: 320px">
+		    				#foreach($objMotivoEstudio in $lstMotivosEstudios )
+		    					#option("$!objMotivoEstudio.getCmotivoestudio()" "$!objMotivoEstudio.getCmotivoestudio() - $!objMotivoEstudio.getSmotivoestudio()" "0")							
+		    				#end										
+					</select>
+				</td>
+	        	<td style="width: 175px; height: 26px;">
+	                <strong>* Sintomatología actual</strong>
+				</td>
+				<td colspan="2" style="height: 26px">
+					<input type="text" id="txtSintomatologiaActual" maxlength="50" style="width: 317px"  onKeyPress="mayuscula();">
+				</td>
+			</tr>
+	        <tr >
+	        	<td style="height: 26px">
+	                <strong>* Observaciones</strong>
+				</td>
+				<td colspan="2" style="height: 26px">					
+					<input type="text" id="txtObservaciones" maxlength="100" style="width: 317px"  onKeyPress="mayuscula();">
+				</td>
+			</tr>
+			
+	    </table>
+	    <!-- Vulvoscopia -->
+	    <table border="1" align="center" style="width: 980px" frame="border">
+			<tr>
+	        	<td style="width: 158px">
+				</td>
+	        	<td style="width: 158px">
+				</td>
+	        	<td style="width: 158px">
+					<input type="button" class="boton" onClick="actualizarCuestionario();" value="Enviar datos">
+				</td>
+	        	<td style="width: 158px">
+					<input type="Reset" class="boton"  value="Borrar todo">
+				</td>
+			</tr>
+		</table>
+	</div>
+</form>

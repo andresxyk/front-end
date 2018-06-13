@@ -1,0 +1,115 @@
+
+$data.setLayoutTemplate("/web2lab/Default.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/carpermor/examenes/ConfiguraExamen.js")"></script>
+
+#set ( $titlePage = "Configurar examen" )
+#set ( $strLigaActual = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamenBusqueda.vm") )
+#set ( $strLigaActual = $link.setAction("carpermor.examenes.BConfiguraExamenAction").toString() )
+
+<form name="frmConfExamenBusqueda" action="$strLigaActual" method="post" >
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td colspan="4">
+				<input type="hidden" name="hdnSiguientePantalla">
+				#if($aStrMsjError)							
+					<img align="middle" src="$content.getURI('images/icon_error_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$ff0030" aling="center">$aStrMsjError</font></b>				
+				#elseif($aStrMensaje)							
+					<img align="middle" src="$content.getURI('images/icon_success_sml.gif')"/>&nbsp;&nbsp;
+					<b><font color="$339933" aling="center">$aStrMensaje</font></b>				
+				#end					
+			</td>
+		</tr>
+		<tr>
+			<td align="right">
+				<b>C&oacute;digo examen:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtClaveExamen" value="$!aStrClaveExamen" 
+					onKeyPress="return soloNumeros();">
+				<script language="JavaScript">
+					document.getElementById('txtClaveExamen').focus();
+				</script>
+			</td>	
+			<td align="right">
+				<b>Examen:</b> 
+			</td>
+			<td>
+				<input type="text" name="txtNombreExamen" value="$!aStrNombreExamen" 
+					onKeyPress="mayuscula();">
+			</td>
+		</tr>	
+		<tr><td colspan="4">&nbsp;</td></tr>
+	</table>
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
+		<tr>
+			<td align="center">
+				<input type="submit" value="Buscar examen" name="eventSubmit_doBuscarexamen" class="boton"
+					onClick="return validaCampos();">
+			</td>
+			<td align="center">
+				<input type="submit" value="Crear examen" name="Crearexamen" class="boton"
+					onClick="siguientePantalla('CreaExamen');">
+			</td>			
+		</tr>
+		<tr><td colspan="2">&nbsp;</td></tr>		
+	</table>	
+	
+	<DIV STYLE="font-size: 11px;
+		color: #000000;
+		line-height: normal;
+		font-family: Arial, Helvetica, sans-serif;
+		background-color : #DFEAF7;
+		overflow: auto; 
+		width: 550px; 
+		height: 250; 
+		border-left: 0px gray solid; 
+		border-right: 0px gray solid;
+		border-bottom: 1px gray solid; 
+		border-top: 0px gray solid; 
+		padding: 0px; 
+		margin: 0px"> 
+	<table border="0" cellspacing="2" cellpadding="3" width="100%" id="examenes">
+		<COL WIDTH=100><COL WIDTH=300>
+		<tr>
+			<th width=100 nowrap>C&oacute;digo examen</th>
+			<th width=300 nowrap>Nombre examen</th>
+##			<th width=100 nowrap>Editar</th>
+##			<th width=100 nowrap>Crear</th>
+			##<th width=100 nowrap>Borrar</th>
+		</tr>
+		<COL WIDTH=100><COL WIDTH=300>
+		#foreach($objExamen in $objExamenes)
+			#set ($cexamen = $objExamen.getObjCExamen())
+			#set ($dexamen = $objExamen.getObjDExamen())
+			
+##			#set ( $ligaCrear = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamen.vm"))
+##			#set ( $ligaCrear = $link.setAction("carpermor.examenes.BConfiguraExamenAction"))
+##			#set ( $ligaCrear = $link.addQueryData("doCreaexamen","action"))
+##			#set ( $ligaCrear = $link.addQueryData("cexamen","$!cexamen.getCexamen()").toString())
+##			
+##			#set ( $ligaEditar = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamen.vm"))
+##			#set ( $ligaEditar = $link.setAction("carpermor.examenes.BConfiguraExamenAction"))
+##			#set ( $ligaEditar = $link.addQueryData("doEditarexamen","action"))
+##			#set ( $ligaEditar = $link.addQueryData("claboratorioexamen","$!dexamen.getClaboratorioexamen()").toString())
+##			
+##			#set ( $ligaBorrar = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamenBusqueda.vm"))
+##			#set ( $ligaBorrar = $link.setAction("carpermor.examenes.BConfiguraExamenAction"))
+##			#set ( $ligaBorrar = $link.addQueryData("doBorrarexamen","$!dexamen.getClaboratorioexamen()"))
+##			#set ( $ligaBorrar = $link.addQueryData("claboratorioexamen","$!dexamen.getClaboratorioexamen()").toString())
+			#set ( $ligaExamen = $link.setPage("proa2milv2,carpermor,examenes,ConfiguraExamen.vm"))
+			#set ( $ligaExamen = $link.addQueryData("cexamen","$!cexamen.getCexamen()"))
+			#set ( $ligaExamen = $link.addQueryData("claboratorioexamen","$!dexamen.getClaboratorioexamen()"))
+			#set ( $ligaExamen = $link.addQueryData("clean","true").toString())
+		<tr>
+			<td width=100 valign="top"><a href="$!ligaExamen" title="Configurar">$!cexamen.getCexamen()</a></td>
+			<td width=300 valign="top"><a href="$!ligaExamen" title="Configurar">$!cexamen.getSexamen()</a></td>
+##			<td width=300 valign="top">#if($dexamen)<a href="$!ligaEditar">Editar</a>#end</td>
+##			<td width=300 valign="top">#if(!$dexamen)<a href="$!ligaCrear">Crear</a>#end</td>
+			##<td width=300 valign="top"><a href="$ligaBorrar">Borrar</a></td>
+		</tr>
+		#end
+	</table>
+	</DIV> 
+</form>

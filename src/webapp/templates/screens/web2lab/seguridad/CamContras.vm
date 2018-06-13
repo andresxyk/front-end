@@ -1,0 +1,97 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenu.vm")
+<SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
+
+#set ( $titlePage = "Cambiar Contraseña") 
+
+## #set ( $strLigaActual = $link.setPage("web2lab,seguridad,CamContras.vm").setAction(seguridad.BCambiaPasswd).toString())
+#set ( $strLigaActual = $link.setPage("web2lab,seguridad,CamContras.vm"))
+#set ( $strLigaActual = $link.setAction("seguridad.BCambiaPasswd").toString())
+#set ( $objUsuario = $CSeguridadTool.getInformacionUsuario())
+#set ( $strFechaModi = $CSeguridadTool.getFechaModiParaDate($username))
+
+#set ($logoutLnk = $link.setPage("web2lab,seguridad,Login.vm"))
+#set ($logoutLnk = $link.setAction("seguridad.BLogoutAction").toString())
+<SCRIPT LANGUAGE="JavaScript">function goToURL() { window.location = "$strCargarPagina"; }</script>
+
+<form method="post" action="$strLigaActual" name="frmCamContras" onSubmit="return ContrasIguales()">
+	<table width="100%" class="tabla">
+		<tr>
+			<td>
+				<b><font color="$ff0030">&nbsp;$!strMenContras </font></b>	
+			</td>
+		</tr>
+	</table>
+	<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
+		<tr>
+			<td>
+				<b>Usuario:</b>
+				#if ( $!strUsuaVuel != "" ) 
+					$!strUsuaVuel
+					<input type="hidden" name="hdnUsuario" value="$!strUsuaVuel">
+				#else
+					$!objUsuario.getIStrObjNombre() $!objUsuario.getIStrObjApellido()
+					<input type="hidden" name="hdnUsuario" value="$!objUsuario.getIStrObjNombre() $!objUsuario.getIStrObjApellido()">
+				#end
+				
+			</td>
+		</tr>
+        <tr>
+			<td>
+				<b>Num de Empleado:</b> 
+				#if ( $!intNumEmpVuel != "" ) 
+					$!intNumEmpVuel
+					<input type="hidden" name="hdnNumEmple" value="$!intNumEmpVuel">
+				#else
+					$!objUsuario.getIIntIdUsuario()
+					<input type="hidden" name="hdnNumEmple" value="$!objUsuario.getIIntIdUsuario()">
+				#end
+				
+			</td>
+		</tr>
+        <tr>
+			<td>
+				<b>Email:</b>
+				#if ( $!strEMailVuel != "" ) 
+					$!strEMailVuel
+					<input type="hidden" name="hdnEMail" value="$!strEMailVuel">
+				#else
+					$!objUsuario.getIStrObjEmail()
+					<input type="hidden" name="hdnEMail" value="$!objUsuario.getIStrObjEmail()">
+				#end
+
+			</td>
+		</tr>
+        <tr>
+			<td>
+				<b>Login name:</b> 
+				#if ( $!strLoginNameVuel != "" ) 
+					$!strLoginNameVuel
+					<input type="hidden" name="hdnLoginName" value="$!strLoginNameVuel">
+				#else
+					$!objUsuario.getIStrObjLogin()
+					<input type="hidden" name="hdnLoginName" value="$!objUsuario.getIStrObjLogin()">
+				#end
+				
+			</td>
+		</tr>		 
+        <tr>
+			<td ></td>
+            <td colspan="2" align="right">Password nuevo:</td>
+            <td><input type="password" name="txtNuevaContras" size="20" onBlur="return validapassCam();"></td>
+        </tr>
+        <tr>
+			<td ></td>
+            <td colspan="2" align="right">Cofirma password:</td>
+            <td><input type="password" name="txtConfContras" size="20"></td>
+        </tr>
+	</table>               
+    <input type="submit" value="Aceptar" name="onSubmit_doPerform" class="boton" onclick="return ContrasIguales();">
+    <input type="button"  onClick="window.location.href='$!logoutLnk'" value="Regresar" class="boton">
+	<tr>
+		<b>Nota:</br>Recuerda las siguientes reglas al cambiar tu password:
+	</tr>
+		<tr>• Longitud mínima de 6 caracteres </tr>
+		<tr>• La contraseña no puede ser igual a la del usuario </tr>
+		<tr>• La contraseña debe de contener al menos un dígito y una letra</tr>
+	</tr>
+</form> 

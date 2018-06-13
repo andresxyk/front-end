@@ -1,0 +1,509 @@
+#popup_container {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+	border: solid 5px #999;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#popup_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+	color: #666;
+	background: #CCC url(../images/alerts/title.gif) top repeat-x;
+	border: solid 1px #FFF;
+	border-bottom: solid 1px #999;
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+
+#popup_content {
+	background: 16px 16px no-repeat url(../images/alerts/info.gif);
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+#popup_content.alert {
+	background-image: url(../images/alerts/info.gif);
+}
+
+#popup_content.confirm {
+	background-image: url(../images/alerts/important.gif);
+}
+
+#popup_content.prompt {
+	background-image: url(../images/alerts/help.gif);
+}
+
+#popup_message {
+	padding-left: 48px;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+
+
+/******************************SubModal***********************************************/
+/**
+ * POPUP CONTAINER STYLES
+ */
+#popupMask {
+	position: absolute;
+	z-index: 200;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: .4;
+	filter: alpha(opacity=40);
+	/* this hack is so it works in IE
+	 * I find setting the color in the css gives me more flexibility 
+	 * than the PNG solution.
+	 */
+	background-color:transparent !important;
+	background-color: #333333;
+	/* this hack is for opera support
+	 * you can uncomment the background-image if you don't care about opera.
+	 * this gives you the flexibility to use any bg color that you want, instead of the png
+	 */
+	background-image/**/:  url(../images/maskBG.png) !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat;
+	display:none;
+}
+#popupContainer {
+	position: absolute;
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	display:none;
+	padding: 0px;
+}
+#popupInner {
+	border: 2px solid #000000;
+	background-color: #ffffff;
+}
+
+#popupFrame {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 202;
+}
+#popupTitleBar {
+	background-color: #486CAE;
+	color: #ffffff;
+	font-weight: bold;
+	height: 1.3em;
+	padding: 5px;
+	border-bottom: 2px solid #000000;
+	border-top: 1px solid #78A3F2;
+	border-left: 1px solid #78A3F2;
+	border-right: 1px solid #204095;
+	position: relative;
+	z-index: 203;
+}
+#popupTitle {
+	float:left;
+	font-size: 1.1em;
+}
+#popupControls {
+	float: right;
+	cursor: pointer;
+	cursor: hand;
+}
+
+
+
+A:link
+{
+   font-weight : bold;
+   color : #FF6600;
+	font-size:10px;
+	text-align : center;
+	text-decoration :  underline;
+
+}
+A:visited
+{
+     font-weight : bold;
+    color : #FF6600;
+    font-size: 10px;
+	text-align : center;
+	text-decoration :  underline;
+
+	
+}
+A:active
+{
+    font-weight : bold;
+    color : #FF6600;
+    font-size: 10px;
+	text-align : center;
+	text-decoration :   underline;
+
+
+}
+
+TD
+{
+    font-size: 12px;
+    color : black;
+    font-weight: bold;
+    line-height : normal;
+    font-family : Arial, Helvetica, sans-serif;
+}
+
+BODY
+{
+
+    font-size: 10px;
+    font-family : arial, Helvetica, sans-serif;
+   	background-color: #FF6600;
+	padding:0;
+	
+}
+
+
+
+INPUT
+{
+    font-size: 11px;
+    font-family : Arial, Helvetica, Verdana;
+	color : #000000;
+	background-color : #F5FEEE;
+}
+.textopie {
+	font-family : Arial, Helvetica, sans-serif;
+	font-size: 8pt;
+	color : #FFFFFF;
+	background-color: #FF6600;
+	text-align: left;
+	vertical-align: middle;
+	height: 23px;
+	}
+
+SELECT
+{
+    font-size : 10px;
+    font-family: arial, Helvetica, sans-serif;
+    background-color : #F5FEEE;
+}
+
+TEXTAREA
+{
+   font-size: 12px;
+   font-family : Arial, Helvetica, Verdana;
+	background-color : #F5FEEE;
+}
+
+.select-netscape
+{
+    font-size: 9px;
+    font-family : Courier, sans-serif, monospace
+}
+.textarea-netscape
+{
+    font-size : 9px;
+    font-family : Courier, sans-serif, monospace
+}
+.titulologin {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+	color: black;
+	background-color: #FF6600;
+	text-align: left;
+	vertical-align: middle;
+	height: 25px;
+     border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+}
+	
+
+.small
+{
+    font-size: 9px;
+    color: #03507A;
+    font-family: Arial, Helvetica, Verdana
+}
+.plainlink
+{
+    text-decoration: none
+}
+.BasicText
+{
+     font-size: 11px;
+    color: #03507A;
+    line-height: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif
+}
+.menu
+{
+   font-weight: normal;
+#    color: #838587;
+    color: #FF6600;
+    text-decoration: none
+}
+.BasicTextGrey
+{
+    font-size: 11px;
+    color: #666666;
+    font-family: Arial, Helvetica, Verdana
+}
+
+th
+{
+	 background-color: #FF6600;
+	 border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+	 color: black;
+	 font-weight :  bold;
+	 font-size: medium;
+	 font-style: normal; 
+	 font-variant: normal	 	 
+}
+
+ths
+{
+	 background-color : #FF6600;
+	 border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+	 color: black;
+	 font-weight :  bold;
+	 font-size: small;
+	 font-style: normal; 
+	 font-variant: normal	 	 
+}
+
+
+table
+{
+    font-size: 11px;
+    color: #000000;
+    line-height: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color : #F9BB00;
+}
+
+.colorExamen
+{
+    background-color : #FFFFCC;
+}
+
+
+.tr1 { background-color : #F9BB00 }
+.tr2 { background-color : #F9BB00 }
+
+
+.boton{
+ 
+ background-color : #FF6600;  
+ border-bottom: 2px solid #5F5F5F;
+ border-right : 2px solid #5F5F5F;
+ height : 20px;
+ color : black;
+ font-weight :  bold;
+ text-align :  center;
+ }
+ 
+.azul2
+{
+	 background-color : #E7EDF5;
+}
+
+.azul3
+{
+	 color : #FF6600;
+}
+
+.griz
+{
+	 background-color : #666666;
+}
+
+.fondo
+{
+	 background-color : #FFFFFF;
+}
+
+.titulotabla
+{
+	 background-color : #FF6600;
+	 border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+	 color: #031A44;
+	 font-weight :  bold;
+}
+
+.textflat 
+{
+  border-width: 0px;
+  background-color: #FF6600;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btncalculator{
+ 
+ background-color : #FF6600;  
+ border-bottom: 2px solid #5F5F5F;
+ border-right : 2px solid #5F5F5F;
+ height : 20px;
+ width : 40px;
+ color : black;
+ font-weight :  bold;
+ text-align :  center;
+ }
+
+#menu 
+{
+	height: 25px;
+	margin: 2em 0; padding:0 2em;
+	border-bottom: 1px solid black;
+}
+
+div.outer 
+{
+	float: left;
+	width: 100px; height: 38px;
+	margin: 0 3px 0 0;
+	background: #A9C6EA 0 -50px no-repeat;
+}
+div.outer a 
+{
+	display: block;
+	margin: 0; padding:0;
+	width:100%; height:100%;
+	overflow:hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#000000;
+	text-decoration: none;
+	background: #A9C6EA top left no-repeat;
+}
+div.outer span 
+{
+	display: block;
+	margin:0; padding: 7px 0 0 7px;
+}
+div.outer a:hover 
+{
+	background-image: url('none');
+	color: yellow
+}
+div.outer a:active 
+{
+	color: black;
+}
+
+/* CoolMenus 4 - default styles - do not edit */
+/*.clCMAbs{position:absolute; visibility:hidden; left:0; top:0}*/
+/* CoolMenus 4 - default styles - end */
+  
+/*Style for the background-bar*/
+.clBar{position:absolute; width:10; height:10; background-color:#FF6600; layer-background-color:#FF6600; visibility:hidden}
+
+/*Styles for level 0*/
+.clLevel0, .clLevel0over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel0{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
+.clLevel0over{background-color:#F9BB00; layer-background-color:#F9BB00;  color:black; cursor:pointer; cursor:hand; }
+.clLevel0border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:red}
+
+/*Styles for level 1*/
+.clLevel1, .clLevel1over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel1{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
+.clLevel1over{background-color:#F9BB00; layer-background-color:#F9BB00; color:black; cursor:pointer; cursor:hand; }
+.clLevel1border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:#FF6600}
+
+/*Styles for level 2*/
+.clLevel2, .clLevel2over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel2{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
+.clLevel2over{background-color:#F9BB00; layer-background-color:#F9BB00; color:black; cursor:pointer; cursor:hand; }
+.clLevel2border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:FF6600}
+
+/*Styles for grid containers*/
+.clgrid
+{
+	font-size: 11px;color: #000000;
+	line-height: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color : #FF6600;
+	overflow: auto;width: 100%;
+	/*height: 150;*/
+	border-left: 1px black solid; 
+	border-right: 1px black solid;
+	border-bottom: 1px black solid; 
+	border-top: 1px black solid;
+	padding: 0px;margin: 0px
+}
+
+/**
+ * The automcomplete box styling
+ */
+div.auto_complete {
+    width: 350px;
+    background: #fff;
+}
+
+div.auto_complete ul {
+    border: 1px solid #31430f;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+}
+
+div.auto_complete ul li {
+    margin: 0;
+    padding: 3px;
+    text-align: left;
+}
+
+div.auto_complete ul li.selected {
+    background-color: #dcedad;
+}
+
+div.auto_complete ul strong.highlight {
+    color: #800;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* color de campos de texto requeridos en la forma */
+.required{background-color : #ffffde}
+
+/* color de campos de texto como solo label o invisibles */
+.invisible{background: none;border: none;color: none}
+
+/* color de fondo de solo lectura */
+.readonly{background-color : #EDB5A5}
+
+/* color de fondo de solo lectura */
+.bgblanco{background-color : #FFFFFF}
+
+/* color de fondo de inconsistencia de sexo */
+.inconsistente{background-color : orange}
+

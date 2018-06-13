@@ -1,0 +1,41 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+#set ($titlePage = "Alta Datos Adicionales" )
+#set ($intkOrdenSucursal = $data.getParameters().getString('kOrdenSucursal') )
+
+#set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
+
+
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+
+
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/AltaDatoAdicional.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/factura/nuevafacturacion/Tools.js")"></script>
+
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosAdicionales.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;		
+</script>	
+
+
+<form name="frmAltaDatoAdicional" action="$ligaAct" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
+	<input type="hidden" id="hdlHelp" name="hdlHelp" value="">	
+	<input type="hidden" id="txtAdmision" name="txtAdmision" value="$intkOrdenSucursal">	
+	
+    <div id="datosAdicionales">                
+	</div>	    	
+</form>
+
+#if($intkOrdenSucursal)
+	<script>		
+	     mostrarDatoAdicional('$intkOrdenSucursal');
+	</script>	
+#end
