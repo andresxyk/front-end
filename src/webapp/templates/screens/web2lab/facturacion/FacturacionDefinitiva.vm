@@ -132,7 +132,12 @@
 		<table border="0" class="tabla" width="100%">
 				<td>
 					Folio Factura
-					<input type="text" id="txtUfoliofactura"  onKeyPress="numero();" size="15" style="width:100px;" >
+					<input type="text" id="txtUfoliofactura" size="15" style="width:100px;" >
+					<select id="selMarca" style="width: 120px" align="up">
+						    <option value="1">OLAB</option>
+						    <option value="4">AZTECA</option>
+						   	<option value="5">SwissLab</option>
+			        </select>
 					<input type="button" id="idBuscaFactura" name="idBuscaFactura" value="Busca Factura" onClick="buscaFactura();" class="boton">
 				</td>
 			</tr>

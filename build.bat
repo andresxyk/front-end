@@ -1,5 +1,5 @@
-SET JAVA_HOME=C:\Java\j2sdk1.4.2_19
-SET PATH=C:\Java\j2sdk1.4.2_19\bin;%PATH%
+SET JAVA_HOME=C:\Program Files\Java\j2sdk1.4.2_19
+SET PATH=C:\Program Files\Java\j2sdk1.4.2_19\bin;%PATH%
 java -version
 CD .. 
 IF "%1" == "back" GOTO BACK-INSTALL

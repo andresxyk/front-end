@@ -682,11 +682,12 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
    
    function buscaFactura(){
 	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
+	   var selectedMarca = document.getElementById("selMarca").value; 
 	   
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 		        var frmPantalla = window.document.frmFacturacion;
 		    		//adminDIV("gridbusquedaFacturas","visible","inline");
-			    	BusquedaFacturas.buscarFacturaAjuste(frmPantalla.txtUfoliofactura.value,buscarFacturaAjuste_CallBack);
+			    	BusquedaFacturas.buscarFacturaAjuste(frmPantalla.txtUfoliofactura.value, frmPantalla.selMarca.value, buscarFacturaAjuste_CallBack);
 			    	
 			}else{
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ

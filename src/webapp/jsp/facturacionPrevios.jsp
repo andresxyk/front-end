@@ -1,4 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao" errorPage="/jsp/error.jsp"
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1" import="mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao,java.util.Date;" errorPage="/jsp/error.jsp"
 	pageEncoding="ISO-8859-1"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -26,7 +26,7 @@
 				&& exportToExcel.toString().equalsIgnoreCase("YES")) {
 			response.setContentType("application/vnd.ms-excel");
 			response.setHeader("Content-Disposition", "inline; filename="
-					+ "excel.xls");
+					+ strconvenio + "-" + new Date().getTime() + ".xls");
 
 		}
 	%>

@@ -41,14 +41,14 @@ public String buscarFacturas(String strFacturas){
 	return strReturn;
 }
 
-public String buscarFacturaAjuste(String strFacturas){
+public String buscarFacturaAjuste(String strFacturas, Integer idMarca){
 	String strReturn = null;
 	
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
 	try {
-			iObjLog.debug("Entrando a BusquedaGacturasAjax.buscarFactura");
-			strReturn = objBusquedaFactura.getBusquedaFacturaAjuste(strFacturas);
-			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFactura"+strReturn);
+			iObjLog.debug("Entrando de BusquedaGacturasAjax.buscarFacturaAjuste("+strReturn+"," + idMarca);
+			strReturn = objBusquedaFactura.getBusquedaFacturaAjuste(strFacturas, idMarca);
+			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFacturaAjuste("+strReturn+"," + idMarca);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
