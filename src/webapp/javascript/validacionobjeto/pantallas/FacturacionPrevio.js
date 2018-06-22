@@ -614,18 +614,21 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				}else{
 					LoadFacturaElectronica(descripcionfactura,0);
 					FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+					
 				}
-			}if((tipofactura==2)){
+			}else if((tipofactura==2)){
 				LoadFacturaElectronica("",0);
 				FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
-			}if(tipofactura==4){
+				
+			}else if(tipofactura==4){
 				var ordencompra = document.getElementById("txtOrdenCompra").value;
 				if((ordencompra=="") ||(ordencompra==0)){
 					alert("Debe ingresar una orden de compra valida");
 					document.getElementById("txtOrdenCompra").focus();
 				}else{
 					LoadFacturaElectronica("",ordencompra);
-					FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+					//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+					
 				}
 			}
 		}else{
@@ -649,7 +652,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 			 snombre = "FacturaOrden";
 			 alert(data);
 			 showPopWin(data, 800, 400, snombre);			 
-//			 abrirVentanaOrden(data,snombre); 
+			 // abrirVentanaOrden(data,snombre); 
 		 }
    }
    /*
@@ -834,7 +837,8 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	 */
    //Modificacion BY 02/09/2013
 	 function LoadFacturaElectronica(sdescripcion,iordencompra) {
-			facturaelectronicaBean.sserie="A";
+		 
+			
 			facturaelectronicaBean.sfolio="1";
 			facturaelectronicaBean.fecha="2010-12-31 10:55:31";
 			facturaelectronicaBean.cconvenio=309;
@@ -849,6 +853,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 //			facturaelectronicaBean.sncertificado="00001000000102101701";
 			//variables del emisorOlab	
 			if (document.getElementById('cMarca').value == 1) {
+				facturaelectronicaBean.sserie="A";
 				facturaelectronicaBean.srazonsocialemisor="ESTUDIOS CLINICOS DR TJ ORIARD SA DE CV";
 				facturaelectronicaBean.srfcemisor="ECD741021QA5";
 				facturaelectronicaBean.scalleemisor="AV. REVOLUCION No.56";
@@ -862,7 +867,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.spaisemisor="MEXICO";
 				facturaelectronicaBean.cmarca = 1;
 			} else if (document.getElementById('cMarca').value == 5){
-							
+				facturaelectronicaBean.sserie="AS";
 				facturaelectronicaBean.srazonsocialemisor="SWISSLAB S.A. de C.V.";
 				facturaelectronicaBean.srfcemisor="SWI1201268J8";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
@@ -876,6 +881,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 5;
 			}else{
+				facturaelectronicaBean.sserie="AZ";
 				facturaelectronicaBean.srazonsocialemisor="LABORATORIO QUIMICO CLINICO AZTECA S.A.P.I. DE C.V.";
 				facturaelectronicaBean.srfcemisor="LQC920131M20";
 				facturaelectronicaBean.scalleemisor="SIMON BOLIVAR 15";

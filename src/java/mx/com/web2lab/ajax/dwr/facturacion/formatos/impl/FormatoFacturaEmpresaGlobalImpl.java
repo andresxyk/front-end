@@ -29,7 +29,7 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 
 	private static Log iObjLog = LogFactory.getLog(FormatoFacturaEmpresaGlobalImpl.class);
 
-	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean) throws Exception {
+	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean, int marca) throws Exception {
 		DatosOrdenDao objBuscarOrdenDAO = new DatosOrdenDao();
 		SucursalDao objSucursalDAO = new SucursalDao();
 		SucursalDao objSucursalAdionalesDAO = new SucursalDao();
@@ -47,7 +47,14 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 			/** Busca los datos de la Orden **/
 			//OrdenBean objOrdenBean = objBuscarOrdenDAO.buscarOrdenExamenFac(Integer.parseInt(objFacturaBean.getkOrdenSucursal()));
 			/** Busca los datos de la Sucursal Folios, serie **/
-			SucursalBean objSucursalTempBean = objSucursalDAO.getSucursal(1003);
+			SucursalBean objSucursalTempBean = null;
+			if (marca == 1){
+				objSucursalTempBean = objSucursalDAO.getSucursal(1003);
+			}else if (marca==4){
+				objSucursalTempBean = objSucursalDAO.getSucursal(1012);
+			}else if (marca==5){
+				objSucursalTempBean = objSucursalDAO.getSucursal(1013);
+			}
 			FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreo = new FacturacionElectronicaMayoreoDao();
 			//objFacturacionElectronicaMayoreo.getDatosFacturarSucursal(objSucursalTempBean);					
 			objFacturaBean.setObjSucursalBean(objSucursalTempBean);
@@ -96,7 +103,15 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 			/** Ingresa Cabecero izquierdo*/
 			objFacturaBean.setFecha((objFormatos.getFechaNumerosHoraMinYearMothnDay(objTfactura.getDregistro()).toString()));
 			objFacturaBean.setFechaxml(objFormatos.getFechaHoraFEXMLNew(objTfactura.getDregistro()));
-			objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1003);
+			
+			if (marca == 1){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1003);
+			}else if (marca==4){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1012);
+			}else if (marca==5){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1013);
+			}
+			
 			objFacturaBean.setNnumeroaprobacion(objCcontrolFolio.getNaprobacion().toString());
 			objFacturaBean.setSanoaprobacion(objCcontrolFolio.getNanoprobacion().toString());
 			objFacturaBean.setSserie(objTfactura.getSserie());
