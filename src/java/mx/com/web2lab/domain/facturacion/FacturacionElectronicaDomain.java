@@ -18,6 +18,7 @@ public class FacturacionElectronicaDomain {
 
 	public FacturaElectronicaBean crearFacturaElectronica(FacturaElectronicaBean objFacturaBean) throws Exception {
 		iObjLog.debug("Entrando a FacturacionElectronicaDomain.crearFacturaElectronica:... Marca " + objFacturaBean.getCmarca());
+		int cmarca=objFacturaBean.getCmarca();
 		OrdenDatosFacturacionDao objDatosOrdenDAO = new OrdenDatosFacturacionDao();
 		FacturaElectronicaXML objFacturaElectronicaXML = new FacturaElectronicaXML();
 		FacturaElectronicaFOPDao objFacturaElectronicaFOPDAO = new FacturaElectronicaFOPDao();
@@ -36,7 +37,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo... URL " + objFacturaBean.getsURL());
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo...  ");
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -53,6 +54,7 @@ public class FacturacionElectronicaDomain {
 	
 	public FacturaElectronicaBean crearFacturaElectronicaMayoreo(FacturaElectronicaBean objFacturaBean) throws Exception {
 		iObjLog.debug("Entrando a FacturacionElectronicaDomain.crearFacturaElectronicaMayoreo:...  Marca " + objFacturaBean.getCmarca());
+		int cmarca=objFacturaBean.getCmarca();
 		OrdenDatosFacturacionDao objDatosOrdenDAO = new OrdenDatosFacturacionDao();
 		FacturaElectronicaXML objFacturaElectronicaXML = new FacturaElectronicaXML();
 		FacturaElectronicaFOPDao objFacturaElectronicaFOPDAO = new FacturaElectronicaFOPDao();
@@ -67,7 +69,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setSfop(objFacturaElectronicaFOPDAO.createFactura(objFacturaBean,false));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean);
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronicaMayoreo:Saliendo... URL " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -84,6 +86,7 @@ public class FacturacionElectronicaDomain {
 	
 	public FacturaElectronicaBean crearFacturaElectronicaEmpresa(FacturaElectronicaBean objFacturaBean) throws Exception {
 		iObjLog.debug("Entrando a FacturacionElectronicaDomain.crearFacturaElectronicaEmpresa:... Marca " + objFacturaBean.getCmarca());
+		int cmarca=objFacturaBean.getCmarca();
 		OrdenDatosFacturacionDao objDatosOrdenDAO = new OrdenDatosFacturacionDao();
 		FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
 		FacturaElectronicaXML objFacturaElectronicaXML = new FacturaElectronicaXML();
@@ -100,7 +103,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setSfop(objFacturaElectronicaEmpresaFOPDAO.createFactura(objFacturaBean));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronicaEmpresa:Saliendo... URL " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -118,6 +121,7 @@ public class FacturacionElectronicaDomain {
 	
 	public FacturaElectronicaBean crearFacturaEmpresaUnidad(FacturaElectronicaBean objFacturaBean) throws Exception {
 		iObjLog.debug("Entrando a FacturacionElectronicaDomain.crearFacturaEmpresaUnidad:...  BY Marca " + objFacturaBean.getCmarca());
+		int cmarca=objFacturaBean.getCmarca();
 		OrdenDatosFacturacionDao objDatosOrdenDAO = new OrdenDatosFacturacionDao();
 		FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
 		FacturaElectronicaXML objFacturaElectronicaXML = new FacturaElectronicaXML();
@@ -135,7 +139,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaEmpresaUnidad:Saliendo...  BY II " + objFacturaBean.getsURL());
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaEmpresaUnidad:Saliendo...  BY " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -154,6 +158,7 @@ public class FacturacionElectronicaDomain {
 	/******************Verificar este caso de PEMEX **************************/
 	public FacturaElectronicaBean crearFacturaXmlAdenda(FacturaElectronicaBean objFacturaBean) throws Exception {
 		iObjLog.debug("Entrando a FacturacionElectronicaDomain.crearFacturaXmlAdenda:...  ");
+		int cmarca=objFacturaBean.getCmarca();
 		OrdenDatosFacturacionDao objDatosOrdenDAO = new OrdenDatosFacturacionDao();
 		FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
 		FacturaElectronicaXML objFacturaElectronicaXML = new FacturaElectronicaXML();
@@ -170,7 +175,7 @@ public class FacturacionElectronicaDomain {
 			datosEmisor(objFacturaBean);						
 			objFacturaBean.setSfop(objFacturaElectronicaEmpresaFOPDAO.createFactura(objFacturaBean));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean, cmarca);			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo...  ");
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);

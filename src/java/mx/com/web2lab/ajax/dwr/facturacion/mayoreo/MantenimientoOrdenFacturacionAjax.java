@@ -44,7 +44,7 @@ public class MantenimientoOrdenFacturacionAjax extends AjaxAction {
 		return strReturn;
 	}	
 
-	public String cancelarFactura(int uFolioFactura,int intUsuario,int intCopiarInformacion) throws Exception	
+	public String cancelarFactura(int uFolioFactura,int intUsuario,int intCopiarInformacion, int cmarca) throws Exception	
 	{
 		OrdenDatosFacturacionDao objOrdenDatosFacturacionDao = new OrdenDatosFacturacionDao();
 		FacturaElectronicaBean objfilexmlbean = new FacturaElectronicaBean();		
@@ -53,7 +53,7 @@ public class MantenimientoOrdenFacturacionAjax extends AjaxAction {
 		try {			  			
 			objfilexmlbean.setSfolio(String.valueOf(uFolioFactura));
 			objfilexmlbean.setTurbine_User(intUsuario);
-			strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion);
+			strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion,cmarca);
 			iObjLog.debug("Saliendo a MantenimientoOrdenFacturacionAjax.cancelarFactura:Saliendo... ");
 		}catch (Exception aObjException){
     	    iObjLog.error("ERROR.......MantenimientoOrdenFacturacionAjax.cancelarFactura:Exception....", aObjException);

@@ -24,7 +24,14 @@
         <tr>
             <td>
                 <input type="text" id="txtIdFactura" value="0" STYLE="font-size: 30px;" onKeyPress="numero();" size="10" />
-    	    </td>     
+    	    </td> 
+    	    <td>
+    	    	<select id="selMarca" style="width: 120px" align="up">
+						    <option value="1">OLAB</option>
+						    <option value="4">AZTECA</option>
+						   	<option value="5">SWISSLAB</option>
+			     </select>
+    	    </td>    
             <td>
 				<select id="selInformacionCopiar" style="width: 200px"> 
 					<option value="1">Informacion Facturacion</option>

@@ -83,7 +83,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		try {								
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");							
 			objFacturaElectronicaBean.setSfolio(cFolio + "");							
-			objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean);							
+			objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,1);							
 				if (objTFactura != null) {						
 					if(objTFactura.getCestadoregistro()==34) {					
 						objPagoFacturaBean = objPagoFacturaDao.getDatosFacturaCancelada(objTFactura.getKfactura().intValue(),true);				

@@ -686,7 +686,15 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
    function buscaFactura(){
 	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
 	   var selectedMarca = document.getElementById("selMarca").value; 
-	   
+	   var marca='';
+	   if(selectedMarca==1){
+		   marca='OLAB';
+	   } else if (selectedMarca==4){
+		   marca='AZTECA';
+	   } else if (selectedMarca==5){
+		   marca='SWISSLAB';
+	   }
+	   	if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 		        var frmPantalla = window.document.frmFacturacion;
 		    		//adminDIV("gridbusquedaFacturas","visible","inline");
@@ -696,7 +704,8 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ
 					document.getElementById("txtUfoliofactura").focus();		
 			}
-	    }
+	   	}
+   }
    
    function buscarFacturaAjuste_CallBack(data){ 
 	   
