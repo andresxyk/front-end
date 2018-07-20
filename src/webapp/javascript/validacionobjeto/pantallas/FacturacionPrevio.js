@@ -694,17 +694,17 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   } else if (selectedMarca==5){
 		   marca='SWISSLAB';
 	   }
-	   	if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
+	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
 		        var frmPantalla = window.document.frmFacturacion;
 		    		//adminDIV("gridbusquedaFacturas","visible","inline");
 			    	BusquedaFacturas.buscarFacturaAjuste(frmPantalla.txtUfoliofactura.value, frmPantalla.selMarca.value, buscarFacturaAjuste_CallBack);
-			    	
+	    	   }
 			}else{
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ
 					document.getElementById("txtUfoliofactura").focus();		
 			}
-	   	}
+	   	
    }
    
    function buscarFacturaAjuste_CallBack(data){ 

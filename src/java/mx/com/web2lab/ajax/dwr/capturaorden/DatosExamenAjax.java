@@ -398,14 +398,15 @@ public class DatosExamenAjax extends AjaxAction {
 					if( objExamenFundacion.getCestadoregistro() == 13) {
 						iObjLog.debug("Consulta a DatosExamenAjax.persistentesExamenesFac:Estado...Orden " + objBOrden.getKadmision() + " " + objBOrden.getCestado());					
 						if (objBOrden.getCestado() == 14) {
-							if(intCsucursal != 1003 || intCsucursal != 1012 ||intCsucursal != 1013){
+							//if(intCsucursal != 1003 || intCsucursal != 1012 ||intCsucursal != 1013){
+							if(intCsucursal != 1003 && intCsucursal != 1012 && intCsucursal != 1013){	
 								strBodyExamenes += this.createBodyExamenCotizados(objExamenFundacion,"black",true,true); 
 							}else{
 								strBodyExamenes += this.showBodyExamen(objExamenFundacion,"black",true,true); 
 							}
 						} else {
 							objExamenFundacion.setSmotivocancelacion("");
-							if(intCsucursal != 1003 || intCsucursal != 1012 ||intCsucursal != 1013){
+							if(intCsucursal != 1003 && intCsucursal != 1012 && intCsucursal != 1013){
 								strBodyExamenes += this.createBodyExamenCotizados(objExamenFundacion,"black",false,true);
 							}else{
 								strBodyExamenes += this.showBodyExamen(objExamenFundacion,"black",false,true); 							
@@ -413,7 +414,7 @@ public class DatosExamenAjax extends AjaxAction {
 						}
 						bolOrdenCancelada = false;
 					} else {
-						if(intCsucursal != 1003 || intCsucursal != 1012 ||intCsucursal != 1013){
+						if(intCsucursal != 1003 && intCsucursal != 1012 && intCsucursal != 1013){
 							strBodyExamenes += this.createBodyExamenCotizados(objExamenFundacion,"red",false,true);
 						} else{
 							strBodyExamenes += this.showBodyExamen(objExamenFundacion,"red",false,true); 

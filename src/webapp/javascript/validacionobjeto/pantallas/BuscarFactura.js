@@ -18,7 +18,7 @@
 		    	BusquedaFacturas.buscarFacturas(frmPantalla.txtBuscarFactura.value,buscarFactura_CallBack);
 			}else{
 				alert('Debe ingresar un folio de factura adecuado');
-			}
+			} 
 		 //}
 	}
    

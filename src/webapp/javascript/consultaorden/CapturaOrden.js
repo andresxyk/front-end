@@ -175,7 +175,7 @@
         		alert('Es necesario que capture por lo menos el Apellido Paterno del Medico');
     		} else {
 		        activaDemograficosMedico(false);
-    			DatosMedico.altaMedicoBasico(strNombre,strApellidoPaterno,strApellidoMaterno,"",<medicoAceptado_CallBack);    	    			
+    			DatosMedico.altaMedicoBasico(strNombre,strApellidoPaterno,strApellidoMaterno,"",medicoAceptado_CallBack);    	    			
     		}
     	} else {
     		alert('Para guardar una medico no debio seleccionar ningun medico');

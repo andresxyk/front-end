@@ -18,9 +18,9 @@
        	} else if(selectedMarca==4){
        		marca='AZTECA';
        	}else if(selectedMarca==5){
-       		marca='SWISSLAB';
+       		marca='SWISSLAB'; 
        	}
-       	
+       	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {
 			MantenimientoOrdenFacturacion.cancelarFactura(facturaCancelar,frmPantalla.idUsuario.value,TypeObjeto(frmPantalla.selInformacionCopiar),frmPantalla.selMarca.value,CancelacionFacturacion_CallBack)
 		}    			   
