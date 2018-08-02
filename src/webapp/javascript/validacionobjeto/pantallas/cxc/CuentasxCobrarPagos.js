@@ -73,7 +73,7 @@
 	function reimprimirFacturaPDF() {
 		var frmPantalla = window.document.frmPagoFactura;
 		snombre = "FacturaOrden";
-		strRuta = "http://192.237.150.66:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 	    abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true;
 	}
@@ -81,14 +81,26 @@
 	function reimprimirFacturaXML() {
 		var frmPantalla = window.document.frmPagoFactura;
 		snombre = "FacturaOrden";
-		strRuta = "http://192.237.150.66:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 	    abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true;
 	}
 	
 	function buscarFolio() {
-		CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,initFactura_CallBack);
-		adminDIV("gridEstadoFactura","visible","inline");
+		var frmPantalla = window.document.frmPagoFactura;
+		var selectedMarca = document.getElementById("selMarca").value; 
+       	var marca='';
+       	if(selectedMarca==1){
+       		marca='OLAB';
+       	} else if(selectedMarca==4){
+       		marca='AZTECA';
+       	}else if(selectedMarca==5){
+       		marca='SWISSLAB'; 
+       	}
+       	if (confirm("Estas seguro de buscar el folio" + window.document.frmPagoFactura.txtFolioFactura.value + " de la marca "+marca+" ?")) {
+			CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,initFactura_CallBack);
+			adminDIV("gridEstadoFactura","visible","inline");
+       	}
     }
     
 	function buscarFolioKey() {

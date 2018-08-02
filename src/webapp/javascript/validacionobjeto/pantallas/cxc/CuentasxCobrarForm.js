@@ -13,7 +13,7 @@ function showReporteFacturaPagos() {
 	showPopWin(frmPantalla.hdenRutaReportes.value, 800, 400, "Reportes Factura y Pagos");
 }
 
-function showAntiguedadCxC() {
+function showAntiguedadCxC() { 
 	var frmPantalla = window.document.frmAdminClientes;
 	showPopWin("/web2labportal/jsp/antiguedadCxC.jsp", 800, 400, "Antiguedad Saldos");
 }
@@ -515,7 +515,7 @@ function changeMontoPagar(strConvenio) {
 	}	
 }
 
-/****************Versión 25 de Marzo 2013 BY*******************/
+/****************Versiï¿½n 25 de Marzo 2013 BY*******************/
 function buscarConvenioRapido(objConvenio,strBuscar) {
     var frmPantalla = window.document.frmAdminClientes;		
 		if ((strBuscar.length == 9) && (validaSoloNumeros(strBuscar))) {

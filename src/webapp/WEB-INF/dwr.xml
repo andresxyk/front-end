@@ -386,7 +386,7 @@
 	  FacturarElectronicaSucursalAjax.crearOrdenFacturar(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico);
 	  CuentasxCobrarMayoreoAjax.pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago);
 	  CuentasxCobrarMayoreoAjax.getPagoFactura(int kFactura);	  
-	  CuentasxCobrarMayoreoAjax.buscaFacturaFolio(int cFolio);	  
+	  CuentasxCobrarMayoreoAjax.buscaFacturaFolio(int cFolio, int marca);	  
 	  SeguridadAjax.getUser(String username);
 	  ViajeFacturacionAjax.buscarViajeOrdenes(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);
 	  ViajeFacturacionAjax.buscarViajeOrdenesNewIndividual(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);

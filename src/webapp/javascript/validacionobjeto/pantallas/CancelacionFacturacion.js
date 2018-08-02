@@ -7,7 +7,7 @@
 		frmPantalla.radInformacionCopiar[1].checked = true;				    
    }
 /********************* Negocio *******************************/
-   function CancelacionFacturacion()
+   function CancelacionFacturacion() 
    {
        	var frmPantalla = window.document.frmFacturaCancelar;
        	facturaCancelar = TypeObjeto(frmPantalla.txtIdFactura);

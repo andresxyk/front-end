@@ -171,7 +171,7 @@ public class DatosClienteAjax extends AjaxAction {
 	}	
 	
 	public String buscarClientes(ClienteBean objClienteBean) throws Exception
-	{
+	{ 
 		iObjLog.debug("Entrando DatosClienteAjax.buscarClientes:Entrando... ");		
 		String strReturn = "";
 		try {			

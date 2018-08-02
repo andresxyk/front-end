@@ -7,7 +7,7 @@
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
 
-<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script> 
 <script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/interface/CuentasxCobrarMayoreo.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>

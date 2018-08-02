@@ -113,11 +113,18 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     	<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
     		<tr>
     			<td>
-    				<b>Folio Factura:</b>				
+    				<b>Folio Factura:</b>			 	
                 </td>
     	        <td>
                     <input type="text" id="txtFolioFactura" value="0" STYLE="font-size: 30px;" onKeyPress="buscarFolioKey();" size="5" />
-    			</td>			
+    			</td>	
+    			<td>
+	    	    	<select id="selMarca" style="width: 120px" align="up">
+							    <option value="1">OLAB</option>
+							    <option value="4">AZTECA</option>
+							   	<option value="5">SWISSLAB</option> 
+				     </select>
+    	   		 </td> 		
     		</tr>
     	</table>               
 		<input type="button" value="Buscar Folio" name="Buscar Folio" class="boton" onclick="buscarFolio();">
