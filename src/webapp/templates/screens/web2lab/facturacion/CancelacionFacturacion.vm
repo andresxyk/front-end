@@ -30,6 +30,8 @@
 						    <option value="1">OLAB</option>
 						    <option value="4">AZTECA</option>
 						   	<option value="5">SWISSLAB</option>
+						   	<option value="7">JENNER PRADO</option>
+						   	<option value="8">JENNER LEAN</option>
 			     </select>
     	    </td>    
             <td>

@@ -25,13 +25,15 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		iObjLog.debug("new: Generando nueva clase FacturarElectronicaMayoreoAjax");
 	}
 	
-	public PagoFacturaBean pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago, int intGrupo) throws Exception
+	public PagoFacturaBean pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago, int intGrupo, boolean crearComplemento,String formaPago, int marca) throws Exception
 	{
 		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagoFactura:Entrando... ");		
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
 		PagoFacturaBean objPagoFacturaBean = new PagoFacturaBean();
+		int keyPago=0;
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");	
+						
 			objPagoFacturaBean.setCestadoregistro(52);
 			objPagoFacturaBean.setCtipopago(cTipoPago);
 			objPagoFacturaBean.setDfechapago(new Formatos().getFecha(strFechaPago));
@@ -42,16 +44,65 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 			objPagoFacturaBean.setMsaldo(new BigDecimal(dblSaldo));
 			objPagoFacturaBean.setUserId(UserID);
 			objPagoFacturaBean.setUgrupopago(intGrupo);
-			objPagoFacturaBean = objPagoFacturaDao.pagoFactura(objPagoFacturaBean);
+			if(crearComplemento){
+				keyPago=objPagoFacturaDao.pago(objPagoFacturaBean,dblMontoPago,formaPago ,marca);
+			}			
+			objPagoFacturaBean = objPagoFacturaDao.pagoFactura(objPagoFacturaBean,keyPago);
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.pagoFactura:Saliendo...  ");
 		} catch (Exception aObjException){
-			iObjLog.error("Error CuentasxCobrarMayoreoAjax.buscarCliente:Exception....", aObjException);
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.pagoFactura:Exception....", aObjException);
 			throw aObjException;
 		} finally {
 			objPagoFacturaDao = null;
 		}
 		return objPagoFacturaBean;
-	}	
+	}
+	
+	public int getKeyPago(String fechaPago,double monto, String formaPago, int convenio, String kfacturas) throws Exception{
+		int key=0;
+		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.getKeyPago:Entrando... ");
+		try {
+			String facturas=kfacturas.substring(0, kfacturas.length()-1);
+			key=objPagoFacturaDao.pagoMulti(new Formatos().getFecha(fechaPago),monto,formaPago ,convenio, facturas);
+			
+			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getKeyPago:Saliendo... "+key);
+		}catch (Exception aObjException){
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.getKeyPago:Exception....", aObjException);
+			throw aObjException;
+		}
+		return key;
+	} 
+	
+	public PagoFacturaBean pagoFacturaMulti(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,
+			int UserID,String strFechaPago, int intGrupo, int keyPago) throws Exception
+	{
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagoFacturaMulti:Entrando... "+ keyPago);		
+		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
+		PagoFacturaBean objPagoFacturaBean = new PagoFacturaBean();
+		try {			
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");	
+						
+			objPagoFacturaBean.setCestadoregistro(52);
+			objPagoFacturaBean.setCtipopago(cTipoPago);
+			objPagoFacturaBean.setDfechapago(new Formatos().getFecha(strFechaPago));
+			objPagoFacturaBean.setDregistro(new Date());
+			objPagoFacturaBean.setKfactura(kFactura);
+			objPagoFacturaBean.setManticipo(new BigDecimal(dblAnticipo));
+			objPagoFacturaBean.setMpago(new BigDecimal(dblMontoPago));
+			objPagoFacturaBean.setMsaldo(new BigDecimal(dblSaldo));
+			objPagoFacturaBean.setUserId(UserID);
+			objPagoFacturaBean.setUgrupopago(intGrupo);		
+			objPagoFacturaBean = objPagoFacturaDao.pagoFactura(objPagoFacturaBean,keyPago);
+			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.pagoFacturaMulti:Saliendo...  ");
+		} catch (Exception aObjException){
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.pagoFacturaMulti:Exception....", aObjException);
+			throw aObjException;
+		} finally {
+			objPagoFacturaDao = null;
+		}
+		return objPagoFacturaBean;
+	}
 
 	public PagoFacturaBean getPagoFactura(int kFactura) throws Exception
 	{
@@ -63,7 +114,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 			objPagoFacturaBean = objPagoFacturaDao.getDatosPagoFactura(kFactura,true);
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getDatosPagoFactura:Saliendo... mTotalFactura=" + objPagoFacturaBean.getMtotalfactura().doubleValue() + " kFactura=" + objPagoFacturaBean.getKfactura() + " FormatoFactura="+ objPagoFacturaBean.getSformatofactura());
 		} catch (Exception aObjException){
-			iObjLog.error("Error CuentasxCobrarMayoreoAjax.buscarCliente:Exception....", aObjException);
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.getPagoFactura:Exception....", aObjException);
 			throw aObjException;
 		} finally {
 			objPagoFacturaDao = null;
@@ -82,8 +133,16 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		TFactura objTFactura = null;								
 		try {								
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");							
-			objFacturaElectronicaBean.setSfolio(cFolio + "");							
-			objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,marca);							
+			objFacturaElectronicaBean.setSfolio(cFolio + "");
+			if((marca==7) || (marca==8)){
+				if(marca==7){
+					objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,7,"AJP");					
+				}else if (marca==8){
+					objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,7,"AJL");
+				}
+			}else{
+				objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,marca,"");
+			}
 				if (objTFactura != null) {						
 					if(objTFactura.getCestadoregistro()==34) {					
 						objPagoFacturaBean = objPagoFacturaDao.getDatosFacturaCancelada(objTFactura.getKfactura().intValue(),true);				

@@ -56,6 +56,20 @@ public String buscarFacturaAjuste(String strFacturas, Integer idMarca){
 	return strReturn;
 }
 
+public int buscarMarca(int cconvenio){
+	int marca=0;
+	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
+	try {
+			iObjLog.debug("Entrando de BusquedaGacturasAjax.buscarMarca("+cconvenio+")");
+			marca = objBusquedaFactura.getMarca(cconvenio);
+			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarMarca("+cconvenio+")");
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return marca;
+}
+
  /**
      * Metodo que verifica que exista una sesion valida 
      * @return

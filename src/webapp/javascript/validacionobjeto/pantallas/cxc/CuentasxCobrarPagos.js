@@ -22,7 +22,8 @@
     function initFactura_CallBack(data) {
     		
     	var frmPantalla = window.document.frmPagoFactura;							
-        adminDIV("gridBuscarFactura","hidden","none");							
+        adminDIV("gridBuscarFactura","hidden","none");	
+        cargarHora();
     							
     		document.getElementById('txtTotalFactura').className = 'textflat';					
     		frmPantalla.txtTotalFactura.disabled = true;					
@@ -72,16 +73,40 @@
 
 	function reimprimirFacturaPDF() {
 		var frmPantalla = window.document.frmPagoFactura;
+		var selectedMarca = document.getElementById("selMarca").value;
 		snombre = "FacturaOrden";
-		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+		if(selectedMarca==1){
+			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	} else if(selectedMarca==4){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	}else if(selectedMarca==5){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	}else if(selectedMarca==7){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+       	}else if(selectedMarca==8){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+       	}				
 	    abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true;
 	}
 
 	function reimprimirFacturaXML() {
 		var frmPantalla = window.document.frmPagoFactura;
+		var selectedMarca = document.getElementById("selMarca").value;
 		snombre = "FacturaOrden";
-		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+		
+		if(selectedMarca==1){
+			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	} else if(selectedMarca==4){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	}else if(selectedMarca==5){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	}else if(selectedMarca==7){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+       	}else if(selectedMarca==8){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+       	}	
+		
 	    abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true;
 	}
@@ -96,6 +121,10 @@
        		marca='AZTECA';
        	}else if(selectedMarca==5){
        		marca='SWISSLAB'; 
+       	}else if(selectedMarca==7){
+       		marca='JENNER PRADO'; 
+       	}else if(selectedMarca==8){
+       		marca='JENNER LEAN'; 
        	}
        	if (confirm("Estas seguro de buscar el folio" + window.document.frmPagoFactura.txtFolioFactura.value + " de la marca "+marca+" ?")) {
 			CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,initFactura_CallBack);
@@ -111,6 +140,7 @@
 	}	
 	
 	function pagoFactura() {
+		
 		var frmPantalla = window.document.frmPagoFactura;
 		var pago = frmPantalla.txtImportePago.value;
 		var saldo = frmPantalla.hidSaldoFactura.value;
@@ -120,12 +150,31 @@
 		var sFechaPago = frmPantalla.txtFechaDeposito.value;
 		var idUsuario = frmPantalla.idUsuario.value; 
 		var cTipoPago = TypeObjeto(frmPantalla.selTipoPago);
+		var shora = frmPantalla.selhora.value;
+		var sminutos = frmPantalla.selminutos.value;
+		var ssegundos = frmPantalla.selsegundos.value;
+		var cFormaPago = frmPantalla.selFormaPago.value;
+		var checkbox =	document.getElementById("chkCrearComplento").checked;
+		var selectedMarca = document.getElementById("selMarca").value;
+		
+		var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
+		
+		
 		if (pago != null) {
 			if (( parseInt(pago) > 0) && ( parseInt(saldo) >=  parseInt(pago))) {
-				if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
-					CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPago,1,pagoFactura_CallBack);			
+				if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
+					if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
+						CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,checkbox,parseInt(cFormaPago),selectedMarca,pagoFactura_CallBack);						
+					}
+				}else{
+					if(parseInt(cFormaPago)==0){
+						alert("Tienes que seleccionar una Forma de Pago");
+					}
+					if(sFechaPago==null || sFechaPago==''){
+						alert("Tienes que ingresar una fecha correcta");						
+					}
 				}
-			} else {
+			} else { 
 				alert("El pago debe ser mayor a $0 y menor a $" + frmPantalla.hidSaldoFactura.value);				
 				frmPantalla.txtImportePago.value = frmPantalla.hidSaldoFactura.value;
 			}
@@ -200,4 +249,50 @@
 		alert(data);
 		nuevoFactura();
 		adminDIV("gridEstadoFactura","hidden","none");
+	}
+	
+	function cargarHora(){
+		document.getElementById("selhora").innerHTML="";
+		document.getElementById("selminutos").innerHTML="";
+		document.getElementById("selsegundos").innerHTML="";
+
+		var selecthora = document.getElementById('selhora');
+		for (var i = 0; i<=23; i++){
+		    var opt = document.createElement('option');
+		    opt.value = i;
+		    if(i<10){
+		    	opt.innerHTML = '0'+i+' hrs';
+		    }else{
+		    	if (i==12) {
+		    		opt.selected=true;
+		    		opt.innerHTML = i+' hrs';
+		    	}else{
+		    		opt.innerHTML = i+' hrs';
+		    	}	
+		    }		    
+		    selecthora.appendChild(opt);
+		}		
+
+		var selectmin = document.getElementById('selminutos');
+		for (var i = 0; i<=59; i++){
+		    var opt = document.createElement('option');
+		    opt.value = i;
+		    if(i<10){
+		    	opt.innerHTML = '0'+i+' min';
+		    }else{		    	
+	    		opt.innerHTML = i+' min';		    		
+		    }		    
+		    selectmin.appendChild(opt);
+		}
+		var selectseg = document.getElementById('selsegundos');
+		for (var i = 0; i<=59; i++){
+		    var opt = document.createElement('option');
+		    opt.value = i;
+		    if(i<10){
+		    	opt.innerHTML = '0'+i+' seg';
+		    }else{
+		    	opt.innerHTML = i+' seg';
+		    }		    
+		    selectseg.appendChild(opt);
+		}
 	}

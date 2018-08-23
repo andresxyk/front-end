@@ -164,8 +164,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
     	}
    }
    
-   
-   
+     
    function GeneracionDefinitivoFactura()
    {
 	   	var frmPantalla = window.document.frmFacturacion;
@@ -177,12 +176,37 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
        	
       	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
-				if (confirm("¿Esta seguro de genera la facturación definitiva del convenio? "+cconvenio)) {	 	
-					showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1", 300, 300, "Definitivo"); 	
-				}
+      		//alert('convenio: '+cconvenio);
+      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack);
+      		
 		} else {
 			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
 		}   			   
+   }
+   
+   function GeneracionDefinitivoFactura_CallBack(data){
+	   
+		var frmPantalla = window.document.frmFacturacion;
+	  	var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
+	  	var strbloques = loopSelected();
+	  	var tipoprevio = TypeObjeto(frmPantalla.selTipoPrevio);
+	  	var userid =frmPantalla.idUsuario.value;
+	  	var monto =frmPantalla.txtMontoMaximo.value;
+	  	var razonSocial = TypeObjeto(frmPantalla.selRazonSocial);
+      	
+	   if(data==7){
+		   if(razonSocial>0){
+			   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+					showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
+				}
+		   }else{
+			   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+		   }
+	   }else{
+		   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
+				showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0", 300, 300, "Definitivo"); 	
+			}
+	   }
    }
    
    function buscarConvenioRapido(objConvenio,strBuscar) {
@@ -264,6 +288,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var frmPantalla = window.document.frmFacturacion;
 	   valorCombo(frmPantalla.selConvenios,356);
 	   valorCombo(frmPantalla.selTipoPrevio,0);
+	   valorCombo(frmPantalla.selRazonSocial,0);
 	   frmPantalla.txtMontoMaximo.value=0;
 	   frmPantalla.txtBuscarConvenio.value="";
 	   document.getElementById("txtBuscarConvenio").focus();
@@ -481,7 +506,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 			document.getElementById("txtUfoliofactura").value="";
 			valorCombo(frmPantalla.selTipoFactura,0);
 		}
-	}
+	} 
    
    
    function showAsignacionBloques(){
@@ -597,50 +622,55 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var miva = document.getElementById("txtmIva").value;
 	   var mtotal = document.getElementById("txtmTotal").value;
 	   var smetodopago = document.getElementById("txtTipoPago").value;
+	   var cmarca = document.getElementById('cMarca').value;
 	   
 	   if(smetodopago!='99'){
 		   var nocuenta = document.getElementById("txtNoCuenta").value;
 	   } else {
 		   var nocuenta = '';
 	   }
-
+ 
 	   alert('Metodo pago' + smetodopago);
-	   if((tipofactura>0)&&(ufoliofactura>0)){
-			if((tipofactura==1) ||(tipofactura==3)){
-				var descripcionfactura = document.getElementById("txtDescripcion").value;
-				if(descripcionfactura==""){
-					alert("Debe ingresar una descripcion para la factura");
-					document.getElementById("txtDescripcion").focus();
-				}else{
-					LoadFacturaElectronica(descripcionfactura,0);
+
+		   if((tipofactura>0)&&(ufoliofactura>0)){
+				if((tipofactura==1) ||(tipofactura==3)){
+					var descripcionfactura = document.getElementById("txtDescripcion").value;
+					if(descripcionfactura==""){
+						alert("Debe ingresar una descripcion para la factura");
+						document.getElementById("txtDescripcion").focus();
+					}else{
+						LoadFacturaElectronica(descripcionfactura,0);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						
+					}
+				}else if((tipofactura==2)){
+					LoadFacturaElectronica("",0);
 					FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					
+				}else if(tipofactura==4){
+					var ordencompra = document.getElementById("txtOrdenCompra").value;
+					if((ordencompra=="") ||(ordencompra==0)){
+						alert("Debe ingresar una orden de compra valida");
+						document.getElementById("txtOrdenCompra").focus();
+					}else{
+						LoadFacturaElectronica("",ordencompra);
+						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						
+					}
 				}
-			}else if((tipofactura==2)){
-				LoadFacturaElectronica("",0);
-				FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
-				
-			}else if(tipofactura==4){
-				var ordencompra = document.getElementById("txtOrdenCompra").value;
-				if((ordencompra=="") ||(ordencompra==0)){
-					alert("Debe ingresar una orden de compra valida");
-					document.getElementById("txtOrdenCompra").focus();
-				}else{
-					LoadFacturaElectronica("",ordencompra);
-					//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
-					
+			}else{
+				if(tipofactura==0){
+					alert('Debe elegir un formato adecuado de factura');
+					document.getElementById("selTipoFactura").focus();
+					return false;
+				}if((ufoliofactura==0)||(ufoliofactura=="")){
+					alert('Debe ingresar un folio de factura valido');
+					document.getElementById("txtUfoliofactura").focus();	
 				}
 			}
-		}else{
-			if(tipofactura==0){
-				alert('Debe elegir un formato adecuado de factura');
-				document.getElementById("selTipoFactura").focus();
-				return false;
-			}if((ufoliofactura==0)||(ufoliofactura=="")){
-				alert('Debe ingresar un folio de factura valido');
-				document.getElementById("txtUfoliofactura").focus();	
-			}
-		}
+	   
+	   
+	   
    }
 
    function generarFactura_CallBack(data) {
@@ -680,6 +710,8 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   //adminDIV("labelfactura","hidden","none");
 	   adminDIV("montosFactura","hidden","none");
 	   document.getElementById("txtUfoliofactura").focus();	   
+	   frmPantalla.txtUfoliofactura.disabled = false;
+  		frmPantalla.selMarca.disabled = false;
    }
 
    
@@ -693,6 +725,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   marca='AZTECA';
 	   } else if (selectedMarca==5){
 		   marca='SWISSLAB';
+	   } else if (selectedMarca==7){
+		   marca='JENNER PRADO';
+	   } else if (selectedMarca==8){
+		   marca='JENNER LEAN';
 	   }
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
@@ -703,14 +739,22 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 			}else{
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ
 					document.getElementById("txtUfoliofactura").focus();		
-			}
+			} 
 	   	
    }
    
    function buscarFacturaAjuste_CallBack(data){ 
-	   
-		  adminDIV("montosFactura","visible","inline");
-		  codeDIVHTML("montosFactura",data);
+	   var frmPantalla = window.document.frmFacturacion;
+	   	if(data!=""){
+	   		adminDIV("montosFactura","visible","inline");
+	   		codeDIVHTML("montosFactura",data);	  
+	   		frmPantalla.txtUfoliofactura.disabled = true;
+	   		frmPantalla.selMarca.disabled = true;
+	   	}else{
+	   		frmPantalla.txtUfoliofactura.disabled = false;
+	   		frmPantalla.selMarca.disabled = false;
+	   	}
+		  
 		  
 	  }
    
@@ -875,6 +919,20 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.scodigopostalemisor="11800";
 				facturaelectronicaBean.spaisemisor="MEXICO";
 				facturaelectronicaBean.cmarca = 1;
+			} else if (document.getElementById('cMarca').value == 4){ 
+				facturaelectronicaBean.sserie="AZ";
+				facturaelectronicaBean.srazonsocialemisor="LABORATORIO QUIMICO CLINICO AZTECA S.A.P.I. DE C.V.";
+				facturaelectronicaBean.srfcemisor="LQC920131M20";
+				facturaelectronicaBean.scalleemisor="SIMON BOLIVAR 15";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="LOS REYES ACAQUILPAN CENTRO";
+				facturaelectronicaBean.sciudademisor="ESTADO DE MEXICO";
+				facturaelectronicaBean.smunicipioemisor="LA PAZ";
+				facturaelectronicaBean.sestadoemisor="MEXICO D.F.";
+				facturaelectronicaBean.scodigopostalemisor="56400";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 4;
 			} else if (document.getElementById('cMarca').value == 5){
 				facturaelectronicaBean.sserie="AS";
 				facturaelectronicaBean.srazonsocialemisor="SWISSLAB S.A. de C.V.";
@@ -889,20 +947,36 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.scodigopostalemisor="64060";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 5;
-			}else{
-				facturaelectronicaBean.sserie="AZ";
-				facturaelectronicaBean.srazonsocialemisor="LABORATORIO QUIMICO CLINICO AZTECA S.A.P.I. DE C.V.";
-				facturaelectronicaBean.srfcemisor="LQC920131M20";
-				facturaelectronicaBean.scalleemisor="SIMON BOLIVAR 15";
-				facturaelectronicaBean.snexterioremisor="";
-				facturaelectronicaBean.sninterioremisor="";
-				facturaelectronicaBean.scoloniaemisor="LOS REYES ACAQUILPAN CENTRO";
-				facturaelectronicaBean.sciudademisor="ESTADO DE MEXICO";
-				facturaelectronicaBean.smunicipioemisor="LA PAZ";
-				facturaelectronicaBean.sestadoemisor="MEXICO D.F.";
-				facturaelectronicaBean.scodigopostalemisor="56400";
-				facturaelectronicaBean.spaisemisor="MEXICO";				
-				facturaelectronicaBean.cmarca = 4;
+			} else if (document.getElementById('cMarca').value == 7){
+				if(document.getElementById("selMarca").value==7){
+					facturaelectronicaBean.sserie="AJP";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO DEL PRADO S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCP061017PA9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}else if (document.getElementById("selMarca").value==8){
+					facturaelectronicaBean.sserie="AJL";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO LEAN S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCL050622DD9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}
 			}
 			//variables del emisorSucursal
 			facturaelectronicaBean.scallesuc="AV. VASCO DE QUIROGA NO.3380 P.B.";

@@ -15,11 +15,12 @@
 		String strtipoprevio = request.getParameter("tipoprevio");
 		String strtipofacturacion = request.getParameter("btipofactura");
 		String strmonto = request.getParameter("monto");
+		String strrazon = request.getParameter("razon");
 		
 		
 		
 		FacturacionPrevioDao objfacturacionPrevioDao = new FacturacionPrevioDao();
-	    strBody = objfacturacionPrevioDao.getPrevioFacturacion(strconvenio,struserid,strbloques,strtipoprevio,strtipofacturacion,strmonto);
+	    strBody = objfacturacionPrevioDao.getPrevioFacturacion(strconvenio,struserid,strbloques,strtipoprevio,strtipofacturacion,strmonto,strrazon);
 	    objfacturacionPrevioDao = null;
 		String exportToExcel = "YES";
 		if (exportToExcel != null

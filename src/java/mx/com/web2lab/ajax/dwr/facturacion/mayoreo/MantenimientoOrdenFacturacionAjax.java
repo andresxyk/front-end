@@ -53,7 +53,15 @@ public class MantenimientoOrdenFacturacionAjax extends AjaxAction {
 		try {			  			
 			objfilexmlbean.setSfolio(String.valueOf(uFolioFactura));
 			objfilexmlbean.setTurbine_User(intUsuario);
-			strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion,cmarca);
+			if((cmarca==7) || (cmarca==8)){
+				if(cmarca==7){
+					strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion,7,"AJP");					
+				}else if(cmarca==8){
+					strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion,7,"AJL");
+				}
+			}else{
+				strReturn = objOrdenDatosFacturacionDao.cancelarOrdenesFactura(objfilexmlbean,intCopiarInformacion,cmarca,"");
+			}
 			iObjLog.debug("Saliendo a MantenimientoOrdenFacturacionAjax.cancelarFactura:Saliendo... ");
 		}catch (Exception aObjException){
     	    iObjLog.error("ERROR.......MantenimientoOrdenFacturacionAjax.cancelarFactura:Exception....", aObjException);

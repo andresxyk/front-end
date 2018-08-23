@@ -55,7 +55,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     FormatoFacturaEmpresa objFormato = null;
     iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura);
     try {
-      objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca());
+      objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
       if (objTFactura != null) {
         if (!isSesionValida()) throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
         objFacturaBean.setBolredondear(true);
@@ -69,7 +69,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
 
         objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
         objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca());
+        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
         FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
         objFEDomain.crearFacturaElectronicaEmpresa(objFacturaBean);
         strReturn = objFacturaBean.getsURL();
@@ -94,9 +94,9 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     String strReturn = "";
     FormatoFacturaEmpresa objFormato = null;
     
-    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca());
+    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+"  serie:"+objFacturaBean.getSserie());
     try {
-      objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca());
+      objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
       objFacturaElectronicaMayoreoDAO.persistirAjusteFactura(objTFactura.getKfactura(), objTFactura.getUserId(), msubtotal, miva, mtotal);
       objFacturaElectronicaMayoreoDAO.persistirMetodoPago(strnocuenta.trim(), strmetodopago.trim(), objTFactura.getCconvenio());
       if (!isSesionValida()) throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
@@ -118,7 +118,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
       if ((itipofactura == 1) || (itipofactura == 2)) {
         objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
         objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca());
+        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
         FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
         objFacturaBean = objFEDomain.crearFacturaElectronicaEmpresa(objFacturaBean);
         strReturn = objFacturaBean.getsURL();
@@ -126,7 +126,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
       }if (itipofactura == 3) {
         objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
         objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca());
+        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
         FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
         objFacturaBean = objFEDomain.crearFacturaEmpresaUnidad(objFacturaBean);
         strReturn = objFacturaBean.getsURL();
@@ -134,7 +134,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
       }if (itipofactura == 4) {
         objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
         objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca());
+        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
         FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
         objFacturaBean = objFEDomain.crearFacturaXmlAdenda(objFacturaBean);
         strReturn = objFacturaBean.getsURL();

@@ -230,12 +230,18 @@ public class FacturaElectronicaXML
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       } else if(objfilexmlbean.getCmarca() == 5){
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      } else {
+      } else if(objfilexmlbean.getCmarca() == 4) {
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      } else if(objfilexmlbean.getCmarca() == 7) {
+    	  if(objfilexmlbean.getSserie().equals("AJP")){
+    		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_JennerPrado") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }else if(objfilexmlbean.getSserie().equals("AJL")){
+    		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }
       }
       out.output(doc, file);
       file.flush();
-      file.close();
+      file.close(); 
 
       boolean no_exit = true;
       while (no_exit) {
@@ -244,8 +250,14 @@ public class FacturaElectronicaXML
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
           } else if (objfilexmlbean.getCmarca() == 5){
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-          }else{
+          }else if (objfilexmlbean.getCmarca() == 4){
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          }else if (objfilexmlbean.getCmarca() == 7){
+        	  if(objfilexmlbean.getSserie().equals("AJP")){
+        		  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerPrado") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+        	  }else if(objfilexmlbean.getSserie().equals("AJL")){
+        		  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+        	  }
           }
         if (archivo.exists()) {
           no_exit = false;
@@ -262,8 +274,14 @@ public class FacturaElectronicaXML
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       } else if(objfilexmlbean.getCmarca() == 5){
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      }else{
+      }else if(objfilexmlbean.getCmarca() == 4){
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      } else if(objfilexmlbean.getCmarca() == 7){
+    	  if(objfilexmlbean.getSserie().equals("AJP")){
+    		  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerPrado") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }else if(objfilexmlbean.getSserie().equals("AJL")){
+    		  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }
       }
       BufferedReader contenido = new BufferedReader(lector);
       while ((strFileCFDI = contenido.readLine()) != null) {
@@ -280,8 +298,14 @@ public class FacturaElectronicaXML
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       } else if(objfilexmlbean.getCmarca() == 5){
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      }else {
+      }	else if(objfilexmlbean.getCmarca() == 4){
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      } else if(objfilexmlbean.getCmarca() == 7){
+    	  if(objfilexmlbean.getSserie().equals("AJP")){
+    		  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerPrado") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }else if(objfilexmlbean.getSserie().equals("AJL")){
+    		  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }
       }
       Node root1 = document.getDocumentElement();
       NodeList childNodes = root1.getChildNodes();
@@ -544,7 +568,13 @@ public class FacturaElectronicaXML
           file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }	else if (objfilexmlbean.getCmarca() == 5) {
           file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      }
+      } else if (objfilexmlbean.getCmarca() == 7) {
+    	  if(objfilexmlbean.getSserie().equals("AJP")){
+    		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerPrado") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }else if(objfilexmlbean.getSserie().equals("AJL")){
+    		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+    	  }
+	  }
       out.output(doc, file);
       file.flush();
       file.close();
@@ -563,40 +593,40 @@ public class FacturaElectronicaXML
     String strReturn = "";
     for (int inti = 0; inti < strConvert.length(); inti++) {
       strChar = strConvert.substring(inti, inti + 1);
-      if (strChar.equals("ÃƒÂ±"))
+      if (strChar.equals("ÃƒÆ’Ã‚Â±"))
         strChar = "&ntilde;";
-      else if (strChar.equals("Ãƒâ€˜"))
+      else if (strChar.equals("ÃƒÆ’Ã¢â‚¬Ëœ"))
         strChar = "&Ntilde;";
       else if (strChar.equals("&"))
         strChar = "&amp;";
       else if (strChar.equals("<")) {
         strChar = "&lt;";
       }
-      else if (strChar.equals("Ã‚Â°")) {
+      else if (strChar.equals("Ãƒâ€šÃ‚Â°")) {
         strChar = "&deg;";
       }
-      else if (strChar.equals("Ã¢Ë†â€”")) {
+      else if (strChar.equals("ÃƒÂ¢Ã‹â€ Ã¢â‚¬â€�")) {
         strChar = "&lowast;";
       }
-      else if (strChar.equals("Ãƒï¿½"))
+      else if (strChar.equals("ÃƒÆ’Ã¯Â¿Â½"))
         strChar = "&Aacute;";
-      else if (strChar.equals("Ãƒâ€°"))
+      else if (strChar.equals("ÃƒÆ’Ã¢â‚¬Â°"))
         strChar = "&Eacute;";
-      else if (strChar.equals("Ãƒï¿½"))
+      else if (strChar.equals("ÃƒÆ’Ã¯Â¿Â½"))
         strChar = "&Iacute;";
-      else if (strChar.equals("Ãƒâ€œ"))
+      else if (strChar.equals("ÃƒÆ’Ã¢â‚¬Å“"))
         strChar = "&Oacute;";
-      else if (strChar.equals("ÃƒÅ¡"))
+      else if (strChar.equals("ÃƒÆ’Ã…Â¡"))
         strChar = "&Uacute;";
-      else if (strChar.equals("ÃƒÂ¡"))
+      else if (strChar.equals("ÃƒÆ’Ã‚Â¡"))
         strChar = "&aacute;";
-      else if (strChar.equals("ÃƒÂ©"))
+      else if (strChar.equals("ÃƒÆ’Ã‚Â©"))
         strChar = "&eacute;";
-      else if (strChar.equals("ÃƒÂ­"))
+      else if (strChar.equals("ÃƒÆ’Ã‚Â­"))
         strChar = "&iacute;";
-      else if (strChar.equals("ÃƒÂ³"))
+      else if (strChar.equals("ÃƒÆ’Ã‚Â³"))
         strChar = "&oacute;";
-      else if (strChar.equals("ÃƒÂº")) {
+      else if (strChar.equals("ÃƒÆ’Ã‚Âº")) {
         strChar = "&uacute;";
       }
       strReturn = strReturn + strChar;

@@ -19,6 +19,10 @@
        		marca='AZTECA';
        	}else if(selectedMarca==5){
        		marca='SWISSLAB'; 
+       	}else if(selectedMarca==7){
+       		marca='JENNER PRADO'; 
+       	}else if(selectedMarca==8){
+       		marca='JENNER LEAN'; 
        	}
        	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {

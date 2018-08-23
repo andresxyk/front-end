@@ -232,12 +232,62 @@ function ocultarConvenios() {
 }
 
 function ocultarGridFacturas(strGridName) {
+	 
 	var objDIV = document.getElementById(strGridName);
 	if ((objDIV.style.visibility == "hidden") && (objDIV.style.display == "none")) {
-	    adminDIV(strGridName,"visible","inline");			
+	    adminDIV(strGridName,"visible","inline");
+	    if(strGridName=='gridGridFacturasConvenios'){
+	    	cargarHora(); 
+	    }
 	} else {
 	    adminDIV(strGridName,"hidden","none");			
 	}		
+}
+
+function cargarHora(){
+	document.getElementById("selhora").innerHTML="";
+	document.getElementById("selminutos").innerHTML="";
+	document.getElementById("selsegundos").innerHTML="";
+
+	var selecthora = document.getElementById('selhora');
+	for (var i = 0; i<=23; i++){
+	    var opt = document.createElement('option');
+	    opt.value = i;
+	    if(i<10){
+	    	opt.innerHTML = '0'+i+' hrs';
+	    }else{
+	    	if (i==12) {
+	    		opt.selected=true;
+	    		opt.innerHTML = i+' hrs';
+	    	}else{
+	    		opt.innerHTML = i+' hrs';
+	    	}	
+	    }		    
+	    selecthora.appendChild(opt);
+	}		
+
+	var selectmin = document.getElementById('selminutos');
+	for (var i = 0; i<=59; i++){
+	    var opt = document.createElement('option');
+	    opt.value = i;
+	    if(i<10){
+	    	opt.innerHTML = '0'+i+' min';
+	    }else{		    	
+    		opt.innerHTML = i+' min';		    		
+	    }		    
+	    selectmin.appendChild(opt);
+	}
+	var selectseg = document.getElementById('selsegundos');
+	for (var i = 0; i<=59; i++){
+	    var opt = document.createElement('option');
+	    opt.value = i;
+	    if(i<10){
+	    	opt.innerHTML = '0'+i+' seg';
+	    }else{
+	    	opt.innerHTML = i+' seg';
+	    }		    
+	    selectseg.appendChild(opt);
+	}
 }
 
 
@@ -418,18 +468,32 @@ function ConvenioBean() {
 
 function aceptaPago(strConvenio) {
 	var frm = document.getElementById("frmAdminClientes");
-	document.getElementById("txtMontoAPagarTotal" + strConvenio).value = "0";
-    for (i=0;i<frm.chkPagos.length;i++) {
-        if (frm.chkPagos[i].checked) {
-			frm.txtMontoAPagar[i].value = validarString(frm.txtMontoAPagar[i].value)
+	document.getElementById("txtMontoAPagarTotal").value = "0";
+	for (i=0;i<frm.chkPagos.length;i++) {
+		if (frm.chkPagos[i].checked) {
+			frm.txtMontoAPagar[i].value = validarString(frm.txtMontoAPagar[i].value);
 			if (parseFloat(frm.hdnSaldoFactura[i].value) >= parseFloat(frm.txtMontoAPagar[i].value)) { 
-				document.getElementById("txtMontoAPagarTotal" + strConvenio).value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal" + strConvenio).value)).toFixed(2);				
+				document.getElementById("txtMontoAPagarTotal").value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal").value)).toFixed(2);				
 			} else {
 				alert("El monto del pago no puede ser mayor al saldo de la factura");
 				frm.txtMontoAPagar[i].value = parseFloat(frm.hdnSaldoFactura[i].value).toFixed(2);
 			}
-        }
-    }
+		}
+	}
+	
+	
+//	document.getElementById("txtMontoAPagarTotal" + strConvenio).value = "0";
+//    for (i=0;i<frm.chkPagos.length;i++) {
+//        if (frm.chkPagos[i].checked) {
+//			frm.txtMontoAPagar[i].value = validarString(frm.txtMontoAPagar[i].value);
+//			if (parseFloat(frm.hdnSaldoFactura[i].value) >= parseFloat(frm.txtMontoAPagar[i].value)) { 
+//				document.getElementById("txtMontoAPagarTotal" + strConvenio).value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal" + strConvenio).value)).toFixed(2);				
+//			} else {
+//				alert("El monto del pago no puede ser mayor al saldo de la factura");
+//				frm.txtMontoAPagar[i].value = parseFloat(frm.hdnSaldoFactura[i].value).toFixed(2);
+//			}
+//        }
+//    }
     changeMontoPagar(strConvenio);
 }
 
@@ -476,40 +540,122 @@ function validarString(cadenaAnalizar) {
     }
 }
 
-function pagosFacturas(strConvenio) {
+function pagosFacturas() { 
 	var frm = document.getElementById("frmAdminClientes");
 	var pago = "";
 	var saldo = "";
 	var anticipo = "";
 	var strfactura = "";
 	var intFactura = "";
-	var sFechaPago = document.getElementById("txtFechaDepositoGlobal" + strConvenio).value;
+	var sFechaPago = document.getElementById("txtFechaDepositoGlobal").value;
 	var idUsuario = document.getElementById("idUsuario").value; 
-	var cTipoPago = TypeObjeto(document.getElementById("selTipoPago" + strConvenio));        	
-//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
-	var randomnumber = Math.floor(Math.random()*101);
-    for (i=0;i<frm.chkPagos.length;i++) {
-        if (frm.chkPagos[i].checked) {
-        	pago = frm.txtMontoAPagar[i].value;
-        	saldo = frm.hdnSaldoFactura[i].value;
-        	anticipo = frm.hdnAnticipoSaldo[i].value;
-        	intFactura = frm.hdnkFacturaSaldo[i].value;
-        	strfactura = frm.hdnsFacturaSaldo[i].value;
-			if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
-				CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPago,randomnumber,pagosFacturas_CallBack);			
+	var cTipoPago = TypeObjeto(document.getElementById("selTipoPago")); 
+	var txtTotal = document.getElementById("txtMontoAPagarTotal").value;
+	var shora = document.getElementById("selhora").value;
+	var sminutos = document.getElementById("selminutos").value; 
+	var ssegundos = document.getElementById("selsegundos").value; 
+	var cFormaPago = document.getElementById("selFormaPago").value; 
+	var checkbox =	document.getElementById("chkCrearComplento").checked;
+	
+	var kfacturas="";
+	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
+	if(checkbox==true){
+		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
+			for (i=0;i<frm.chkPagos.length;i++) {
+				if (frm.chkPagos[i].checked) {					
+					kfacturas += frm.hdnkFacturaSaldo[i].value+",";
+				}
+			}	
+			if(kfacturas!=""){
+				CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,getKeyPago_CallBack);				
 			}
-        }
-    }
-    alert('Registro de pago Exitosos');
+		}else{
+			if(parseInt(cFormaPago)==0){
+				alert("Tienes que seleccionar una Forma de Pago");
+			}
+			if(sFechaPago==null || sFechaPago==''){
+				alert("Tienes que ingresar una fecha correcta");						
+			}
+		}		
+	}else{
+		
+		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
+			//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
+				var randomnumber = Math.floor(Math.random()*101);
+			    for (i=0;i<frm.chkPagos.length;i++) {
+			        if (frm.chkPagos[i].checked) {
+			        	pago = frm.txtMontoAPagar[i].value;
+			        	saldo = frm.hdnSaldoFactura[i].value;
+			        	anticipo = frm.hdnAnticipoSaldo[i].value;
+			        	intFactura = frm.hdnkFacturaSaldo[i].value;
+			        	strfactura = frm.hdnsFacturaSaldo[i].value;
+						if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
+							CuentasxCobrarMayoreo.pagoFacturaMulti(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,randomnumber,0,pagosFacturas_CallBack);			
+						}
+			        }
+			    }
+			    alert('Registro de pago Exitosos');
+			}else{
+				if(parseInt(cFormaPago)==0){
+					alert("Tienes que seleccionar una Forma de Pago");
+				}
+				if(sFechaPago==null || sFechaPago==''){
+					alert("Tienes que ingresar una fecha correcta");						
+				}
+			}		
+		
+	}
+		 
+	
+	
 }
 
 function pagosFacturas_CallBack(data) {
 
 }	
 
+function getKeyPago_CallBack(data){
+	
+	var keyPago=parseInt(data);
+	var frm = document.getElementById("frmAdminClientes");
+	var pago = "";
+	var saldo = "";
+	var anticipo = "";
+	var strfactura = "";
+	var intFactura = "";
+	var convenio="";
+	var sFechaPago = document.getElementById("txtFechaDepositoGlobal").value;
+	var idUsuario = document.getElementById("idUsuario").value; 
+	var cTipoPago = TypeObjeto(document.getElementById("selTipoPago")); 
+	var txtTotal = document.getElementById("txtMontoAPagarTotal").value;
+	var shora = document.getElementById("selhora").value;
+	var sminutos = document.getElementById("selminutos").value; 
+	var ssegundos = document.getElementById("selsegundos").value; 
+	var cFormaPago = document.getElementById("selFormaPago").value; 
+
+	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
+	//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
+		var randomnumber = Math.floor(Math.random()*101);
+	    for (i=0;i<frm.chkPagos.length;i++) {
+	        if (frm.chkPagos[i].checked) {
+	        	pago = frm.txtMontoAPagar[i].value;
+	        	saldo = frm.hdnSaldoFactura[i].value;
+	        	anticipo = frm.hdnAnticipoSaldo[i].value;
+	        	intFactura = frm.hdnkFacturaSaldo[i].value;
+	        	strfactura = frm.hdnsFacturaSaldo[i].value;
+	        	convenio=frm.hdnsConvenio[i].value;
+				if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
+					CuentasxCobrarMayoreo.pagoFacturaMulti(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,randomnumber,keyPago,pagosFacturas_CallBack);			
+				}
+	        }
+	    }
+	    alert('Registro de pago Exitosos');
+}
+
 function changeMontoPagar(strConvenio) {
 	if (parseFloat(document.getElementById("txtMontoAPagarTotal" + strConvenio).value) > 0) {
 		adminDIV("gridPagoGlobal" + strConvenio,"visible","inline");
+		
 	} else {
 		adminDIV("gridPagoGlobal" + strConvenio,"hidden","none");
 	}	

@@ -73,6 +73,8 @@
     <create creator="new" javascript="CuentasxCobrarMayoreo">
       <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.CuentasxCobrarMayoreoAjax"/>
       <include method="pagoFactura"/>
+      <include method="pagoFacturaMulti"/>
+      <include method="getKeyPago"/>
       <include method="getPagoFactura"/>
       <include method="buscaFacturaFolio"/>
       <include method="actualizarFactura"/>
@@ -258,6 +260,7 @@
       <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.BusquedaFacturasAjax"/>
       <include method="buscarFacturas"/>
       <include method="buscarFacturaAjuste"/>
+      <include method="buscarMarca"/>
     </create>
     
     <create creator="new" javascript="FacturaElectronicaEmpresaAjax">

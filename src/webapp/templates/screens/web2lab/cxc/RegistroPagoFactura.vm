@@ -93,6 +93,21 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     		        </a>	
     			</td>			
     		</tr>
+    		<tr>
+    			<td>    				
+					 <b>Hora Deposito:</b>
+    			</td>
+				<td>	
+					<select id="selhora" style="background:#E6E6FA">		  
+					</select>
+					<b>:</b>
+					<select id="selminutos" style="background:#E6E6FA">
+					</select>
+					<b>:</b>
+					<select id="selsegundos" style="background:#E6E6FA">
+					</select>
+				</td>
+    		</tr>
             <tr>
     			<td>
     				<b>Institucion Deposito:</b> 				
@@ -105,6 +120,46 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     				</select>	
     			</td>			
     		</tr>
+    		
+    		<tr id="rowFormaPago">
+    			<td>
+    				<b>Forma de Pago:</b>
+    			</td>
+    			<td>
+    				<select id="selFormaPago" style="width: 120px" style="background:#E6E6FA" align="up">
+    							<option value="0">Seleccionar</option>
+							    <option value="1">01 - Efectivo</option>
+							    <option value="2">02 - Cheque nominativo</option>
+							   	<option value="3">03 - Transferencia electrónica de fondos</option>
+							   	<option value="4">04 - Tarjeta de crédito</option>
+							   	<option value="5">05 - Monedero electrónico</option> 
+							   	<option value="6">06 - Dinero electrónico</option>
+							    <option value="8">08 - Vales de despensa</option>
+							   	<option value="12">12 - Dación en pago</option> 
+							   	<option value="13">13 - Pago por subrogación</option>
+							   	<option value="14">14 - Pago por consignación</option> 
+							   	<option value="15">15 - Condonación</option>
+							    <option value="17">17 - Compensación</option>
+							   	<option value="23">23 - Novación</option>
+							   	<option value="24">24 - Confusión</option>
+							   	<option value="25">25 - Remisión de deuda</option> 
+							   	<option value="26">26 - Prescripción o caducidad</option>
+							   	<option value="27">27 - A satisfacción del acreedor</option>
+							   	<option value="28">28 - Tarjeta de débito</option>
+							   	<option value="29">29 - Tarjeta de servicios</option>
+							   	<option value="30">30 - Aplicación de anticipos</option>
+							   	<option value="31">31 - Intermediario pagos</option>  
+							   	<option value="99">99 - Por definir</option>  
+				     </select>
+    			</td>
+    		</tr>
+    		<tr>
+    			<td>
+    			</td>
+				<td>
+	        		<input type="checkbox" id="chkCrearComplento" checked>Crear Complemento de Pago	
+				</td>
+			</tr>
     	</table>               
 		<input type="button" value="Registrar Pago" name="Registrar Pago" class="boton" onclick="pagoFactura();">
 		<input type="button" value="Nueva Factura" name="Nueva Factura" class="boton" onclick="nuevoFactura();">
@@ -122,7 +177,9 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 	    	    	<select id="selMarca" style="width: 120px" align="up">
 							    <option value="1">OLAB</option>
 							    <option value="4">AZTECA</option>
-							   	<option value="5">SWISSLAB</option> 
+							   	<option value="5">SWISSLAB</option>
+							   	<option value="7">JENNER PRADO</option> 
+							   	<option value="8">JENNER LEAN</option> 
 				     </select>
     	   		 </td> 		
     		</tr>

@@ -59,6 +59,18 @@ public class FacturaElectronicaPDF {
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
 	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Swisslab");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            } else if (objFacturaBean.getCmarca() == 7) {
+            	if(objFacturaBean.getSserie().equals("AJP")){
+            		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_JennerPrado");
+    	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+    	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_JennerPrado");
+    	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);  
+            	}else if(objFacturaBean.getSserie().equals("AJL")){
+            		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_JennerLean");
+    	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+    	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_JennerLean");
+    	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);  
+            	}	
             }
             DataOutputStream dos = new DataOutputStream(new FileOutputStream(sPdfPath + strNomArchivo + ".fo"));
             dos.writeBytes(objFacturaBean.getSfop());

@@ -29,7 +29,7 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 
 	private static Log iObjLog = LogFactory.getLog(FormatoFacturaEmpresaGlobalImpl.class);
 
-	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean, int marca) throws Exception {
+	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean, int marca, String serie) throws Exception {
 		DatosOrdenDao objBuscarOrdenDAO = new DatosOrdenDao();
 		SucursalDao objSucursalDAO = new SucursalDao();
 		SucursalDao objSucursalAdionalesDAO = new SucursalDao();
@@ -54,6 +54,12 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 				objSucursalTempBean = objSucursalDAO.getSucursal(1012);
 			}else if (marca==5){
 				objSucursalTempBean = objSucursalDAO.getSucursal(1013);
+			}else if(marca==7){
+				if(serie.equals("AJP")){
+					objSucursalTempBean = objSucursalDAO.getSucursal(1014);
+				}else if(serie.equals("AJL")){
+					objSucursalTempBean = objSucursalDAO.getSucursal(1015);
+				}
 			}
 			FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreo = new FacturacionElectronicaMayoreoDao();
 			//objFacturacionElectronicaMayoreo.getDatosFacturarSucursal(objSucursalTempBean);					
@@ -110,6 +116,12 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1012);
 			}else if (marca==5){
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1013);
+			}else if(marca==7){
+				if(serie.equals("AJP")){
+					objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1014);
+				}else if(serie.equals("AJL")){
+					objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1015);
+				}
 			}
 			
 			objFacturaBean.setNnumeroaprobacion(objCcontrolFolio.getNaprobacion().toString());

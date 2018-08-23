@@ -4,6 +4,6 @@ import mx.com.web2lab.backend.beans.facturacion.electronica.FacturaElectronicaBe
 
 public interface FormatoFacturaEmpresa {
 
-	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean, int marca) throws Exception;
+	public FacturaElectronicaBean crearFacturaFormatoEmpresa(FacturaElectronicaBean objFacturaBean, int marca, String serie) throws Exception;
 		
 }

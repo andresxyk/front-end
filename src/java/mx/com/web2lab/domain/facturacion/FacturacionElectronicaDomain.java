@@ -37,7 +37,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo... URL " + objFacturaBean.getsURL());
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca, objFacturaBean.getSserie());			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo...  ");
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -69,7 +69,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setSfop(objFacturaElectronicaFOPDAO.createFactura(objFacturaBean,false));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca, objFacturaBean.getSserie());
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronicaMayoreo:Saliendo... URL " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -103,7 +103,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setSfop(objFacturaElectronicaEmpresaFOPDAO.createFactura(objFacturaBean));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca,objFacturaBean.getSserie());			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronicaEmpresa:Saliendo... URL " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -139,7 +139,7 @@ public class FacturacionElectronicaDomain {
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
 //			objFacturaBean = objFacturaElectronicaXML.createCFDXML(objFacturaBean);					
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaEmpresaUnidad:Saliendo...  BY II " + objFacturaBean.getsURL());
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean,cmarca,objFacturaBean.getSserie());			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaEmpresaUnidad:Saliendo...  BY " + objFacturaBean.getsURL());
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -175,7 +175,7 @@ public class FacturacionElectronicaDomain {
 			datosEmisor(objFacturaBean);						
 			objFacturaBean.setSfop(objFacturaElectronicaEmpresaFOPDAO.createFactura(objFacturaBean));					
 			objFacturaBean.setsURL(objFacturaElectronicaPDF.createDocument(objFacturaBean));    				
-			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean, cmarca);			
+			objDatosOrdenDAO.actualizarFacturaXML(objFacturaBean, cmarca, objFacturaBean.getSserie());			
 			iObjLog.debug("Saliendo a FacturacionElectronicaDomain.crearFacturaElectronica:Saliendo...  ");
 		}catch (TorqueException aObjException){
     	    iObjLog.error("FacturacionElectronicaDomain.crearFacturaElectronica:ErrorException....", aObjException);
@@ -229,6 +229,32 @@ public class FacturacionElectronicaDomain {
 			facturaelectronicaBean.setSestadoemisor("NUEVO LEON");
 			facturaelectronicaBean.setScodigopostalemisor("64060");
 			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 7) {
+			if(facturaelectronicaBean.getSserie().equals("AJP")){
+				facturaelectronicaBean.setSrazonsocialemisor("LABORATORIO CLINICO DEL PRADO S.A. DE C.V.");
+				facturaelectronicaBean.setSrfcemisor("LCP061017PA9");
+				facturaelectronicaBean.setScalleemisor("MEDELLIN 153");
+				facturaelectronicaBean.setSnexterioremisor("");
+				facturaelectronicaBean.setSninterioremisor("");
+				facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+				facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+				facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+				facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+				facturaelectronicaBean.setScodigopostalemisor("06700");
+				facturaelectronicaBean.setSpaisemisor("MEXICO");	
+			}else if (facturaelectronicaBean.getSserie().equals("AJL")){
+				facturaelectronicaBean.setSrazonsocialemisor("LABORATORIO CLINICO LEAN S.A. DE C.V.");
+				facturaelectronicaBean.setSrfcemisor("LCL050622DD9");
+				facturaelectronicaBean.setScalleemisor("MEDELLIN 153");
+				facturaelectronicaBean.setSnexterioremisor("");
+				facturaelectronicaBean.setSninterioremisor("");
+				facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+				facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+				facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+				facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+				facturaelectronicaBean.setScodigopostalemisor("06700");
+				facturaelectronicaBean.setSpaisemisor("MEXICO");
+			}
 		}
 		facturaelectronicaBean.setScallesuc("AV. RÍO CONSULADO ESQ. LIRAS, NO. 2727");
 		facturaelectronicaBean.setScoloniasuc("AQUILES SERDÁN");

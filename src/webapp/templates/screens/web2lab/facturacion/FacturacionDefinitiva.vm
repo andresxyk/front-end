@@ -102,6 +102,18 @@
 		<tr>
 		</tr>
 		<tr>
+			<td valign="middle">Razon Social
+				<select id="selRazonSocial" style="width: 300px" align="up">
+					    <option value="0">Seleccionar... (Solo para JENNER)</option>
+    					<option value="1">LABORATORIO CLINICO DEL PRADO S.A. DE C.V.</option>
+    					<option value="2">LABORATORIO CLINICO LEAN S.A. DE C.V.</option>
+		         </select>
+			</td>
+		</tr>
+		<tr>
+			<td>				
+		         <br>
+			</td>
 		</tr>
 		<tr>
 			<td>
@@ -136,7 +148,9 @@
 					<select id="selMarca" style="width: 120px" align="up">
 						    <option value="1">OLAB</option>
 						    <option value="4">AZTECA</option>
-						   	<option value="5">SwissLab</option>
+						   	<option value="5">SWISSLAB</option>
+						   	<option value="7">JENNER PRADO</option>
+						   	<option value="8">JENNER LEAN</option>
 			        </select>
 					<input type="button" id="idBuscaFactura" name="idBuscaFactura" value="Busca Factura" onClick="buscaFactura();" class="boton">
 				</td>
