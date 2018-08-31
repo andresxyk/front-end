@@ -628,7 +628,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   var nocuenta = document.getElementById("txtNoCuenta").value;
 	   } else {
 		   var nocuenta = '';
-	   }
+	   } 
  
 	   alert('Metodo pago' + smetodopago);
 
@@ -729,7 +729,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   marca='JENNER PRADO';
 	   } else if (selectedMarca==8){
 		   marca='JENNER LEAN';
-	   }
+	   } 
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
 		        var frmPantalla = window.document.frmFacturacion;

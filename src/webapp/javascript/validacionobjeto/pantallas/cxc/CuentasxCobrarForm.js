@@ -392,7 +392,7 @@ function imprimirReporte(liga, nombre)
 	url = liga+'?eventSubmit_doReporteconvenio=action';	
 	abrirVentana(url,nombre);
 	return  true;
-}
+} 
 
 	
 function loadPantallaConvenio(data) {
@@ -557,9 +557,14 @@ function pagosFacturas() {
 	var cFormaPago = document.getElementById("selFormaPago").value; 
 	var checkbox =	document.getElementById("chkCrearComplento").checked;
 	
+	var checkboxOpcional = document.getElementById("chkAgregarOpcionales").checked;
+	var txtRfcBanco = document.getElementById("txtRfcBanco").value;
+	var txtNomBanco = document.getElementById("txtNombreBanco").value;
+	var txtNomCuentaClabe= document.getElementById("txtNumCuentaClabe").value;
+	
 	var kfacturas="";
 	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
-	if(checkbox==true){
+	
 		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
 			for (i=0;i<frm.chkPagos.length;i++) {
 				if (frm.chkPagos[i].checked) {					
@@ -567,7 +572,11 @@ function pagosFacturas() {
 				}
 			}	
 			if(kfacturas!=""){
-				CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,getKeyPago_CallBack);				
+				if (checkboxOpcional){
+					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,getKeyPago2_CallBack);	
+				}else{
+					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,null,null,null,getKeyPago2_CallBack);
+				}
 			}
 		}else{
 			if(parseInt(cFormaPago)==0){
@@ -577,46 +586,100 @@ function pagosFacturas() {
 				alert("Tienes que ingresar una fecha correcta");						
 			}
 		}		
-	}else{
-		
-		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
-			//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
-				var randomnumber = Math.floor(Math.random()*101);
-			    for (i=0;i<frm.chkPagos.length;i++) {
-			        if (frm.chkPagos[i].checked) {
-			        	pago = frm.txtMontoAPagar[i].value;
-			        	saldo = frm.hdnSaldoFactura[i].value;
-			        	anticipo = frm.hdnAnticipoSaldo[i].value;
-			        	intFactura = frm.hdnkFacturaSaldo[i].value;
-			        	strfactura = frm.hdnsFacturaSaldo[i].value;
-						if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
-							CuentasxCobrarMayoreo.pagoFacturaMulti(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,randomnumber,0,pagosFacturas_CallBack);			
-						}
-			        }
-			    }
-			    alert('Registro de pago Exitosos');
-			}else{
-				if(parseInt(cFormaPago)==0){
-					alert("Tienes que seleccionar una Forma de Pago");
-				}
-				if(sFechaPago==null || sFechaPago==''){
-					alert("Tienes que ingresar una fecha correcta");						
-				}
-			}		
-		
-	}
-		 
-	
 	
 }
 
+var gblmjsExito=0;
+var gblmjsError=0;
+var cont=0;
+var keyPago =0;
 function pagosFacturas_CallBack(data) {
-
+	var checkbox =	document.getElementById("chkCrearComplento").checked;
+	//alert(data.smensaje);
+	if(data.smensaje=="Exito en el registro del Pago"){
+		gblmjsExito++;
+	}else{
+		gblmjsError++;
+	}
+	//alert(keyPago+'    '+cont+'    '+gblmjsExito+'     '+gblmjsError);
+	if((gblmjsExito+gblmjsError)==cont){
+		if(gblmjsError==0){	    	
+			alert('Registro de pagos Exitosos.');
+			if(checkbox==true){
+				window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+			}
+		}else{
+		  alert('Error al generar el complemento de pago');
+		}		  
+	} 
+	 
 }	
 
-function getKeyPago_CallBack(data){
+function getKeyPago2_CallBack(data){
+	var keyPagocomplemento=parseInt(data);
+	keyPago=keyPagocomplemento;
+	var frm = document.getElementById("frmAdminClientes");
+	var pago = "";
+	var saldo = "";
+	var anticipo = "";
+	var strfactura = "";
+	var intFactura = "";
+	var convenio="";
+	var sFechaPago = document.getElementById("txtFechaDepositoGlobal").value;
+	var idUsuario = document.getElementById("idUsuario").value; 
+	var cTipoPago = TypeObjeto(document.getElementById("selTipoPago")); 
+	var txtTotal = document.getElementById("txtMontoAPagarTotal").value;
+	var shora = document.getElementById("selhora").value;
+	var sminutos = document.getElementById("selminutos").value; 
+	var ssegundos = document.getElementById("selsegundos").value; 
+	var cFormaPago = document.getElementById("selFormaPago").value;
+	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
+	//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
+		var randomnumber = Math.floor(Math.random()*101);
 	
-	var keyPago=parseInt(data);
+	var arrayPagos=[];
+	var cadenaPagos="";
+	if (confirm("Estas seguro de generar el complemento de pago?")) {
+	    for (i=0;i<frm.chkPagos.length;i++) {
+	        if (frm.chkPagos[i].checked) {
+	        	
+	        	pago = frm.txtMontoAPagar[i].value;
+	        	saldo = frm.hdnSaldoFactura[i].value;
+	        	anticipo = frm.hdnAnticipoSaldo[i].value;
+	        	intFactura = frm.hdnkFacturaSaldo[i].value;
+	        	strfactura = frm.hdnsFacturaSaldo[i].value;
+	        	convenio=frm.hdnsConvenio[i].value;
+	        	cadenaPagos=intFactura+","+anticipo+","+pago+","+saldo+","+cTipoPago+","+idUsuario+","+sFechaPagoCompleta+","+randomnumber+","+keyPagocomplemento;        	
+	        	arrayPagos.push(cadenaPagos);
+	        	cadenaPagos="";
+	        }
+	    }	
+	    CuentasxCobrarMayoreo.pagosFacturasArray(arrayPagos,pagosFacturasArray_CallBack);    
+    }
+	
+}
+
+function pagosFacturasArray_CallBack(data){
+	var checkbox =	document.getElementById("chkCrearComplento").checked;
+	//alert('status: '+data)
+	if(data){	    	
+		alert('Registro de pagos Exitosos.');
+		if(checkbox==true){
+			window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+		}
+	}else{
+	  alert('Error al generar el complemento de pago');
+	}
+	
+}
+
+function getKeyPago_CallBack(data){
+	gblmesExito=0;
+	gblmjsError=0;
+	cont=0;
+	keyPago =0;
+	keyPago=parseInt(data);
+	//alert('Key  '+keyPago);
 	var frm = document.getElementById("frmAdminClientes");
 	var pago = "";
 	var saldo = "";
@@ -632,12 +695,21 @@ function getKeyPago_CallBack(data){
 	var sminutos = document.getElementById("selminutos").value; 
 	var ssegundos = document.getElementById("selsegundos").value; 
 	var cFormaPago = document.getElementById("selFormaPago").value; 
-
+	
 	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
 	//	var cTipoPago = TypeObjeto(frm.selTipoPago);        	
 		var randomnumber = Math.floor(Math.random()*101);
+		for (j=0;j<frm.chkPagos.length;j++) {
+			if (frm.chkPagos[j].checked) {
+				cont++;
+			}
+		}		
+	 
+	
+	//if (confirm("Estas seguro de generar el complemento de pago?")) {
 	    for (i=0;i<frm.chkPagos.length;i++) {
 	        if (frm.chkPagos[i].checked) {
+	        	
 	        	pago = frm.txtMontoAPagar[i].value;
 	        	saldo = frm.hdnSaldoFactura[i].value;
 	        	anticipo = frm.hdnAnticipoSaldo[i].value;
@@ -645,11 +717,11 @@ function getKeyPago_CallBack(data){
 	        	strfactura = frm.hdnsFacturaSaldo[i].value;
 	        	convenio=frm.hdnsConvenio[i].value;
 				if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
-					CuentasxCobrarMayoreo.pagoFacturaMulti(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,randomnumber,keyPago,pagosFacturas_CallBack);			
+					CuentasxCobrarMayoreo.pagoFacturaMulti(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,randomnumber,keyPago,pagosFacturas_CallBack);
 				}
 	        }
-	    }
-	    alert('Registro de pago Exitosos');
+	    }	    
+	//}
 }
 
 function changeMontoPagar(strConvenio) {
@@ -660,6 +732,20 @@ function changeMontoPagar(strConvenio) {
 		adminDIV("gridPagoGlobal" + strConvenio,"hidden","none");
 	}	
 }
+
+function showCamposOpcionales(){
+	if (document.getElementById("chkAgregarOpcionales").checked){	
+		adminDIV("divCamposOpcionales","visible","inline");
+		document.getElementById("txtUfoliofactura").focus();
+	}else{
+		adminDIV("divCamposOpcionales","hidden","none");
+		document.getElementById("chkAgregarOpcionales").checked = false;
+		document.getElementById("txtRfcBanco").value="";
+		document.getElementById("txtNombreBanco").value="";
+		document.getElementById("txtNumCuentaClabe").value="";
+	}
+}
+
 
 /****************Versi�n 25 de Marzo 2013 BY*******************/
 function buscarConvenioRapido(objConvenio,strBuscar) {

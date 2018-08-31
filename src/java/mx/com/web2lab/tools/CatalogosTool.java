@@ -86,7 +86,7 @@ public class CatalogosTool implements Recyclable, ApplicationTool, Serializable
 	
 	public List obtenAll(String strSucursal,String cMarca) throws Exception
 	{
-        iObjLog.debug("Entrando a obtenAll " + strSucursal);
+        iObjLog.debug("Entrando a obtenAll -" + strSucursal);
 		MCatalogosTool objCatalogo = new MCatalogosTool();
 		return objCatalogo.obtenAll(strSucursal,Integer.parseInt(cMarca));
 	}

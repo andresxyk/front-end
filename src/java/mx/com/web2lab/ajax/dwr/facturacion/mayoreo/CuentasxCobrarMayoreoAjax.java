@@ -1,7 +1,11 @@
 package mx.com.web2lab.ajax.dwr.facturacion.mayoreo;
 
 import java.math.BigDecimal;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import mx.com.web2lab.ajax.dwr.http.AjaxAction;
 import mx.com.web2lab.backend.beans.comer.ConvenioBean;
@@ -25,7 +29,9 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		iObjLog.debug("new: Generando nueva clase FacturarElectronicaMayoreoAjax");
 	}
 	
-	public PagoFacturaBean pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago, int intGrupo, boolean crearComplemento,String formaPago, int marca) throws Exception
+	public PagoFacturaBean pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,
+			int cTipoPago,int UserID,String strFechaPago, int intGrupo, boolean crearComplemento,String formaPago, int marca,
+			String rfcBanco, String nomBanco, String cuentaClabe) throws Exception
 	{
 		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagoFactura:Entrando... ");		
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
@@ -44,9 +50,9 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 			objPagoFacturaBean.setMsaldo(new BigDecimal(dblSaldo));
 			objPagoFacturaBean.setUserId(UserID);
 			objPagoFacturaBean.setUgrupopago(intGrupo);
-			if(crearComplemento){
-				keyPago=objPagoFacturaDao.pago(objPagoFacturaBean,dblMontoPago,formaPago ,marca);
-			}			
+			//if(crearComplemento){
+				keyPago=objPagoFacturaDao.pago(objPagoFacturaBean,dblMontoPago,formaPago ,marca, rfcBanco, nomBanco, cuentaClabe);
+			//}			
 			objPagoFacturaBean = objPagoFacturaDao.pagoFactura(objPagoFacturaBean,keyPago);
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.pagoFactura:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -58,13 +64,14 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		return objPagoFacturaBean;
 	}
 	
-	public int getKeyPago(String fechaPago,double monto, String formaPago, int convenio, String kfacturas) throws Exception{
+	public int getKeyPago(String fechaPago,double monto, String formaPago, int convenio, String kfacturas, 
+			String rfcBanco, String nomBanco, String cuentaClabe) throws Exception{
 		int key=0;
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
 		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.getKeyPago:Entrando... ");
 		try {
 			String facturas=kfacturas.substring(0, kfacturas.length()-1);
-			key=objPagoFacturaDao.pagoMulti(new Formatos().getFecha(fechaPago),monto,formaPago ,convenio, facturas);
+			key=objPagoFacturaDao.pagoMulti(new Formatos().getFecha(fechaPago),monto,formaPago ,convenio, facturas,rfcBanco,nomBanco,cuentaClabe);
 			
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getKeyPago:Saliendo... "+key);
 		}catch (Exception aObjException){
@@ -73,6 +80,90 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		}
 		return key;
 	} 
+	
+	public String getConsumows() throws Exception{
+		String res="";
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.getConsumows:Entrando... ");
+		try {
+			
+			
+			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getConsumows:Saliendo... ");
+		}catch (Exception aObjException){
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.getConsumows:Exception....", aObjException);
+			throw aObjException;
+		}
+		return res;
+	} 
+	
+	public boolean reglaNegocio(String fechaPago) throws Exception{
+		//boolean res=false;
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.reglaNegocio:Entrando... ");
+		try {
+			
+			SimpleDateFormat formatter = new SimpleDateFormat("dd-MM-yyyy");
+			Date date = new Date();
+			DateFormat hourFormat = new SimpleDateFormat("dd-MM-yyyy");
+			String fechaActual= hourFormat.format(date);
+			Date dfechaemision = formatter.parse(fechaActual);
+			Date dfechaLimite = new Formatos().getFechaLimite(fechaPago);
+			
+			if (dfechaLimite.before(dfechaemision)) {
+				iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.reglaNegocio:Saliendo... ");
+				return false;
+			} else {
+				iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.reglaNegocio:Saliendo... ");
+				return true;
+			}
+		}catch (Exception aObjException){
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.reglaNegocio:Exception....", aObjException);
+			throw aObjException;
+		}
+	} 
+	
+	public boolean pagosFacturasArray(ArrayList pagos){
+		boolean resp=false;
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagosFacturasArray:Entrando... "+pagos.size()+"     "+ pagos);
+		PagoFacturaBean objPagoFacturaBean = new PagoFacturaBean();
+		int contExito=0;
+		try {
+			String cadenaKfacturas="";
+		if(pagos.size()>0){
+//			for(int i=0;i<pagos.size();i++){
+//				String[] pago=pagos.get(i).toString().split(",");
+//				if((pagos.size()-1)==i){
+//					cadenaKfacturas+=pago[0];
+//				}else{
+//					cadenaKfacturas+=pago[0]+",";
+//				}
+//			}
+			for(int i=0;i<pagos.size();i++){
+				iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagosFacturasArray:Array   "+pagos.get(i).toString());
+				String[] pago=pagos.get(i).toString().split(",");
+				objPagoFacturaBean = this.pagoFacturaMulti(Integer.parseInt(pago[0]), Double.parseDouble(pago[1]), 
+						Double.parseDouble(pago[2]), Double.parseDouble(pago[3]), Integer.parseInt(pago[4]), Integer.parseInt(pago[5]),
+						pago[6], Integer.parseInt(pago[7]), Integer.parseInt(pago[8]));
+				if(objPagoFacturaBean.getSmensaje().equals("Exito en el registro del Pago")){
+					contExito++;
+				}
+			}
+			if(contExito==pagos.size()){
+				resp=true;
+			}else{
+				resp=false;
+			}
+		}else{
+			resp=false;
+		}
+		iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.pagosFacturasArray:Saliendo...  ");
+		} catch (NumberFormatException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return resp;
+	}
 	
 	public PagoFacturaBean pagoFacturaMulti(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,
 			int UserID,String strFechaPago, int intGrupo, int keyPago) throws Exception

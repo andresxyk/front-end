@@ -75,7 +75,10 @@
       <include method="pagoFactura"/>
       <include method="pagoFacturaMulti"/>
       <include method="getKeyPago"/>
+      <include method="pagosFacturasArray"/>
       <include method="getPagoFactura"/>
+      <include method="getConsumows"/>
+      <include method="reglaNegocio"/>
       <include method="buscaFacturaFolio"/>
       <include method="actualizarFactura"/>
       <include method="reversarPago"/>

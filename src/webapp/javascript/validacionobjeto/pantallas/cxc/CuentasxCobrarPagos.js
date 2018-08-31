@@ -159,12 +159,22 @@
 		
 		var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
 		
+		var checkboxOpcional = document.getElementById("chkAgregarOpcionales").checked;
+		var txtRfcBanco = document.getElementById("txtRfcBanco").value;
+		var txtNomBanco = document.getElementById("txtNombreBanco").value;
+		var txtNomCuentaClabe= document.getElementById("txtNumCuentaClabe").value;
 		
 		if (pago != null) {
 			if (( parseInt(pago) > 0) && ( parseInt(saldo) >=  parseInt(pago))) {
 				if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
 					if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
-						CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,checkbox,parseInt(cFormaPago),selectedMarca,pagoFactura_CallBack);						
+						if(checkboxOpcional){
+							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
+									checkbox,parseInt(cFormaPago),selectedMarca,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,pagoFactura_CallBack);
+						}else{
+							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
+									checkbox,parseInt(cFormaPago),selectedMarca,null,null,null,pagoFactura_CallBack);
+						}
 					}
 				}else{
 					if(parseInt(cFormaPago)==0){
@@ -183,6 +193,20 @@
 			frmPantalla.txtImportePago.value = frmPantalla.hidSaldoFactura.value;
 		}
 	}
+	
+	function showCamposOpcionales(){
+		if (document.getElementById("chkAgregarOpcionales").checked){	
+			adminDIV("divCamposOpcionales","visible","inline");
+			document.getElementById("txtUfoliofactura").focus();
+		}else{
+			adminDIV("divCamposOpcionales","hidden","none");
+			document.getElementById("chkAgregarOpcionales").checked = false;
+			document.getElementById("txtRfcBanco").value="";
+			document.getElementById("txtNombreBanco").value="";
+			document.getElementById("txtNumCuentaClabe").value="";
+		}
+	}
+ 
 
 	function validapagoFactura() {
 		var frmPantalla = window.document.frmPagoFactura;
@@ -207,8 +231,16 @@
 		alert(data.smensaje);
 		document.getElementById('txtFechaDeposito').value = "";
 		document.getElementById('txtImportePago').value = "";
-		CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);					
+		CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);	
+		if(data.smensaje=="Exito en el registro del Pago"){
+			window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
+//			CuentasxCobrarMayoreo.getConsumows(getConsumows_CallBck);
+		}
 	}	
+	
+//	function getConsumows_CallBck(data){
+//		
+//	}
 	
 	/*** Versi�n 25 de Marzo 2013*/
 	function reversarPago() {
