@@ -575,8 +575,8 @@ function pagosFacturas() {
 				if (checkboxOpcional){
 					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,getKeyPago2_CallBack);	
 				}else{
-					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,null,null,null,getKeyPago2_CallBack);
-				}
+					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,"","","",getKeyPago2_CallBack);
+				} 
 			}
 		}else{
 			if(parseInt(cFormaPago)==0){
@@ -606,7 +606,7 @@ function pagosFacturas_CallBack(data) {
 		if(gblmjsError==0){	    	
 			alert('Registro de pagos Exitosos.');
 			if(checkbox==true){
-				window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+				window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 			}
 		}else{
 		  alert('Error al generar el complemento de pago');
@@ -665,7 +665,7 @@ function pagosFacturasArray_CallBack(data){
 	if(data){	    	
 		alert('Registro de pagos Exitosos.');
 		if(checkbox==true){
-			window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+			window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 		}
 	}else{
 	  alert('Error al generar el complemento de pago');

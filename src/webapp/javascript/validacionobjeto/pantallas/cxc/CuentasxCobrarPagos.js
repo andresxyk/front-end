@@ -173,7 +173,7 @@
 									checkbox,parseInt(cFormaPago),selectedMarca,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,pagoFactura_CallBack);
 						}else{
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
-									checkbox,parseInt(cFormaPago),selectedMarca,null,null,null,pagoFactura_CallBack);
+									checkbox,parseInt(cFormaPago),selectedMarca,"","","",pagoFactura_CallBack);
 						}
 					}
 				}else{
@@ -227,20 +227,17 @@
 		}
 	}	
 	
-	function pagoFactura_CallBack(data) {
+	function pagoFactura_CallBack(data) { 
 		alert(data.smensaje);
+		var checkbox =	document.getElementById("chkCrearComplento").checked;
 		document.getElementById('txtFechaDeposito').value = "";
 		document.getElementById('txtImportePago').value = "";
 		CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);	
-		if(data.smensaje=="Exito en el registro del Pago"){
-			window.open("http://192.237.150.66:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
-//			CuentasxCobrarMayoreo.getConsumows(getConsumows_CallBck);
+		if((data.smensaje=="Exito en el registro del Pago") && (checkbox)){
+			window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
 		}
 	}	
 	
-//	function getConsumows_CallBck(data){
-//		
-//	}
 	
 	/*** Versi�n 25 de Marzo 2013*/
 	function reversarPago() {

@@ -630,7 +630,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   var nocuenta = '';
 	   } 
  
-	   alert('Metodo pago' + smetodopago);
+	   alert('Metodo pago' + smetodopago); 
 
 		   if((tipofactura>0)&&(ufoliofactura>0)){
 				if((tipofactura==1) ||(tipofactura==3)){

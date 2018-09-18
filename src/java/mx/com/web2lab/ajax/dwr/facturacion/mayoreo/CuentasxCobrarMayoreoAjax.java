@@ -234,6 +234,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 			}else{
 				objTFactura = objOrdenDatosFacturacionDao.buscarFacturaHB(objFacturaElectronicaBean,marca,"");
 			}
+			
 				if (objTFactura != null) {						
 					if(objTFactura.getCestadoregistro()==34) {					
 						objPagoFacturaBean = objPagoFacturaDao.getDatosFacturaCancelada(objTFactura.getKfactura().intValue(),true);				
