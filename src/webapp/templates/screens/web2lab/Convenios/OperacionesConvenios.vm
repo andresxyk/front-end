@@ -1,0 +1,45 @@
+#set ($titlePage = "Operaciones Convenios" )
+
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+<script>
+		 window.onload = init;			    		 
+</script>	
+
+<form action="http://192.237.150.70:8192/facturas/operacion" method="post" target="_blank">	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
+	
+    <table	border="0" class="tabla" width="100%">	
+    	<tr><th colspan="5">Operaciones Convenios</th></tr>
+		<tr>
+			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Operación
+    	    </td>
+			    
+		</tr>
+		<tr>
+			<td colspan="2">
+                <select name="operacion"  style="width: 600px">
+                	<optgroup label="Convenios">
+					<option value="20">Procedimientos de Atención</option>
+					<option value="21">Lista de Precios</option>
+					
+					</optgroup>
+	            </select>						
+    	    </td>	
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="submit" value="Aceptar" class="boton">	
+			</td>		
+		</tr>	
+	</table>
+</form>

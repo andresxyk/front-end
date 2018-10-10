@@ -218,7 +218,8 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 							    <option value="4">AZTECA</option>
 							   	<option value="5">SWISSLAB</option>
 							   	<option value="7">JENNER PRADO</option> 
-							   	<option value="8">JENNER LEAN</option> 
+							   	<option value="8">JENNER LEAN</option>
+							   	<option value="9">SERIE B</option> 
 				     </select>
     	   		 </td> 		
     		</tr>

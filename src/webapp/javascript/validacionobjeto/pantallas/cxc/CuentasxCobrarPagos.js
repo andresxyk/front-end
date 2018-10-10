@@ -125,8 +125,10 @@
        		marca='JENNER PRADO'; 
        	}else if(selectedMarca==8){
        		marca='JENNER LEAN'; 
+       	}else if(selectedMarca==9){
+       		marca='SERIE B'; 
        	}
-       	if (confirm("Estas seguro de buscar el folio" + window.document.frmPagoFactura.txtFolioFactura.value + " de la marca "+marca+" ?")) {
+       	if (confirm("Estas seguro de buscar el folio " + window.document.frmPagoFactura.txtFolioFactura.value + " de la marca "+marca+" ?")) {
 			CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,initFactura_CallBack);
 			adminDIV("gridEstadoFactura","visible","inline");
        	}
