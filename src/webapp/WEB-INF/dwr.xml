@@ -75,6 +75,7 @@
       <include method="pagoFactura"/>
       <include method="pagoFacturaMulti"/>
       <include method="getKeyPago"/>
+      <include method="getMarcaKfactura"/>
       <include method="pagosFacturasArray"/>
       <include method="getPagoFactura"/>
       <include method="getConsumows"/>

@@ -64,6 +64,20 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		return objPagoFacturaBean;
 	}
 	
+	public int getMarcaKfactura(int Kfactura) throws Exception{
+		int marca=0;
+		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.getMarcaKfactura:Entrando... ");
+		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
+		try {
+			marca = objPagoFacturaDao.getMarcaKfactura(Kfactura);			
+			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getMarcaKfactura:Saliendo... "+Kfactura);
+		}catch (Exception aObjException){
+			iObjLog.error("Error CuentasxCobrarMayoreoAjax.getMarcaKfactura:Exception....", aObjException);
+			throw aObjException;
+		}
+		return marca;
+	}
+	
 	public int getKeyPago(String fechaPago,double monto, String formaPago, int convenio, String kfacturas, 
 			String rfcBanco, String nomBanco, String cuentaClabe) throws Exception{
 		int key=0;

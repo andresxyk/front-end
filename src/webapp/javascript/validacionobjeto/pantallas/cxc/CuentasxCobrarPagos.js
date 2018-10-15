@@ -77,17 +77,45 @@
 		snombre = "FacturaOrden";
 		if(selectedMarca==1){
 			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+			abrirVentanaOrden(strRuta,snombre);	   			     			    
+		    return true;
        	} else if(selectedMarca==4){
        		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==5){
        		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==7){
-       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==8){
-       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
-       	}				
-	    abrirVentanaOrden(strRuta,snombre);	   			     			    
-	    return true;
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+       	}else if (selectedMarca==9){
+       		var kfactura = frmPantalla.txtkFactura.value;
+       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura2_CallBack);
+       	}	
+	}
+	
+	function marcaKfactura2_CallBack(data){
+		var marca =data;
+		var frmPantalla = window.document.frmPagoFactura;
+		snombre = "FacturaOrden";
+		if(marca==1){
+			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	} else if(marca==4){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	}else if(marca==5){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       	}else if(marca==7){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+       	}
+		abrirVentanaOrden(strRuta,snombre);	   			     			    
+	    return true; 
 	}
 
 	function reimprimirFacturaXML() {
@@ -97,18 +125,46 @@
 		
 		if(selectedMarca==1){
 			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+			abrirVentanaOrden(strRuta,snombre);	   			     			    
+		    return true;
        	} else if(selectedMarca==4){
        		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==5){
        		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==7){
-       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if(selectedMarca==8){
-       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
-       	}	
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Lean/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
+       	}else if (selectedMarca==9){
+       		var kfactura = frmPantalla.txtkFactura.value;
+       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura_CallBack);
+       	}		
 		
-	    abrirVentanaOrden(strRuta,snombre);	   			     			    
-	    return true;
+	}
+	
+	function marcaKfactura_CallBack(data){
+		var marca =data;
+		var frmPantalla = window.document.frmPagoFactura;
+		snombre = "FacturaOrden";
+		if(marca==1){
+			strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	} else if(marca==4){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	}else if(marca==5){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       	}else if(marca==7){
+       		strRuta = "http://192.237.150.70:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+       	}
+		abrirVentanaOrden(strRuta,snombre);	   			     			    
+	    return true; 
 	}
 	
 	function buscarFolio() {
