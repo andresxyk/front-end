@@ -1,16 +1,11 @@
-#set ($titlePage = "Operaciones Facturación" )
+#set ($titlePage = "Cancelacion Complemento de Pago" )
 
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
-<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio.js")"></script>
 
-
-<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/FacturaElectronicaEmpresaAjax.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 
@@ -23,7 +18,7 @@
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
 	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Operaciones Facturación</th></tr>
+    	<tr><th colspan="5">Cancelacion Complemento de Pago</th></tr>
 		<tr>
 			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
                 Operación
@@ -33,15 +28,8 @@
 		<tr>
 			<td colspan="2">
                 <select name="operacion"  style="width: 600px">
-                	<optgroup label="Facturas">
-					<option value="0">Emisión Antincipada Serie A</option>
-					<option value="1">Emisión Serie B (Convenio)</option>
-					<option value="2">Emisión Serie B (RFC)</option>
-					<option value="3">Emisión Nota de Crédito</option>
-										
-					<option value="22">Cambio de Convenio</option>
-					<option value="23">Carga de Exámenes/Perfiles</option>
-					<option value="24">Descarga de Órdenes a Facturas Anticipadas</option>
+                	<optgroup label="Cuentas por Cobrar">
+						<option value="12">Cancelacion Complemento de Pago</option>
 					</optgroup>
 	            </select>						
     	    </td>	
