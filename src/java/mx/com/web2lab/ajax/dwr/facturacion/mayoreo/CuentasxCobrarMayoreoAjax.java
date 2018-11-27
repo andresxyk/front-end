@@ -31,7 +31,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	
 	public PagoFacturaBean pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,
 			int cTipoPago,int UserID,String strFechaPago, int intGrupo, boolean crearComplemento,String formaPago, int marca,
-			String rfcBanco, String nomBanco, String cuentaClabe) throws Exception
+			String rfcBanco, String nomBanco, String cuentaClabe, String numOperacion) throws Exception
 	{
 		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.pagoFactura:Entrando... ");		
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
@@ -51,7 +51,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 			objPagoFacturaBean.setUserId(UserID);
 			objPagoFacturaBean.setUgrupopago(intGrupo);
 			//if(crearComplemento){
-				keyPago=objPagoFacturaDao.pago(objPagoFacturaBean,dblMontoPago,formaPago ,marca, rfcBanco, nomBanco, cuentaClabe);
+				keyPago=objPagoFacturaDao.pago(objPagoFacturaBean,dblMontoPago,formaPago ,marca, rfcBanco, nomBanco, cuentaClabe,numOperacion);
 			//}			
 			objPagoFacturaBean = objPagoFacturaDao.pagoFactura(objPagoFacturaBean,keyPago);
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.pagoFactura:Saliendo...  ");
@@ -79,13 +79,13 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	}
 	
 	public int getKeyPago(String fechaPago,double monto, String formaPago, int convenio, String kfacturas, 
-			String rfcBanco, String nomBanco, String cuentaClabe) throws Exception{
+			String rfcBanco, String nomBanco, String cuentaClabe, String numOperacion ) throws Exception{
 		int key=0;
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
 		iObjLog.debug("Entrando CuentasxCobrarMayoreoAjax.getKeyPago:Entrando... ");
 		try {
 			String facturas=kfacturas.substring(0, kfacturas.length()-1);
-			key=objPagoFacturaDao.pagoMulti(new Formatos().getFecha(fechaPago),monto,formaPago ,convenio, facturas,rfcBanco,nomBanco,cuentaClabe);
+			key=objPagoFacturaDao.pagoMulti(new Formatos().getFecha(fechaPago),monto,formaPago ,convenio, facturas,rfcBanco,nomBanco,cuentaClabe,numOperacion);
 			
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getKeyPago:Saliendo... "+key);
 		}catch (Exception aObjException){

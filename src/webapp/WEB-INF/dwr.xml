@@ -263,6 +263,7 @@
      <create creator="new" javascript="BusquedaFacturas">
       <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.BusquedaFacturasAjax"/>
       <include method="buscarFacturas"/>
+      <include method="buscarComplemento"/>
       <include method="buscarFacturaAjuste"/>
       <include method="buscarMarca"/>
     </create>

@@ -30,6 +30,7 @@
                 <select name="operacion"  style="width: 600px">
                 	<optgroup label="Cuentas por Cobrar">
 						<option value="4">Facturas/Pagos</option>
+						<option value="25">Reporte Complemento de Pagos</option>
 					</optgroup>
 	            </select>						
     	    </td>	

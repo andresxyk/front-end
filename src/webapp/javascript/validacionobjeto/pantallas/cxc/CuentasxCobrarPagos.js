@@ -221,6 +221,7 @@
 		var txtRfcBanco = document.getElementById("txtRfcBanco").value;
 		var txtNomBanco = document.getElementById("txtNombreBanco").value;
 		var txtNomCuentaClabe= document.getElementById("txtNumCuentaClabe").value;
+		var txtNomOperacion= document.getElementById("txtNumOperacion").value;
 		
 		if (pago != null) {
 			if (( parseInt(pago) > 0) && ( parseInt(saldo) >=  parseInt(pago))) {
@@ -228,10 +229,10 @@
 					if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
 						if(checkboxOpcional){
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
-									checkbox,parseInt(cFormaPago),selectedMarca,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,pagoFactura_CallBack);
+									checkbox,parseInt(cFormaPago),selectedMarca,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,txtNomOperacion,pagoFactura_CallBack);
 						}else{
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
-									checkbox,parseInt(cFormaPago),selectedMarca,"","","",pagoFactura_CallBack);
+									checkbox,parseInt(cFormaPago),selectedMarca,"","","","",pagoFactura_CallBack);
 						}
 					}
 				}else{
@@ -336,6 +337,11 @@
 		alert(data);
 		nuevoFactura();
 		adminDIV("gridEstadoFactura","hidden","none");
+	}
+	
+	function visualizarFactura(strRuta) {
+		snombre = "Factura";
+		abrirVentanaOrden(strRuta,snombre);	   			     			    
 	}
 	
 	function cargarHora(){

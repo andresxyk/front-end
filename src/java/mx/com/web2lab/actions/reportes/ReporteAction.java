@@ -266,7 +266,7 @@ public class ReporteAction extends SecureAction {
 			try {
 				GenericDAO objConn = new GenericDAO();
 				objCon = objConn.getConnection();                			        									
-			    String strImagen = aObjDatos.getServletContext().getRealPath("/images/web2lab.jpg");            
+			    String strImagen = aObjDatos.getServletContext().getRealPath("/images/4-LOGOS-ALT.png");            
 				String cConvenio = aObjDatos.getParameters().getString("cConvenio") + "";
 				String uTipoFile = aObjDatos.getParameters().getString("uTipoFile") + "";
 				String strFechaIni = aObjDatos.getParameters().getString("txtDeFecha");

@@ -31,9 +31,24 @@ public String buscarFacturas(String strFacturas){
 	
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
 	try {
-			iObjLog.debug("Entrando a BusquedaGacturasAjax.buscarFactura");
+			iObjLog.debug("Entrando a BusquedaFacturasAjax.buscarFactura");
 			strReturn=objBusquedaFactura.getBusquedaFactura(strFacturas);
-			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFactura"+strReturn);
+			iObjLog.debug("Saliendo de BusquedaFacturasAjax.buscarFactura"+strReturn);
+	} catch (Exception e) {
+		// TODO Auto-generated catch block
+		e.printStackTrace();
+	}
+	return strReturn;
+}
+
+public String buscarComplemento(String strComplementos){
+	String strReturn = null;
+	
+	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
+	try {
+			iObjLog.debug("Entrando a BusquedaFacturasAjax.buscarComplemento");
+			strReturn=objBusquedaFactura.getBusquedaComplemento(strComplementos);
+			iObjLog.debug("Saliendo de BusquedaFacturasAjax.buscarComplemento"+strReturn);
 	} catch (Exception e) {
 		// TODO Auto-generated catch block
 		e.printStackTrace();
@@ -46,11 +61,11 @@ public String buscarFacturaAjuste(String strFacturas, Integer idMarca){
 	
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
 	try {
-			iObjLog.debug("Entrando de BusquedaGacturasAjax.buscarFacturaAjuste("+strFacturas+"," + idMarca+")");
+			iObjLog.debug("Entrando de BusquedaFacturasAjax.buscarFacturaAjuste("+strFacturas+"," + idMarca+")");
 			strReturn = objBusquedaFactura.getBusquedaFacturaAjuste(strFacturas, idMarca);
 			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFacturaAjuste("+strReturn+"," + idMarca+")");
 	} catch (Exception e) {
-		// TODO Auto-generated catch block
+		// TODO Auto-generated catch block 
 		e.printStackTrace();
 	}
 	return strReturn;
@@ -60,7 +75,7 @@ public int buscarMarca(int cconvenio){
 	int marca=0;
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
 	try {
-			iObjLog.debug("Entrando de BusquedaGacturasAjax.buscarMarca("+cconvenio+")");
+			iObjLog.debug("Entrando de BusquedaFacturasAjax.buscarMarca("+cconvenio+")");
 			marca = objBusquedaFactura.getMarca(cconvenio);
 			iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarMarca("+cconvenio+")");
 	} catch (Exception e) {

@@ -561,6 +561,7 @@ function pagosFacturas() {
 	var txtRfcBanco = document.getElementById("txtRfcBanco").value;
 	var txtNomBanco = document.getElementById("txtNombreBanco").value;
 	var txtNomCuentaClabe= document.getElementById("txtNumCuentaClabe").value;
+	var txtNomOperacion= document.getElementById("txtNumOperacion").value;
 	
 	var kfacturas="";
 	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
@@ -573,9 +574,9 @@ function pagosFacturas() {
 			}	
 			if(kfacturas!=""){
 				if (checkboxOpcional){
-					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,getKeyPago2_CallBack);	
+					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,txtNomOperacion,getKeyPago2_CallBack);	
 				}else{
-					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,"","","",getKeyPago2_CallBack);
+					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,"","","","",getKeyPago2_CallBack);
 				} 
 			}
 		}else{

@@ -39,6 +39,7 @@ public class FacturaElectronicaXML
       root.addNamespaceDeclaration(XSI);
       root.setAttribute("schemaLocation", "http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv22.xsd", XSI);
       root.setAttribute("version", "2.2");
+      //root.setAttribute("uuid",objfilexmlbean.getUuid()+"");
       root.setAttribute("serie", objfilexmlbean.getSserie() + "");
       root.setAttribute("folio", objfilexmlbean.getSfolio() + "");
       root.setAttribute("fecha", objfilexmlbean.getFechaxml() + "");

@@ -38,10 +38,13 @@
 					<option value="1">Emisión Serie B (Convenio)</option>
 					<option value="2">Emisión Serie B (RFC)</option>
 					<option value="3">Emisión Nota de Crédito</option>
+					<option value="5">Emisión Copago</option>
 										
 					<option value="22">Cambio de Convenio</option>
 					<option value="23">Carga de Exámenes/Perfiles</option>
 					<option value="24">Descarga de Órdenes a Facturas Anticipadas</option>
+					<option value="26">Reportes Facturacion</option>
+					<option value="27">Cambio de bloque</option>
 					</optgroup>
 	            </select>						
     	    </td>	

@@ -132,7 +132,7 @@
 		</tr>
 		<tr>
 			<td>
-        		<input type="checkbox" id="chkCrearFactura" onClick="showCajaFactura();" >Crear Factura	
+        		<input type="checkbox" id="chkCrearFactura" onClick="showCajaFactura();">Crear Factura	
 			</td>
 		</tr>
 		<tr>

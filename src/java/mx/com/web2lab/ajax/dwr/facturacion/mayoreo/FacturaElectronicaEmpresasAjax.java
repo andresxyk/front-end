@@ -5,6 +5,7 @@ import mx.com.web2lab.ajax.dwr.facturacion.formatos.impl.FormatoFacturaEmpresaDe
 import mx.com.web2lab.ajax.dwr.facturacion.formatos.impl.FormatoFacturaEmpresaGlobalImpl;
 import mx.com.web2lab.ajax.dwr.http.AjaxAction;
 import mx.com.web2lab.backend.beans.facturacion.electronica.FacturaElectronicaBean;
+import mx.com.web2lab.backend.beans.facturacion.electronica.FacturaSustitucionBean;
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionElectronicaMayoreoDao;
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao;
 //import mx.com.web2lab.backend.facturacion33.mb.FacturacionV33;
@@ -88,11 +89,14 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     return strReturn;
   }
 
-  public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, String strnocuenta, String strmetodopago) throws Exception {
+  public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, 
+		  String strnocuenta, String strmetodopago) throws Exception {
+	  //String folioSustitucion, String uuidSustitucion, boolean sustitucion
     TFactura objTFactura = new TFactura();
     FacturacionElectronicaMayoreoDao objFacturaElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
     String strReturn = "";
     FormatoFacturaEmpresa objFormato = null;
+    boolean bandSustitucion = true;
     
     iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+"  serie:"+objFacturaBean.getSserie());
     try {
@@ -114,34 +118,58 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
       case 4:
         objFormato = new FormatoFacturaEmpresaDesgloceImpl();
       }
-
-      if ((itipofactura == 1) || (itipofactura == 2)) {
-        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
-        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
-        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
-        objFacturaBean = objFEDomain.crearFacturaElectronicaEmpresa(objFacturaBean);
-        strReturn = objFacturaBean.getsURL();
-        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...1 o 2...." + objFacturaBean.getsURL());
-      }if (itipofactura == 3) {
-        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
-        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
-        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
-        objFacturaBean = objFEDomain.crearFacturaEmpresaUnidad(objFacturaBean);
-        strReturn = objFacturaBean.getsURL();
-        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...3...." + objFacturaBean.getsURL());
-      }if (itipofactura == 4) {
-        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
-        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
-        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
-        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
-        objFacturaBean = objFEDomain.crearFacturaXmlAdenda(objFacturaBean);
-        strReturn = objFacturaBean.getsURL();
-        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...4...." + objFacturaBean.getsURL());
-      }
-
-      iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...  "); } catch (TorqueException aObjException) {
+      
+      FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
+//      if(sustitucion){
+//    	  facturaSustitucionBean = objFacturaElectronicaMayoreoDAO.getUUIDTfactura(folioSustitucion,objFacturaBean.getCmarca(),objFacturaBean.getSserie()); 
+//    	  if(facturaSustitucionBean.getCestadoregistro() == 34){
+//    		  if(facturaSustitucionBean.getSuuid() != null && facturaSustitucionBean.getSuuid() != ""){
+//        		  if(facturaSustitucionBean.getSuuid().equals(uuidSustitucion)){
+//        			  objFacturaBean.setUuid(facturaSustitucionBean.getSuuid());
+//        		  }else{
+//        			  strReturn="UUIDs DIFERENTES";
+//            		  bandSustitucion = false;
+//        		  }
+//        	  }else{
+//        		  strReturn="SIN UUID EN BD";
+//        		  bandSustitucion = false;
+//        	  }
+//    	  }else{
+//    		  strReturn="NO CANCELADA";
+//    		  bandSustitucion = false;
+//    	  }
+//    	  
+//      }
+//      if(bandSustitucion){    	
+	      
+	      if ((itipofactura == 1) || (itipofactura == 2)) {
+	        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
+	        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
+	        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
+	        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
+	        objFacturaBean = objFEDomain.crearFacturaElectronicaEmpresa(objFacturaBean);
+	        strReturn = objFacturaBean.getsURL();
+	        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...1 o 2...." + objFacturaBean.getsURL());
+	      }if (itipofactura == 3) {
+	        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
+	        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
+	        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
+	        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
+	        objFacturaBean = objFEDomain.crearFacturaEmpresaUnidad(objFacturaBean);
+	        strReturn = objFacturaBean.getsURL();
+	        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...3...." + objFacturaBean.getsURL());
+	      }if (itipofactura == 4) {
+	        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
+	        objFacturaBean.setCconvenio(objTFactura.getCconvenio());
+	        objFacturaBean = objFormato.crearFacturaFormatoEmpresa(objFacturaBean,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
+	        FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
+	        objFacturaBean = objFEDomain.crearFacturaXmlAdenda(objFacturaBean);
+	        strReturn = objFacturaBean.getsURL();
+	        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...4...." + objFacturaBean.getsURL());
+	      }
+//      }
+      iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...  "); 
+      } catch (TorqueException aObjException) {
       aObjException = 
         aObjException;
 

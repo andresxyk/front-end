@@ -508,6 +508,23 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		}
 	} 
    
+   function showFormSustitucion(){
+	   document.getElementById("txtUfoliofacturaSustitucion").value="";
+	   document.getElementById("txtFolioFiscal").value="";
+	   document.getElementById("txtUfoliofacturaSustitucion").focus();
+	   if(document.getElementById("chkSustitucion").checked){
+		   adminDIV("labelFolioInterno","visible","inline");
+		   adminDIV("txtUfoliofacturaSustitucion","visible","inline");
+		   adminDIV("labelFolioFiscal","visible","inline");
+		   adminDIV("txtFolioFiscal","visible","inline");
+	   }else{
+		   adminDIV("labelFolioInterno","hidden","none");
+		   adminDIV("txtUfoliofacturaSustitucion","hidden","none");
+		   adminDIV("labelFolioFiscal","hidden","none");
+		   adminDIV("txtFolioFiscal","hidden","none");
+	   }
+   }
+   
    
    function showAsignacionBloques(){
 		if (document.getElementById("chkAsigancionBloque").checked){	
@@ -623,7 +640,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var mtotal = document.getElementById("txtmTotal").value;
 	   var smetodopago = document.getElementById("txtTipoPago").value;
 	   var cmarca = document.getElementById('cMarca').value;
-	   
+	    
 	   if(smetodopago!='99'){
 		   var nocuenta = document.getElementById("txtNoCuenta").value;
 	   } else {
@@ -640,12 +657,13 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						document.getElementById("txtDescripcion").focus();
 					}else{
 						LoadFacturaElectronica(descripcionfactura,0);
+						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
 						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
-						
 					}
 				}else if((tipofactura==2)){
 					LoadFacturaElectronica("",0);
-					FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					
 				}else if(tipofactura==4){
 					var ordencompra = document.getElementById("txtOrdenCompra").value;
@@ -653,7 +671,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						alert("Debe ingresar una orden de compra valida");
 						document.getElementById("txtOrdenCompra").focus();
 					}else{
-						LoadFacturaElectronica("",ordencompra);
+						LoadFacturaElectronica("",ordencompra); 
 						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 						
 					}

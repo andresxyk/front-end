@@ -22,9 +22,29 @@
 		 //}
 	}
    
+   function buscarComplemento() {	
+		var frmPantalla = window.document.frmBusqudaComplemento;
+		var key=window.event.keyCode;
+		
+		//if(key==13){
+		    if (frmPantalla.txtBuscarComplemento.value != "" && frmPantalla.txtBuscarComplemento.value > 0)  {
+				adminDIV("gridbusquedaComplemento","visible","inline");
+		    	BusquedaFacturas.buscarComplemento(frmPantalla.txtBuscarComplemento.value,buscarComplemento_CallBack);
+			}else{
+				alert('Debe ingresar un folio de complemento de pago adecuado');
+			} 
+		 //}
+	}
+   
   function buscarFactura_CallBack(data){
 	  adminDIV("gridbusquedaFacturas","visible","inline");
 	  codeDIVHTML("gridbusquedaFacturas",data);
+	  
+  }
+  
+  function buscarComplemento_CallBack(data){
+	  adminDIV("gridbusquedaComplemento","visible","inline");
+	  codeDIVHTML("gridbusquedaComplemento",data);
 	  
   }
   
@@ -43,6 +63,14 @@
 		frmPantalla.txtBuscarFactura.value="";
 		adminDIV("gridbusquedaFacturas","hidden","none");
 		frmPantalla.txtBuscarFactura.focus();
+		
+	  }
+  
+  function limpiarComplemento(){
+		var frmPantalla = window.document.frmBusqudaComplemento;
+		frmPantalla.txtBuscarComplemento.value="";
+		adminDIV("gridbusquedaComplemento","hidden","none");
+		frmPantalla.txtBuscarComplemento.focus();
 		
 	  }
   
