@@ -640,6 +640,9 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var mtotal = document.getElementById("txtmTotal").value;
 	   var smetodopago = document.getElementById("txtTipoPago").value;
 	   var cmarca = document.getElementById('cMarca').value;
+	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+	   var uuidSustitucion = document.getElementById("txtFolioFiscal").value;
+	   var checkSustitucion = document.getElementById("chkSustitucion").checked
 	    
 	   if(smetodopago!='99'){
 		   var nocuenta = document.getElementById("txtNoCuenta").value;
