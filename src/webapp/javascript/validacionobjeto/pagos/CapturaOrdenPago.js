@@ -7,7 +7,7 @@ function cambiaTipoPago() {
 		adminDIV("txtUltimosDigitos","hidden","none");		    
 		adminDIV("idDigitos","hidden","none");		    
 		frmPantalla.txtUltimosDigitos.disabled = true;
-		var url = "http://173.203.12.185:8081/PuntoVentaTAE/jsp/tae/safetypay/integrar/CreateExpressToken.jsp?" +
+		var url = "http://192.168.100.180:8081/PuntoVentaTAE/jsp/tae/safetypay/integrar/CreateExpressToken.jsp?" +
 		"referencia="+ frmPantalla.txtOrden.value + 
 		"&uTelefono=" + frmPantalla.txtAdmision.value +
 		"&sMonto=" + frmPantalla.txtAdeudo.value;
@@ -42,7 +42,7 @@ function validaPago()
 	}
     if(!validaSoloNumeros(txtPaga))
     {
-		alert(corrigeAcentos("Solo se permite ingresar números."));
+		alert(corrigeAcentos("Solo se permite ingresar nï¿½meros."));
 		frmPantalla.txtPago.value="";
 		return false;
 	} 		

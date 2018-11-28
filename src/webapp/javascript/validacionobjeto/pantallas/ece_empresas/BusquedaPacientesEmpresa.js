@@ -230,14 +230,14 @@ var convenioBean = new ConvenioBean();
 	}	
         
 	function visualizarResultado(kAdmision,sPassword) {
-		strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
+		strRuta = ("http://192.168.100.180:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
 				   "kOrden=" + kAdmision +
 				   "&sPassword=" + sPassword);
 		showPopWin(strRuta, 800, 500, "Resultados via Internet");			
 	}
 
 	function visualizarResultadoSinImagenes(kAdmision,sPassword) {
-		strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabProcesos.jsp?" +
+		strRuta = ("http://192.168.100.180:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabProcesos.jsp?" +
 						"kOrdenSucursal=" + kAdmision +
 						"&uFormato=0" +
 						"&uRepo=1" +

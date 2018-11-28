@@ -90,8 +90,8 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
   }
 
   public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, 
-		  String strnocuenta, String strmetodopago) throws Exception {
-	  //String folioSustitucion, String uuidSustitucion, boolean sustitucion
+		  String strnocuenta, String strmetodopago,String folioSustitucion, String uuidSustitucion, boolean sustitucion) throws Exception {
+	  
     TFactura objTFactura = new TFactura();
     FacturacionElectronicaMayoreoDao objFacturaElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
     String strReturn = "";
@@ -120,27 +120,27 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
       }
       
       FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
-//      if(sustitucion){
-//    	  facturaSustitucionBean = objFacturaElectronicaMayoreoDAO.getUUIDTfactura(folioSustitucion,objFacturaBean.getCmarca(),objFacturaBean.getSserie()); 
-//    	  if(facturaSustitucionBean.getCestadoregistro() == 34){
-//    		  if(facturaSustitucionBean.getSuuid() != null && facturaSustitucionBean.getSuuid() != ""){
-//        		  if(facturaSustitucionBean.getSuuid().equals(uuidSustitucion)){
-//        			  objFacturaBean.setUuid(facturaSustitucionBean.getSuuid());
-//        		  }else{
-//        			  strReturn="UUIDs DIFERENTES";
-//            		  bandSustitucion = false;
-//        		  }
-//        	  }else{
-//        		  strReturn="SIN UUID EN BD";
-//        		  bandSustitucion = false;
-//        	  }
-//    	  }else{
-//    		  strReturn="NO CANCELADA";
-//    		  bandSustitucion = false;
-//    	  }
-//    	  
-//      }
-//      if(bandSustitucion){    	
+      if(sustitucion){
+    	  facturaSustitucionBean = objFacturaElectronicaMayoreoDAO.getUUIDTfactura(folioSustitucion,objFacturaBean.getCmarca(),objFacturaBean.getSserie()); 
+    	  if(facturaSustitucionBean.getCestadoregistro() == 34){
+    		  if(facturaSustitucionBean.getSuuid() != null && facturaSustitucionBean.getSuuid() != ""){
+        		  if(facturaSustitucionBean.getSuuid().equals(uuidSustitucion)){
+        			  objFacturaBean.setUuid(facturaSustitucionBean.getSuuid());
+        		  }else{
+        			  strReturn="UUIDs DIFERENTES";
+            		  bandSustitucion = false;
+        		  }
+        	  }else{
+        		  strReturn="SIN UUID EN BD";
+        		  bandSustitucion = false;
+        	  }
+    	  }else{
+    		  strReturn="NO CANCELADA";
+    		  bandSustitucion = false;
+    	  }
+    	  
+      }
+      if(bandSustitucion){    	
 	      
 	      if ((itipofactura == 1) || (itipofactura == 2)) {
 	        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
@@ -167,7 +167,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
 	        strReturn = objFacturaBean.getsURL();
 	        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...4...." + objFacturaBean.getsURL());
 	      }
-//      }
+      }
       iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...  "); 
       } catch (TorqueException aObjException) {
       aObjException = 

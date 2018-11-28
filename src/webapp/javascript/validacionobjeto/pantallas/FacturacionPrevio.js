@@ -660,13 +660,13 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						document.getElementById("txtDescripcion").focus();
 					}else{
 						LoadFacturaElectronica(descripcionfactura,0);
-						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
+						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					}
 				}else if((tipofactura==2)){
 					LoadFacturaElectronica("",0);
-						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
+						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					
 				}else if(tipofactura==4){
 					var ordencompra = document.getElementById("txtOrdenCompra").value;
@@ -698,7 +698,13 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   //alert(data);
 	   if (data =="NO EXISTE") {
 		     	alert("Esa factura no existe favor de verificarlo");   			     
-		 } else{
+	   } else if (data == "UUIDs DIFERENTES"){
+		   alert("El UUID no es igual al que esta registro en base de datos");
+	   } else if (data == "SIN UUID EN BD"){
+		   alert("No se tiene UUID en base de datos.");
+	   } else if (data == "NO CANCELADA"){
+		   alert("La factura a sustituir no esta cancelada");
+	   } else{
 			 adminDIV("creacionPdf","hidden","none");
 			 snombre = "FacturaOrden";
 			 alert(data);
