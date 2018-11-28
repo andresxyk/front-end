@@ -607,7 +607,7 @@ function pagosFacturas_CallBack(data) {
 		if(gblmjsError==0){	    	
 			alert('Registro de pagos Exitosos.');
 			if(checkbox==true){
-				window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+				window.open("http://192.168.100.182:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 			}
 		}else{
 		  alert('Error al generar el complemento de pago');
@@ -666,7 +666,7 @@ function pagosFacturasArray_CallBack(data){
 	if(data){	    	
 		alert('Registro de pagos Exitosos.');
 		if(checkbox==true){
-			window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+			window.open("http://192.168.100.182:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 		}
 	}else{
 	  alert('Error al generar el complemento de pago');
