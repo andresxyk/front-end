@@ -55,9 +55,11 @@
 		      if (objOrdenBean.getMadeuda() > 0 ) {
 		    	  sPrint = objOrdenBean.getDatosDemograficosFacturacionElectronica(sEmail,"La orden tiene adeudos","No se puede mostrar sus Resultados");   	  
 		      } else if (objOrdenBean.getObjdatosfiscalesbean().getkDatosFiscales() == 0 && objOrdenBean.getSmensajeerror().trim().length() == 0 && objOrdenBean.getStrFactura().trim().length() == 0) {
-		    	  response.sendRedirect("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);     	  
+		    	  //response.sendRedirect("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);
+		    	  response.sendRedirect("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);     	  
 		      } else {    	  
-		    	  response.sendRedirect("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);     	  
+		    	  //response.sendRedirect("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);
+		    	  response.sendRedirect("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" + "kOrden=" + skOrdenSucursal +"&sPassword=" + sPassword);     	  
 		      }
 		      kDatoFiscal = objOrdenBean.getObjdatosfiscalesbean().getkDatosFiscales();
 		      cSucursal = objOrdenBean.getCsucursal();

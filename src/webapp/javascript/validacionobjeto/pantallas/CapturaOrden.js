@@ -681,7 +681,8 @@
 	}
 	
 	function visualizarResultado(kAdmision,sPassword) {
-		strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
+		//strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
+		strRuta = ("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
 				   "kOrden=" + kAdmision +
 				   "&sPassword=" + sPassword);
 		showPopWin(strRuta, 800, 500, "Resultados via Internet");			
