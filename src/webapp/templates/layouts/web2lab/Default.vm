@@ -55,7 +55,7 @@ $page.addBodyAttribute("marginwidth","0")
             							<tr class=titulotabla>
         									<td align="center">Sucursal: $!objSesion.getAttribute("grupo") - $!objSesion.getAttribute("NombreRol")</td>
         									<td align="center">Usuario: $!objSesion.getAttribute("strNombreCompleto") - $!sVersion</td>
-        									<td align="center">Version 27 Noviembre 2018 2.4.0 - SIN PROCESOS</td>
+        									<td align="center">Version 21 Diciembre 2018 3.0.0 - SIN PROCESOS</td>
             							</tr>
         							</table>
         						</td>

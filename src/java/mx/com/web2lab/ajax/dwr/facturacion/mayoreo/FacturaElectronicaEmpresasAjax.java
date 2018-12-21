@@ -90,7 +90,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
   }
 
   public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, 
-		  String strnocuenta, String strmetodopago,String folioSustitucion, String uuidSustitucion, boolean sustitucion) throws Exception {
+		  String strnocuenta, String strmetodopago, String uuidSustitucion, boolean sustitucion) throws Exception {
 	  
     TFactura objTFactura = new TFactura();
     FacturacionElectronicaMayoreoDao objFacturaElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
@@ -119,26 +119,9 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
         objFormato = new FormatoFacturaEmpresaDesgloceImpl();
       }
       
-      FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
-      if(sustitucion){
-    	  facturaSustitucionBean = objFacturaElectronicaMayoreoDAO.getUUIDTfactura(folioSustitucion,objFacturaBean.getCmarca(),objFacturaBean.getSserie()); 
-    	  if(facturaSustitucionBean.getCestadoregistro() == 34){
-    		  if(facturaSustitucionBean.getSuuid() != null && facturaSustitucionBean.getSuuid() != ""){
-        		  if(facturaSustitucionBean.getSuuid().equals(uuidSustitucion)){
-        			  objFacturaBean.setUuid(facturaSustitucionBean.getSuuid());
-        		  }else{
-        			  strReturn="UUIDs DIFERENTES";
-            		  bandSustitucion = false;
-        		  }
-        	  }else{
-        		  strReturn="SIN UUID EN BD";
-        		  bandSustitucion = false;
-        	  }
-    	  }else{
-    		  strReturn="NO CANCELADA";
-    		  bandSustitucion = false;
-    	  }
-    	  
+      //FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
+      if(sustitucion){    	  
+    	  objFacturaBean.setUuid(uuidSustitucion.trim());    	  
       }
       if(bandSustitucion){    	
 	      

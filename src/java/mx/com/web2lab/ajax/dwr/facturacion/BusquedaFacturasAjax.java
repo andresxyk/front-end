@@ -71,6 +71,19 @@ public String buscarFacturaAjuste(String strFacturas, Integer idMarca){
 	return strReturn;
 }
 
+public String buscarFacturaSustitucion(String factura, int idMarca, int tipofactura){
+	String strReturn=null;
+	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
+	try {
+		iObjLog.debug("Entrando de BusquedaFacturasAjax.buscarFacturaSustitucion("+factura+"," + idMarca+")");
+		strReturn = objBusquedaFactura.getBusquedaFacturasSustitucion(factura, idMarca,tipofactura);
+		iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFacturaSustitucion("+strReturn+"," + idMarca+")");		
+	} catch (Exception e) {
+		e.printStackTrace();
+	}	
+	return strReturn;	
+}
+
 public int buscarMarca(int cconvenio){
 	int marca=0;
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();

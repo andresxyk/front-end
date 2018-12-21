@@ -510,18 +510,14 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
    
    function showFormSustitucion(){
 	   document.getElementById("txtUfoliofacturaSustitucion").value="";
-	   document.getElementById("txtFolioFiscal").value="";
-	   document.getElementById("txtUfoliofacturaSustitucion").focus();
 	   if(document.getElementById("chkSustitucion").checked){
 		   adminDIV("labelFolioInterno","visible","inline");
 		   adminDIV("txtUfoliofacturaSustitucion","visible","inline");
-		   adminDIV("labelFolioFiscal","visible","inline");
-		   adminDIV("txtFolioFiscal","visible","inline");
+		   adminDIV("popupBuscar","visible","inline");
 	   }else{
 		   adminDIV("labelFolioInterno","hidden","none");
 		   adminDIV("txtUfoliofacturaSustitucion","hidden","none");
-		   adminDIV("labelFolioFiscal","hidden","none");
-		   adminDIV("txtFolioFiscal","hidden","none");
+		   adminDIV("popupBuscar","hidden","none");
 	   }
    }
    
@@ -641,7 +637,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var smetodopago = document.getElementById("txtTipoPago").value;
 	   var cmarca = document.getElementById('cMarca').value;
 	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
-	   var uuidSustitucion = document.getElementById("txtFolioFiscal").value;
+	   var uuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
 	   var checkSustitucion = document.getElementById("chkSustitucion").checked
 	    
 	   if(smetodopago!='99'){
@@ -660,12 +656,12 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						document.getElementById("txtDescripcion").focus();
 					}else{
 						LoadFacturaElectronica(descripcionfactura,0);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
 						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					}
 				}else if((tipofactura==2)){
 					LoadFacturaElectronica("",0);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
+						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
 						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
 					
 				}else if(tipofactura==4){
@@ -696,18 +692,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 
    function generarFactura_CallBack(data) {
 	   //alert(data);
-	   if (data =="NO EXISTE") {
-		     	alert("Esa factura no existe favor de verificarlo");   			     
-	   } else if (data == "UUIDs DIFERENTES"){
-		   alert("El UUID no es igual al que esta registro en base de datos");
-	   } else if (data == "SIN UUID EN BD"){
-		   alert("No se tiene UUID en base de datos.");
-	   } else if (data == "NO CANCELADA"){
-		   alert("La factura a sustituir no esta cancelada");
-	   } else{
+	   if (data!=""){
+		   	alert(data);
 			 adminDIV("creacionPdf","hidden","none");
 			 snombre = "FacturaOrden";
-			 alert(data);
 			 showPopWin(data, 800, 400, snombre);			 
 			 // abrirVentanaOrden(data,snombre); 
 		 }
@@ -768,6 +756,23 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 					document.getElementById("txtUfoliofactura").focus();		
 			} 
 	   	
+   }
+      
+   var ventana_secundaria = null;     
+   function showSubModalSustitucion() {
+	   if(ventana_secundaria != null){
+		   ventana_secundaria.close();
+	   }
+	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
+	   var selectedMarca = document.getElementById("selMarca").value; 
+	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca+'&tipoFactura=1',"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
+	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
+   }
+            
+   function agregarValoresSustitucion(datafolio,datakfactura,datauuid){
+	   document.getElementById("txtUfoliofacturaSustitucion").value=datafolio;
+	   document.getElementById("hdenkfacturaSustitucion").value=datakfactura;
+	   document.getElementById("hdenUuidSustitucion").value=datauuid;
    }
    
    function buscarFacturaAjuste_CallBack(data){ 

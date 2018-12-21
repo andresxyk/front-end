@@ -265,6 +265,7 @@
       <include method="buscarFacturas"/>
       <include method="buscarComplemento"/>
       <include method="buscarFacturaAjuste"/>
+      <include method="buscarFacturaSustitucion"/>
       <include method="buscarMarca"/>
     </create>
     
