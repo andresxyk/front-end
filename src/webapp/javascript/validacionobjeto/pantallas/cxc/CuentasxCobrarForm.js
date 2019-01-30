@@ -675,8 +675,8 @@ function pagosFacturas_CallBack(data) {
 		if(gblmjsError==0){	    	
 			alert('Registro de pagos Exitosos.');
 			if(checkbox==true){
-				//window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
-				window.open("http://localhost:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+				window.open("http://192.237.150.67:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+//				window.open("http://localhost:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 			}
 		}else{
 		  alert('Error al generar el complemento de pago');
@@ -743,8 +743,8 @@ function pagosFacturasArray_CallBack(data){
 				txtUuidSustitucion = document.getElementById("hdenUuidSustitucion").value;				
 			}
 			
-			//window.open("http://192.237.150.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
-			window.open("http://localhost:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
+			window.open("http://192.237.150.67:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
+//			window.open("http://localhost:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
 		}
 	}else{
 	  alert('Error al generar el complemento de pago');

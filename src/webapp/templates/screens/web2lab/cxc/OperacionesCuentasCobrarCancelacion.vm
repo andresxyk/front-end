@@ -13,7 +13,7 @@
 		 window.onload = init;			    		 
 </script>	
 
-<form action="http://192.237.150.70:8192/facturas/operacion" method="post" target="_blank">	
+<form action="http://192.237.150.67:8192/facturas/operacion" method="post" target="_blank">	
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
 	
@@ -29,7 +29,7 @@
 			<td colspan="2">
                 <select name="operacion"  style="width: 600px">
                 	<optgroup label="Cuentas por Cobrar">
-						<option value="12">Cancelacion Complemento de Pago</option>
+						<option value="13">Cancelacion CFDI</option>
 					</optgroup>
 	            </select>						
     	    </td>	
