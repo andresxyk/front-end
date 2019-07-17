@@ -1,4 +1,4 @@
-#set ($titlePage = "Notas de Credito" )
+#set ($titlePage = "Notas de Credito" ) 
 #set ($lstConvenios = $CatalogosTool.obtenAll("Convenio","691"))
 #set ($intcSucursal = $data.getSession().getAttribute('idgrupo') )
 #set ($ligaNotaCredito = $link.setPage("web2lab,facturacion,AltaNotasdeCredito.vm").toString())

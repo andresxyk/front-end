@@ -298,6 +298,7 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
 	            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
 	            //Valida si el usuario esta dado de alta
 	            TurbineUser objTurbineUser = getUserByName(nomUser);
+	            iObjLog.debug("LoginAction:Password= "+objTurbineUser.getPassword());
 //	            if (objTurbineUser == null) {
 //	                aObjContext.put("mensaje","El usuario no es v&aacute;lido, intente de nuevo.");
 //	                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");	            	
