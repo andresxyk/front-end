@@ -700,20 +700,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 			 // abrirVentanaOrden(data,snombre); 
 		 }
    }
-   /*
-   function limpiaFactura()
-   {
-	   var frmPantalla = window.document.frmFacturacion;
-	   //valorCombo(frmFacturacion.selTipoFactura,0);
-	   document.getElementById("txtUfoliofactura").value=""; 
-	   //document.getElementById("txtDescripcion").value="ESTUDIOS REALIZADOS SEGUN RELACION ADJUNTA";
-	   //adminDIV("txtDescripcion","hidden","none");	
-	   //adminDIV("labelfactura","hidden","none");
-	   adminDIV("montosFactura","hidden","none");
-	   document.getElementById("txtUfoliofactura").focus();
-	  
-	   
-   }*/
+  
    //Modificacion BY 02/09/2013
    function limpiaFactura()
    {

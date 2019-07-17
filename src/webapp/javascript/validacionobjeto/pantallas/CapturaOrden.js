@@ -681,6 +681,7 @@
 	}
 	
 	function visualizarResultado(kAdmision,sPassword) {
+
 		strRuta = ("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
 				   "kOrden=" + kAdmision +
 				   "&sPassword=" + sPassword);
