@@ -231,7 +231,7 @@ var convenioBean = new ConvenioBean();
         
 	function visualizarResultado(kAdmision,sPassword) {
 		//strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
-		strRuta = ("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
+		strRuta = ("http://40.84.228.70:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabECE.jsp?" +
 				   "kOrden=" + kAdmision +
 				   "&sPassword=" + sPassword);
 		showPopWin(strRuta, 800, 500, "Resultados via Internet");			
@@ -239,7 +239,7 @@ var convenioBean = new ConvenioBean();
 
 	function visualizarResultadoSinImagenes(kAdmision,sPassword) {
 		//strRuta = ("http://173.203.12.185:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabProcesos.jsp?" +
-		strRuta = ("http://201.150.42.46:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabProcesos.jsp?" +
+		strRuta = ("http://40.84.228.70:8081/ResultadosOlab/jsp/resultado/ServicioResultadosOlabProcesos.jsp?" +
 						"kOrdenSucursal=" + kAdmision +
 						"&uFormato=0" +
 						"&uRepo=1" +

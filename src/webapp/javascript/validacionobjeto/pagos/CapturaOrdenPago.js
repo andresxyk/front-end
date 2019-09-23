@@ -8,7 +8,7 @@ function cambiaTipoPago() {
 		adminDIV("idDigitos","hidden","none");		    
 		frmPantalla.txtUltimosDigitos.disabled = true;
 		//var url = "http://173.203.12.185:8081/PuntoVentaTAE/jsp/tae/safetypay/integrar/CreateExpressToken.jsp?" +
-		var url = "http://201.150.42.46:8081/PuntoVentaTAE/jsp/tae/safetypay/integrar/CreateExpressToken.jsp?" +
+		var url = "http://40.84.228.70:8081/PuntoVentaTAE/jsp/tae/safetypay/integrar/CreateExpressToken.jsp?" +
 		"referencia="+ frmPantalla.txtOrden.value + 
 		"&uTelefono=" + frmPantalla.txtAdmision.value +
 		"&sMonto=" + frmPantalla.txtAdeudo.value;
