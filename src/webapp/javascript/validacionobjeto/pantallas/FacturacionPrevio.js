@@ -177,7 +177,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
       	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
       		//alert('convenio: '+cconvenio);
-      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack);
+      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack); 
       		
 		} else {
 			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
@@ -196,9 +196,15 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
       	
 	   if(data==7){
 		   if(razonSocial>0){
-			   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
-					showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
-				}
+			   if(razonSocial == 1 || razonSocial == 2){
+				   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+					   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
+				   }				   
+			   }else{
+				   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+					   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
+				   }	 
+			   }
 		   }else{
 			   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
 		   }
@@ -967,6 +973,36 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 5;
 			} else if (document.getElementById('cMarca').value == 7){
+				if(document.getElementById("selMarca").value==7){
+					facturaelectronicaBean.sserie="AJP";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO DEL PRADO S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCP061017PA9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}else if (document.getElementById("selMarca").value==8){
+					facturaelectronicaBean.sserie="AJL";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO LEAN S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCL050622DD9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}
+			} else if (document.getElementById('cMarca').value == 8){
 				if(document.getElementById("selMarca").value==7){
 					facturaelectronicaBean.sserie="AJP";
 					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO DEL PRADO S.A. DE C.V.";

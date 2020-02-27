@@ -230,7 +230,8 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);	
 	frmPantalla.selTipoCliente.selectedIndex = data.ctipocliente;
 	frmPantalla.selGiro.selectedIndex = data.cgirocliente;
-	frmPantalla.selZonaAsignada.selectedIndex = 0;
+	compareSelectvalue(frmPantalla.selZonaAsignada,data.czonaventa);		
+	compareSelectvalue(frmPantalla.selMarca,data.cmarca);			
 	codigoBean(frmPantalla.txtEstadoCliente,true,data.sestadoregistro);		
     adminDIV("gridbusquedaConvenios","visible","inline");
  	codeDIVHTML("gridbusquedaConvenios",data.strConvenioGrid); 	
@@ -264,7 +265,6 @@ function ocultarFacturas() {
 	}		
 }
 
-
 function LoadCompletedCliente() {
 	var frmPantalla = window.document.frmAdminClientes;
 	clienteBean.ccliente=frmPantalla.txtCliente.value;
@@ -281,7 +281,8 @@ function LoadCompletedCliente() {
 	clienteBean.ctipocliente=frmPantalla.selTipoCliente[frmPantalla.selTipoCliente.selectedIndex].value;
 	clienteBean.cgirocliente=frmPantalla.selGiro[frmPantalla.selGiro.selectedIndex].value;
 	clienteBean.ctipopersona=frmPantalla.selTipoPersona[frmPantalla.selTipoPersona.selectedIndex].value;
-	clienteBean.cmarca=document.getElementById('idMarca').value;
+	clienteBean.cmarca=frmPantalla.selMarca[frmPantalla.selMarca.selectedIndex].value;	
+	clienteBean.czonaventa=frmPantalla.selZonaAsignada[frmPantalla.selZonaAsignada.selectedIndex].value;
 }
 
 function LoadBusquedaCliente() {
@@ -374,7 +375,8 @@ function ClienteBean() {
 	ctipopersona=null,
 	cestadoregistro=null,
 	sestadoregistro=null,
-	cmarca=null
+	cmarca=null,
+	czonaventa=null
 }
 
 /************************************** TERMINA FUNCIONES DEL CLIENTE *******************************************************************/
@@ -484,6 +486,7 @@ function loadPantallaConvenio(data) {
 	codigoBean(frmPantalla.txtEstadoConvenio,true,data.sestadoconvenio);		
 	frmPantalla.hdnEstadoConvenio.value = data.uestadoconvenio;
 	frmPantalla.txtCorreoElectronico.value = data.scorreoelectronico + " ";
+	
 	if (frmPantalla.txtCorreoElectronico.value.length > 4) {
 		frmPantalla.optResultado.checked = true;
 	} else {
@@ -530,6 +533,7 @@ function LoadCompletedConvenio() {
         convenioBeanActualizacion.uestadoconvenio = frmPantalla.hdnEstadoConvenio.value;	
         convenioBeanActualizacion.cuser = frmPantalla.idUsuario.value;
         convenioBeanActualizacion.scorreoelectronico = frmPantalla.txtCorreoElectronico.value;
+        convenioBeanActualizacion.cmarca=frmPantalla.selMarca[frmPantalla.selMarca.selectedIndex].value;	
     	return true;
     }   
 }
@@ -703,7 +707,8 @@ function ConvenioBean() {
     sestadoconvenio=null,    
     uestadoconvenio=null,
     scorreoelectronico=null,
-    cuser=null
+    cuser=null,
+    cmarca=null
 }
 
 

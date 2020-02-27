@@ -1,3 +1,14 @@
+
+/* .tabla tbody{ */
+/*   display:block; */
+/*   overflow:auto; */
+/*   height:200px; */
+/*   width:100%; */
+/* } */
+/* .tabla thead tr{ */
+/*   display:block; */
+/* } */
+
 #popup_container {
 	font-family: Arial, sans-serif;
 	font-size: 12px;
@@ -133,7 +144,7 @@
 A:link
 {
    font-weight : bold;
-   color : #FF6600;
+   color : #11BBB5;
 	font-size:10px;
 	text-align : center;
 	text-decoration :  underline;
@@ -142,7 +153,7 @@ A:link
 A:visited
 {
      font-weight : bold;
-    color : #FF6600;
+    color : #11BBB5;
     font-size: 10px;
 	text-align : center;
 	text-decoration :  underline;
@@ -152,7 +163,7 @@ A:visited
 A:active
 {
     font-weight : bold;
-    color : #FF6600;
+    color : #11BBB5;
     font-size: 10px;
 	text-align : center;
 	text-decoration :   underline;
@@ -174,7 +185,7 @@ BODY
 
     font-size: 10px;
     font-family : arial, Helvetica, sans-serif;
-   	background-color: #FF6600;
+   	background-color: #11BBB5;
 	padding:0;
 	
 }
@@ -192,7 +203,7 @@ INPUT
 	font-family : Arial, Helvetica, sans-serif;
 	font-size: 8pt;
 	color : #FFFFFF;
-	background-color: #FF6600;
+	background-color: #11BBB5;
 	text-align: left;
 	vertical-align: middle;
 	height: 23px;
@@ -226,8 +237,8 @@ TEXTAREA
 	font-family: Arial, Helvetica, sans-serif;
 	font-size: 12pt;
 	font-weight: bold;
-	color: black;
-	background-color: #FF6600;
+	color: white;
+	background-color: #11BBB5;
 	text-align: left;
 	vertical-align: middle;
 	height: 25px;
@@ -259,7 +270,7 @@ TEXTAREA
 {
    font-weight: normal;
 #    color: #838587;
-    color: #FF6600;
+    color: #11BBB5;
     text-decoration: none
 }
 .BasicTextGrey
@@ -271,7 +282,7 @@ TEXTAREA
 
 th
 {
-	 background-color: #FF6600;
+	 background-color: #11BBB5;
 	 border-bottom: 1px solid #928F8F;
      border-right : 1px solid #928F8F;
 	 border-left : 1px solid #928F8F;
@@ -285,7 +296,7 @@ th
 
 tho
 {
-	 background-color: #FF6600;
+	 background-color: #11BBB5;
 	 color: black;
 	 font-weight :  bold;
 	 font-size: medium;
@@ -296,7 +307,7 @@ tho
 
 ths
 {
-	 background-color : #FF6600;
+	 background-color : #11BBB5;
 	 border-bottom: 1px solid #928F8F;
      border-right : 1px solid #928F8F;
 	 border-left : 1px solid #928F8F;
@@ -315,7 +326,7 @@ table
     color: #000000;
     line-height: normal;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color : #F9BB00;
+	background-color : #F5FEEE;
 }
 
 .colorExamen
@@ -324,19 +335,31 @@ table
 }
 
 
-.tr1 { background-color : #F9BB00 }
-.tr2 { background-color : #F9BB00 }
+.tr1 { background-color : #F5FEEE }
+.tr2 { background-color : #F5FEEE }
+
+.botonmenu{
+ 
+ background-color : #11BBB5;  
+ border-bottom: 2px solid #5F5F5F;
+ border-right : 2px solid #5F5F5F;
+ height : 40px;
+ color : black;
+ font-weight :  bold;
+ text-align :  center;
+ }
 
 
 .boton{
  
- background-color : #FF6600;  
+ background-color : #11BBB5;  
  border-bottom: 2px solid #5F5F5F;
  border-right : 2px solid #5F5F5F;
  height : 20px;
  color : black;
  font-weight :  bold;
  text-align :  center;
+  
  }
  
 .azul2
@@ -346,7 +369,7 @@ table
 
 .azul3
 {
-	 color : #FF6600;
+	 color : #11BBB5;
 }
 
 .griz
@@ -361,7 +384,7 @@ table
 
 .titulotabla
 {
-	 background-color : #FF6600;
+	 background-color : #11BBB5;
 	 border-bottom: 1px solid #928F8F;
      border-right : 1px solid #928F8F;
 	 border-left : 1px solid #928F8F;
@@ -373,13 +396,13 @@ table
 .textflat 
 {
   border-width: 0px;
-  background-color: #FF6600;
+  background-color: #11BBB5;
   font-family: Arial, Helvetica, sans-serif;
 }
 
 .btncalculator{
  
- background-color : #FF6600;  
+ background-color : #11BBB5;  
  border-bottom: 2px solid #5F5F5F;
  border-right : 2px solid #5F5F5F;
  height : 20px;
@@ -434,25 +457,25 @@ div.outer a:active
 /* CoolMenus 4 - default styles - end */
   
 /*Style for the background-bar*/
-.clBar{position:absolute; width:10; height:10; background-color:#FF6600; layer-background-color:#FF6600; visibility:hidden}
+.clBar{position:absolute; width:10; height:10; background-color:#11BBB5; layer-background-color:#11BBB5; visibility:hidden}
 
 /*Styles for level 0*/
 .clLevel0, .clLevel0over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
-.clLevel0{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
-.clLevel0over{background-color:#F9BB00; layer-background-color:#F9BB00;  color:black; cursor:pointer; cursor:hand; }
-.clLevel0border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:red}
+.clLevel0{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel0over{background-color:#F5FEEE; layer-background-color:#F5FEEE;  color:black; cursor:pointer; cursor:hand; }
+.clLevel0border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:red}
 
 /*Styles for level 1*/
 .clLevel1, .clLevel1over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
-.clLevel1{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
-.clLevel1over{background-color:#F9BB00; layer-background-color:#F9BB00; color:black; cursor:pointer; cursor:hand; }
-.clLevel1border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:#FF6600}
+.clLevel1{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel1over{background-color:#F5FEEE; layer-background-color:#F5FEEE; color:black; cursor:pointer; cursor:hand; }
+.clLevel1border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:#11BBB5}
 
 /*Styles for level 2*/
 .clLevel2, .clLevel2over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
-.clLevel2{background-color:#FF6600; layer-background-color:#FF6600; color:black;}
-.clLevel2over{background-color:#F9BB00; layer-background-color:#F9BB00; color:black; cursor:pointer; cursor:hand; }
-.clLevel2border{position:absolute; visibility:hidden; background-color:#FF6600; color:black; layer-background-color:FF6600}
+.clLevel2{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel2over{background-color:#F5FEEE; layer-background-color:#F5FEEE; color:black; cursor:pointer; cursor:hand; }
+.clLevel2border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:FF6600}
 
 /*Styles for grid containers*/
 .clgrid
@@ -460,7 +483,7 @@ div.outer a:active
 	font-size: 11px;color: #000000;
 	line-height: normal;
 	font-family: Arial, Helvetica, sans-serif;
-	background-color : #FF6600;
+	background-color : #11BBB5;
 	overflow: auto;width: 100%;
 	/*height: 150;*/
 	border-left: 1px black solid; 
@@ -666,6 +689,3 @@ div.auto_complete ul strong.highlight {
 	position:absolute;
 	overflow:hidden;
 }
-
-
-

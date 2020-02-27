@@ -110,6 +110,7 @@
 					    <option value="0">Seleccionar... (Solo para JENNER)</option>
     					<option value="1">LABORATORIO CLINICO DEL PRADO S.A. DE C.V.</option>
     					<option value="2">LABORATORIO CLINICO LEAN S.A. DE C.V.</option>
+    					<option value="3">LABORATORIO QUIMICO CLINICO AZTECA,  S.A.P.I. DE C.V.</option>
 		         </select>
 			</td>
 		</tr>
@@ -123,7 +124,7 @@
 				<input type="button" id="idGenerarPrevio" name="idGenerarPrevio" value="Facturación Previo" onClick="GeneracionPrevioFactura();" class="boton">
 			</td>
 			<td>
-				<input type="button" id="idGenerarDefinitivo" value="Facturación Definitivo" onClick="GeneracionDefinitivoFactura();" class="boton">
+				<input type="button" id="idGenerarDefinitivo" value="Facturación Definitivo" onClick="GeneracionDefinitivoFactura();" class="boton"> 
 			</td>
 			<td> 
 				<input type="button" name="agregar" value="Limpia Pantalla" onClick="limpiaPantalla();" class="boton">

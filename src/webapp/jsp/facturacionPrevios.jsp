@@ -20,7 +20,7 @@
 		
 		
 		FacturacionPrevioDao objfacturacionPrevioDao = new FacturacionPrevioDao();
-	    strBody = objfacturacionPrevioDao.getPrevioFacturacion(strconvenio,struserid,strbloques,strtipoprevio,strtipofacturacion,strmonto,strrazon);
+	    strBody = objfacturacionPrevioDao.getPrevioFacturacion(strconvenio,struserid,strbloques,strtipoprevio,strtipofacturacion,strmonto,strrazon); 
 	    objfacturacionPrevioDao = null;
 		String exportToExcel = "YES";
 		if (exportToExcel != null

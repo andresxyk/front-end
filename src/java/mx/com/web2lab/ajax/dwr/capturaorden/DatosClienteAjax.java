@@ -510,9 +510,9 @@ public class DatosClienteAjax extends AjaxAction {
 	public ConvenioBean actualizaConvenio(ConvenioBean objConvenioBean) throws Exception
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando... ");		
+		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		try {			
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
-			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Inicio " + objConvenioBean.getSiniciovigencia());		
 			objConvenioBean.setDinicio(new Formatos().getFecha(objConvenioBean.getSiniciovigencia()));
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Termino " + objConvenioBean.getSterminovigencia());		
@@ -521,11 +521,12 @@ public class DatosClienteAjax extends AjaxAction {
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Termino Objeto " + objConvenioBean.getDtermino());
 			objConvenioBean = objDAOCliente.setConvenioActualizacion(objConvenioBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizaConvenio:Saliendo...  ");
-			objDAOCliente = null;
 		} catch (Exception aObjException){
 			iObjLog.error("Error DatosClienteAjax.actualizaConvenio:Exception....", aObjException);
 			objConvenioBean = null;
 			throw aObjException;
+		} finally {
+			objDAOCliente = null;
 		}
 		return objConvenioBean;
 	}	
@@ -584,6 +585,9 @@ public class DatosClienteAjax extends AjaxAction {
 								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
 								"	<b><font color='black'>RFC" + 
 								"</th>" + 
+								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
+								"	<b><font color='black'>Marca" + 
+								"</th>" + 
 							"</tr>");			    
 			 if (lstClientes != null) {
 				int y; 
@@ -591,6 +595,7 @@ public class DatosClienteAjax extends AjaxAction {
 				{
 					objClientes = (ClienteBean)lstClientes.get(i);						
 					y = i + 1;
+					
 					strReturn += ("<tr>" + 
 										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
 											y + 
@@ -603,6 +608,9 @@ public class DatosClienteAjax extends AjaxAction {
 										"</a></td>" + 
 										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
 											objClientes.getSrfc()+
+										"</a></td>" + 
+										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
+											objClientes.getSmarca() +
 										"</a></td>" + 
 									 "</tr>");
 				}

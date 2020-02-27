@@ -6,13 +6,7 @@ $page.setHttpEquiv("expires","-1")
 ##$page.addStyleSheet($content.getURI("css/azul.css"))
 ##$page.addStyleSheet($content.getURI("css/web2lab.css"))
 #set ($cMarca =$data.getUser().getConfirmed())	
-#if ($!cMarca == "1")	
-	$page.addStyleSheet($content.getURI("css/marcas/olab.css"))
-#elseif($!cMarca == "4")
-	$page.addStyleSheet($content.getURI("css/marcas/azteca.css"))
-#elseif($!cMarca == "5")
-	$page.addStyleSheet($content.getURI("css/marcas/condesa.css"))
-#end								
+$page.addStyleSheet($content.getURI("css/marcas/olab.css"))
 $page.addBodyAttribute("marginheight","0")
 $page.addBodyAttribute("topmargin","0")
 $page.addBodyAttribute("leftmargin","0")
@@ -55,7 +49,7 @@ $page.addBodyAttribute("marginwidth","0")
             							<tr class=titulotabla>
         									<td align="center">Sucursal: $!objSesion.getAttribute("grupo") - $!objSesion.getAttribute("NombreRol")</td>
         									<td align="center">Usuario: $!objSesion.getAttribute("strNombreCompleto") - $!sVersion</td>
-        									<td align="center">Version 21 Diciembre 2018 3.0.0 - SIN PROCESOS</td>
+        									<td align="center">Version 17 octubre 2019 - SIN PROCESOS</td>
             							</tr>
         							</table>
         						</td>

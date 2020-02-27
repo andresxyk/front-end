@@ -22,7 +22,7 @@
 		 window.onload = init;		
 </script>	
 
-##set ($lstZonaAsignada = $CatalogosTool.obtenAll("TratamientoDiabet","0"))
+#set ($lstZonaAsignada = $CatalogosTool.obtenAll("ZonaVenta","0"))
 #set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
 #set ($lstClasificacionComercial = $CatalogosTool.obtenAll("ClasificacionComercial","0"))
 
@@ -73,6 +73,14 @@
 	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
 		<tr>				
 			<td align="left" width="25%">
+			
+				<b>Marca</b>
+                <select id="selMarca" >
+            		<option value="1" >Olab</option>
+            		<option value="4" >Azteca</option>
+            		<option value="5" >SwissLab</option>
+            		<option value="7" >Jenner</option>
+                </select>	
 				<b>*Cliente</b>
 				<input type="text" id="txtCliente" value="0" onKeyPress="numero();" size="5"  onkeyup="consultaClienteGrid(window.document.frmAdminClientes);">
 				<b>*Pre-Alta</b>	
@@ -406,7 +414,7 @@
 				<select id="selZonaAsignada" style="background:#E6E6FA" >
 					<option value="0">Selecciona </option>								
 					#foreach($objZonaAsignada in $lstZonaAsignada)
-						#option("$!objZonaAsignada.getCrutaejecutivoventa()"  "$!objZonaAsignada.getCruta() - $!objZonaAsignada.getSrutaejecutivoventa()" "0")			
+						#option("$!objZonaAsignada.getCzonaventa()"  "$!objZonaAsignada.getSzonaventa() - $!objZonaAsignada.getSejecutivoventas()" "0")			
 					#end
 				</select>	
 			</td>
@@ -443,6 +451,8 @@
     	</table>
 	</div>            	 
 	<div id="gridbusquedaConvenios">                
+	</div>            		        						
+	<div id="gridGridClienteConvenios">                
 	</div>            		        						
 	<div id="gridbusquedaFacturas">                
 	</div>            		        						
