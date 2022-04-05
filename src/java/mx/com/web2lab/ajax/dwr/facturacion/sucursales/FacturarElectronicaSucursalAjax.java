@@ -1,5 +1,14 @@
 package mx.com.web2lab.ajax.dwr.facturacion.sucursales;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.torque.TorqueException;
+
 import mx.com.web2lab.ajax.dwr.facturacion.formatos.FormatoFactura;
 import mx.com.web2lab.ajax.dwr.facturacion.formatos.impl.FormatoFacturaConDescuentoSinonimosImpl;
 import mx.com.web2lab.ajax.dwr.facturacion.formatos.impl.FormatoFacturaPublicoImpl;
@@ -15,10 +24,6 @@ import mx.com.web2lab.backend.hbm.ConfiguracionProperties;
 import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
 import mx.com.web2lab.domain.facturacion.FacturacionElectronicaDomain;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.torque.TorqueException;
-
 public class FacturarElectronicaSucursalAjax extends AjaxAction {
 	private static Log iObjLog = LogFactory.getLog(FacturarElectronicaSucursalAjax.class);
 	
@@ -26,6 +31,7 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 		iObjLog.debug("new: Generando nueva clase FacturarElectronicaSucursalAjax");
 	}
 
+	
 	public String crearOrdenFacturarElectronica(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico) throws Exception {
 		String strReturn = "";
 		DatosFiscalesDao objDatosFiscalesDao = new DatosFiscalesDao();

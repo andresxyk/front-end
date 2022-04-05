@@ -47,6 +47,7 @@
 					<option value="24">Descarga de Órdenes a Facturas Anticipadas</option>
 					<option value="26">Reportes Facturacion</option>
 					<option value="27">Cambio de bloque</option>
+					<option value="29">Cambio Masivo No Facturable</option>
 					</optgroup>
 	            </select>						
     	    </td>	

@@ -1,5 +1,9 @@
 package mx.com.web2lab.ajax.dwr.facturacion;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,34 @@ public class BusquedaFacturasAjax extends AjaxAction {
 	public BusquedaFacturasAjax(){
 		iObjLog.debug("new: Generando nueva clase BusquedaFacturasAjax");
 	}	
+	
+	public String findCfdiPdf(String path) throws Exception {
+		String strReturn = "";
+		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.findCfdiPdf:Entrando... ");
+		try {
+			String remplacePath = path.replaceAll("http://10.3.0.8:9085", "/mnt/gda/apache-tomcat/webapps/ROOT");
+			URL url; 
+			url = new URL("http://10.3.0.8:8192/facturas/ordenes/find-cfdi-server?path="+remplacePath);
+			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+			conn.setRequestMethod("GET");
+
+			if (conn.getResponseCode() != 200) {
+				throw new RuntimeException("Failed : HTTP Error code : " + conn.getResponseCode());
+			}
+			InputStreamReader in = new InputStreamReader(conn.getInputStream());
+			BufferedReader br = new BufferedReader(in);
+			String output;
+			while ((output = br.readLine()) != null) {
+				System.out.println(output);
+			}
+			conn.disconnect();
+			
+			iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.findCfdiPdf:Saliendo...  ");
+		}catch (Exception aObjException){
+    	    iObjLog.error("FacturarElectronicaSucursalAjax.crearOrdenFacturarElectronica:ErrorException....", aObjException);
+    	}
+    	return path;
+	}
 		
 public String buscarFacturas(String strFacturas){
 	String strReturn = null;

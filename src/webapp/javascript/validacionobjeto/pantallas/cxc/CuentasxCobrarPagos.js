@@ -5,7 +5,7 @@
 			CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);					
 		} else {
 		    adminDIV("gridRegistroPago","hidden","none");			
-		    adminDIV("gridBuscarFactura","visible","inline");	    
+		    adminDIV("gridBuscarFactura","visible","inline");	     
 			document.getElementById("txtFolioFactura").focus(); 		    
 		}
 	}
@@ -77,7 +77,7 @@
 		snombre = "FacturaOrden";
 		if(selectedMarca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
 			abrirVentanaOrden(strRuta,snombre);	   			     			    
 		    return true;
@@ -87,7 +87,7 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
-       	}else if(selectedMarca==5){
+       	}else if(selectedMarca==5 || selectedMarca==15){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
@@ -117,13 +117,13 @@
 		snombre = "FacturaOrden";
 		if(marca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        	} else if(marca==4){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
-       	}else if(marca==5){
+       	}else if(marca==5 || marca==15){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
@@ -153,7 +153,7 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
-       	}else if(selectedMarca==5){
+       	}else if(selectedMarca==5 || selectedMarca==15){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
@@ -190,7 +190,7 @@
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
-       	}else if(marca==5){
+       	}else if(marca==5 || marca==15){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
@@ -219,6 +219,8 @@
        		marca='JENNER LEAN'; 
        	}else if(selectedMarca==9){
        		marca='SERIE B'; 
+       	} else if(selectedMarca==15){
+       		marca='LIACSA'; 
        	} 
        	var tipoVM = frmPantalla.idVMRegistro.value;
        	var pagos ;
@@ -284,7 +286,7 @@
 		if(txtNomOperacion != ""){
 			txtConfirmacionOpcionales += "Numero de Operacion: "+txtNomOperacion+"\n";
 		}
-		
+		 
 		if (pago != null) {
 			if (( parseInt(pago) > 0) && ( parseInt(saldo) >=  parseInt(pago))) {
 				if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
@@ -299,7 +301,7 @@
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
 									checkbox,parseInt(cFormaPago),selectedMarca,"","","","",
 									checkboxSustitucion,txtfoliosustitucion,txtUuidSustitucion,pagoFactura_CallBack);
-						}
+						} 
 					}
 				}else{
 					if(parseInt(cFormaPago)==0){
@@ -447,7 +449,7 @@
 		}else{
 			alert('Debes buscar una factura v�lida');
 		}
-	}
+	} 
 	
 	function actualizarEstadoFactura_CallBack(data) {
 		alert(data);
@@ -456,9 +458,16 @@
 	}
 	
 	function visualizarFactura(strRuta) {
-		snombre = "Factura";
-		abrirVentanaOrden(strRuta,snombre);	   			     			    
+		CuentasxCobrarMayoreo.findCfdiPdf(strRuta,file_CallBack);
+		  			     			    
 	}
+	
+	function file_CallBack(data)
+	{
+		snombre = "Factura";
+		abrirVentanaOrden(data,snombre);	 
+	}	
+
 	
 	function cargarHora(){
 		document.getElementById("selhora").innerHTML="";

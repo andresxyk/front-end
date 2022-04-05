@@ -84,6 +84,8 @@
       <include method="actualizarFactura"/>
       <include method="reversarPago"/>
       <include method="getCcliente"/>
+      <include method="findCfdiPdf"/>
+      
       
     </create>
 
@@ -117,6 +119,7 @@
 
     <create creator="new" javascript="OrdenFacturarAjax">
       <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.sucursales.FacturarElectronicaSucursalAjax"/>
+      <include method="findCfdiPdf"/>  
     </create>
 
     <create creator="new" javascript="ToolFacSucursalesAjax">
@@ -194,7 +197,8 @@
       <include method="buscarMedicoClave"/>      
       <include method="buscarMedicoZona"/>            
       <include method="buscarMedicoEspecialidad"/>            
-      <include method="actualizaMedico"/>            
+      <include method="actualizaMedico"/>  
+      <include method="altaMedico"/>             
       <include method="actualizaCorreoElectronicoMedico"/>            
       <include method="altaMedicoBasico"/>            
       <include method="buscarMedicosOrdenes"/>            
@@ -267,6 +271,7 @@
       <include method="buscarFacturaAjuste"/>
       <include method="buscarFacturaSustitucion"/>
       <include method="buscarMarca"/>
+      <include method="findCfdiPdf"/>      
     </create>
     
     <create creator="new" javascript="FacturaElectronicaEmpresaAjax">
@@ -368,7 +373,8 @@
 	  DatosClienteAjax.buscarOrdenesConvenioPaciente(ConvenioBean objConvenioBean,String strFechaInicio, String strFechaTermino, int kPaciente);	  
 	  DatosClienteAjax.buscarOrdenesConvenioECE(ConvenioBean objConvenioBean,String strFechaInicio, String strFechaTermino, int kPaciente);	  
 	  DatosClienteAjax.buscarOrdenesSucursalECE(int cSucursal,String strFechaInicio, String strFechaTermino, int kPaciente, int uFechaRegistro);	  
-	  DatosClienteAjax.estatusAltas();	  
+	  DatosClienteAjax.estatusAltas(int userid);	
+	  DatosClienteAjax.getMarcasUser(int userid);	  
 	  DatosClienteAjax.showEstadistica(int uTipoControl);	  
 	  DatosClienteAjax.altaPorcentajeClasificacionConvenio(int uConvenio,int uClasificacion, double pDescuento);	  
 	  DatosClienteAjax.altaPorcentajeExamenConvenio(int uConvenio,int uExamen, double pDescuento);	  
@@ -377,7 +383,8 @@
 	  DatosClienteAjax.actualizarPorcentajeClasificacionConvenio(int kClasificacion,int uConvenio,int uClasificacion,double pDescuento);	  
 	  DatosClienteAjax.buscarViajeOrdenes(int kviajesucursal);	  
 	  DatosClienteAjax.buscarFacturacionOrden(int kadmision);	  
-	  DatosMedicoAjax.actualizaMedico(MedicoBean objMedicoBean);
+	  DatosMedicoAjax.actualizaMedico(MedicoBean objMedicoBean); 
+	  DatosMedicoAjax.altaMedico(MedicoBean objMedicoBean);
 	  DatosMedicoAjax.buscarMedicosOrdenes(MedicoBean objMedicoBean,String strFechaInicio, String strFechaTermino);
 	  PueblaAjax.persistirCuestionario(CuestionarioPantallaBean objCuestionarioPantallaBean);
 	  PueblaAjax.buscarCuestionario(CuestionarioPantallaBean objCuestionarioPantallaBean);
@@ -392,10 +399,12 @@
 	  DatosFiscalesAjax.crearDatosFiscalesFacturacionElectronicaInternet(DatosFiscalesBean objDatosFiscalesBean, int intUser);
 	  DatosFiscalesAjax.getOneDatoFiscal(DatosFiscalesBean objDatosFiscalesBean);	  
 	  FacturarElectronicaSucursalAjax.crearOrdenFacturarElectronica(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico);
+	  FacturarElectronicaSucursalAjax.findCfdiPdf(String path);
 	  FacturarElectronicaSucursalAjax.crearOrdenFacturar(FacturaElectronicaBean objFacturaBean,String strkAdmision,int cSucursal,int cUsuario,boolean bolRefacturacion,String strCorreoElectronico);
 	  CuentasxCobrarMayoreoAjax.pagoFactura(int kFactura,double dblAnticipo, double dblMontoPago,double dblSaldo,int cTipoPago,int UserID,String strFechaPago);
 	  CuentasxCobrarMayoreoAjax.getPagoFactura(int kFactura);	  
-	  CuentasxCobrarMayoreoAjax.buscaFacturaFolio(int cFolio, int marca);	  
+	  CuentasxCobrarMayoreoAjax.buscaFacturaFolio(int cFolio, int marca);
+	  CuentasxCobrarMayoreoAjax.findCfdiPdf(String path);
 	  SeguridadAjax.getUser(String username);
 	  ViajeFacturacionAjax.buscarViajeOrdenes(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);
 	  ViajeFacturacionAjax.buscarViajeOrdenesNewIndividual(BuscarOrdenesViajeBean objBuscarOrdenesViajeBean);

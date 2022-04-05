@@ -145,6 +145,24 @@ public class DatosMedicoAjax extends AjaxAction {
     	}
 		return objMedicoBean;
 	}	
+	
+	public MedicoBean altaMedico(MedicoBean objMedicoBean) throws Exception
+	{
+		MedicosDao objDAOMedico = new MedicosDao();
+		iObjLog.debug("Entrando DatosMedicoAjax.altaMedico:Entrando... " + objMedicoBean.getCmedico().intValue());		
+		try {			
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+				objMedicoBean = objDAOMedico.setMedicoAlta(objMedicoBean);
+			iObjLog.debug("Saliendo DatosMedicoAjax.altaMedico:Saliendo...  " + objMedicoBean.toString());
+    	}catch (Exception aObjException){
+    	    iObjLog.error("Error DatosMedicoAjax.altaMedico:Exception....", aObjException);
+    	    objMedicoBean = null;
+    	    throw aObjException;
+		} finally {
+			objDAOMedico = null;
+    	}
+		return objMedicoBean;
+	}
 
 	public String actualizaCorreoElectronicoMedico(int cMedico, String strCorreoElectronico) throws Exception
 	{

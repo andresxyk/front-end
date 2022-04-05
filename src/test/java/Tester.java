@@ -277,7 +277,7 @@ public class Tester extends TestCase
 
     /**
      * Create a suite of tests.
-     */
+     */ 
     public static Test suite()
     {
         try

@@ -19,6 +19,7 @@
 		if (intGrupo == 104) {
 		} else {
 			eliminarElemento('idGuardarNuevaOrden');
+			eliminarElemento('idUpdateMedico');
 			eliminarElemento('idEnviarSMS');
 		}		
 	}
@@ -52,7 +53,30 @@
 		frmPantalla.selFormaPago.selectedIndex = 0;				
 		frmPantalla.txtHorarioVisita.value = "";
 		frmPantalla.txtCURP.value = "";
-		frmPantalla.selTipoMedico.selectedIndex = 0;				
+		frmPantalla.selTipoMedico.selectedIndex = 0;
+		
+		frmPantalla.selEstatusDireccion.selectedIndex = 0;
+		frmPantalla.txtTelefono.value = "";
+		frmPantalla.selReferenciaDireccion.selectedIndex = 0;
+		frmPantalla.txtCalle.value = "";
+		frmPantalla.txtColonia.value = "";
+		frmPantalla.txtDelegacionMunicipio.value = "";
+		frmPantalla.selEstado.selectedIndex = 1;
+		frmPantalla.txtCodigoPostal.value = "";
+		
+		frmPantalla.txtDiasVisita.value = "";
+		frmPantalla.checkOlab.checked = false;
+		frmPantalla.checkAzteca.checked = false;
+		frmPantalla.checkSwisslab.checked = false;
+		frmPantalla.checkJenner.checked = false;
+		frmPantalla.checkLiacsa.checked = false;
+		
+		frmPantalla.hdnCodigoPostal.value = "0";
+		
+		frmPantalla.hdnEstadoMedico.value = 0;
+		frmPantalla.hdnActualizacion.value = 0;
+		frmPantalla.hdnCMedico.value =0;
+		
 	    adminDIV("MedicoBusqueda","hidden","none");
 	 	codeDIVHTML("MedicoBusqueda","");
 	 	codeDIVHTML("gridbusquedaDireccion","");
@@ -79,6 +103,10 @@
 		bolSexoFemenino =  TypeObjeto(frmPantalla.radSexo[0]);
 		bolSexoMasculino =  TypeObjeto(frmPantalla.radSexo[1]);
 		cZona = TypeObjeto(frmPantalla.selZona);
+		
+		tipodireccion = TypeObjeto(frmPantalla.selReferenciaDireccion);
+		direccion = frmPantalla.hdnCodigoPostal.value;
+		
 		var EspecialidadArray = new Array();
 		EspecialidadArray = loopSelected("selEspecialidad");		
 		if( !validaVacios(txtCodigo.value) ) {
@@ -115,12 +143,21 @@
 			strField = "Fecha de Nacimiento";
 			bolReturn = false;
 	    } 
+		else if(tipodireccion == 0){
+	    	alert("No seleccionaste ningun Tipo de Direccion");			
+			return false;
+	    }
+	    else if(direccion=="0"){
+	    	alert("Falta infomacion en el apartado de Direccion");			
+			return false;
+	    }
 	    else if (bolSexoFemenino == false) {
 	    	if (bolSexoMasculino == false) {
 				strField = "Sexo del Medico";
 				bolReturn = false;
 	    	}
-	    }		
+	    }	
+		
 		if (bolReturn == false) {
 			alert("Existe un error o falta  " + strField);			
 			return false;
@@ -139,6 +176,9 @@
 		bolSexoFemenino =  TypeObjeto(frmPantalla.radSexo[0]);
 		bolSexoMasculino =  TypeObjeto(frmPantalla.radSexo[1]);
 		cZona = TypeObjeto(frmPantalla.selZona);
+		tipodireccion = TypeObjeto(frmPantalla.selReferenciaDireccion);
+		direccion = frmPantalla.hdnCodigoPostal.value;
+		
 		var EspecialidadArray = new Array();
 		EspecialidadArray = loopSelected("selEspecialidad");		
 		if( !validaVacios(txtApellidoPaterno.value) ) {
@@ -165,7 +205,7 @@
 			strField = "Nombre";
 			bolReturn = false;
 	    }	    
-	    else if( cZona == 0 ) {
+	    else if( cZona == -1 ) {
 			alert("No seleccionaste ninguna Zona");			
 			return false;
 	    }
@@ -176,17 +216,29 @@
 	    else if( !validaVacios(txtFechaNacimiento.value) ) {
 			strField = "Fecha de Nacimiento";
 			bolReturn = false;
-	    } 
+	    }
+		else if(tipodireccion == 0){
+	    	alert("No seleccionaste ningun Tipo de Direccion");			
+			return false;
+	    }
+	    else if(direccion=="0"){
+	    	alert("Falta infomacion en el apartado de Direccion");			
+			return false;
+	    }
 	    else if (bolSexoFemenino == false) {
 	    	if (bolSexoMasculino == false) {
 				strField = "Sexo del Medico";
 				bolReturn = false;
 	    	}
-	    }		
+	    }
+				
 		if (bolReturn == false) {
 			alert('Existe un error o falta  ' + strField);			
 			return false;
 		}
+		
+		
+		
 		return true;	
 	}	 	
 		
@@ -230,6 +282,8 @@
 	 function medicoAceptado_CallBack(data) 
 	 {
 			var frmPantalla = window.document.frmMedicos;
+			
+			frmPantalla.hdnCMedico.value = data.kmedico;
 			codigoBean(frmPantalla.txtCodigoMedico,true,data.cmedico);		
 			frmPantalla.txtApellidoPaternoMedico.value = data.sappaterno;
 			frmPantalla.txtApellidoMaternoMedico.value = data.sapmaterno;		
@@ -252,10 +306,39 @@
 			frmPantalla.txtCURP.value = data.scurp;
 			frmPantalla.selTipoMedico.selectedIndex = (data.ucategoriamedico);		
 			frmPantalla.hdnEstadoMedico.value = data.uestadomedico;
-			adminDIV("divGridDirecciones","visible","inline");
-		 	codeDIVHTML("divGridDirecciones",data.sgriddirecciones);	
-			adminDIV("divGridTelefonos","visible","inline");
-		 	codeDIVHTML("divGridTelefonos",data.sgridtelefonos);	
+			frmPantalla.selReferenciaDireccion.selectedIndex = (data.ctipoDireccion);
+			frmPantalla.txtTelefono.value = data.stelefono;
+			frmPantalla.txtCalle.value = data.sdireccion;
+			frmPantalla.hdnCodigoPostal.value = data.kcodigopostal;
+			 			
+						
+			if(data.cestadoregistro==3){
+				frmPantalla.selEstatusDireccion.selectedIndex = 0;
+			}else{
+				frmPantalla.selEstatusDireccion.selectedIndex = 1;
+			}
+			
+			frmPantalla.txtColonia.value = data.scolonia;
+			frmPantalla.txtDelegacionMunicipio.value = data.sdelegmuni;
+			
+			if(data.sciudad!=""){
+				frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sciudad);
+			}	
+			frmPantalla.txtCodigoPostal.value = data.scodigopostal;
+			frmPantalla.txtUsuarioWeb.value = data.susuarioweb;
+			
+			frmPantalla.checkOlab.checked = data.marcaolab;
+			frmPantalla.checkAzteca.checked = data.marcaazteca;
+			frmPantalla.checkSwisslab.checked = data.marcaswisslab;
+			frmPantalla.checkJenner.checked = data.marcajenner;
+			frmPantalla.checkLiacsa.checked = data.marcaliacsa;
+			
+			
+			
+//			adminDIV("divGridDirecciones","visible","inline");
+//		 	codeDIVHTML("divGridDirecciones",data.sgriddirecciones);	
+//			adminDIV("divGridTelefonos","visible","inline");
+//		 	codeDIVHTML("divGridTelefonos",data.sgridtelefonos);	
 			permisoActualizacion();
 	 }
 	
@@ -306,7 +389,7 @@
 		frmPantalla.selReferenciaDireccion.disabled = true;
 		eliminarElemento('imgFechaNacimiento');		
 		eliminarElemento('btnLimpiar');		
-	}
+	} 
 	
 	function mantenimientoDirecciones() {
 		var frmPantalla = window.document.frmMedicos;

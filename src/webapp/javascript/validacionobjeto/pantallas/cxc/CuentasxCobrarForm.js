@@ -20,7 +20,7 @@ function showAntiguedadCxC() {
 
 
 function init() 
-{
+{	
 	var frmPantalla = window.document.frmAdminClientes;
     DWRUtil.useLoadingMessage();
     disableDIV();
@@ -34,6 +34,7 @@ function init()
 	frmPantalla.idEstado.disabled=true;
 	frmPantalla.txtCorreoElectronico.value = "";
 	frmPantalla.optResultado.checked = false;
+	DatosCliente.getMarcasUser(frmPantalla.idUsuario.value,getMarcasUser_CallBack);
 }
 
 function initEmpresas() 
@@ -51,6 +52,12 @@ function initEmpresas()
 	frmPantalla.idEstado.disabled=true;
 	frmPantalla.txtCorreoElectronico.value = "";
 	frmPantalla.optResultado.checked = false;
+	DatosCliente.getMarcasUser(frmPantalla.idUsuario.value,getMarcasUser_CallBack);
+}
+
+function getMarcasUser_CallBack(data) {
+	var frmPantalla = window.document.frmAdminClientes;
+	frmPantalla.marcasUser.value = data;		
 }
 
 function showclienteEmpresas(cCliente) {
@@ -317,6 +324,7 @@ function LoadBusquedaCliente() {
 	clienteBean.smnemonico=frmPantalla.txtMNEMONICO.value;
 	clienteBean.ctipocliente=69;
 	clienteBean.breadonly = false;
+	clienteBean.smarcauser = frmPantalla.marcasUser.value;
 }
 
 
@@ -386,6 +394,7 @@ function visualizarFactura(strRuta) {
 	snombre = "Factura";
 	abrirVentanaOrden(strRuta,snombre);	   			     			    
 }
+
 
 function imprimirReporte(liga, nombre) 
 {
@@ -896,6 +905,7 @@ function LoadBusquedaClienteConvenio(data) {
 	clienteBean.smnemonico=frmPantalla.txtMNEMONICO.value;
 	clienteBean.ctipocliente=69;
 	clienteBean.breadonly = false;
+	clienteBean.smarcauser = frmPantalla.marcasUser.value;
 } 
 
 /************************************** TERMINA FUNCIONES DEL CONVENIO *******************************************************************/

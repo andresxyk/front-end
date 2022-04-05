@@ -17,7 +17,7 @@
 <script>
 		 window.onload = init;			    		 
 </script>	
-
+ 
 
 <form action="http://10.3.0.8:8192/facturas/operacion" method="post" target="_blank">	
 
@@ -25,7 +25,7 @@
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
 	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Cancelacion de Facturas</th></tr>
+    	<tr><th colspan="5">Cancelación y Refacturación CFDI</th></tr>
 		<tr>
 			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
                 Operación
@@ -37,6 +37,7 @@
                 <select name="operacion"  style="width: 600px">
                 	<optgroup label="Cancelacion">
 					<option value="13">Cancelación de CFDI</option>
+					<option value="14">Refacturación CFDI Orden</option>
 					</optgroup>
 	            </select>						
     	    </td>	

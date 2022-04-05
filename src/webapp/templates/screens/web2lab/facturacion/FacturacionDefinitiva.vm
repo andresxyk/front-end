@@ -154,8 +154,9 @@
 						    <option value="4">AZTECA</option>
 						   	<option value="5">SWISSLAB</option>
 						   	<option value="7">JENNER PRADO</option>
-						   	<option value="8">JENNER LEAN</option> 
-			        </select>
+						   	<option value="8">JENNER LEAN</option>
+						   	<option value="15">LIACSA</option>
+			        </select> 
 					<input type="button" id="idBuscaFactura" name="idBuscaFactura" value="Busca Factura" onClick="buscaFactura();" class="boton">
 				</td>
 			</tr>

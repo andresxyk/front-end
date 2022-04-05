@@ -90,10 +90,10 @@
 	   var frmPantalla = window.document.frmNotasdeCredito;
 	   var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
 	   frmPantalla.hdnCconvenio.value=cconvenio;
-	   NotasdeCredito.getFacturasConvenio(cconvenio,displayfacturas_CallBack);   
+	   NotasdeCredito.getFacturasConvenio(cconvenio,displayfacturas_CallBack);    
 	     
 	} 
-   
+    
    
    function displayCargaDatosAsignacion(){
 	   var frmPantalla = window.document.frmAsignacionBloques;
@@ -373,7 +373,7 @@
 	   }
    }
 	
-  function crearNota(){
+  function crearNota(){ 
 	  var frm = document.getElementById("frmAltaNotaCredito");
 	  var facturasnota = frm.hdnFacturas.value;
 	  var montonota = frm.hdnMontoNota.value;

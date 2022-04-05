@@ -10,7 +10,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 
 #set ( $titlePage = "Registro Pago Factura") 
 
-#set ($lstTiposPagoFactura = $CatalogosTool.obtenAll("TipoPagoFactura","0"))
+#set ($lstTiposPagoFactura = $CatalogosTool.obtenAll("TipoPagoFactura","0")) 
 #set ($intkFactura = $data.getParameters().getString('kFactura') )
 #set ($sformatFactura = $data.getParameters().getString('formatFactura') )
 #set ($uActividad = $data.getParameters().getString('uActividad') )
@@ -259,6 +259,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 							   	<option value="7">JENNER PRADO</option> 
 							   	<option value="8">JENNER LEAN</option>
 							   	<option value="9">SERIE B</option> 
+							   	<option value="15">LIACSA</option> 
 				     </select>
     	   		 </td> 		
     		</tr>

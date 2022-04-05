@@ -1,7 +1,11 @@
 package mx.com.web2lab.actions.seguridad;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -18,6 +22,7 @@ import java.util.Vector;
 import javax.servlet.http.HttpSession;
 
 import mx.com.web2lab.beans.BMenuOptions;
+import mx.com.web2lab.util.ConfiguracionPropertiesFront;
 import mx.com.web2lab.util.Formatos;
 import mx.com.web2lab.util.GenericDAO;
 import mx.com.web2lab.util.SCambiaPass;
@@ -27,11 +32,13 @@ import mx.com.web2lab.backend.beans.comer.ConvenioBean;
 import mx.com.web2lab.backend.dao.ap.PacientesDao;
 import mx.com.web2lab.backend.dao.comer.ClientesNewDao;
 import mx.com.web2lab.backend.dao.sms.AdministracionSmsDao;
+import mx.com.web2lab.backend.hbm.ConfiguracionProperties;
 import mx.com.web2lab.backend.util.beans.sistema.TurbineGroup;
 import mx.com.web2lab.backend.util.catalogos.ValoresCatalogo;
 import oracle.jdbc.OracleCallableStatement;
 import oracle.jdbc.OracleTypes;
 
+import org.apache.axis.encoding.Base64;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.apache.torque.Torque;
@@ -72,104 +79,209 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
         String strEmpresa = "";
         iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Usuario " + nomUser + " password " + passwd + " " + strCamContras);
         try {
-        	if (nomUser.trim().length() > 2) {
-        		strEmpresa = nomUser.substring(0,3);
-        	}
-            iObjLog.debug("LoginAction + + + + + + + ECE Empresas " + nomUser + " password " + passwd + " " + strCamContras + " SUbstring" + strEmpresa );
-        	if ((strEmpresa.equals("CON")) || (strEmpresa == "CON")) {
-                iObjLog.debug("LoginAction + + + + + + + ECE Empresas " + nomUser + " password " + passwd + " " + strCamContras);
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-        		ClientesNewDao objConvenioDao = new ClientesNewDao();
-        		ConvenioBean objConvenioBean = new ConvenioBean();
-        		objConvenioBean.setCconvenio(Integer.decode(nomPaciente.substring(3)));
-    			objConvenioBean = (ConvenioBean)objConvenioDao.buscarConvenio(objConvenioBean,"0,1").get(0);
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Convenio Usuario " + objConvenioBean.getCconvenio() + " password " + objConvenioBean.getSpassword() + " " + strCamContras);
-        		if ((objConvenioBean.getSpassword() == passwd) || (objConvenioBean.getSpassword().equals(passwd))) {
-        			nomUser = "eceolab";
-        			passwd  = "tjoriard1";
-//        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
-        		}
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Validacion Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-                objConvenioBean = null;
-        		objConvenioDao = null;
-	            List objRoles = getRoleByUser(nomUser);
-	            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
-	            //Valida si el usuario esta dado de alta
-	            TurbineUser objTurbineUser = getUserByName(nomUser);	
-	    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);
-	    		
-	    		if(objUsuario!=null) {
-	    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
-	    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
-	    			objUsuario.setId(objTurbineUser.getUserId());
-	    			aObjData.setUser(objUsuario);
-	    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
-	    			HttpSession objSesion = aObjData.getSession();
-	    			objSesion.setAttribute( "username", nomUser );
-            		objSesion.setAttribute("cConvenio", nomPaciente.substring(3));
-	    			objSesion.setAttribute( "ACL", acl );
-	                objUsuario.setHasLoggedIn(new Boolean(true));
-	                objUsuario.updateLastLogin();
-	                objUsuario.setLastLogin(new Date());
-	    			objSesion.setAttribute("strNombreCompleto", objUsuario.getFirstName()+" "+objUsuario.getLastName());
-	    			objSesion.setAttribute("IdUsuarioSesion", new Integer(objUsuario.getId()));
-	                aObjData.save();
-	                String strPath = aObjData.getContextPath().trim()+"/servlet/template/";   
-	                List objTurbineGroups = getGroupByUser(objUsuario.getName());
-	                if(objTurbineGroups.size() > 0  ){
-	                	objTurbineGroup = (TurbineGroup)objTurbineGroups.get(0);
-	                	strTipSistema = getSistema( objTurbineGroup );
-	                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
-	                	objSesion.setAttribute("existeUnidad", "true");
-	                }
-	                if ( strCamContras != null && strCamContras.trim().equals("1") ){
-	                	aObjContext.put("username", nomUser);
-	                	aObjContext.put("selDepto", "1");
-	                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
-	                	return;
-	                }
-	                if(objTurbineGroups != null && !objTurbineGroups.isEmpty() && objTurbineGroups.size() > 1){
-	                	iObjLog.debug("LoginAction.doPerform Entro al if de mas de un grupo");
-	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
-	                	if ( strCamContras == null || !strCamContras.trim().equals("1") ){
-	                		aObjData.setScreenTemplate("/web2lab,seguridad,OpcionDepartamento.vm");
-	                	}
-	                } else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
-	                	String objMenu = generaMenu(strPath, objRoles)+"";
-	                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
-	                	objSesion.setAttribute("menu"," ");
-	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
-	            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
-	            		objSesion.setAttribute("strIdUnidadActual", st);	            	
-	            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO EMPRESA");
-	            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());
-	            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
-	            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
-	            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECEConvenios.vm");
-	                }
+        	
+//        	if(nomUser.indexOf(".")>=0){
+//        		iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Active Directory" + nomUser + " password " + passwd + " " + strCamContras);
+//        		
+//        		String userName = "";
+//        		
+//        		String [] splitCadena = nomUser.split("@");
+//        		
+////        		String userss = "";
+//        		
+//        		if(splitCadena[0].indexOf(".",splitCadena[0].indexOf(".")+1) >=0){
+//        			if(splitCadena.length>1){
+//        				userName = nomUser.substring(0, (nomUser.indexOf(".",nomUser.indexOf(".")+1)))+"@"+splitCadena[1];
+//        			}else{
+//        				userName = nomUser.substring(0, (nomUser.indexOf(".",nomUser.indexOf(".")+1)));
+//        			}
+//        			
+//        		}else{
+//        			userName = nomUser;
+//        		}
+//        	
+////        		String [] splitUser = nomUser.split(".");
+//        		
+//        		String authUser=ConfiguracionProperties.getPropiedad("active.directory.user");
+//                String authPass=ConfiguracionProperties.getPropiedad("active.directory.password"); 
+//                iObjLog.debug("user:"+authUser);
+//                iObjLog.debug("authPass:"+authPass);
+//                
+//                String auth = authUser+":"+authPass;
+//        		String encoded = Base64.encode(auth.getBytes());
+//        		String authHeaderValue = "Basic " + encoded;
+//        		System.out.println(new String(authHeaderValue));
+//        		
+//        		URL url;
+//    			url = new URL(ConfiguracionProperties.getPropiedad("active.directory.url.azure"));
+//	            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+//	            conn.setRequestMethod("POST");
+//	            conn.setRequestProperty("Accept", "application/json");
+//	            conn.setRequestProperty("Authorization", authHeaderValue);
+//	            conn.setRequestProperty("appID", ConfiguracionProperties.getPropiedad("active.directory.app.id"));
+//	            conn.setRequestProperty("password", passwd);
+////	            conn.setRequestProperty("username", nomUser.substring(0, nomUser.indexOf(".",nomUser.indexOf(".")+1)));
+//	            conn.setRequestProperty("username", userName);
+//	            boolean authSuccess = false;
+//	            if (conn.getResponseCode() != 200) {
+//	            	authSuccess = false;
+//	            	iObjLog.error("Failed : HTTP Error code : "
+//	                        + conn.getResponseCode());
+////	                throw new RuntimeException("Failed : HTTP Error code : "
+////	                        + conn.getResponseCode());
+//	            }else{
+//	            	authSuccess = true;
+//	            }
+//	            InputStreamReader in = new InputStreamReader(conn.getInputStream());
+//	            BufferedReader br = new BufferedReader(in);
+//	            String output;
+//	            while ((output = br.readLine()) != null) {
+//	                iObjLog.debug(output);
+//	            }
+//	            conn.disconnect();
+//        		
+//	            List objRoles = getRoleByUser(nomUser);
+//	            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
+//	            
+//	            TurbineUser objTurbineUser = getUserByName(nomUser);
+//	            iObjLog.debug("LoginAction:Password= "+objTurbineUser.getPassword());
+//	            if(authSuccess) {
+//	            	User objUsuario = TurbineSecurity.getUser(nomUser);
+//	            	ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
+//	            	
+//	            	
+//	            	objUsuario.setId(objTurbineUser.getUserId());
+//	    			aObjData.setUser(objUsuario);
+//	    			
+//	    			
+//	    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
+//	    			HttpSession objSesion = aObjData.getSession();
+//	    			objSesion.setAttribute( "username", nomUser );
+//	    			objSesion.setAttribute( "ACL", acl );
+//	                objUsuario.setHasLoggedIn(new Boolean(true));
+//	                objUsuario.updateLastLogin();
+//	                objUsuario.setLastLogin(new Date());
+//	    			objSesion.setAttribute("strNombreCompleto", objUsuario.getFirstName()+" "+objUsuario.getLastName());
+//	    			objSesion.setAttribute("IdUsuarioSesion", new Integer(objUsuario.getId()));
+//	                aObjData.save();
+//	                String strPath = aObjData.getContextPath().trim()+"/servlet/template/";   
+//	                List objTurbineGroups = getGroupByUser(objUsuario.getName());
+//	                if(objTurbineGroups.size() > 0  ){
+//	                	objTurbineGroup = (TurbineGroup)objTurbineGroups.get(0);
+//	                	strTipSistema = getSistema( objTurbineGroup );
+//	                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
+//	                	objSesion.setAttribute("existeUnidad", "true");
+//	                }
+//	//                boolean bolCamPasswd = new SCambiaPass().getCambiaPasswd(nomUser);
+//	//                iObjLog.debug("");
+//	//                if ( bolCamPasswd ){
+//	//                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
+//	//                	aObjContext.put("username", nomUser);
+//	//                	aObjContext.put("selDepto", "1");
+//	//                	return;
+//	//                }
+//	                if ( strCamContras != null && strCamContras.trim().equals("1") ){
+//	                	aObjContext.put("username", nomUser);
+//	                	aObjContext.put("selDepto", "1");
+//	                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
+//	                	return;
+//	                }
+//	                if(objTurbineGroups != null && !objTurbineGroups.isEmpty() && objTurbineGroups.size() > 1){
+//	                	iObjLog.debug("LoginAction.doPerform Entro al if de mas de un grupo");
+//	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+//	                	if ( strCamContras == null || !strCamContras.trim().equals("1") ){
+//	                		aObjData.setScreenTemplate("/web2lab,seguridad,OpcionDepartamento.vm");
+//	                	}
+//	                }else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
+//	                	String objMenu = generaMenu(strPath, objRoles)+"";
+//	                    BGrupoMenuUtil objGrupMenUtil = new BGrupoMenuUtil();
+//	                    boolean bolGerente = objGrupMenUtil.isGerente(objUsuario.getId() + "");
+//	                    objGrupMenUtil = null;
+//	                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
+//	                	objSesion.setAttribute("menu",objMenu);
+//	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+//	            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
+//	            		objSesion.setAttribute("strIdUnidadActual", st);	            	
+//	            		objSesion.setAttribute("grupo", objTurbineGroup.getGroupName());
+//	            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());		            		
+//	            		if (Integer.parseInt(objUsuario.getConfirmed()) == 2) {
+//	            			int cConvenio = 0;
+//	            			int cCliente = 750;
+//	            			switch (objTurbineGroup.getGroupId().intValue()) {
+//	            				case 27:
+//	            					cConvenio = (1180);		            		
+//	            					break;
+//	            				case 28:
+//	            					cConvenio = (1177);		            		
+//	            					break;
+//	            				case 29:
+//	            					cConvenio = (1175);		            		
+//	            					break;
+//	            				case 30:
+//	            					cConvenio = (1179);		            		
+//	            					break;
+//	            				case 31:
+//	            					cConvenio = (1174);		            		
+//	            					break;
+//	            				case 32:
+//	            					cConvenio = (1178);		            		
+//	            					break;
+//	            				case 33:
+//	            					cConvenio = (1173);		            		
+//	            					break;
+//	            				case 34:
+//	            					cConvenio = (1176);		            		
+//	            					break;
+//	            			}
+//		            		objSesion.setAttribute("cConvenioMarca", cConvenio + "");		            				            			
+//		            		objSesion.setAttribute("cClienteMarca", cCliente + "");		            				            			
+//	            		}
+//	            		if (bolGerente) {
+//		            		objSesion.setAttribute("NombreRol", "Gerente Sucursal");
+//		            		objSesion.setAttribute("IdRol", "330");
+//	            		} else {
+//		            		objSesion.setAttribute("NombreRol", "Recepcionista InfoDiaMex");
+//		            		objSesion.setAttribute("IdRol", "0");
+//	            		}
+//	            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
+//	            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
+//	//	            	objSesion.setAttribute("strIdCLabDefault", getLaboratorioByDesc(ValoresCatalogo.LABORATORIO_DEFAULT));
+//	            		aObjData.setScreenTemplate("/web2lab,ap,PantallaInicio.vm");
+//	                }
+//	            	
+//	            } else {
+//	                aObjContext.put("mensaje","El Usuario o Password no es v&aacute;lido, intente de nuevo.");
+//	                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");
+//	        	}
+//	            
+//        	}else{		//else ActiveDirectoy
+        		
+	        	if (nomUser.trim().length() > 2) {
+	        		strEmpresa = nomUser.substring(0,3);
 	        	}
-        	} else if ((strEmpresa.equals("MED")) || (strEmpresa == "MED")) {
-	                iObjLog.debug("LoginAction + + + + + + + ECE Medico " + nomUser + " password " + passwd + " " + strCamContras + " SUbstring" + strEmpresa );
-	                iObjLog.debug("LoginAction + + + + + + + ECE Medicos " + nomUser + " password " + passwd + " " + strCamContras);
+	            iObjLog.debug("LoginAction + + + + + + + ECE Empresas " + nomUser + " password " + passwd + " " + strCamContras + " SUbstring" + strEmpresa );
+	        	if ((strEmpresa.equals("CON")) || (strEmpresa == "CON")) {
+	                iObjLog.debug("LoginAction + + + + + + + ECE Empresas " + nomUser + " password " + passwd + " " + strCamContras);
 	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-	 //       		PacientesDao objPacientesDAO = new PacientesDao();
-	 //       		PacienteBean objPacienteBean = new PacienteBean();
-//	        		objPacienteBean.setKpacientefundacion(Integer.decode(nomUser));
-	 //       		objPacienteBean = objPacientesDAO.buscarPaciente(objPacienteBean);
-	 //               iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Paciente Usuario " + objPacienteBean.getKpacientefundacion() + " password " + objPacienteBean.getSpasswordexpediente() + " " + strCamContras);
-//	        		if ((objPacienteBean.getSpasswordexpediente() == passwd) || (objPacienteBean.getSpasswordexpediente().equals(passwd))) {
+	        		ClientesNewDao objConvenioDao = new ClientesNewDao();
+	        		ConvenioBean objConvenioBean = new ConvenioBean();
+	        		objConvenioBean.setCconvenio(Integer.decode(nomPaciente.substring(3)));
+	    			objConvenioBean = (ConvenioBean)objConvenioDao.buscarConvenio(objConvenioBean,"0,1").get(0);
+	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Convenio Usuario " + objConvenioBean.getCconvenio() + " password " + objConvenioBean.getSpassword() + " " + strCamContras);
+	        		if ((objConvenioBean.getSpassword() == passwd) || (objConvenioBean.getSpassword().equals(passwd))) {
 	        			nomUser = "eceolab";
 	        			passwd  = "tjoriard1";
-//	        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
-//	       		}
+	//        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
+	        		}
 	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Validacion Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-	 //       		objPacienteBean = null;
-	 //       		objPacientesDAO = null;
+	                objConvenioBean = null;
+	        		objConvenioDao = null;
 		            List objRoles = getRoleByUser(nomUser);
 		            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
 		            //Valida si el usuario esta dado de alta
 		            TurbineUser objTurbineUser = getUserByName(nomUser);	
 		    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);
+		    		
 		    		if(objUsuario!=null) {
 		    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
 		    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
@@ -178,7 +290,7 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
 		    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
 		    			HttpSession objSesion = aObjData.getSession();
 		    			objSesion.setAttribute( "username", nomUser );
-	            		objSesion.setAttribute("cClaveMedico", nomPaciente.substring(3));
+	            		objSesion.setAttribute("cConvenio", nomPaciente.substring(3));
 		    			objSesion.setAttribute( "ACL", acl );
 		                objUsuario.setHasLoggedIn(new Boolean(true));
 		                objUsuario.updateLastLogin();
@@ -213,107 +325,114 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
 		                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
 		            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
 		            		objSesion.setAttribute("strIdUnidadActual", st);	            	
-		            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO MEDICO");
+		            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO EMPRESA");
 		            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());
 		            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
 		            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
-		            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECEMedico.vm");
+		            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECEConvenios.vm");
 		                }
-		        	}        	
-        	} else if ((Formatos.isNumeric(nomUser)) && (Integer.parseInt(nomUser) > 999999)) {
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-        		PacientesDao objPacientesDAO = new PacientesDao();
-        		PacienteBean objPacienteBean = new PacienteBean();
-        		objPacienteBean.setKpacientefundacion(Integer.decode(nomUser));
-        		objPacienteBean = objPacientesDAO.buscarPaciente(objPacienteBean);
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Paciente Usuario " + objPacienteBean.getKpacientefundacion() + " password " + objPacienteBean.getSpasswordexpediente() + " " + strCamContras);
-        		if ((objPacienteBean.getSpasswordexpediente() == passwd) || (objPacienteBean.getSpasswordexpediente().equals(passwd))) {
-        			nomUser = "eceolab";
-        			passwd  = "tjoriard1";
-        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
-        		}
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Validacion Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-        		objPacienteBean = null;
-        		objPacientesDAO = null;
-	            List objRoles = getRoleByUser(nomUser);
-	            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
-	            //Valida si el usuario esta dado de alta
-	            TurbineUser objTurbineUser = getUserByName(nomUser);	
-	    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);
-	    		if(objUsuario!=null) {
-	    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
-	    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
-	    			objUsuario.setId(objTurbineUser.getUserId());
-	    			aObjData.setUser(objUsuario);
-	    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
-	    			HttpSession objSesion = aObjData.getSession();
-	    			objSesion.setAttribute( "username", nomUser );
-            		objSesion.setAttribute("kPaciente", nomPaciente);
-	    			objSesion.setAttribute( "ACL", acl );
-	                objUsuario.setHasLoggedIn(new Boolean(true));
-	                objUsuario.updateLastLogin();
-	                objUsuario.setLastLogin(new Date());
-	    			objSesion.setAttribute("strNombreCompleto", objUsuario.getFirstName()+" "+objUsuario.getLastName());
-	    			objSesion.setAttribute("IdUsuarioSesion", new Integer(objUsuario.getId()));
-	                aObjData.save();
-	                String strPath = aObjData.getContextPath().trim()+"/servlet/template/";   
-	                List objTurbineGroups = getGroupByUser(objUsuario.getName());
-	                if(objTurbineGroups.size() > 0  ){
-	                	objTurbineGroup = (TurbineGroup)objTurbineGroups.get(0);
-	                	strTipSistema = getSistema( objTurbineGroup );
-	                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
-	                	objSesion.setAttribute("existeUnidad", "true");
-	                }
-	                if ( strCamContras != null && strCamContras.trim().equals("1") ){
-	                	aObjContext.put("username", nomUser);
-	                	aObjContext.put("selDepto", "1");
-	                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
-	                	return;
-	                }
-	                if(objTurbineGroups != null && !objTurbineGroups.isEmpty() && objTurbineGroups.size() > 1){
-	                	iObjLog.debug("LoginAction.doPerform Entro al if de mas de un grupo");
-	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
-	                	if ( strCamContras == null || !strCamContras.trim().equals("1") ){
-	                		aObjData.setScreenTemplate("/web2lab,seguridad,OpcionDepartamento.vm");
-	                	}
-	                }else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
-	                	String objMenu = generaMenu(strPath, objRoles)+"";
-	                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
-//	                	objSesion.setAttribute("menu",objMenu);
-	                	objSesion.setAttribute("menu"," ");
-	                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
-	            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
-	            		objSesion.setAttribute("strIdUnidadActual", st);	            	
-//	            		objSesion.setAttribute("grupo", objTurbineGroup.getGroupName());
-	            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO PACIENTE");
-	            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());
-	            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
-	            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
-	            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECE.vm");
-	                }
-	        	}
-        	} else {        	
-                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Empleado Usuario " + nomUser + " password " + passwd + " " + strCamContras);
-	            List objRoles = getRoleByUser(nomUser);
-	            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
-	            //Valida si el usuario esta dado de alta
-	            TurbineUser objTurbineUser = getUserByName(nomUser);
-	            iObjLog.debug("LoginAction:Password= "+objTurbineUser.getPassword());
-//	            if (objTurbineUser == null) {
-//	                aObjContext.put("mensaje","El usuario no es v&aacute;lido, intente de nuevo.");
-//	                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");	            	
-//	            } else {
-		    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);		    		
+		        	}
+	        	} else if ((strEmpresa.equals("MED")) || (strEmpresa == "MED")) {
+		                iObjLog.debug("LoginAction + + + + + + + ECE Medico " + nomUser + " password " + passwd + " " + strCamContras + " SUbstring" + strEmpresa );
+		                iObjLog.debug("LoginAction + + + + + + + ECE Medicos " + nomUser + " password " + passwd + " " + strCamContras);
+		                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Usuario " + nomUser + " password " + passwd + " " + strCamContras);
+		 //       		PacientesDao objPacientesDAO = new PacientesDao();
+		 //       		PacienteBean objPacienteBean = new PacienteBean();
+	//	        		objPacienteBean.setKpacientefundacion(Integer.decode(nomUser));
+		 //       		objPacienteBean = objPacientesDAO.buscarPaciente(objPacienteBean);
+		 //               iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Paciente Usuario " + objPacienteBean.getKpacientefundacion() + " password " + objPacienteBean.getSpasswordexpediente() + " " + strCamContras);
+	//	        		if ((objPacienteBean.getSpasswordexpediente() == passwd) || (objPacienteBean.getSpasswordexpediente().equals(passwd))) {
+		        			nomUser = "eceolab";
+		        			passwd  = "tjoriard1";
+	//	        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
+	//	       		}
+		                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Validacion Usuario " + nomUser + " password " + passwd + " " + strCamContras);
+		 //       		objPacienteBean = null;
+		 //       		objPacientesDAO = null;
+			            List objRoles = getRoleByUser(nomUser);
+			            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
+			            //Valida si el usuario esta dado de alta
+			            TurbineUser objTurbineUser = getUserByName(nomUser);	
+			    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);
+			    		if(objUsuario!=null) {
+			    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
+			    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
+			    			objUsuario.setId(objTurbineUser.getUserId());
+			    			aObjData.setUser(objUsuario);
+			    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
+			    			HttpSession objSesion = aObjData.getSession();
+			    			objSesion.setAttribute( "username", nomUser );
+		            		objSesion.setAttribute("cClaveMedico", nomPaciente.substring(3));
+			    			objSesion.setAttribute( "ACL", acl );
+			                objUsuario.setHasLoggedIn(new Boolean(true));
+			                objUsuario.updateLastLogin();
+			                objUsuario.setLastLogin(new Date());
+			    			objSesion.setAttribute("strNombreCompleto", objUsuario.getFirstName()+" "+objUsuario.getLastName());
+			    			objSesion.setAttribute("IdUsuarioSesion", new Integer(objUsuario.getId()));
+			                aObjData.save();
+			                String strPath = aObjData.getContextPath().trim()+"/servlet/template/";   
+			                List objTurbineGroups = getGroupByUser(objUsuario.getName());
+			                if(objTurbineGroups.size() > 0  ){
+			                	objTurbineGroup = (TurbineGroup)objTurbineGroups.get(0);
+			                	strTipSistema = getSistema( objTurbineGroup );
+			                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
+			                	objSesion.setAttribute("existeUnidad", "true");
+			                }
+			                if ( strCamContras != null && strCamContras.trim().equals("1") ){
+			                	aObjContext.put("username", nomUser);
+			                	aObjContext.put("selDepto", "1");
+			                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
+			                	return;
+			                }
+			                if(objTurbineGroups != null && !objTurbineGroups.isEmpty() && objTurbineGroups.size() > 1){
+			                	iObjLog.debug("LoginAction.doPerform Entro al if de mas de un grupo");
+			                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+			                	if ( strCamContras == null || !strCamContras.trim().equals("1") ){
+			                		aObjData.setScreenTemplate("/web2lab,seguridad,OpcionDepartamento.vm");
+			                	}
+			                } else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
+			                	String objMenu = generaMenu(strPath, objRoles)+"";
+			                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
+			                	objSesion.setAttribute("menu"," ");
+			                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+			            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
+			            		objSesion.setAttribute("strIdUnidadActual", st);	            	
+			            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO MEDICO");
+			            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());
+			            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
+			            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
+			            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECEMedico.vm");
+			                }
+			        	}        	
+	        	} else if ((Formatos.isNumeric(nomUser)) && (Integer.parseInt(nomUser) > 999999)) {
+	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Usuario " + nomUser + " password " + passwd + " " + strCamContras);
+	        		PacientesDao objPacientesDAO = new PacientesDao();
+	        		PacienteBean objPacienteBean = new PacienteBean();
+	        		objPacienteBean.setKpacientefundacion(Integer.decode(nomUser));
+	        		objPacienteBean = objPacientesDAO.buscarPaciente(objPacienteBean);
+	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados DAO son usuario Paciente Usuario " + objPacienteBean.getKpacientefundacion() + " password " + objPacienteBean.getSpasswordexpediente() + " " + strCamContras);
+	        		if ((objPacienteBean.getSpasswordexpediente() == passwd) || (objPacienteBean.getSpasswordexpediente().equals(passwd))) {
+	        			nomUser = "eceolab";
+	        			passwd  = "tjoriard1";
+	        			objPacientesDAO.actualizaVisitaPaciente(objPacienteBean);
+	        		}
+	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Paciente Validacion Usuario " + nomUser + " password " + passwd + " " + strCamContras);
+	        		objPacienteBean = null;
+	        		objPacientesDAO = null;
+		            List objRoles = getRoleByUser(nomUser);
+		            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
+		            //Valida si el usuario esta dado de alta
+		            TurbineUser objTurbineUser = getUserByName(nomUser);	
+		    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);
 		    		if(objUsuario!=null) {
 		    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
 		    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
 		    			objUsuario.setId(objTurbineUser.getUserId());
 		    			aObjData.setUser(objUsuario);
-		    			
-		    			
 		    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
 		    			HttpSession objSesion = aObjData.getSession();
 		    			objSesion.setAttribute( "username", nomUser );
+	            		objSesion.setAttribute("kPaciente", nomPaciente);
 		    			objSesion.setAttribute( "ACL", acl );
 		                objUsuario.setHasLoggedIn(new Boolean(true));
 		                objUsuario.updateLastLogin();
@@ -329,14 +448,6 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
 		                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
 		                	objSesion.setAttribute("existeUnidad", "true");
 		                }
-		//                boolean bolCamPasswd = new SCambiaPass().getCambiaPasswd(nomUser);
-		//                iObjLog.debug("");
-		//                if ( bolCamPasswd ){
-		//                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
-		//                	aObjContext.put("username", nomUser);
-		//                	aObjContext.put("selDepto", "1");
-		//                	return;
-		//                }
 		                if ( strCamContras != null && strCamContras.trim().equals("1") ){
 		                	aObjContext.put("username", nomUser);
 		                	aObjContext.put("selDepto", "1");
@@ -351,66 +462,143 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
 		                	}
 		                }else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
 		                	String objMenu = generaMenu(strPath, objRoles)+"";
-		                    BGrupoMenuUtil objGrupMenUtil = new BGrupoMenuUtil();
-		                    boolean bolGerente = objGrupMenUtil.isGerente(objUsuario.getId() + "");
-		                    objGrupMenUtil = null;
 		                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
-		                	objSesion.setAttribute("menu",objMenu);
+	//	                	objSesion.setAttribute("menu",objMenu);
+		                	objSesion.setAttribute("menu"," ");
 		                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
 		            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
 		            		objSesion.setAttribute("strIdUnidadActual", st);	            	
-		            		objSesion.setAttribute("grupo", objTurbineGroup.getGroupName());
-		            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());		            		
-		            		if (Integer.parseInt(objUsuario.getConfirmed()) == 2) {
-		            			int cConvenio = 0;
-		            			int cCliente = 750;
-		            			switch (objTurbineGroup.getGroupId().intValue()) {
-		            				case 27:
-		            					cConvenio = (1180);		            		
-		            					break;
-		            				case 28:
-		            					cConvenio = (1177);		            		
-		            					break;
-		            				case 29:
-		            					cConvenio = (1175);		            		
-		            					break;
-		            				case 30:
-		            					cConvenio = (1179);		            		
-		            					break;
-		            				case 31:
-		            					cConvenio = (1174);		            		
-		            					break;
-		            				case 32:
-		            					cConvenio = (1178);		            		
-		            					break;
-		            				case 33:
-		            					cConvenio = (1173);		            		
-		            					break;
-		            				case 34:
-		            					cConvenio = (1176);		            		
-		            					break;
-		            			}
-			            		objSesion.setAttribute("cConvenioMarca", cConvenio + "");		            				            			
-			            		objSesion.setAttribute("cClienteMarca", cCliente + "");		            				            			
-		            		}
-		            		if (bolGerente) {
-			            		objSesion.setAttribute("NombreRol", "Gerente Sucursal");
-			            		objSesion.setAttribute("IdRol", "330");
-		            		} else {
-			            		objSesion.setAttribute("NombreRol", "Recepcionista InfoDiaMex");
-			            		objSesion.setAttribute("IdRol", "0");
-		            		}
+	//	            		objSesion.setAttribute("grupo", objTurbineGroup.getGroupName());
+		            		objSesion.setAttribute("grupo", "EXPEDIENTE CLINICO ELECTRONICO PACIENTE");
+		            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());
 		            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
 		            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
-		//	            	objSesion.setAttribute("strIdCLabDefault", getLaboratorioByDesc(ValoresCatalogo.LABORATORIO_DEFAULT));
-		            		aObjData.setScreenTemplate("/web2lab,ap,PantallaInicio.vm");
+		            		aObjData.setScreenTemplate("/web2lab,ap,BienvenidoECE.vm");
 		                }
-		        	} else {
-		                aObjContext.put("mensaje","El Password no es v&aacute;lido, intente de nuevo.");
-		                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");
 		        	}
-//	            }
-        	}
+	        	} else {        	
+	                iObjLog.debug("LoginAction + + + + + + + Los datos recuperados son usuario Empleado Usuario " + nomUser + " password " + passwd + " " + strCamContras);
+	               
+	                
+	                List objRoles = getRoleByUser(nomUser);
+		            iObjLog.debug("LoginAction:ROLES ENCONTRADOS= "+objRoles);
+		            //Valida si el usuario esta dado de alta
+		            TurbineUser objTurbineUser = getUserByName(nomUser);
+		            iObjLog.debug("LoginAction:Password= "+objTurbineUser.getPassword());
+	//	            if (objTurbineUser == null) {
+	//	                aObjContext.put("mensaje","El usuario no es v&aacute;lido, intente de nuevo.");
+	//	                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");	            	
+	//	            } else {
+		           
+			    		User objUsuario = TurbineSecurity.getAuthenticatedUser(nomUser, passwd);    		
+			    		if(objUsuario!=null) {
+			    			iObjLog.debug("LoginAction.doPerform: EjecutandoSeguridadUtil....");
+			    			ACL acl = SeguridadUtil.obtenACL(objTurbineUser.getUserId());
+			    			objUsuario.setId(objTurbineUser.getUserId());
+			    			aObjData.setUser(objUsuario);
+			    			
+			    			
+			    			iObjLog.debug("LoginAction.doPerform: el id del usuario es "+objUsuario.getId());
+			    			HttpSession objSesion = aObjData.getSession();
+			    			objSesion.setAttribute( "username", nomUser );
+			    			objSesion.setAttribute( "ACL", acl );
+			                objUsuario.setHasLoggedIn(new Boolean(true));
+			                objUsuario.updateLastLogin();
+			                objUsuario.setLastLogin(new Date());
+			    			objSesion.setAttribute("strNombreCompleto", objUsuario.getFirstName()+" "+objUsuario.getLastName());
+			    			objSesion.setAttribute("IdUsuarioSesion", new Integer(objUsuario.getId()));
+			                aObjData.save();
+			                String strPath = aObjData.getContextPath().trim()+"/servlet/template/";   
+			                List objTurbineGroups = getGroupByUser(objUsuario.getName());
+			                if(objTurbineGroups.size() > 0  ){
+			                	objTurbineGroup = (TurbineGroup)objTurbineGroups.get(0);
+			                	strTipSistema = getSistema( objTurbineGroup );
+			                	iObjLog.debug("LoginAction.doPerform El tiposistema que tiene es el siguiente "+strTipSistema);
+			                	objSesion.setAttribute("existeUnidad", "true");
+			                }
+			//                boolean bolCamPasswd = new SCambiaPass().getCambiaPasswd(nomUser);
+			//                iObjLog.debug("");
+			//                if ( bolCamPasswd ){
+			//                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
+			//                	aObjContext.put("username", nomUser);
+			//                	aObjContext.put("selDepto", "1");
+			//                	return;
+			//                }
+			                if ( strCamContras != null && strCamContras.trim().equals("1") ){
+			                	aObjContext.put("username", nomUser);
+			                	aObjContext.put("selDepto", "1");
+			                	aObjData.setScreenTemplate("/web2lab,seguridad,CamContras.vm");
+			                	return;
+			                }
+			                if(objTurbineGroups != null && !objTurbineGroups.isEmpty() && objTurbineGroups.size() > 1){
+			                	iObjLog.debug("LoginAction.doPerform Entro al if de mas de un grupo");
+			                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+			                	if ( strCamContras == null || !strCamContras.trim().equals("1") ){
+			                		aObjData.setScreenTemplate("/web2lab,seguridad,OpcionDepartamento.vm");
+			                	}
+			                }else if(objTurbineGroups != null && objTurbineGroups.size() == 1){
+			                	String objMenu = generaMenu(strPath, objRoles)+"";
+			                    BGrupoMenuUtil objGrupMenUtil = new BGrupoMenuUtil();
+			                    boolean bolGerente = objGrupMenUtil.isGerente(objUsuario.getId() + "");
+			                    objGrupMenUtil = null;
+			                	iObjLog.debug("LoginAction.doPerform regreso con el menu");
+			                	objSesion.setAttribute("menu",objMenu);
+			                	objSesion.setAttribute("objTurbineGroup", objTurbineGroups);
+			            		String st = this.getCLabDepByGroup(objTurbineGroup.getGroupId()+"");
+			            		objSesion.setAttribute("strIdUnidadActual", st);	            	
+			            		objSesion.setAttribute("grupo", objTurbineGroup.getGroupName());
+			            		objSesion.setAttribute("idgrupo", objTurbineGroup.getGroupId());		            		
+			            		if (Integer.parseInt(objUsuario.getConfirmed()) == 2) {
+			            			int cConvenio = 0;
+			            			int cCliente = 750;
+			            			switch (objTurbineGroup.getGroupId().intValue()) {
+			            				case 27:
+			            					cConvenio = (1180);		            		
+			            					break;
+			            				case 28:
+			            					cConvenio = (1177);		            		
+			            					break;
+			            				case 29:
+			            					cConvenio = (1175);		            		
+			            					break;
+			            				case 30:
+			            					cConvenio = (1179);		            		
+			            					break;
+			            				case 31:
+			            					cConvenio = (1174);		            		
+			            					break;
+			            				case 32:
+			            					cConvenio = (1178);		            		
+			            					break;
+			            				case 33:
+			            					cConvenio = (1173);		            		
+			            					break;
+			            				case 34:
+			            					cConvenio = (1176);		            		
+			            					break;
+			            			}
+				            		objSesion.setAttribute("cConvenioMarca", cConvenio + "");		            				            			
+				            		objSesion.setAttribute("cClienteMarca", cCliente + "");		            				            			
+			            		}
+			            		if (bolGerente) {
+				            		objSesion.setAttribute("NombreRol", "Gerente Sucursal");
+				            		objSesion.setAttribute("IdRol", "330");
+			            		} else {
+				            		objSesion.setAttribute("NombreRol", "Recepcionista InfoDiaMex");
+				            		objSesion.setAttribute("IdRol", "0");
+			            		}
+			            		objSesion.setAttribute("strIdCLab", getLabPorUnidad(st));
+			            		objSesion.setAttribute("strIdCel", getCelPorUnidad(st));
+			//	            	objSesion.setAttribute("strIdCLabDefault", getLaboratorioByDesc(ValoresCatalogo.LABORATORIO_DEFAULT));
+			            		aObjData.setScreenTemplate("/web2lab,ap,PantallaInicio.vm");
+			                }
+			        	} else {
+			                aObjContext.put("mensaje","El Password no es v&aacute;lido, intente de nuevo.");
+			                aObjData.setScreenTemplate("/web2lab,seguridad,Login.vm");
+			        	}
+	//	            }
+	        	}
+//	        } //Cierre ActiveDirectoy
         }catch(DataBackendException aError){
             iObjLog.error("TurbineSecurityException LoginAction.doPerform", aError);
             aObjContext.put("mensaje","No se he podido Autentificar el usuario.");
@@ -500,6 +688,7 @@ public class LoginExpedienteClinicoElectronicoAction extends VelocityAction impl
      * @throws DataSetException
      */
     public List getRoleByUser(String  strLoginUser) throws Exception{
+    	iObjLog.debug("getRoleByUser::: strLoginUser:"+strLoginUser);
     	List objTurbinGroupLLena = new Vector();
 
     	String strQuery = 	"SELECT DISTINCT TURBINE_ROLE.ROLE_ID, " +

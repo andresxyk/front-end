@@ -2,16 +2,32 @@
 
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
-<script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
-<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
-<script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/CapturaClientes.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
 
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 
+
+
 <script>
-		 window.onload = init;			    		 
+		 window.onload = initOperaciones;			    		 
 </script>	
+
+<form name="frmOpConvenios" action="" method="post" >	
+	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
+	<input type="hidden" id="idMarcas" name="idMarcas" value="$data.getUser().getId()">	
+	<table	border="0" class="tabla" width="100%">	
+		<tr><th colspan="5">Operaciones Convenios</th></tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" id="idModConvenios" name="idModConvenios" value="Administracion de Convenios y Productos" onClick="operacionConvenios();" class="boton">
+			</td>		
+		</tr>	 
+	</table>
+</form>
 
 
 <form action="http://10.3.0.8:8192/facturas/operacion" method="post" target="_blank">	
@@ -20,7 +36,6 @@
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
 	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Operaciones Convenios</th></tr>
 		<tr>
 			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
                 Operación

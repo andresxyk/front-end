@@ -47,7 +47,7 @@
 		        <a href="javascript:doNothing()" onclick="javascript:buscarFactura();">
 		            <img alt='Buscar - Factura' id="idBuscarFactura" width="30" height="30" border='0' src='$content.getURI('images/icoBuscar.png')' />
 		        </a>	
-				Factura
+				Factura 
     	    </td>
 		</tr>
 		<tr>
@@ -62,7 +62,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-                <select id="selConvenios"  style="width: 600px" onChange="displayCargaDatos();">
+                <select id="selConvenios"  style="width: 600px" onChange="displayCargaDatos();"> 
 					#foreach($objConvenio in $lstConvenios)
 						#option("$!objConvenio.getCconvenio()" "$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()" 0)	
 					#end

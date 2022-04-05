@@ -149,7 +149,7 @@ var buscarordenesviajeBean = new BuscarOrdenesViajeBean();
 			frmPantalla.txtViaje.focus();			
  		} else if (frmPantalla.txtAdmision.value != "") {
  			LoadBeanBuscarOrdenesViajeBean();
- 			ViajeFacturacion.buscarViajeOrdenes(buscarordenesviajeBean,consultaConveniosGrid_CallBack);
+ 			ViajeFacturacion.buscarViajeOrdenes(buscarordenesviajeBean,consultaConveniosGrid_CallBack); 
 			frmPantalla.txtAdmision.value = "";			
 			frmPantalla.txtAdmision.focus();			
  		} else if (frmPantalla.txtFactura.value != "") {
@@ -328,7 +328,7 @@ var buscarordenesviajeBean = new BuscarOrdenesViajeBean();
     }  
     
     function levantarIncidencia_CallBack(data) {
-    	alert("La incidencia fue levantada con el número: " + data);
+    	alert("La incidencia fue levantada con el nï¿½mero: " + data);
     }
     
     

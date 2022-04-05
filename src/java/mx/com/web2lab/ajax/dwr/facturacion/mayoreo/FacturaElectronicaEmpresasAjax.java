@@ -87,10 +87,11 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     finally {
     }
     return strReturn;
-  }
+  } 
 
   public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, 
-		  String strnocuenta, String strmetodopago, String uuidSustitucion, boolean sustitucion) throws Exception {
+		  String strnocuenta, String strmetodopago, String uuidSustitucion, boolean sustitucion, boolean descuento, String descuentos, String notaDescuento, 
+		  boolean retencion) throws Exception {
 	  
     TFactura objTFactura = new TFactura();
     FacturacionElectronicaMayoreoDao objFacturaElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
@@ -98,7 +99,8 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     FormatoFacturaEmpresa objFormato = null;
     boolean bandSustitucion = true;
     
-    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+"  serie:"+objFacturaBean.getSserie());
+    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+
+    		"  serie:"+objFacturaBean.getSserie()+"   descuento:"+descuento+"    descuentos:"+descuentos+"      retencion:"+retencion);
     try {
       objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
       objFacturaElectronicaMayoreoDAO.persistirAjusteFactura(objTFactura.getKfactura(), objTFactura.getUserId(), msubtotal, miva, mtotal);
@@ -117,12 +119,24 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
         break;
       case 4:
         objFormato = new FormatoFacturaEmpresaDesgloceImpl();
-      }
-      
+      }      
       //FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
+      
+      objFacturaBean.setBandRetencion(retencion);
       if(sustitucion){    	  
     	  objFacturaBean.setUuid(uuidSustitucion.trim());    	  
       }
+      if(descuento){
+    	  objFacturaBean.setBandDescuento(descuento);
+    	  objFacturaBean.setNotaDescuento(notaDescuento);
+    	  objFacturaBean.setDescuentos(descuentos);
+    	  String [] splitdesc = descuentos.split("\\|");
+    	  for(int i=0;i<splitdesc.length;i++){
+    		  System.out.println(splitdesc[i]);
+    	  }
+    	  
+      }
+      
       if(bandSustitucion){    	
 	      
 	      if ((itipofactura == 1) || (itipofactura == 2)) {
