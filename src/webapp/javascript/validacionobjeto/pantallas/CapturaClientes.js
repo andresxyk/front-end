@@ -5,30 +5,64 @@ function showSubModalPago() {
 
 function MetricasClieConBean() {
 	intClientesActivos=null,
-	intClientesNOActivos=null,
+	intClientesNOActivos=null, 
 	intConveniosActivos=null,
 	intConveniosNOActivos=null,
 	intClientesSinConvenio=null,
 	intClientesSinConvenioActivos=null
-}
+} 
 
 function init() 
 {
 	var frmPantalla = window.document.frmAdminClientes;
+	var userid = frmPantalla.idUsuario.value;
+	var marca = frmPantalla.idMarca.value;
     DWRUtil.useLoadingMessage();
-    disableDIV();
+    disableDIV(); 
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
  	codeDIVHTML("gridbusquedaConvenios","");
     adminDIV("gridbusquedaFacturas","hidden","none");	    	
  	codeDIVHTML("gridbusquedaFacturas","");
 	codigoBean(frmPantalla.txtEstadoCliente,true,"");			
 	codigoBean(frmPantalla.txtConvenio,true,0);		
-	DatosCliente.estatusAltas(estatusAltas_CallBack);
+	DatosCliente.estatusAltas(userid,estatusAltas_CallBack);
 	frmPantalla.idEstado.value = ""		
 	frmPantalla.idEstado.disabled=true;
 	frmPantalla.txtCorreoElectronico.value = "";
 	frmPantalla.optResultado.checked = false;
+	
 }
+
+
+function initOperaciones() 
+{
+	
+	
+}
+
+
+
+function operacionConvenios(){
+	 var frmPantalla = window.document.frmOpConvenios;
+	 var idUser = document.getElementById("idUsuario").value;	 
+	 DatosCliente.getMarcasUser(idUser,getMarcasUser_CallBack);
+	 
+	 
+	  
+} 
+
+function getMarcasUser_CallBack(data) {
+	 var frmPantalla = window.document.frmOpConvenios;
+	 var idUser = document.getElementById("idUsuario").value;
+	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGdaInit/"+idUser+"/"+data;
+//	 var url = "http://10.20.20.12:8021/webInfodiamex/homeGda/"+idUser;
+	 window.open(url, "_blank"); 
+}
+
+
+
+
+
 
 function showEstadistica(uValor) {
 	DatosCliente.showEstadistica(uValor,showEstadistica_CallBack);	
@@ -47,7 +81,18 @@ function estatusAltas_CallBack(data) {
 	codigoBean(frmPantalla.txtConveniosActivos,true,data.intConveniosActivos);		
 	codigoBean(frmPantalla.txtConveniosNOActivos,true,data.intConveniosNOActivos);			
 	codigoBean(frmPantalla.txtClienteSINConvenios,true,data.intClientesSinConvenio);			
-	codigoBean(frmPantalla.txtClienteSINConveniosActivos,true,data.intClientesSinConvenioActivos);			
+	codigoBean(frmPantalla.txtClienteSINConveniosActivos,true,data.intClientesSinConvenioActivos);		
+	
+	var frmPantalla = window.document.frmAdminClientes;
+	
+	frmPantalla.marcasUser.value = data.marcasUser;
+	var lstcmarca = data.lstCmarca;
+	var lstsmarca = data.lstSmarca;
+	var selector = document.getElementById("selMarca");
+	 for(var i=0;i<lstcmarca.length;i++){		 
+		 selector.options[i] = new Option(lstsmarca[i], lstcmarca[i]);
+	 }
+	
 }
 
 function disableDIV() {
@@ -162,7 +207,7 @@ function VerificaModificacion()
 	}
 }
 
-function actualizaCliente() {		
+function actualizaCliente() {	 	
 	disableDIV();
 	LoadCompletedCliente();
 	DatosCliente.actualizaCliente(clienteBean,actualizaCliente_CallBack);
@@ -178,7 +223,7 @@ function actualizaCliente_CallBack(data)
 
 function consultaClienteGrid(frmPantalla) 
 {		
-	txtRazonSocial = frmPantalla.txtRazonSocial;
+	txtRazonSocial = frmPantalla.txtRazonSocial; 
 	txtRFC = frmPantalla.txtRFC;
 	txtCliente = frmPantalla.txtCliente;		
 	txtMnemonico = frmPantalla.txtMNEMONICO;
@@ -205,7 +250,7 @@ function pagoFactura_CallBack(data) {
 	alert(data);
 	var frmPantalla = window.document.frmAdminClientes;
 	clienteAceptado(frmPantalla.txtCliente.value);
-}
+} 
 
 function clienteAceptado(intCliente) {
 	var frmPantalla = window.document.frmAdminClientes;
@@ -230,7 +275,8 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);	
 	frmPantalla.selTipoCliente.selectedIndex = data.ctipocliente;
 	frmPantalla.selGiro.selectedIndex = data.cgirocliente;
-	frmPantalla.selZonaAsignada.selectedIndex = 0;
+	compareSelectvalue(frmPantalla.selZonaAsignada,data.czonaventa);		
+	compareSelectvalue(frmPantalla.selMarca,data.cmarca);			
 	codigoBean(frmPantalla.txtEstadoCliente,true,data.sestadoregistro);		
     adminDIV("gridbusquedaConvenios","visible","inline");
  	codeDIVHTML("gridbusquedaConvenios",data.strConvenioGrid); 	
@@ -264,7 +310,6 @@ function ocultarFacturas() {
 	}		
 }
 
-
 function LoadCompletedCliente() {
 	var frmPantalla = window.document.frmAdminClientes;
 	clienteBean.ccliente=frmPantalla.txtCliente.value;
@@ -281,7 +326,8 @@ function LoadCompletedCliente() {
 	clienteBean.ctipocliente=frmPantalla.selTipoCliente[frmPantalla.selTipoCliente.selectedIndex].value;
 	clienteBean.cgirocliente=frmPantalla.selGiro[frmPantalla.selGiro.selectedIndex].value;
 	clienteBean.ctipopersona=frmPantalla.selTipoPersona[frmPantalla.selTipoPersona.selectedIndex].value;
-	clienteBean.cmarca=document.getElementById('idMarca').value;
+	clienteBean.cmarca=frmPantalla.selMarca[frmPantalla.selMarca.selectedIndex].value;	
+	clienteBean.czonaventa=frmPantalla.selZonaAsignada[frmPantalla.selZonaAsignada.selectedIndex].value;
 }
 
 function LoadBusquedaCliente() {
@@ -290,6 +336,8 @@ function LoadBusquedaCliente() {
 	clienteBean.srazonsocial=frmPantalla.txtRazonSocial.value;
 	clienteBean.srfc=frmPantalla.txtRFC.value;
 	clienteBean.smnemonico=frmPantalla.txtMNEMONICO.value;
+	clienteBean.smarcauser = frmPantalla.marcasUser.value;
+	
 }
 
 function validaFullCliente() {
@@ -374,7 +422,10 @@ function ClienteBean() {
 	ctipopersona=null,
 	cestadoregistro=null,
 	sestadoregistro=null,
-	cmarca=null
+	cmarca=null,
+	czonaventa=null,
+	smarca=null
+	smarcauser = null;
 }
 
 /************************************** TERMINA FUNCIONES DEL CLIENTE *******************************************************************/
@@ -484,6 +535,14 @@ function loadPantallaConvenio(data) {
 	codigoBean(frmPantalla.txtEstadoConvenio,true,data.sestadoconvenio);		
 	frmPantalla.hdnEstadoConvenio.value = data.uestadoconvenio;
 	frmPantalla.txtCorreoElectronico.value = data.scorreoelectronico + " ";
+	
+	if(data.montoCopago == null){
+		frmPantalla.txtPorcentajeMonto.value = '';
+	}else{
+		frmPantalla.txtPorcentajeMonto.value = data.montoCopago;
+	}
+	valorCombo(frmPantalla.selMontoCopago,data.tipocopago);
+	
 	if (frmPantalla.txtCorreoElectronico.value.length > 4) {
 		frmPantalla.optResultado.checked = true;
 	} else {
@@ -530,6 +589,10 @@ function LoadCompletedConvenio() {
         convenioBeanActualizacion.uestadoconvenio = frmPantalla.hdnEstadoConvenio.value;	
         convenioBeanActualizacion.cuser = frmPantalla.idUsuario.value;
         convenioBeanActualizacion.scorreoelectronico = frmPantalla.txtCorreoElectronico.value;
+        convenioBeanActualizacion.cmarca=frmPantalla.selMarca[frmPantalla.selMarca.selectedIndex].value;	
+        convenioBeanActualizacion.tipocopago=TypeObjeto(frmPantalla.selMontoCopago);
+        convenioBeanActualizacion.montoCopago=frmPantalla.txtPorcentajeMonto.value;
+        
     	return true;
     }   
 }
@@ -703,7 +766,8 @@ function ConvenioBean() {
     sestadoconvenio=null,    
     uestadoconvenio=null,
     scorreoelectronico=null,
-    cuser=null
+    cuser=null,
+    cmarca=null
 }
 
 

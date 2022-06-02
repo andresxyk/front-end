@@ -222,7 +222,7 @@
            </td>                                             
             <td>
                            <input type="button" id="idBuscarOrdenes" name="idBuscarOrdenes" value="Buscar" onClick="buscarOrdenes();" class="boton">
-           </td>     
+           </td>      
         </tr>   
     </table>         
        <div id="Busqueda">

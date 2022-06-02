@@ -1,13 +1,18 @@
 package mx.com.web2lab.ajax.dwr.capturaorden;
 
+import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.turbine.om.security.User;
+import org.apache.turbine.services.security.TurbineSecurity;
+import org.apache.turbine.services.security.torque.om.TurbineUser;
 
 import mx.com.web2lab.actions.seguridad.SeguridadUtil;
-import mx.com.web2lab.ajax.dwr.facturacion.tool.FacturaElectronicaPDF;
 import mx.com.web2lab.ajax.dwr.http.AjaxAction;
-import mx.com.web2lab.backend.util.Formatos;
-import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
-
 import mx.com.web2lab.backend.beans.comer.ClienteBean;
 import mx.com.web2lab.backend.beans.comer.ConvenioBean;
 import mx.com.web2lab.backend.beans.comer.MetricasClieConBean;
@@ -17,18 +22,33 @@ import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionMayoreoDao;
 import mx.com.web2lab.backend.dao.tools.AdministracionFOP_PDF;
 import mx.com.web2lab.backend.dao.tools.ConsultaOrdenesDao;
 import mx.com.web2lab.backend.dao.tools.ReporteEstadoCuentaCxC;
+import mx.com.web2lab.backend.hbm.ConfiguracionProperties;
+import mx.com.web2lab.backend.util.Formatos;
+import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.turbine.om.security.User;
-import org.apache.turbine.services.security.TurbineSecurity;
-import org.apache.turbine.services.security.torque.om.TurbineUser;
-
-
+ 
 public class DatosClienteAjax extends AjaxAction {
 	private static Log iObjLog = LogFactory.getLog(DatosClienteAjax.class);	
+	
+	public String getMarcasUser(int userid) throws Exception
+	{
+		iObjLog.debug("Entrando DatosClienteAjax.getMarcasUser:Entrando... userid:"+userid);
+		String marcas = null;
+		try {			
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			marcas = ConfiguracionProperties.getPropiedad("alta.convenios.users."+userid);
+			iObjLog.debug("marcas:"+marcas);
+			iObjLog.debug("Saliendo DatosClienteAjax.getMarcasUser:Saliendo...  ");
+			return marcas;
+		} catch (Exception aObjException){
+			iObjLog.error("Error DatosClienteAjax.getMarcasUser:Exception....", aObjException);
+			marcas = null;
+			throw aObjException;
+		} 
+		
+	}	
 
-	public MetricasClieConBean estatusAltas() throws Exception
+	public MetricasClieConBean estatusAltas(int userid) throws Exception
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.estatusAltas:Entrando... ");		
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
@@ -36,6 +56,20 @@ public class DatosClienteAjax extends AjaxAction {
 		try {			
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
 			objMetricas = objDAOCliente.estatusClientesConvenios();
+			String marcas = ConfiguracionProperties.getPropiedad("alta.convenios.users."+userid);
+			iObjLog.info("marcasProperties:"+marcas);
+			if(marcas!=null){
+				List lstCmarca = new ArrayList();
+				List lstSmarca = new ArrayList();
+				String [] marcasSplit = marcas.split(",");
+				for (int i = 0; i < marcasSplit.length; i++) {
+					lstCmarca.add(marcasSplit[i]);
+					lstSmarca.add(this.nameMarca(Integer.parseInt(marcasSplit[i])));
+				}
+				objMetricas.setLstCmarca(lstCmarca);
+				objMetricas.setLstSmarca(lstSmarca);
+				objMetricas.setMarcasUser(marcas);
+			}
 			iObjLog.debug("Saliendo DatosClienteAjax.estatusAltas:Saliendo...  ");
 		} catch (Exception aObjException){
 			iObjLog.error("Error DatosClienteAjax.estatusAltas:Exception....", aObjException);
@@ -46,6 +80,33 @@ public class DatosClienteAjax extends AjaxAction {
 		}
 		return objMetricas;
 	}	
+	
+	private String nameMarca(int cmarca){
+		String name="";
+		switch (cmarca) {
+		case 1:
+			name="OLAB";
+			break;
+		case 4:
+			name="AZTECA";
+			break;
+		case 5:
+			name="SWISSLAB";
+			break;
+		case 7:
+			name="JENNER";
+			break;
+		case 15:
+			name="LIACSA";
+			break;
+		case 17:
+			name="DIAGNOSTIX";
+			break;
+		default:
+			break;
+		}
+		return name;
+	}
 	
 	public String showEstadistica(int uTipoControl) throws Exception
 	{
@@ -179,14 +240,14 @@ public class DatosClienteAjax extends AjaxAction {
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = this.showClientes(objDAOCliente.buscarCliente(objClienteBean));
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarClientes:Saliendo...  ");
-			objDAOCliente = null;
+			objDAOCliente = null; 
 		} catch (Exception aObjException){
 			iObjLog.error("Error DatosClienteAjax.buscarClientes:Exception....", aObjException);
 			objClienteBean = null;
 			throw aObjException;
 		}
 		return strReturn;
-	}	
+	}	 
 
 	public ConvenioBean buscarConvenio(ConvenioBean objConvenioBean) throws Exception
 	{
@@ -510,9 +571,9 @@ public class DatosClienteAjax extends AjaxAction {
 	public ConvenioBean actualizaConvenio(ConvenioBean objConvenioBean) throws Exception
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando... ");		
+		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		try {			
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
-			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Inicio " + objConvenioBean.getSiniciovigencia());		
 			objConvenioBean.setDinicio(new Formatos().getFecha(objConvenioBean.getSiniciovigencia()));
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Termino " + objConvenioBean.getSterminovigencia());		
@@ -521,11 +582,12 @@ public class DatosClienteAjax extends AjaxAction {
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Termino Objeto " + objConvenioBean.getDtermino());
 			objConvenioBean = objDAOCliente.setConvenioActualizacion(objConvenioBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizaConvenio:Saliendo...  ");
-			objDAOCliente = null;
 		} catch (Exception aObjException){
 			iObjLog.error("Error DatosClienteAjax.actualizaConvenio:Exception....", aObjException);
 			objConvenioBean = null;
 			throw aObjException;
+		} finally {
+			objDAOCliente = null;
 		}
 		return objConvenioBean;
 	}	
@@ -584,6 +646,9 @@ public class DatosClienteAjax extends AjaxAction {
 								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
 								"	<b><font color='black'>RFC" + 
 								"</th>" + 
+								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
+								"	<b><font color='black'>Marca" + 
+								"</th>" + 
 							"</tr>");			    
 			 if (lstClientes != null) {
 				int y; 
@@ -591,6 +656,7 @@ public class DatosClienteAjax extends AjaxAction {
 				{
 					objClientes = (ClienteBean)lstClientes.get(i);						
 					y = i + 1;
+					
 					strReturn += ("<tr>" + 
 										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
 											y + 
@@ -603,6 +669,9 @@ public class DatosClienteAjax extends AjaxAction {
 										"</a></td>" + 
 										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
 											objClientes.getSrfc()+
+										"</a></td>" + 
+										"<td align='center' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'> <a href='javascript:doNothing()' onClick='javascript:clienteAceptado(" + objClientes.getCcliente() + ");' align='bottom' style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" + 
+											objClientes.getSmarca() +
 										"</a></td>" + 
 									 "</tr>");
 				}

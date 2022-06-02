@@ -70,7 +70,7 @@
 	function reimprimirFacturaPDF() {
 		var frmPantalla = window.document.frmPagoFactura;
 		snombre = "FacturaOrden";
-		strRuta = "http://192.237.150.66:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+		strRuta = "http://192.237.150.66:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 	    abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true;
 	}

@@ -8,6 +8,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 
 /********************* Negocio *******************************/
    
+   function agregarKFactura(kfactura){
+	   document.getElementById("txtTipoPago").value=kfactura;
+   }
+   
    function GeneracionPrevioFactura()
    {
        	var frmPantalla = window.document.frmFacturacion;
@@ -19,8 +23,14 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
        	
        	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
-				showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0", 300, 300, "Previo");
-		} else {
+//       		showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0&razon=0"+
+//					"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+//					"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+//					 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 
+//			showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0", 300, 300, "Previo");
+			window.open("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0","SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
+       	
+       	} else {
 			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
 		} 		   
    }
@@ -177,7 +187,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
       	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
       		//alert('convenio: '+cconvenio);
-      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack);
+      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack); 
       		
 		} else {
 			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
@@ -193,20 +203,129 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	  	var userid =frmPantalla.idUsuario.value;
 	  	var monto =frmPantalla.txtMontoMaximo.value;
 	  	var razonSocial = TypeObjeto(frmPantalla.selRazonSocial);
-      	
-	   if(data==7){
-		   if(razonSocial>0){
-			   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
-					showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
-				}
+	  	
+	  	
+	   var tipofactura = document.getElementById("selTipoFactura").value;
+	   var smetodopago = document.getElementById("txtTipoPago").value;
+	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+	   var uuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
+	   var checkSustitucion = document.getElementById("chkSustitucion").checked;
+	   var checkDescuento = document.getElementById("chkDescuento").checked;
+	   var checkRetencion = document.getElementById("chkRetencion").checked;
+	   var descuentos = document.getElementById("txtDescuentosFac").value;
+	   var notaDescuentos = '';
+		   if(checkDescuento){
+			   notaDescuentos = (document.getElementById("txtNotaDescuentosFac").value).replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
+
 		   }else{
-			   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+			   notaDescuentos = '';
 		   }
-	   }else{
-		   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
-				showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0", 300, 300, "Definitivo"); 	
-			}
-	   }
+		   
+		   var descuentosRm = descuentos.replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
+		    
+		   if(smetodopago!='99'){
+			   var nocuenta = document.getElementById("txtNoCuenta").value;
+		   } else {
+			   var nocuenta = '';
+		   }  
+	 
+		   alert('Metodo pago' + smetodopago); 
+
+			   if(tipofactura>0){
+					if((tipofactura==1) ||(tipofactura==3)){
+						var descripcionfactura = document.getElementById("txtDescripcion").value;
+						if(descripcionfactura==""){
+							alert("Debe ingresar una descripcion para la factura");
+							document.getElementById("txtDescripcion").focus();
+						}else{
+							
+							if(data==7){
+								   if(razonSocial>0){
+									   if(razonSocial == 1 || razonSocial == 2){
+										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+											   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+													   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+													   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+													   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+										   }				   
+									   }else{
+										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+											   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+													   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+													   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+													   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+										   }	 
+									   }
+								   }else{
+									   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+								   }
+							   }else{
+								   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
+										showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0"+
+												"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									}
+							   }
+							
+//							var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//							"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//							"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//							"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//							"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//							"descripcionFactura="+descripcionfactura;							
+//							window.open(url, "_blank"); 	 
+						}
+					}else if((tipofactura==2)){
+						if(data==7){
+							   if(razonSocial>0){
+								   if(razonSocial == 1 || razonSocial == 2){
+									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+										   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+												   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									   }				   
+								   }else{
+									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+										   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+												   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									   }	 
+								   }
+							   }else{
+								   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+							   }
+						   }else{
+							   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
+									showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0"+
+											"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+											"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+											 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+								}
+						   }
+//						var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//							"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//							"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//							"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//							"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//							"descripcionFactura="+descripcionfactura;
+//							
+//							window.open(url, "_blank");
+					}else if(tipofactura==4){
+						alert('Debe elegir un formato adecuado de factura');
+						document.getElementById("selTipoFactura").focus();
+						return false;
+					}
+				}else{
+					if(tipofactura==0){
+						alert('Debe elegir un formato adecuado de factura');
+						document.getElementById("selTipoFactura").focus();
+						return false;
+					}
+				}
+	  	
    }
    
    function buscarConvenioRapido(objConvenio,strBuscar) {
@@ -509,21 +628,38 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	} 
    
    function showFormSustitucion(){
-	   document.getElementById("txtUfoliofacturaSustitucion").value="";
-	   document.getElementById("txtFolioFiscal").value="";
-	   document.getElementById("txtUfoliofacturaSustitucion").focus();
 	   if(document.getElementById("chkSustitucion").checked){
+		   document.getElementById("txtUfoliofacturaSustitucion").value="";
 		   adminDIV("labelFolioInterno","visible","inline");
 		   adminDIV("txtUfoliofacturaSustitucion","visible","inline");
-		   adminDIV("labelFolioFiscal","visible","inline");
-		   adminDIV("txtFolioFiscal","visible","inline");
+		   adminDIV("popupBuscar","visible","inline");
 	   }else{
 		   adminDIV("labelFolioInterno","hidden","none");
 		   adminDIV("txtUfoliofacturaSustitucion","hidden","none");
-		   adminDIV("labelFolioFiscal","hidden","none");
-		   adminDIV("txtFolioFiscal","hidden","none");
+		   adminDIV("popupBuscar","hidden","none");
 	   }
    }
+   
+   function showFormDescuento(){
+	   document.getElementById("txtDescuentosFac").value="";
+	   document.getElementById("txtNotaDescuentosFac").value="";
+	   if(document.getElementById("chkDescuento").checked){
+		   adminDIV("labelDescuentosFac","visible","inline");
+		   adminDIV("txtDescuentosFac","visible","inline");
+		   adminDIV("labelNotaDescuentosFac","visible","inline");
+		   adminDIV("txtNotaDescuentosFac","visible","inline");
+	   }else{
+		   adminDIV("labelDescuentosFac","hidden","none");
+		   adminDIV("txtDescuentosFac","hidden","none");
+		   adminDIV("labelNotaDescuentosFac","hidden","none");
+		   adminDIV("txtNotaDescuentosFac","hidden","none");
+	   }
+	   
+   }
+   
+   
+   
+   
    
    
    function showAsignacionBloques(){
@@ -552,6 +688,11 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		}
 	}
    
+   
+   function selectConvenioCombo(convenio){
+		alert(convenio);
+	}
+   
 
    /*
 	function tipoFactura(tipofactura){
@@ -569,17 +710,20 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
    function tipoFactura(tipofactura){
 		document.getElementById("txtUfoliofactura").focus();
 		if((tipofactura==1) ||(tipofactura==3)){
+			adminDIV("divchkDescuento","hidden","none");
 			adminDIV("txtDescripcion","visible","inline");
 			adminDIV("labelfactura","visible","inline");
 			document.getElementById("txtDescripcion").focus();
 		}else{
 			if(tipofactura==4){
+				adminDIV("divchkDescuento","hidden","none");
 				adminDIV("txtDescripcion","hidden","none");	
 				adminDIV("labelfactura","hidden","none");
 				adminDIV("labelordencompra","visible","inline");
 				adminDIV("txtOrdenCompra","visible","inline");
 				document.getElementById("txtOrdenCompra").focus();
 			}else{
+				adminDIV("divchkDescuento","visible","inline");	
 				adminDIV("txtDescripcion","hidden","none");	
 				adminDIV("labelfactura","hidden","none");
 			}
@@ -631,7 +775,74 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		}
    }
   */
-  // Modificacion BY 02/09/2013
+  // Respaldo FActuarcion
+//   function generacionPdfXml(){
+//	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
+//	   var tipofactura = document.getElementById("selTipoFactura").value;
+//	   var msubtotal = document.getElementById("txtmSubtotal").value;
+//	   var miva = document.getElementById("txtmIva").value;
+//	   var mtotal = document.getElementById("txtmTotal").value;
+//	   var smetodopago = document.getElementById("txtTipoPago").value;
+//	   var cmarca = document.getElementById('cMarca').value;
+//	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+//	   var uuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
+//	   var checkSustitucion = document.getElementById("chkSustitucion").checked;
+//	   var checkDescuento = document.getElementById("chkDescuento").checked;
+//	   var checkRetencion = document.getElementById("chkRetencion").checked;
+//	   var descuentos = document.getElementById("txtDescuentosFac").value;
+//	   var notaDescuentos = document.getElementById("txtNotaDescuentosFac").value;
+//	    
+//	   if(smetodopago!='99'){
+//		   var nocuenta = document.getElementById("txtNoCuenta").value;
+//	   } else {
+//		   var nocuenta = '';
+//	   }  
+// 
+//	   alert('Metodo pago' + smetodopago); 
+//
+//		   if((tipofactura>0)&&(ufoliofactura>0)){
+//				if((tipofactura==1) ||(tipofactura==3)){
+//					var descripcionfactura = document.getElementById("txtDescripcion").value;
+//					if(descripcionfactura==""){
+//						alert("Debe ingresar una descripcion para la factura");
+//						document.getElementById("txtDescripcion").focus();
+//					}else{
+//						LoadFacturaElectronica(descripcionfactura,0);
+//						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,uuidSustitucion,checkSustitucion,checkDescuento,descuentos,notaDescuentos,checkRetencion,generarFactura_CallBack);
+//						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+//					}
+//				}else if((tipofactura==2)){
+//					LoadFacturaElectronica("",0);
+//						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,uuidSustitucion,checkSustitucion,checkDescuento,descuentos,notaDescuentos,checkRetencion,generarFactura_CallBack);
+//						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+//					
+//				}else if(tipofactura==4){
+//					var ordencompra = document.getElementById("txtOrdenCompra").value;
+//					if((ordencompra=="") ||(ordencompra==0)){
+//						alert("Debe ingresar una orden de compra valida");
+//						document.getElementById("txtOrdenCompra").focus();
+//					}else{
+//						LoadFacturaElectronica("",ordencompra); 
+//						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+//						
+//					}
+//				}
+//			}else{
+//				if(tipofactura==0){
+//					alert('Debe elegir un formato adecuado de factura');
+//					document.getElementById("selTipoFactura").focus();
+//					return false;
+//				}if((ufoliofactura==0)||(ufoliofactura=="")){
+//					alert('Debe ingresar un folio de factura valido');
+//					document.getElementById("txtUfoliofactura").focus();	
+//				}
+//			}
+//	   
+//	   
+//	   
+//   }
+
+   
    function generacionPdfXml(){
 	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
 	   var tipofactura = document.getElementById("selTipoFactura").value;
@@ -640,12 +851,27 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   var mtotal = document.getElementById("txtmTotal").value;
 	   var smetodopago = document.getElementById("txtTipoPago").value;
 	   var cmarca = document.getElementById('cMarca').value;
+	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+	   var uuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
+	   var checkSustitucion = document.getElementById("chkSustitucion").checked;
+	   var checkDescuento = document.getElementById("chkDescuento").checked;
+	   var checkRetencion = document.getElementById("chkRetencion").checked;
+	   var descuentos = document.getElementById("txtDescuentosFac").value;
+	   var notaDescuentos = '';
+	   if(checkDescuento){
+		   notaDescuentos = (document.getElementById("txtNotaDescuentosFac").value).replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
+
+	   }else{
+		   notaDescuentos = '';
+	   }
+	   
+	   var descuentosRm = descuentos.replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
 	    
 	   if(smetodopago!='99'){
 		   var nocuenta = document.getElementById("txtNoCuenta").value;
 	   } else {
 		   var nocuenta = '';
-	   } 
+	   }  
  
 	   alert('Metodo pago' + smetodopago); 
 
@@ -656,15 +882,32 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						alert("Debe ingresar una descripcion para la factura");
 						document.getElementById("txtDescripcion").focus();
 					}else{
-						LoadFacturaElectronica(descripcionfactura,0);
-						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
+						
+
+						var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+						"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+						"descripcionFactura="+descripcionfactura;
+						
+						
+						window.open(url, "_blank"); 
+ 
+						
+						
 					}
 				}else if((tipofactura==2)){
-					LoadFacturaElectronica("",0);
-						//FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,folioSustitucion,uuidSustitucion,checkSustitucion,generarFactura_CallBack);
-						FacturaElectronicaEmpresaAjax.crearFacturaEmpresa(facturaelectronicaBean,ufoliofactura,tipofactura,msubtotal,miva,mtotal,nocuenta,smetodopago,generarFactura_CallBack);
-					
+					var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+						"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+						"descripcionFactura="+descripcionfactura;
+						
+
+						
+						window.open(url, "_blank");
 				}else if(tipofactura==4){
 					var ordencompra = document.getElementById("txtOrdenCompra").value;
 					if((ordencompra=="") ||(ordencompra==0)){
@@ -690,15 +933,15 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   
 	   
    }
-
+   
+   
+   
    function generarFactura_CallBack(data) {
 	   //alert(data);
-	   if (data =="NO EXISTE") {
-		     	alert("Esa factura no existe favor de verificarlo");   			     
-		 } else{
+	   if (data!=""){
+		   	alert(data);
 			 adminDIV("creacionPdf","hidden","none");
 			 snombre = "FacturaOrden";
-			 alert(data);
 			 showPopWin(data, 800, 400, snombre);			 
 			 // abrirVentanaOrden(data,snombre); 
 		 }
@@ -734,18 +977,37 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   marca='JENNER PRADO';
 	   } else if (selectedMarca==8){
 		   marca='JENNER LEAN';
+	   } else if (selectedMarca==15){
+		   marca='LIACSA'; 
 	   } 
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
 		        var frmPantalla = window.document.frmFacturacion;
 		    		//adminDIV("gridbusquedaFacturas","visible","inline");
 			    	BusquedaFacturas.buscarFacturaAjuste(frmPantalla.txtUfoliofactura.value, frmPantalla.selMarca.value, buscarFacturaAjuste_CallBack);
-	    	   }
+	    	   } 
 			}else{
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ
 					document.getElementById("txtUfoliofactura").focus();		
 			} 
 	   	
+   }
+      
+   var ventana_secundaria = null;     
+   function showSubModalSustitucion() {
+	   if(ventana_secundaria != null){
+		   ventana_secundaria.close();
+	   }
+	   var frmPantalla = window.document.frmFacturacion;
+	   var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
+	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura=0&cmarca=0&tipoFactura=0&cconvenio='+cconvenio,"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
+	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
+   }
+            
+   function agregarValoresSustitucion(datafolio,datakfactura,datauuid){
+	   document.getElementById("txtUfoliofacturaSustitucion").value=datafolio;
+	   document.getElementById("hdenkfacturaSustitucion").value=datakfactura;
+	   document.getElementById("hdenUuidSustitucion").value=datauuid;
    }
    
    function buscarFacturaAjuste_CallBack(data){ 
@@ -952,7 +1214,51 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				facturaelectronicaBean.scodigopostalemisor="64060";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 5;
+			} else if (document.getElementById('cMarca').value == 15){
+				facturaelectronicaBean.sserie="ASL";
+				facturaelectronicaBean.srazonsocialemisor="SWISSLAB S.A. de C.V.";
+				facturaelectronicaBean.srfcemisor="SWI1201268J8";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 15; 
 			} else if (document.getElementById('cMarca').value == 7){
+				if(document.getElementById("selMarca").value==7){
+					facturaelectronicaBean.sserie="AJP";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO DEL PRADO S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCP061017PA9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}else if (document.getElementById("selMarca").value==8){
+					facturaelectronicaBean.sserie="AJL";
+					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO LEAN S.A. DE C.V.";
+					facturaelectronicaBean.srfcemisor="LCL050622DD9";
+					facturaelectronicaBean.scalleemisor="MEDELLIN 153";
+					facturaelectronicaBean.snexterioremisor="";
+					facturaelectronicaBean.sninterioremisor="";
+					facturaelectronicaBean.scoloniaemisor="ROMA NORTE";
+					facturaelectronicaBean.sciudademisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.smunicipioemisor="CUAUHTEMOC";
+					facturaelectronicaBean.sestadoemisor="CIUDAD DE MEXICO";
+					facturaelectronicaBean.scodigopostalemisor="06700";
+					facturaelectronicaBean.spaisemisor="MEXICO";				
+					facturaelectronicaBean.cmarca = 7;
+				}
+			} else if (document.getElementById('cMarca').value == 8){
 				if(document.getElementById("selMarca").value==7){
 					facturaelectronicaBean.sserie="AJP";
 					facturaelectronicaBean.srazonsocialemisor="LABORATORIO CLINICO DEL PRADO S.A. DE C.V.";

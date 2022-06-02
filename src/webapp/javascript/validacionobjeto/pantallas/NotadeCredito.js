@@ -90,10 +90,10 @@
 	   var frmPantalla = window.document.frmNotasdeCredito;
 	   var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
 	   frmPantalla.hdnCconvenio.value=cconvenio;
-	   NotasdeCredito.getFacturasConvenio(cconvenio,displayfacturas_CallBack);   
+	   NotasdeCredito.getFacturasConvenio(cconvenio,displayfacturas_CallBack);    
 	     
 	} 
-   
+    
    
    function displayCargaDatosAsignacion(){
 	   var frmPantalla = window.document.frmAsignacionBloques;
@@ -373,7 +373,7 @@
 	   }
    }
 	
-  function crearNota(){
+  function crearNota(){ 
 	  var frm = document.getElementById("frmAltaNotaCredito");
 	  var facturasnota = frm.hdnFacturas.value;
 	  var montonota = frm.hdnMontoNota.value;
@@ -386,9 +386,95 @@
   }
   
   function creaNota_CallBack(data) {		
-	  alert(data);
+	  // strKfacturas=3288198,1;&montoTotalNota=1&cConvenio=309
+	  var frm = document.getElementById("frmAltaNotaCredito");
+	  var facturasnota = frm.hdnFacturas.value;
+	  if(data!=""){
+		  alert('Se genero la NC '+data);
+		  document.getElementById("txtNumNota").value=data;
+		  adminDIV("divFormFacturaNC","visible","inline");
+	  }else{
+		  alert('Error al generar la Nota de Credito');
+	  }
   }	
   
+  function showCamposSustitucion(){
+		if (document.getElementById("chkAgregarSustitucion").checked){	
+			adminDIV("divuuidSustitucionLabel","visible","inline");
+			adminDIV("divuuidSustitucionText","visible","inline");
+			
+			adminDIV("divuuidFacturaLabel","hidden","none");
+			adminDIV("divuuidFacturaText","hidden","none");
+		}else{
+			adminDIV("divuuidSustitucionLabel","hidden","none");
+			adminDIV("divuuidSustitucionText","hidden","none");
+			
+			adminDIV("divuuidFacturaLabel","visible","inline");
+			adminDIV("divuuidFacturaText","visible","inline");
+			
+			document.getElementById("chkAgregarSustitucion").checked = false;
+		}
+	}
+  
+  var ventana_secundaria = null;     
+  function showSubModalSustitucion() {
+	   if (ventana_secundaria != null){
+		   ventana_secundaria.close();
+	   }
+	   
+	   var ufoliofactura = document.getElementById("txtNumNota").value;
+	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca=0&tipoFactura=2&cconvenio=0',"SustitucionFactura","width=900,height=300,top=200,left=200,menubar=no,scrollbars=yes");
+	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
+  }
+     
+  function agregarValoresSustitucion(folio,kfactura,uuid){
+	   //document.getElementById("txtUfoliofacturaSustitucion").value=folio;
+	   //document.getElementById("hdenkfacturaSustitucion").value=kfactura;
+	   document.getElementById("txtUuidSustitucion").value=uuid;
+  }
+  
+  function emitirNota(){
+	  var valida = true;
+	  var numNotaCre = document.getElementById("txtNumNota").value;
+	  var numFactura = document.getElementById("txtNumFactura").value;
+	  var formaPago = document.getElementById("selFormaPago").value;
+	  var metodoPago = document.getElementById("selMetodoPago").value;
+	  var uuidFactura = document.getElementById("txtUuidFactura").value;
+	  var checkboxSustitucion = document.getElementById("chkAgregarSustitucion").checked;
+	  var uuidSustitucion = document.getElementById("txtUuidSustitucion").value;	  
+	  
+	  var concepto = document.getElementById("txtConcepto").value;
+	  var cantidad = document.getElementById("txtCantidad").value;
+	  var iva = document.getElementById("selIva").value;
+	  
+	  
+	  if(concepto==""){
+		  valida=false;
+	  }
+	  if(cantidad==""){
+		  valida=false;
+	  }
+	  if(checkboxSustitucion){
+		  if(uuidSustitucion==""){
+			  valida=false;
+		  }
+	  }
+	  
+	  if(valida){
+		  var uuid="";
+		  if(checkboxSustitucion){
+			  uuid=uuidSustitucion;
+		  }else{
+			  uuid=uuidFactura;
+		  }
+		window.open("http://10.20.26.6:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
+			"&metodoPago="+metodoPago+"&uuid="+uuid+"&concepto="+concepto+"&cantidad="+cantidad+
+			"&iva="+iva+"&sustitucion="+checkboxSustitucion, "_blank");
+//			window.open("http://localhost:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
+//					"&metodoPago="+metodoPago+"&uuid="+uuid+"&concepto="+concepto+"&cantidad="+cantidad+
+//					"&iva="+iva+"&sustitucion="+checkboxSustitucion, "_blank");
+	  }
+  }
            
   function asignarBloquesFactura(){
 	  var frm = document.getElementById("frmAltaBloques");//versi cvambbio
@@ -428,5 +514,12 @@
 			}
 		 }
 	 }
+  
+  function buscarFactura() {
+		var frmPantalla = window.document.frmNotasdeCredito;
+		showPopWin(frmPantalla.hdenRutaFactura.value + "?kFactura=0&formatFactura=0", 800, 500, "Buscar Factura");	
+	}
+  
+  
   
   

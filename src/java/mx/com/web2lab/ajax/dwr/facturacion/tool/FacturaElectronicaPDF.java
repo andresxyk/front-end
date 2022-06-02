@@ -47,14 +47,14 @@ public class FacturaElectronicaPDF {
             if (objFacturaBean.getCmarca() == 1) {                        
 	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Olab");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);
-	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Olab");
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_OLab");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
             } else if (objFacturaBean.getCmarca() == 4) {
 	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Azteca");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
 	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Azteca");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
-            } else if (objFacturaBean.getCmarca() == 5) {
+            } else if (objFacturaBean.getCmarca() == 5 || objFacturaBean.getCmarca() == 15) {
 	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Swisslab");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
 	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Swisslab");

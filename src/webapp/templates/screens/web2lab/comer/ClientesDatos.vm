@@ -22,19 +22,20 @@
 		 window.onload = init;		
 </script>	
 
-##set ($lstZonaAsignada = $CatalogosTool.obtenAll("TratamientoDiabet","0"))
+#set ($lstZonaAsignada = $CatalogosTool.obtenAll("ZonaVenta","0"))
 #set ($lstEstados = $CatalogosTool.obtenAllField("CodigoPostal","sestado"))
 #set ($lstClasificacionComercial = $CatalogosTool.obtenAll("ClasificacionComercial","0"))
 
 #set ( $actLnk = $link.setPage("web2lab,comer,ClientesDatos.vm"))
 #set ( $actLnk = $link.setAction("reportes.ReporteAction").toString())
-
+ 
 #set($ligaReporte = $link.setPage("web2lab,ap,RepRedirect.vm"))
 #set($ligaReporte = $link.setAction("reportes.ReporteAction").toString())
 
 <form name="frmAdminClientes" action="$ligaAct" method="post" >
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
-	<input type="hidden" id="idMarca" name="idMarca" value="$data.getUser().getConfirmed()">	
+	<input type="hidden" id="idMarca" name="idMarca" value="$data.getUser().getConfirmed()">
+	<input type="hidden" id="marcasUser" name="marcasUser" value="0">	
     <table border="0"  align="center" style="width: 100%" class="tabla" >	        
 		<tr>
             <td onClick="showEstadistica(1);">
@@ -73,8 +74,12 @@
 	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
 		<tr>				
 			<td align="left" width="25%">
+			
+				<b>Marca</b>
+                <select id="selMarca" >
+                </select>	
 				<b>*Cliente</b>
-				<input type="text" id="txtCliente" value="0" onKeyPress="numero();" size="5"  onkeyup="consultaClienteGrid(window.document.frmAdminClientes);">
+				<input type="text" id="txtCliente" value="0" onKeyPress="numero();" size="5"  onkeyup="consultaClienteGrid(window.document.frmAdminClientes);"> 
 				<b>*Pre-Alta</b>	
 				<input type="text" id="txtPrealta" value="0" style="background:#E6E6FA" onKeyPress="numero();" size="5">
 			</td>			
@@ -406,7 +411,7 @@
 				<select id="selZonaAsignada" style="background:#E6E6FA" >
 					<option value="0">Selecciona </option>								
 					#foreach($objZonaAsignada in $lstZonaAsignada)
-						#option("$!objZonaAsignada.getCrutaejecutivoventa()"  "$!objZonaAsignada.getCruta() - $!objZonaAsignada.getSrutaejecutivoventa()" "0")			
+						#option("$!objZonaAsignada.getCzonaventa()"  "$!objZonaAsignada.getSzonaventa() - $!objZonaAsignada.getSejecutivoventas()" "0")			
 					#end
 				</select>	
 			</td>
@@ -444,6 +449,8 @@
 	</div>            	 
 	<div id="gridbusquedaConvenios">                
 	</div>            		        						
+	<div id="gridGridClienteConvenios">                
+	</div>            		        						
 	<div id="gridbusquedaFacturas">                
 	</div>            		        						
 	<div id="gridConvenios">                
@@ -472,7 +479,13 @@
 	    	    </td>  
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	            	&nbsp;*Clasificación de convenio
-	    	  	</td>			
+	    	  	</td>	
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;*Tipo Copago
+	    	  	</td>
+				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+	            	&nbsp;*Porcentaje/Monto
+	    	  	</td>				
 	        </tr> 
 			<tr>
 				<td style="width: 187px">
@@ -489,6 +502,15 @@
 						#end
 					</select>
 	    	    </td>
+				<td style="width: 187px">
+			     	<select id="selMontoCopago" style="width: 177px">
+						<option value="1">PORCENTAJE</option>
+						<option value="2">MONTO</option>
+					</select>
+				</td>
+				<td style="width: 187px">
+			     	<input type="text" id="txtPorcentajeMonto" value="0" size="7">
+				</td>
 			</tr>
 			<tr>
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">

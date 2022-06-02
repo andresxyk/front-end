@@ -23,7 +23,7 @@
 	}
    
    function buscarComplemento() {	
-		var frmPantalla = window.document.frmBusqudaComplemento;
+		var frmPantalla = window.document.frmBusqudaComplemento; 
 		var key=window.event.keyCode;
 		
 		//if(key==13){
@@ -75,6 +75,11 @@
 	  }
   
   function visualizarFactura(strRuta) {
-		snombre = "Factura";
-		abrirVentanaOrden(strRuta,snombre);	   			     			    
+	  BusquedaFacturas.findCfdiPdf(strRuta,file_CallBack);
 	}
+  
+  function file_CallBack(data)
+	{
+		snombre = "Factura";
+		abrirVentanaOrden(data,snombre);	 
+	}	

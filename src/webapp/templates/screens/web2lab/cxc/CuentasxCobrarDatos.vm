@@ -52,9 +52,10 @@
 	<input type="hidden" id="hdenRutaPago" name="hdenRutaPago" value="$ligaActPago">
 	<input type="hidden" id="hdenRutaReportes" name="hdenRutaReportes" value="$ligaReportes">
 	<input type="hidden" id="hdnCconvenio" >
+	<input type="hidden" id="marcasUser" name="marcasUser" value="0">
 	<div id="TableConsultas">
         <table  border="0"  align="center" width="100%" class="tabla" >	        
-    		<tr>
+    		<tr> 
                 <td>
     		        <a href="javascript:doNothing()" onclick="javascript:cleanCliente();">
     		            <img alt='Limpiar Pantalla' id="idCleanCliente" width="30" height="30" border='0' src='$content.getURI('images/icoLimpiar.png')' />

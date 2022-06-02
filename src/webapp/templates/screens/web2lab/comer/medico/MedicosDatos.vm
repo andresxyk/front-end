@@ -49,6 +49,7 @@
 	<input type="hidden" id="hdenligaRutaMantenimientoTelefonos" name="hdenligaRutaMantenimientoTelefonos" value="$ligaRutaMantenimientoTelefonos">
     <input type="hidden" id="hdnEstadoMedico" value="0"/>
 	<input type="hidden" id="hdnActualizacion" value="0"/>
+	<input type="hidden" id="hdnCMedico" value="0"/>
 	<div id="RegistroMedico" style="display:none">
         <table border="0"  align="center" style="width: 883px">
             <tr>
@@ -89,17 +90,21 @@
 		        </a>	
     	    </td>     
 			<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-		        <a href="javascript:doNothing()" onclick="javascript:VerificaModificacion();">
+		        <a href="javascript:doNothing()" onclick="javascript:VerificaAltaMedico();"> 
 		            <img alt='Guardar' id="idGuardarNuevaOrden" width="30" height="30" border='0' src='$content.getURI('images/icoGuardar.png')' />
 		        </a>	
-    	    </td>     
-			<td>
-		        <a href="javascript:doNothing()" onclick="javascript:enviarSMS();">
-		            <img alt='Enviar SMS' id="idEnviarSMS" width="30" height="30" border='0' src='$content.getURI('images/icoSMS.png')' />
+    	    </td>  
+    	    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+		        <a href="javascript:doNothing()" onclick="javascript:VerificaModificacion();"> 
+		            <img alt='Actualizar' id="idUpdateMedico" width="30" height="30" border='0' src='$content.getURI('images/pngocean.png')' />
 		        </a>	
+    	    </td>    
+			<td>
+				<input type="button" id="idReasigancion" name="idReasigancion" value="Procesos Medicos" onClick="reasignacionOrdenes();" class="boton">
+		       
 			</td>
 			<td>			
-			</td>
+			</td> 
 			<td>			
 			</td>
         </tr>   
@@ -119,12 +124,12 @@
             <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
     	    	Zona
             	<select id="selZona" style="width: 177px" onChange="medicosxZona(window.document.frmMedicos);" >
-					<option value="0">Selecciona </option>								
+					<option value="-1">Selecciona </option>								
 					#foreach($objZonaMedico in $lstZonaMedico)
 						#option("$!objZonaMedico.getCzona()" "Zona - $!objZonaMedico.getCzona()" "0")							
 					#end
 				</select>    	    
-    	    </td>    	    
+    	    </td>  	    
         </tr>   
         <tr>
         </tr>   
@@ -250,7 +255,33 @@
 					<option value="1">Asimilables</option>								
 				</select>    	    
    	        </td>        	        
-        </tr>   
+        </tr>  
+        
+        
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Usuario Web
+    	    </td>	            
+            <td>
+                <input type="text" id="txtUsuarioWeb" onKeyPress="mayuscula();" style="width: 180px" />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal" colspan="4">
+                Marcas Venta:
+                <input type="checkbox" id="checkOlab" name="checkOlab" value="1">
+  				<label for="checkOlab">Olab</label>
+ 				<input type="checkbox" id="checkAzteca" name="checkAzteca" value="4">
+ 				<label for="checkAzteca">Azteca</label>
+ 				<input type="checkbox" id="checkSwisslab" name="checkSwisslab" value="5">
+ 				<label for="checkSwisslab">Swisslab</label>
+                <input type="checkbox" id="checkJenner" name="checkJenner" value="7">
+ 				<label for="checkJenner">Jenner</label>
+                <input type="checkbox" id="checkLiacsa" name="checkLiacsa" value="15">
+ 				<label for="checkLiacsa">Liacsa</label>
+    	    </td>     	        
+        </tr> 
+        
+        
+         
         <tr>
             <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
     	    </td>	            
@@ -264,6 +295,91 @@
     	    </td>	            
         </tr>   
     </table>
+    
+    
+    
+    
+    
+    
+    <table border="0"  align="center" style="width: 100%">	        
+        <tr>
+    	    <th colspan="6">
+    	        <center>
+    	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Direcci&oacute;n</b>
+    	        </center>
+    	    </th>
+        </tr>  
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Tipo de Direcci&oacute;n
+    	    </td>	            
+            <td >
+                <SELECT id="selReferenciaDireccion" style="WIDTH: 177px"> 
+	                <OPTION value=0>Selecciona</OPTION> 
+	                <OPTION value=1>CONSULTORIO</OPTION> 
+	                <OPTION value=2>CLINICA</OPTION> 
+	                <OPTION value=3>HOSPITAL</OPTION>
+                </SELECT>
+    	    </td>
+    	    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                Estatus
+    	    </td>	
+			 <td>
+            	<select id="selEstatusDireccion" style="width: 177px" >
+					<OPTION value="0">ACTIVO</OPTION> 
+	                <OPTION value="1">INACTIVO</OPTION> 
+				</select> 		
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Calle
+    	    </td>	            
+            <td colspan="5">
+                <input type="text" id="txtCalle" style="width: 490px" onKeyPress="mayuscula();"   />
+    	    </td>
+        </tr>   
+        <tr>
+            <input type="hidden" id="hdnCodigoPostal" value="0"/>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Colonia
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtColonia" style="width: 157px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);"  />
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Delegaci&oacute;n o Municipio
+    	    </td>
+            <td style="width: 158px">
+                <input type="text" id="txtDelegacionMunicipio" style="width: 180px" onKeyPress="mayuscula();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);"  />
+    	    </td>
+        </tr>   
+        <tr>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *Estado
+    	    </td>
+            <td style="width: 158px">
+            	<select id="selEstado" style="width: 177px" >
+					#foreach($objEstado in $lstEstados)
+						#option("$!objEstado.getKdistinct()" "$!objEstado.getSdistinct()" "0")							
+					#end
+				</select>    	    
+    	    </td>
+            <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+                *C&oacute;digo Postal
+    	    </td>
+            <td>
+                <input type="text" id="txtCodigoPostal" onKeyPress="javascript:return numero();" onkeyup="consultaDireccionGrid(window.document.frmMedicos);" />
+    	    </td>
+        </tr>   
+    </table>
+	<div id="gridbusquedaDireccion">                
+	</div>   
+    
+    
+    
+    
+    
 	<div id="divGridDirecciones">                			
     </div>
 	<div id="divGridTelefonos">                			
@@ -282,7 +398,7 @@
 	</table>	
 	<div id="MedicoBusqueda" style="width:100%; height:150px;">
 	</div>            		        				
-	<div id="MedicoBusquedaPacientes">
+	<div id="MedicoBusquedaPacientes" style="display:none">
         <table border="0"  align="center" width='100%'>
             <tr>
         	    <th colspan="6">

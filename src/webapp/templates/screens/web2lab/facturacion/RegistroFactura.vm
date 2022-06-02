@@ -8,9 +8,9 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 <script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
 <script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 
-#set ( $titlePage = "Registro Pago Factura") 
+#set ( $titlePage = "Registro Factura") 
 
-#set ($lstTiposPagoFactura = $CatalogosTool.obtenAll("TipoPagoFactura","0")) 
+#set ($lstTiposPagoFactura = $CatalogosTool.obtenAll("TipoPagoFactura","0"))
 #set ($intkFactura = $data.getParameters().getString('kFactura') )
 #set ($sformatFactura = $data.getParameters().getString('formatFactura') )
 #set ($uActividad = $data.getParameters().getString('uActividad') )
@@ -18,7 +18,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 
 <form name="frmPagoFactura" method="post" action="$strLigaActual" >
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
-	<input type="hidden" id="idVMRegistro" name="idVMRegistro" value="1">
+	<input type="hidden" id="idVMRegistro" name="idVMRegistro" value="0">
 	<table width="100%" class="tabla">
 		<tr>
 			<td>
@@ -75,7 +75,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     				<input type="hidden" id="hidSaldoFactura" name="hidSaldoFactura" >	
     			</td>			
     		</tr>
-    		<tr>
+    		<tr style="display:none">
     			<td>
     				<b>Importe Pago:</b>				
                 </td>
@@ -83,7 +83,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
                     <input type="text" id="txtImportePago" value="0" STYLE="font-size: 30px;" onKeyPress="montos();" size="5" onChange="javascript:validapagoFactura();" onFocus="javascript:validapagoFactura();"/>
     			</td>			
     		</tr>
-            <tr>
+            <tr style="display:none">
     			<td>
     				<b>Fecha Deposito:</b> 				
     			</td>
@@ -94,7 +94,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     		        </a>	
     			</td>			
     		</tr>
-    		<tr>
+    		<tr style="display:none">
     			<td>    				
 					 <b>Hora Deposito:</b>
     			</td>
@@ -109,7 +109,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 					</select>
 				</td>
     		</tr>
-            <tr>
+            <tr style="display:none">
     			<td>
     				<b>Institucion Deposito:</b> 				
     			</td>
@@ -122,7 +122,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     			</td>			
     		</tr>
     		
-    		<tr id="rowFormaPago">
+    		<tr id="rowFormaPago" style="display:none">
     			<td>
     				<b>Forma de Pago:</b>
     			</td>
@@ -154,21 +154,21 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 				     </select>
     			</td>
     		</tr>
-    		<tr>
+    		<tr style="display:none">
     			<td>
     			</td>
 				<td>
-	        		<input type="checkbox" id="chkCrearComplento" onClick='showCheckSustitucion();'>Crear Complemento de Pago	
+	        		<input type="checkbox" id="chkCrearComplento" onClick='showCheckSustitucion();' checked>Crear Complemento de Pago	
 				</td>
 			</tr>
-			<tr>
+			<tr style="display:none">
     			<td>
     			</td>
 				<td>
 	        		<input type='checkbox' id='chkAgregarOpcionales' onClick='showCamposOpcionales();'>Agregar campos opcionales	
 				</td>
 			</tr>
-			<tr>
+			<tr style="display:none">
 				<td colspan='2'>
 					<div id='divCamposOpcionales' style="display:none">
 						<table border='0' align='center' style='width: 100%' class='tabla'>
@@ -208,16 +208,16 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 					</div>
 				</td>				
 			</tr>
-			<tr>
+			<tr style="display:none">
     			<td>
     			</td>
 				<td>
-					<div id='divCheckSustitucion' style="display:none">
+					<div id='divCheckSustitucion'>
 	        			<input type='checkbox' id='chkAgregarSustitucion' onClick='showCamposSustitucion();'>Sustitucion
 	        		</div>	
 				</td>
 			</tr>
-			<tr>
+			<tr style="display:none">
 				<td colspan='2'>
 					<div id='divCamposSustitucion' style="display:none">
 						<input type='hidden' id='hdenkfacturaSustitucion' value=''>
@@ -239,7 +239,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 				</td>				
 			</tr>
     	</table>               
-		<input type="button" value="Registrar Pago" name="Registrar Pago" class="boton" onclick="pagoFactura();"> 
+		 
 		<input type="button" value="Nueva Factura" name="Nueva Factura" class="boton" onclick="nuevoFactura();">
     </div> 
     <div id="gridBuscarFactura"> 
@@ -258,8 +258,8 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 							   	<option value="5">SWISSLAB</option>
 							   	<option value="7">JENNER PRADO</option> 
 							   	<option value="8">JENNER LEAN</option>
-							   	<option value="9">SERIE B</option> 
-							   	<option value="15">LIACSA</option> 
+							   	<option value="9">SERIE B</option>
+							   	<option value="15">LIACSA</option>  
 				     </select>
     	   		 </td> 		
     		</tr>
@@ -268,7 +268,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     </div> 
 	<div id="gridEstadoFactura" style="display:none">
 		<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
-			<tr>
+			<tr style="display:none">
 				<td>
     				<b>Cambio de status:</b>				
                 </td>

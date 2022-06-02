@@ -50,6 +50,21 @@
 		<servlet-name>dwr-invoker</servlet-name>
 		<url-pattern>/dwr/*</url-pattern>
 	</servlet-mapping>
+	
+
+   <servlet>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <servlet-class>mx.com.web2lab.util.FileUploadHandler</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>FileUploadHandler</servlet-name>
+        <url-pattern>/upload</url-pattern>
+    </servlet-mapping>
+  
+  
+
+	
+	
   <session-config>
     <session-timeout>
             30000

@@ -20,7 +20,7 @@ function showAntiguedadCxC() {
 
 
 function init() 
-{
+{	
 	var frmPantalla = window.document.frmAdminClientes;
     DWRUtil.useLoadingMessage();
     disableDIV();
@@ -34,6 +34,7 @@ function init()
 	frmPantalla.idEstado.disabled=true;
 	frmPantalla.txtCorreoElectronico.value = "";
 	frmPantalla.optResultado.checked = false;
+	DatosCliente.getMarcasUser(frmPantalla.idUsuario.value,getMarcasUser_CallBack);
 }
 
 function initEmpresas() 
@@ -51,6 +52,12 @@ function initEmpresas()
 	frmPantalla.idEstado.disabled=true;
 	frmPantalla.txtCorreoElectronico.value = "";
 	frmPantalla.optResultado.checked = false;
+	DatosCliente.getMarcasUser(frmPantalla.idUsuario.value,getMarcasUser_CallBack);
+}
+
+function getMarcasUser_CallBack(data) {
+	var frmPantalla = window.document.frmAdminClientes;
+	frmPantalla.marcasUser.value = data;		
 }
 
 function showclienteEmpresas(cCliente) {
@@ -317,6 +324,7 @@ function LoadBusquedaCliente() {
 	clienteBean.smnemonico=frmPantalla.txtMNEMONICO.value;
 	clienteBean.ctipocliente=69;
 	clienteBean.breadonly = false;
+	clienteBean.smarcauser = frmPantalla.marcasUser.value;
 }
 
 
@@ -386,6 +394,7 @@ function visualizarFactura(strRuta) {
 	snombre = "Factura";
 	abrirVentanaOrden(strRuta,snombre);	   			     			    
 }
+
 
 function imprimirReporte(liga, nombre) 
 {
@@ -540,6 +549,40 @@ function validarString(cadenaAnalizar) {
     }
 }
 
+
+var ventana_secundaria = null;     
+
+function showSubModalSustitucion(){
+	   if(ventana_secundaria != null){
+		   ventana_secundaria.close();
+	   }
+	   var frm = document.getElementById("frmAdminClientes");
+	   var kfacturas="";
+	   for (i=0;i<frm.chkPagos.length;i++) {		   
+			if (frm.chkPagos[i].checked) {	
+				if(kfacturas==""){
+					kfacturas += frm.hdnkFacturaSaldo[i].value;
+				}else{
+					kfacturas += ","+frm.hdnkFacturaSaldo[i].value;					
+				}
+			}
+		}	
+	    if(kfacturas!=""){
+	    	ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+kfacturas+'&cmarca='+0+'&tipoFactura=4&cconvenio=0',"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");	    	
+	    }else{
+	    	alert('Tienes que seleccionar algun pago');
+	    }
+	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
+}
+         
+function agregarValoresSustitucion(datafolio,datakfactura,datauuid){
+	   document.getElementById("txtUfoliofacturaSustitucion").value=datafolio;
+	   document.getElementById("hdenkfacturaSustitucion").value=datakfactura;
+	   document.getElementById("hdenUuidSustitucion").value=datauuid;
+}
+
+
+
 function pagosFacturas() { 
 	var frm = document.getElementById("frmAdminClientes");
 	var pago = "";
@@ -563,21 +606,55 @@ function pagosFacturas() {
 	var txtNomCuentaClabe= document.getElementById("txtNumCuentaClabe").value;
 	var txtNomOperacion= document.getElementById("txtNumOperacion").value;
 	
+	var checkboxSustitucion = document.getElementById("chkAgregarSustitucion").checked;
+	var txtfoliosustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+	var txtUuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
+	
 	var kfacturas="";
-	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;
+	var sFechaPagoCompleta =sFechaPago+" "+shora+":"+sminutos+":"+ssegundos;	
+	
+	var sustitucion = true;
+	
+	var txtConfirmacionOpcionales = "";
+		if(txtRfcBanco != ""){
+			txtConfirmacionOpcionales += "Rfc del Banco: "+txtRfcBanco+"\n";
+		}
+		if(txtNomBanco != ""){
+			txtConfirmacionOpcionales += "Nombre del Banco: "+txtNomBanco+"\n";
+		}
+		if(txtNomCuentaClabe != ""){
+			txtConfirmacionOpcionales += "Numero de Cuenta/Clabe: "+txtNomCuentaClabe+"\n";
+		}
+		if(txtNomOperacion != ""){
+			txtConfirmacionOpcionales += "Numero de Operacion: "+txtNomOperacion+"\n";
+		}
+		
+		
+		if(checkboxSustitucion){
+			if(txtfoliosustitucion<1){
+				sustitucion= false;
+				alert("Tienes que ingresar un Folio Correcto");
+			}	
+		}
 	
 		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
-			for (i=0;i<frm.chkPagos.length;i++) {
-				if (frm.chkPagos[i].checked) {					
-					kfacturas += frm.hdnkFacturaSaldo[i].value+",";
+			if(sustitucion){
+				for (i=0;i<frm.chkPagos.length;i++) {
+					if (frm.chkPagos[i].checked) {					
+						kfacturas += frm.hdnkFacturaSaldo[i].value+",";
+					}
+				}	
+				if(kfacturas!=""){
+					if (checkboxOpcional){
+						if(confirm("Estas seguro de agregar los siguientes campos opcionales?\n"+txtConfirmacionOpcionales)){
+							CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,
+									txtRfcBanco,txtNomBanco,txtNomCuentaClabe,txtNomOperacion,getKeyPago2_CallBack);
+						}
+					}else{
+						CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,
+								"","","","",getKeyPago2_CallBack);
+					} 
 				}
-			}	
-			if(kfacturas!=""){
-				if (checkboxOpcional){
-					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,txtNomOperacion,getKeyPago2_CallBack);	
-				}else{
-					CuentasxCobrarMayoreo.getKeyPago(sFechaPagoCompleta,txtTotal,cFormaPago,1, kfacturas,"","","","",getKeyPago2_CallBack);
-				} 
 			}
 		}else{
 			if(parseInt(cFormaPago)==0){
@@ -607,7 +684,11 @@ function pagosFacturas_CallBack(data) {
 		if(gblmjsError==0){	    	
 			alert('Registro de pagos Exitosos.');
 			if(checkbox==true){
-				window.open("http://40.84.228.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+
+				window.open("http://10.20.26.6:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+//				window.open("http://localhost:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+
+
 			}
 		}else{
 		  alert('Error al generar el complemento de pago');
@@ -662,11 +743,24 @@ function getKeyPago2_CallBack(data){
 
 function pagosFacturasArray_CallBack(data){
 	var checkbox =	document.getElementById("chkCrearComplento").checked;
-	//alert('status: '+data)
+	//alert('status: '+data) 
 	if(data){	    	
 		alert('Registro de pagos Exitosos.');
 		if(checkbox==true){
-			window.open("http://40.84.228.70:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+
+
+			var checkboxSustitucion = document.getElementById("chkAgregarSustitucion").checked;
+			var txtfoliosustitucion = 0;
+			var txtUuidSustitucion = "";
+			if(checkboxSustitucion){
+				txtfoliosustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+				txtUuidSustitucion = document.getElementById("hdenUuidSustitucion").value;				
+			}
+			
+			window.open("http://10.20.26.6:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
+//			window.open("http://localhost:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
+
+
 		}
 	}else{
 	  alert('Error al generar el complemento de pago');
@@ -747,6 +841,33 @@ function showCamposOpcionales(){
 	}
 }
 
+function showCamposSustitucion(){
+	if (document.getElementById("chkAgregarSustitucion").checked){	
+		adminDIV("divCamposSustitucion","visible","inline");
+		document.getElementById("txtUfoliofacturaSustitucion").focus();
+	}else{
+		adminDIV("divCamposSustitucion","hidden","none");
+		document.getElementById("chkAgregarSustitucion").checked = false;
+		document.getElementById("txtUfoliofacturaSustitucion").value="";
+		document.getElementById("txtFolioFiscal").value="";
+	}
+}
+
+function showCheckSustitucion(){
+	if (document.getElementById("chkCrearComplento").checked){	
+		adminDIV("divCheckSustitucion","visible","inline");
+		adminDIV("divCamposSustitucion","hidden","none");
+		document.getElementById("txtUfoliofacturaSustitucion").value="";
+		document.getElementById("txtFolioFiscal").value="";
+		document.getElementById("chkAgregarSustitucion").checked = false;
+	}else{
+		adminDIV("divCheckSustitucion","hidden","none");
+		adminDIV("divCamposSustitucion","hidden","none");
+		document.getElementById("txtUfoliofacturaSustitucion").value="";
+		document.getElementById("txtFolioFiscal").value="";
+		document.getElementById("chkAgregarSustitucion").checked = false;
+	}
+}
 
 /****************Versi�n 25 de Marzo 2013 BY*******************/
 function buscarConvenioRapido(objConvenio,strBuscar) {
@@ -787,6 +908,7 @@ function LoadBusquedaClienteConvenio(data) {
 	clienteBean.smnemonico=frmPantalla.txtMNEMONICO.value;
 	clienteBean.ctipocliente=69;
 	clienteBean.breadonly = false;
+	clienteBean.smarcauser = frmPantalla.marcasUser.value;
 } 
 
 /************************************** TERMINA FUNCIONES DEL CONVENIO *******************************************************************/

@@ -54,6 +54,8 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 				objSucursalTempBean = objSucursalDAO.getSucursal(1012);
 			}else if (marca==5){
 				objSucursalTempBean = objSucursalDAO.getSucursal(1013);
+			}else if (marca==15){
+				objSucursalTempBean = objSucursalDAO.getSucursal(1017);
 			}else if(marca==7){
 				if(serie.equals("AJP")){
 					objSucursalTempBean = objSucursalDAO.getSucursal(1014);
@@ -116,6 +118,8 @@ public class FormatoFacturaEmpresaGlobalImpl implements FormatoFacturaEmpresa {
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1012);
 			}else if (marca==5){
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1013);
+			}else if (marca==15){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1017);
 			}else if(marca==7){
 				if(serie.equals("AJP")){
 					objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1014);

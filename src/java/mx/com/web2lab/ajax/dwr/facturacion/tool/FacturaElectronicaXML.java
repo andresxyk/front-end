@@ -39,7 +39,10 @@ public class FacturaElectronicaXML
       root.addNamespaceDeclaration(XSI);
       root.setAttribute("schemaLocation", "http://www.sat.gob.mx/cfd/2 http://www.sat.gob.mx/sitio_internet/cfd/2/cfdv22.xsd", XSI);
       root.setAttribute("version", "2.2");
-      //root.setAttribute("uuid",objfilexmlbean.getUuid()+"");
+      root.setAttribute("uuid",objfilexmlbean.getUuid()+"");
+      root.setAttribute("notaDescuento", objfilexmlbean.getNotaDescuento()+"");
+      root.setAttribute("bandDescuento", String.valueOf(objfilexmlbean.isBandDescuento()));
+      root.setAttribute("bandRetencion", String.valueOf(objfilexmlbean.isBandRetencion()));
       root.setAttribute("serie", objfilexmlbean.getSserie() + "");
       root.setAttribute("folio", objfilexmlbean.getSfolio() + "");
       root.setAttribute("fecha", objfilexmlbean.getFechaxml() + "");
@@ -148,6 +151,8 @@ public class FacturaElectronicaXML
       for (int inti = 0; inti < objfilexmlbean.sizeBodys(); inti++) {
         objBody = objfilexmlbean.getBody(inti);
         if (objBody.getIntCantidad() > 0) {
+
+        	
           Element conceps = new Element("Concepto");
           conceps.setNamespace(Namespace.getNamespace("http://www.sat.gob.mx/cfd/2"));
           iObjLog.debug("Consulta Body FacturaElectronicaXMLDao.createXML:... " + objfilexmlbean.sizeBodys() + "\n");
@@ -157,6 +162,24 @@ public class FacturaElectronicaXML
 
           conceps.setAttribute("unidad", "estudios");
           conceps.setAttribute("valorUnitario", Double.toString(redodedoDouble2(objBody.getDblValorUnitario())));
+          
+          conceps.setAttribute("StrCodigo", objBody.getStrCodigo());
+          
+          String descuento = "0.00";
+          if(objfilexmlbean.isBandDescuento()){
+	          String [] splitdesc = objfilexmlbean.getDescuentos().split("\\|");
+	          for(int i = 0; i<splitdesc.length; i++){
+	        	  String [] splitDescuento = splitdesc[i].split("\\=");
+	        	  if(splitDescuento.length>0){
+	        		  System.out.println("splitDescuento[0]:"+splitDescuento[0]);
+	        		  if(splitDescuento[0].equals(objBody.getStrCodigo())){
+	        			  descuento = splitDescuento[1];
+	        		  }
+	        	  }
+	          }
+          }
+          conceps.setAttribute("descuento", descuento);
+          
           concep.addContent(conceps);
         }
       }
@@ -204,6 +227,7 @@ public class FacturaElectronicaXML
 						    {
 						      Element cuerpoAdd = new Element("Cuerpo", "if", "https://www.interfactura.com/Schemas/Documentos");
 						  iObjLog.debug("Consulta Body FacturaElectronicaXMLDao.createXMLAddenda:... " + objfilexmlbean.sizeBodys() + "\n");
+						  objBody.getStrCodigo();
 						  cuerpoAdd.setAttribute("Cantidad", String.valueOf(objBody.getIntCantidad()));
 						  cuerpoAdd.setAttribute("Concepto", convertUTF8(objBody.getStrDescripcion()));
 						  cuerpoAdd.setAttribute("PUnitario", Double.toString(redodedoDouble2(objBody.getDblValorUnitario())));
@@ -229,7 +253,7 @@ public class FacturaElectronicaXML
       FileOutputStream file = null;
       if (objfilexmlbean.getCmarca() == 1) {      
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      } else if(objfilexmlbean.getCmarca() == 5){
+      } else if(objfilexmlbean.getCmarca() == 5 || objfilexmlbean.getCmarca() == 15){
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       } else if(objfilexmlbean.getCmarca() == 4) {
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
@@ -249,7 +273,7 @@ public class FacturaElectronicaXML
     	  File archivo = null;
           if (objfilexmlbean.getCmarca() == 1) {      
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-          } else if (objfilexmlbean.getCmarca() == 5){
+          } else if (objfilexmlbean.getCmarca() == 5 || objfilexmlbean.getCmarca() == 15){
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
           }else if (objfilexmlbean.getCmarca() == 4){
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
@@ -273,7 +297,7 @@ public class FacturaElectronicaXML
       FileReader lector = null;
       if (objfilexmlbean.getCmarca() == 1) {      
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      } else if(objfilexmlbean.getCmarca() == 5){
+      } else if(objfilexmlbean.getCmarca() == 5 || objfilexmlbean.getCmarca() == 15){
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }else if(objfilexmlbean.getCmarca() == 4){
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
@@ -297,7 +321,7 @@ public class FacturaElectronicaXML
       org.w3c.dom.Document document = null;
       if (objfilexmlbean.getCmarca() == 1) {            
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Olab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
-      } else if(objfilexmlbean.getCmarca() == 5){
+      } else if(objfilexmlbean.getCmarca() == 5 || objfilexmlbean.getCmarca() == 15){
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Swisslab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }	else if(objfilexmlbean.getCmarca() == 4){
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");

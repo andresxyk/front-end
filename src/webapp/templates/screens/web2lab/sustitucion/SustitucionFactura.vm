@@ -1,0 +1,32 @@
+$data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
+<script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
+<script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/sustitucion/SustitucionFactura.js")"></script>
+
+<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
+#set ($titlePage = "Sustitucion Factura") 
+
+#set ($intFolioFactura = $data.getParameters().getString('ufoliofactura') )
+#set ($intMarca = $data.getParameters().getString('cmarca') )
+#set ($intTipoFactura = $data.getParameters().getString('tipoFactura') )
+#set ($intCconvenio = $data.getParameters().getString('cconvenio') )
+
+
+<form name="frmSustitucion" method="post" action="$strLigaActual" >
+	<input type="hidden" id="ufoliofactura" name="ufoliofactura" value="$intFolioFactura">	
+	<input type="hidden" id="cmarca" name="cmarca" value="$intMarca">	
+	<input type="hidden" id="tipofactura" name="tipofactura" value="$intTipoFactura">
+	<input type="hidden" id="cconvenio" name="cconvenio" value="$intCconvenio">
+	<div id="divFacturasSustitucion">
+		
+	</div>
+	
+	 	
+</form> 
+<script>
+		 window.onload = init;		
+</script>	

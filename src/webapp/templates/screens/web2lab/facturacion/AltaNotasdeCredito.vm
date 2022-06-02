@@ -30,7 +30,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 	</div>
 </form>
 #if($strKfacturas)
-	<script>		
+	<script>		 
 	     mostrarFacturas('$strKfacturas');
 	</script>	
 #end	

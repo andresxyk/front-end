@@ -87,18 +87,20 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
     finally {
     }
     return strReturn;
-  }
+  } 
 
   public String crearFacturaEmpresa(FacturaElectronicaBean objFacturaBean, String ufoliofactura, int itipofactura, double msubtotal, double miva, double mtotal, 
-		  String strnocuenta, String strmetodopago) throws Exception {
-	  //String folioSustitucion, String uuidSustitucion, boolean sustitucion
+		  String strnocuenta, String strmetodopago, String uuidSustitucion, boolean sustitucion, boolean descuento, String descuentos, String notaDescuento, 
+		  boolean retencion) throws Exception {
+	  
     TFactura objTFactura = new TFactura();
     FacturacionElectronicaMayoreoDao objFacturaElectronicaMayoreoDAO = new FacturacionElectronicaMayoreoDao();
     String strReturn = "";
     FormatoFacturaEmpresa objFormato = null;
     boolean bandSustitucion = true;
     
-    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+"  serie:"+objFacturaBean.getSserie());
+    iObjLog.debug("Entrando a FacturaElectronicaEmpresasAjax.crearFacturaEmpresa:Entrando... " + ufoliofactura + "Tipo Factura" + itipofactura + " cmarca:" + objFacturaBean.getCmarca()+
+    		"  serie:"+objFacturaBean.getSserie()+"   descuento:"+descuento+"    descuentos:"+descuentos+"      retencion:"+retencion);
     try {
       objTFactura = objFacturaElectronicaMayoreoDAO.buscarFacturaFolio(ufoliofactura,objFacturaBean.getCmarca(),objFacturaBean.getSserie());
       objFacturaElectronicaMayoreoDAO.persistirAjusteFactura(objTFactura.getKfactura(), objTFactura.getUserId(), msubtotal, miva, mtotal);
@@ -117,30 +119,25 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
         break;
       case 4:
         objFormato = new FormatoFacturaEmpresaDesgloceImpl();
+      }      
+      //FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
+      
+      objFacturaBean.setBandRetencion(retencion);
+      if(sustitucion){    	  
+    	  objFacturaBean.setUuid(uuidSustitucion.trim());    	  
+      }
+      if(descuento){
+    	  objFacturaBean.setBandDescuento(descuento);
+    	  objFacturaBean.setNotaDescuento(notaDescuento);
+    	  objFacturaBean.setDescuentos(descuentos);
+    	  String [] splitdesc = descuentos.split("\\|");
+    	  for(int i=0;i<splitdesc.length;i++){
+    		  System.out.println(splitdesc[i]);
+    	  }
+    	  
       }
       
-      FacturaSustitucionBean facturaSustitucionBean = new FacturaSustitucionBean();
-//      if(sustitucion){
-//    	  facturaSustitucionBean = objFacturaElectronicaMayoreoDAO.getUUIDTfactura(folioSustitucion,objFacturaBean.getCmarca(),objFacturaBean.getSserie()); 
-//    	  if(facturaSustitucionBean.getCestadoregistro() == 34){
-//    		  if(facturaSustitucionBean.getSuuid() != null && facturaSustitucionBean.getSuuid() != ""){
-//        		  if(facturaSustitucionBean.getSuuid().equals(uuidSustitucion)){
-//        			  objFacturaBean.setUuid(facturaSustitucionBean.getSuuid());
-//        		  }else{
-//        			  strReturn="UUIDs DIFERENTES";
-//            		  bandSustitucion = false;
-//        		  }
-//        	  }else{
-//        		  strReturn="SIN UUID EN BD";
-//        		  bandSustitucion = false;
-//        	  }
-//    	  }else{
-//    		  strReturn="NO CANCELADA";
-//    		  bandSustitucion = false;
-//    	  }
-//    	  
-//      }
-//      if(bandSustitucion){    	
+      if(bandSustitucion){    	
 	      
 	      if ((itipofactura == 1) || (itipofactura == 2)) {
 	        objFacturaBean.setKfactura(objTFactura.getKfactura().intValue());
@@ -167,7 +164,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction
 	        strReturn = objFacturaBean.getsURL();
 	        iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...4...." + objFacturaBean.getsURL());
 	      }
-//      }
+      }
       iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...  "); 
       } catch (TorqueException aObjException) {
       aObjException = 
