@@ -37,7 +37,7 @@
 		</tr>
 		<tr>
 			<td colspan="2">
-                <select id="selConvenios"  style="width: 600px">
+                <select id="selConvenios"  style="width: 600px" onChange="selectConvenioCombo(this.value);">
 					#foreach($objConvenio in $lstConvenios)
 						#option("$!objConvenio.getCconvenio()" "$!objConvenio.getSconvenio()  -  $!objConvenio.getCconvenio()" 0)	
 					#end
@@ -115,8 +115,56 @@
 			</td>
 		</tr>
 		<tr>
-			<td>				
-		         <br>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				Método de pago:
+				<input type="text" id="txtTipoPago"  onKeyPress="mayuscula();" size="25" style="width:220px;" value="99">
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<input type="checkbox" id="chkSustitucion" onClick="showFormSustitucion();" >Sustitución				
+				
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<div id="divchkDescuento" style="display:none" ><input type="checkbox" id="chkDescuento" onClick="showFormDescuento();"  >Descuento </div>
+				<div id="divchkRetencion" ><input type="checkbox" id="chkRetencion" >Retencion de IVA</div>
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				Tipo de Factura
+				<select id="selTipoFactura" style="width:150px" align="up" onChange="tipoFactura(this.value);">
+					<option value="0">Seleccionar</option>
+					<option value="1">Detalle Global</option>
+					<option value="2">Detalle por Examenes</option>
+					<option value="3">Detalle Global/ESTUDIOS</option>
+					<option value="4">Detalle por Examanes/ADENDA</option>
+				</select>
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<label id="labelfactura" style="width:125px;display:none">Descripción Factura</label>
+				<input type="text" id="txtDescripcion" onKeyPress="mayuscula();" size="30" style="width:300px;display:none" value="ESTUDIOS REALIZADOS SEGUN RELACION ADJUNTA"> 
+				<label id="labelordencompra" style="width:125px;display:none">Orden Compra</label>
+				<input type="text" id="txtOrdenCompra" onKeyPress="numero();" size="30" style="width:100px;display:none" value="0"> 
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<label id="labelDescuentosFac" style="display:none">Descuentos:</label>
+				<input type="text" id="txtDescuentosFac" size="15" style="width:400px;display:none">
+			</td>
+		</tr>
+		<tr>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<label id="labelNotaDescuentosFac" style="display:none">Nota Descuento:</label>
+				<textarea  id="txtNotaDescuentosFac" rows="4" cols="50" style="display:none"></textarea>
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<label id="labelFolioInterno" style="display:none">Folio de la factura a sustituir:</label>
+				<input type="text" id="txtUfoliofacturaSustitucion" size="15" style="width:100px;display:none" disabled>
+				<a id='popupBuscar' style="display:none" href='javascript:doNothing()' onclick="javascript:showSubModalSustitucion();">
+					<img alt='Buscar Sustitucion' id='imgBuscar' border='0' src="/web2labportal/images/icoBuscar.png" width="25" height="23" />
+				</a>
+			</td>
+			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+				<input type='hidden' id='hdenkfacturaSustitucion' value=''>
+				<input type='hidden' id='hdenUuidSustitucion' value=''>
 			</td>
 		</tr>
 		<tr>

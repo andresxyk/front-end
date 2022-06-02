@@ -568,7 +568,7 @@ function showSubModalSustitucion(){
 			}
 		}	
 	    if(kfacturas!=""){
-	    	ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+kfacturas+'&cmarca='+0+'&tipoFactura=4',"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");	    	
+	    	ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+kfacturas+'&cmarca='+0+'&tipoFactura=4&cconvenio=0',"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");	    	
 	    }else{
 	    	alert('Tienes que seleccionar algun pago');
 	    }
@@ -685,7 +685,7 @@ function pagosFacturas_CallBack(data) {
 			alert('Registro de pagos Exitosos.');
 			if(checkbox==true){
 
-				window.open("http://10.3.0.8:8192/facturas/complemento-pagos/"+keyPago, "_blank");
+				window.open("http://10.20.26.6:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 //				window.open("http://localhost:8192/facturas/complemento-pagos/"+keyPago, "_blank");
 
 			}
@@ -755,7 +755,7 @@ function pagosFacturasArray_CallBack(data){
 				txtUuidSustitucion = document.getElementById("hdenUuidSustitucion").value;				
 			}
 			
-			window.open("http://10.3.0.8:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
+			window.open("http://10.20.26.6:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
 //			window.open("http://localhost:8192/facturas/complemento-unitario-pagos?idPago="+keyPago+"&folio="+txtfoliosustitucion+"&uuid="+txtUuidSustitucion, "_blank");
 
 		}

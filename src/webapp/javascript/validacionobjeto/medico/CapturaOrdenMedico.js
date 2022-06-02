@@ -54,7 +54,7 @@
  function reasignacionOrdenes(){
 	 var frmPantalla = window.document.frmMedicos;
 	 var idUser = document.getElementById("idUsuario").value;
-	 var url = "http://10.3.0.8:8192/medicos/reasignacion-ordenes/"+idUser;
+	 var url = "http://10.20.26.6:8192/medicos/reasignacion-ordenes/"+idUser;
 	 window.open(url, "_blank"); 
 	 
  }

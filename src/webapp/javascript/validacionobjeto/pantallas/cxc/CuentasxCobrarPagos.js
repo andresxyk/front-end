@@ -77,31 +77,31 @@
 		snombre = "FacturaOrden";
 		if(selectedMarca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+			strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
 			abrirVentanaOrden(strRuta,snombre);	   			     			    
 		    return true;
        	} else if(selectedMarca==4){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==5 || selectedMarca==15){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==7){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==8){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Lean/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Lean/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
@@ -117,19 +117,19 @@
 		snombre = "FacturaOrden";
 		if(marca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+			strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Olab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        	} else if(marca==4){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Azteca/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        	}else if(marca==5 || marca==15){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Swisslab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        	}else if(marca==7){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
 
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
@@ -143,31 +143,31 @@
 		
 		if(selectedMarca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+			strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
 			abrirVentanaOrden(strRuta,snombre);	   			     			    
 		    return true;
        	} else if(selectedMarca==4){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==5 || selectedMarca==15){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==7){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if(selectedMarca==8){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Lean/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Lean/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true; 
@@ -184,19 +184,19 @@
 		snombre = "FacturaOrden";
 		if(marca==1){
 
-			strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+			strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Olab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        	} else if(marca==4){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Azteca/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        	}else if(marca==5 || marca==15){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Swisslab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
 
        	}else if(marca==7){
 
-       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+       		strRuta = "http://10.20.26.6:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
 
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
@@ -367,7 +367,7 @@
 		   
 		   var ufoliofactura = document.getElementById("txtFolioFactura").value; 
 		   var selectedMarca = document.getElementById("selMarca").value; 
-		   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca+'&tipoFactura=3',"SustitucionFactura","width=900,height=300,top=200,left=200,menubar=no,scrollbars=yes");
+		   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca+'&tipoFactura=3&cconvenio=0',"SustitucionFactura","width=900,height=300,top=200,left=200,menubar=no,scrollbars=yes");
 		   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
 	   }
 	      
@@ -408,7 +408,7 @@
 			document.getElementById('txtImportePago').value = "";
 			CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);	
 			if((data.smensaje=="Exito en el registro del Pago") && (checkbox)){
-				window.open("http://10.3.0.8:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
+				window.open("http://10.20.26.6:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
 //				window.open("http://localhost:8192/facturas/complemento-pagos/"+data.keypago, "_blank");
 			}
 

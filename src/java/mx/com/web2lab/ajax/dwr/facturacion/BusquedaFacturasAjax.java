@@ -34,9 +34,9 @@ public class BusquedaFacturasAjax extends AjaxAction {
 		String strReturn = "";
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.findCfdiPdf:Entrando... ");
 		try {
-			String remplacePath = path.replaceAll("http://10.3.0.8:9085", "/mnt/gda/apache-tomcat/webapps/ROOT");
+			String remplacePath = path.replaceAll("http://10.20.26.6:9085", "/mnt/gda/apache-tomcat/webapps/ROOT");
 			URL url; 
-			url = new URL("http://10.3.0.8:8192/facturas/ordenes/find-cfdi-server?path="+remplacePath);
+			url = new URL("http://10.20.26.6:8192/facturas/ordenes/find-cfdi-server?path="+remplacePath);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 
@@ -103,12 +103,12 @@ public String buscarFacturaAjuste(String strFacturas, Integer idMarca){
 	return strReturn;
 }
 
-public String buscarFacturaSustitucion(String factura, int idMarca, int tipofactura){
+public String buscarFacturaSustitucion(String factura, int idMarca, int tipofactura, int cconvenio){
 	String strReturn=null;
 	BusquedaFacturaDao objBusquedaFactura = new BusquedaFacturaDao();
 	try {
 		iObjLog.debug("Entrando de BusquedaFacturasAjax.buscarFacturaSustitucion("+factura+"," + idMarca+")");
-		strReturn = objBusquedaFactura.getBusquedaFacturasSustitucion(factura, idMarca,tipofactura);
+		strReturn = objBusquedaFactura.getBusquedaFacturasSustitucion(factura, idMarca,tipofactura,cconvenio);
 		iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFacturaSustitucion("+strReturn+"," + idMarca+")");		
 	} catch (Exception e) {
 		e.printStackTrace();

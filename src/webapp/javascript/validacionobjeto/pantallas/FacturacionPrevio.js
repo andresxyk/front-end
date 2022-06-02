@@ -8,6 +8,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 
 /********************* Negocio *******************************/
    
+   function agregarKFactura(kfactura){
+	   document.getElementById("txtTipoPago").value=kfactura;
+   }
+   
    function GeneracionPrevioFactura()
    {
        	var frmPantalla = window.document.frmFacturacion;
@@ -19,8 +23,14 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
        	
        	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
-				showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0", 300, 300, "Previo");
-		} else {
+//       		showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0&razon=0"+
+//					"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+//					"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+//					 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 
+//			showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0", 300, 300, "Previo");
+			window.open("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0","SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
+       	
+       	} else {
 			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
 		} 		   
    }
@@ -193,26 +203,129 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	  	var userid =frmPantalla.idUsuario.value;
 	  	var monto =frmPantalla.txtMontoMaximo.value;
 	  	var razonSocial = TypeObjeto(frmPantalla.selRazonSocial);
-      	
-	   if(data==7){
-		   if(razonSocial>0){
-			   if(razonSocial == 1 || razonSocial == 2){
-				   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
-					   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
-				   }				   
-			   }else{
-				   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
-					   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial, 300, 300, "Definitivo"); 	
-				   }	 
-			   }
+	  	
+	  	
+	   var tipofactura = document.getElementById("selTipoFactura").value;
+	   var smetodopago = document.getElementById("txtTipoPago").value;
+	   var folioSustitucion = document.getElementById("txtUfoliofacturaSustitucion").value;
+	   var uuidSustitucion = document.getElementById("hdenUuidSustitucion").value;
+	   var checkSustitucion = document.getElementById("chkSustitucion").checked;
+	   var checkDescuento = document.getElementById("chkDescuento").checked;
+	   var checkRetencion = document.getElementById("chkRetencion").checked;
+	   var descuentos = document.getElementById("txtDescuentosFac").value;
+	   var notaDescuentos = '';
+		   if(checkDescuento){
+			   notaDescuentos = (document.getElementById("txtNotaDescuentosFac").value).replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
+
 		   }else{
-			   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+			   notaDescuentos = '';
 		   }
-	   }else{
-		   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
-				showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0", 300, 300, "Definitivo"); 	
-			}
-	   }
+		   
+		   var descuentosRm = descuentos.replace(/[|]/gi,"%7C").replace(/[=]/gi,"%3d").replace(/[ ]/gi,"%20").replace(/[\n]/gi,"%0A");
+		    
+		   if(smetodopago!='99'){
+			   var nocuenta = document.getElementById("txtNoCuenta").value;
+		   } else {
+			   var nocuenta = '';
+		   }  
+	 
+		   alert('Metodo pago' + smetodopago); 
+
+			   if(tipofactura>0){
+					if((tipofactura==1) ||(tipofactura==3)){
+						var descripcionfactura = document.getElementById("txtDescripcion").value;
+						if(descripcionfactura==""){
+							alert("Debe ingresar una descripcion para la factura");
+							document.getElementById("txtDescripcion").focus();
+						}else{
+							
+							if(data==7){
+								   if(razonSocial>0){
+									   if(razonSocial == 1 || razonSocial == 2){
+										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+											   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+													   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+													   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+													   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+										   }				   
+									   }else{
+										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+											   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+													   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+													   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+													   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+										   }	 
+									   }
+								   }else{
+									   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+								   }
+							   }else{
+								   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
+										showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0"+
+												"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									}
+							   }
+							
+//							var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//							"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//							"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//							"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//							"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//							"descripcionFactura="+descripcionfactura;							
+//							window.open(url, "_blank"); 	 
+						}
+					}else if((tipofactura==2)){
+						if(data==7){
+							   if(razonSocial>0){
+								   if(razonSocial == 1 || razonSocial == 2){
+									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER del convenio? "+cconvenio)) {	 	
+										   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+												   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									   }				   
+								   }else{
+									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+										   showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon="+razonSocial+
+												   "&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+												   "&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+												   "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+									   }	 
+								   }
+							   }else{
+								   alert('El convenio es de Jenner, debes seleccionar una Razon Social');
+							   }
+						   }else{
+							   if (confirm("¿Esta seguro de generar la facturacion definitiva del convenio? "+cconvenio)) {	 	
+									showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=1&razon=0"+
+											"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
+											"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
+											 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 	
+								}
+						   }
+//						var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//							"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//							"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//							"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//							"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//							"descripcionFactura="+descripcionfactura;
+//							
+//							window.open(url, "_blank");
+					}else if(tipofactura==4){
+						alert('Debe elegir un formato adecuado de factura');
+						document.getElementById("selTipoFactura").focus();
+						return false;
+					}
+				}else{
+					if(tipofactura==0){
+						alert('Debe elegir un formato adecuado de factura');
+						document.getElementById("selTipoFactura").focus();
+						return false;
+					}
+				}
+	  	
    }
    
    function buscarConvenioRapido(objConvenio,strBuscar) {
@@ -575,6 +688,11 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		}
 	}
    
+   
+   function selectConvenioCombo(convenio){
+		alert(convenio);
+	}
+   
 
    /*
 	function tipoFactura(tipofactura){
@@ -605,9 +723,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				adminDIV("txtOrdenCompra","visible","inline");
 				document.getElementById("txtOrdenCompra").focus();
 			}else{
-				if(document.getElementById('cMarca').value == 1){
-					adminDIV("divchkDescuento","visible","inline");					
-				}
+				adminDIV("divchkDescuento","visible","inline");	
 				adminDIV("txtDescripcion","hidden","none");	
 				adminDIV("labelfactura","hidden","none");
 			}
@@ -768,7 +884,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 					}else{
 						
 
-						var url = "http://10.3.0.8:8192/facturas/ordenes/empresas-anticipadas?" +
+						var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
 						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
 						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
 						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
@@ -782,7 +898,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						
 					}
 				}else if((tipofactura==2)){
-					var url = "http://10.3.0.8:8192/facturas/ordenes/empresas-anticipadas?" +
+					var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
 						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
 						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
 						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
@@ -869,7 +985,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		        var frmPantalla = window.document.frmFacturacion;
 		    		//adminDIV("gridbusquedaFacturas","visible","inline");
 			    	BusquedaFacturas.buscarFacturaAjuste(frmPantalla.txtUfoliofactura.value, frmPantalla.selMarca.value, buscarFacturaAjuste_CallBack);
-	    	   }
+	    	   } 
 			}else{
 					alert('Debe ingresar un folio de factura adecuado');//mio EMZ
 					document.getElementById("txtUfoliofactura").focus();		
@@ -882,9 +998,9 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 	   if(ventana_secundaria != null){
 		   ventana_secundaria.close();
 	   }
-	   var ufoliofactura = document.getElementById("txtUfoliofactura").value; 
-	   var selectedMarca = document.getElementById("selMarca").value; 
-	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca+'&tipoFactura=1',"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
+	   var frmPantalla = window.document.frmFacturacion;
+	   var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
+	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura=0&cmarca=0&tipoFactura=0&cconvenio='+cconvenio,"SustitucionFactura","width=900,height=300,menubar=no,scrollbars=yes");
 	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
    }
             

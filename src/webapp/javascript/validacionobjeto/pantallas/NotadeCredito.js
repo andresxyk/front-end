@@ -423,7 +423,7 @@
 	   }
 	   
 	   var ufoliofactura = document.getElementById("txtNumNota").value;
-	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca=0&tipoFactura=2',"SustitucionFactura","width=900,height=300,top=200,left=200,menubar=no,scrollbars=yes");
+	   ventana_secundaria = window.open('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca=0&tipoFactura=2&cconvenio=0',"SustitucionFactura","width=900,height=300,top=200,left=200,menubar=no,scrollbars=yes");
 	   //('/web2labportal/servlet/template/web2lab,sustitucion,SustitucionFactura.vm?ufoliofactura='+ufoliofactura+'&cmarca='+selectedMarca, 950, 300, "Sustitucion");
   }
      
@@ -467,7 +467,7 @@
 		  }else{
 			  uuid=uuidFactura;
 		  }
-		window.open("http://10.3.0.8:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
+		window.open("http://10.20.26.6:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
 			"&metodoPago="+metodoPago+"&uuid="+uuid+"&concepto="+concepto+"&cantidad="+cantidad+
 			"&iva="+iva+"&sustitucion="+checkboxSustitucion, "_blank");
 //			window.open("http://localhost:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+

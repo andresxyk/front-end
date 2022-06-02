@@ -13,12 +13,14 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 #set ($intFolioFactura = $data.getParameters().getString('ufoliofactura') )
 #set ($intMarca = $data.getParameters().getString('cmarca') )
 #set ($intTipoFactura = $data.getParameters().getString('tipoFactura') )
+#set ($intCconvenio = $data.getParameters().getString('cconvenio') )
 
 
 <form name="frmSustitucion" method="post" action="$strLigaActual" >
 	<input type="hidden" id="ufoliofactura" name="ufoliofactura" value="$intFolioFactura">	
 	<input type="hidden" id="cmarca" name="cmarca" value="$intMarca">	
 	<input type="hidden" id="tipofactura" name="tipofactura" value="$intTipoFactura">
+	<input type="hidden" id="cconvenio" name="cconvenio" value="$intCconvenio">
 	<div id="divFacturasSustitucion">
 		
 	</div>
