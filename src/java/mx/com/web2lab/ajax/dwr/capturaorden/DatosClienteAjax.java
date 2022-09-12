@@ -62,10 +62,10 @@ public class DatosClienteAjax extends AjaxAction {
 				List lstCmarca = new ArrayList();
 				List lstSmarca = new ArrayList();
 				String [] marcasSplit = marcas.split(",");
-				for (int i = 0; i < marcasSplit.length; i++) {
+				for (int i = 0; i < marcasSplit.length; i++) { 
 					lstCmarca.add(marcasSplit[i]);
 					lstSmarca.add(this.nameMarca(Integer.parseInt(marcasSplit[i])));
-				}
+				} 
 				objMetricas.setLstCmarca(lstCmarca);
 				objMetricas.setLstSmarca(lstSmarca);
 				objMetricas.setMarcasUser(marcas);
@@ -86,6 +86,7 @@ public class DatosClienteAjax extends AjaxAction {
 		switch (cmarca) {
 		case 1:
 			name="OLAB";
+//			name="DOISY";
 			break;
 		case 4:
 			name="AZTECA";

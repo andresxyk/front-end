@@ -74,6 +74,11 @@
 		
 	  }
   
+  function visualizarNotaCredito(strRuta) {
+	  	snombre = "NotaCredito";
+		abrirVentanaOrden(strRuta,snombre);
+	}
+  
   function visualizarFactura(strRuta) {
 	  BusquedaFacturas.findCfdiPdf(strRuta,file_CallBack);
 	}

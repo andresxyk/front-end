@@ -6,7 +6,7 @@
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
-<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio-22062022.js")"></script>
 
 
 <script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
@@ -65,7 +65,7 @@
 		</tr>
 		<tr>
 			<td valign="middle">Tipo de Reporte
-				<select id="selTipoPrevio" style="width: 120px" align="up">
+				<select id="selTipoReporte" style="width: 120px" align="up">
 					    <option value="0">Seleccionar</option>
     					<option value="1">Detalle Examenes</option>
     					<option value="2">Detalle Orden</option>
@@ -182,7 +182,7 @@
 		</tr>
 		<tr>
 		</tr>
-		<tr>
+		<tr style="display:none">
 			<td>
         		<input type="checkbox" id="chkCrearFactura" onClick="showCajaFactura();">Crear Factura	
 			</td>

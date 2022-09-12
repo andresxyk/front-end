@@ -5,7 +5,7 @@
 <script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
-<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio.js")"></script>
+<script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio-13062022.js")"></script>
 
 
 <script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
@@ -19,7 +19,7 @@
 </script>	
  
 
-<form action="http://10.20.26.6:8192/facturas/operacion" method="post" target="_blank">	
+<form action="http://10.3.0.8:8192/facturas/operacion" method="post" target="_blank">	
 
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">

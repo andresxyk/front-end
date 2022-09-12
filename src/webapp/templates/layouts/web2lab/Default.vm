@@ -49,7 +49,7 @@ $page.addBodyAttribute("marginwidth","0")
             							<tr class=titulotabla>
         									<td align="center">Sucursal: $!objSesion.getAttribute("grupo") - $!objSesion.getAttribute("NombreRol")</td>
         									<td align="center">Usuario: $!objSesion.getAttribute("strNombreCompleto") - $!sVersion</td>
-        									<td align="center">Version 23 Marzo 2022 - SIN PROCESOS</td>
+        									<td align="center">Version 12 Agosto 2022 - SIN PROCESOS</td>
             							</tr>
         							</table>
         						</td>

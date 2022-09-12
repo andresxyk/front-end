@@ -276,6 +276,8 @@
     
     <create creator="new" javascript="FacturaElectronicaEmpresaAjax">
       <param name="class" value="mx.com.web2lab.ajax.dwr.facturacion.mayoreo.FacturaElectronicaEmpresasAjax"/>
+      <include method="generarFacturacionPrevio"/>
+      <include method="generarFacturacionDefinitivo"/> 
       <include method="eliminaPreciosActual"/> 
       <include method="obtenerRfc"/> 
       <include method="pruebaLog"/>
