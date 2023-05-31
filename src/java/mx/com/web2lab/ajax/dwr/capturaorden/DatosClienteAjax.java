@@ -103,6 +103,12 @@ public class DatosClienteAjax extends AjaxAction {
 		case 17:
 			name="DIAGNOSTIX";
 			break;
+		case 19:
+			name="FAMILY LABS NORTE";
+			break;
+		case 20:
+			name="EXAKTA";
+			break;
 		default:
 			break;
 		}
@@ -466,6 +472,8 @@ public class DatosClienteAjax extends AjaxAction {
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		try {			
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			iObjLog.debug("getCregimenfiscal:"+objClienteBean.getCregimenfiscal());
+			iObjLog.debug("getCusocfdi:"+objClienteBean.getCusocfdi());
 			objClienteBean = objDAOCliente.setClienteActualizacion(objClienteBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizaCliente:Saliendo...  ");
 			objDAOCliente = null;

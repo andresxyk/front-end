@@ -23,15 +23,6 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
        	
        	
        	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tipoprevio>0))) {
-//       		showPopWin("/web2labportal/jsp/facturacionPrevios.jsp?cconvenio="+cconvenio+"&strbloques="+strbloques+"&tipoprevio="+tipoprevio+"&userid="+userid+"&monto="+monto+"&btipofactura=0&razon=0"+
-//					"&tipofactura="+tipofactura+"&smetodopago="+smetodopago+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+
-//					"&bSustitucion="+checkSustitucion+"&bDescuento="+checkDescuento+"&descuentos="+descuentosRm+
-//					 "&notaDescuentos="+notaDescuentos+"&bRetencion="+checkRetencion+"&descripcionfactura="+descripcionfactura, 300, 300, "Definitivo"); 
-//			showPopWin("http://10.20.20.12:2090/gda/service-orden/previo-facturacion?cConvenio="+cconvenio+"&strBloque="+strbloques+"&nTipoPrevio="+tipoprevio+"&uUserId="+userid+"&monto="+monto+"&nTipoFacturacion=0&razon=", 300, 300, "Previo");
-			//showPopWin("http://localhost:2090/gda/service-orden/definitivo-facturacion-test", 300, 300, "Previo");
-//			alert("http://10.20.26.6:2090/gda/service-orden/previoDefinitivo-facturacion?cConvenio="+cconvenio+"&strBloque="+strbloques+"&nTipoPrevio="+tipoprevio+"&uUserId="+userid+"&monto="+monto+"&nTipoFacturacion=0&razon=");
-			
-	//		window.open("http://10.20.26.6:2090/gda/service-orden/previoDefinitivo-facturacion?cConvenio="+cconvenio+"&strBloque="+strbloques+"&nTipoPrevio="+tipoprevio+"&uUserId="+userid+"&monto="+monto+"&nTipoFacturacion=0&razon=","SustitucionFactura","width=900,height=300,menubar=yes,scrollbars=yes");
        	
 			FacturaElectronicaEmpresaAjax.generarFacturacionPrevio(cconvenio,userid,strbloques,tipoprevio,"0",monto,"",GenerarFacturacionPrevio_CallBack); 
 			
@@ -907,6 +898,12 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						document.getElementById("txtDescripcion").focus();
 					}else{
 						
+//						var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//						"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//						"descripcionFactura="+descripcionfactura;
 
 						var url = "http://10.20.20.12:8192/facturas/ordenes/empresas-anticipadas?" +
 						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
@@ -922,12 +919,19 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 						
 					}
 				}else if((tipofactura==2)){
+//					var url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+//						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+//						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+//						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+//						"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+//						"descripcionFactura="+descripcionfactura;
+					
 					var url = "http://10.20.20.12:8192/facturas/ordenes/empresas-anticipadas?" +
-						"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
-						"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
-						"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
-						"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
-						"descripcionFactura="+descripcionfactura;
+					"folio="+ufoliofactura+"&tipofactura="+tipofactura+"&msubtotal="+msubtotal+"&miva="+miva+"&mtotal="+mtotal+"&" +
+					"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
+					"sustitucion="+checkSustitucion+"&descuento="+checkDescuento+"&" +
+					"descuentos="+descuentosRm+"&notaDescuento="+notaDescuentos+"&retencion="+checkRetencion+"&marca="+cmarca+"&" +
+					"descripcionFactura="+descripcionfactura;
 						
 
 						
@@ -1003,6 +1007,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		   marca='JENNER LEAN';
 	   } else if (selectedMarca==15){
 		   marca='LIACSA'; 
+	   } else if (selectedMarca==19){
+		   marca='FAMILYLABS NORTE'; 
+	   } else if (selectedMarca==20){
+		   marca='EXAKTA'; 
 	   } 
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
@@ -1312,6 +1320,34 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 					facturaelectronicaBean.spaisemisor="MEXICO";				
 					facturaelectronicaBean.cmarca = 7;
 				}
+			} else if (document.getElementById('cMarca').value == 19){
+				facturaelectronicaBean.sserie="AFN";
+				facturaelectronicaBean.srazonsocialemisor="LABORATEX SA DE CV";
+				facturaelectronicaBean.srfcemisor="LAB020416Q67";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 19; 
+			} else if (document.getElementById('cMarca').value == 20){
+				facturaelectronicaBean.sserie="AEX";
+				facturaelectronicaBean.srazonsocialemisor="LABORATORIOS BIO ANALISIS SC";
+				facturaelectronicaBean.srfcemisor="";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 20; 
 			}
 			//variables del emisorSucursal
 			facturaelectronicaBean.scallesuc="AV. VASCO DE QUIROGA NO.3380 P.B.";

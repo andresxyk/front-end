@@ -111,6 +111,18 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
+       	}else if(selectedMarca==19){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_FamilyLabs/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+       	}else if(selectedMarca==20){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Exakta/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if (selectedMarca==9){
        		var kfactura = frmPantalla.txtkFactura.value;
        		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura2_CallBack);
@@ -137,6 +149,14 @@
        	}else if(marca==7){
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==19){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_FamilyLabs/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==20){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Exakta/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
 
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
@@ -179,6 +199,18 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true; 
+       	}else if(selectedMarca==19){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_FamilyLabs/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
+       	}else if(selectedMarca==20){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Exakta/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
        	}else if (selectedMarca==9){
        		var kfactura = frmPantalla.txtkFactura.value;
        		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura_CallBack);
@@ -206,6 +238,14 @@
 
        		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Jenner/Prado/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
 
+       	}else if(marca==19){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_FamilyLabs/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
+       	}else if(marca==20){
+
+       		strRuta = "http://10.3.0.8:9085/FacturasElectronicas_Exakta/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true; 
@@ -229,6 +269,10 @@
        		marca='SERIE B'; 
        	} else if(selectedMarca==15){
        		marca='LIACSA'; 
+       	} else if(selectedMarca==19){
+       		marca='FAMILYLABS NORTE'; 
+       	} else if(selectedMarca==20){
+       		marca='EXAKTA'; 
        	} 
        	var tipoVM = frmPantalla.idVMRegistro.value;
        	var pagos ;

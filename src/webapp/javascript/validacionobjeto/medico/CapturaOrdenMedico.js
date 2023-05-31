@@ -129,6 +129,12 @@
 		if(frmPantalla.checkLiacsa.checked == true){
 			marcasventa = marcasventa+',15';
 		}
+		if(frmPantalla.checkFamilyLabsNorte.checked == true){
+			marcasventa = marcasventa+',19';
+		}
+		if(frmPantalla.checkExakta.checked == true){
+			marcasventa = marcasventa+',20';
+		}
 		if(marcasventa != '0'){
 			marcasventa = marcasventa+',0';
 		}

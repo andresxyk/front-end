@@ -10,7 +10,7 @@
  
  function actualizarDatoAdicional_CallBack(data){
 	 codeDIVHTML("datosAdicionales",data);
- }
+ } 
  
  function limpiarDatos(){
 	   var frm=document.getElementById("frmAltaDatoAdicional");
@@ -52,7 +52,7 @@
  
  function setdatos_CallBack(data) {
 	   if(data=="Existente"){
-		   if(confirm('¿Desea Actualizar los Datos Existentes?')){
+		   if(confirm('ï¿½Desea Actualizar los Datos Existentes?')){
 			   var frm=document.getElementById("frmAltaDatoAdicional");
 			   var datos="";
 			   var bactualiza=true;

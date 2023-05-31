@@ -131,6 +131,12 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 5){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissLab");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissLab");
+					} else if (cMarca == 19){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_FamilyLabs");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs");
+					} else if (cMarca == 20){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Exakta");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta");
 					}
 					if (cMarca == 1) {
 						objMailDAO.sendEmail("OLAB Diagnósticos Médicos, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",1);
@@ -138,6 +144,10 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",4);
 					} else if (cMarca == 5) {
 						objMailDAO.sendEmail("SWISSLAB S.A. de C.V., gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 19) {
+						objMailDAO.sendEmail("FamilyLabs Norte, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 20) {
+						objMailDAO.sendEmail("Exakta, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {
@@ -206,6 +216,12 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 5) {
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissLab");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissLab");
+					} else if (cMarca == 19) {
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_FamilyLabs");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs");
+					} else if (cMarca == 20) {
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Exakta");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta");
 					}
 					if (cMarca == 1) {
 						objMailDAO.sendEmail("OLAB Diagnósticos Médicos, Facturacion Electrónica, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",1);
@@ -213,6 +229,10 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",4);
 					} else if (cMarca == 5) {
 						objMailDAO.sendEmail("SWISSLAB S.A. de C.V., Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 19) {
+						objMailDAO.sendEmail("FamilyLabs Norte, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 20) {
+						objMailDAO.sendEmail("Exakta, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {

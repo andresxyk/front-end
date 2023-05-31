@@ -255,6 +255,30 @@ public class FacturacionElectronicaDomain {
 				facturaelectronicaBean.setScodigopostalemisor("06700");
 				facturaelectronicaBean.setSpaisemisor("MEXICO");
 			}
+		} else if (facturaelectronicaBean.getCmarca() == 19) {
+			facturaelectronicaBean.setSrazonsocialemisor("LABORATEX SA DE CV");
+			facturaelectronicaBean.setSrfcemisor("LAB020416Q67");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 20) {
+			facturaelectronicaBean.setSrazonsocialemisor("LABORATORIOS BIO ANALISIS SC");
+			facturaelectronicaBean.setSrfcemisor("");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
 		}
 		facturaelectronicaBean.setScallesuc("AV. RÍO CONSULADO ESQ. LIRAS, NO. 2727");
 		facturaelectronicaBean.setScoloniasuc("AQUILES SERDÁN");

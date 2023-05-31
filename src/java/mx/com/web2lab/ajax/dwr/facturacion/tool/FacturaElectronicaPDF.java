@@ -59,6 +59,17 @@ public class FacturaElectronicaPDF {
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
 	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Swisslab");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            } else if (objFacturaBean.getCmarca() == 19) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_FamilyLabs");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_FamilyLabs");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            }else if (objFacturaBean.getCmarca() == 20) {
+		    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Exakta");
+		     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+		    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Exakta");
+		     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+	            
             } else if (objFacturaBean.getCmarca() == 7) {
             	if(objFacturaBean.getSserie().equals("AJP")){
             		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_JennerPrado");

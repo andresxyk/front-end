@@ -277,6 +277,10 @@
  				<label for="checkJenner">Jenner</label>
                 <input type="checkbox" id="checkLiacsa" name="checkLiacsa" value="15">
  				<label for="checkLiacsa">Liacsa</label>
+ 				<input type="checkbox" id="checkFamilyLabsNorte" name="checkFamilyLabsNorte" value="19">
+ 				<label for="checkFamilyLabsNorte">Liacsa</label>
+ 				<input type="checkbox" id="checkExakta" name="checkExakta" value="20">
+ 				<label for="checkExakta">Exakta</label>
     	    </td>     	        
         </tr> 
         

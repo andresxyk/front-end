@@ -37,6 +37,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction {
 				+ "   nTipoFacturacion:" + nTipoFacturacion + "    monto:" + monto + "      razon:" + razon);
 		String strReturn = "";
 		try {
+//			String urlParam = "http://10.20.26.6:2010/gda/service-orchestrator/facturacion-previo?cConvenio="+cConvenio+"&strBloque="+strBloque+"&nTipoPrevio="+nTipoPrevio+"&uUserId="+uUserId+"&monto="+monto+"&nTipoFacturacion="+nTipoFacturacion+"&razon="+razon+"&typeResponse=2";
 			String urlParam = "http://10.20.20.12:2010/gda/service-orchestrator/facturacion-previo?cConvenio="+cConvenio+"&strBloque="+strBloque+"&nTipoPrevio="+nTipoPrevio+"&uUserId="+uUserId+"&monto="+monto+"&nTipoFacturacion="+nTipoFacturacion+"&razon="+razon+"&typeResponse=2";
 			String decodeURL = URLDecoder.decode(urlParam, "UTF-8");
 			URL url;
@@ -111,12 +112,20 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction {
 				descripcionfactura = "";
 			}
 			
+//			String urlParam = "http://10.20.26.6:2010/gda/service-orchestrator/facturacion-definitivo?cConvenio="+cConvenio+
+//					"&strBloque="+strBloque+"&nTipoPrevio="+nTipoPrevio+"&uUserId="+uUserId+"&monto="+monto+
+//					"&nTipoFacturacion="+nTipoFacturacion+"&razon="+razon+"&typeResponse=2"+"&tipofactura="+tipofactura+
+//					"&smetodopago="+smetodopago.trim()+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+"&bSustitucion="+bSustitucion+
+//					"&bDescuento="+bDescuento+"&descuentos="+descuentos+"&notaDescuentos="+notaDescuentos+"&bRetencion="+bRetencion+
+//					"&descripcionfactura="+descripcionfactura;
+			
 			String urlParam = "http://10.20.20.12:2010/gda/service-orchestrator/facturacion-definitivo?cConvenio="+cConvenio+
 					"&strBloque="+strBloque+"&nTipoPrevio="+nTipoPrevio+"&uUserId="+uUserId+"&monto="+monto+
 					"&nTipoFacturacion="+nTipoFacturacion+"&razon="+razon+"&typeResponse=2"+"&tipofactura="+tipofactura+
 					"&smetodopago="+smetodopago.trim()+"&nocuenta="+nocuenta+"&uuidSustitucion="+uuidSustitucion+"&bSustitucion="+bSustitucion+
 					"&bDescuento="+bDescuento+"&descuentos="+descuentos+"&notaDescuentos="+notaDescuentos+"&bRetencion="+bRetencion+
 					"&descripcionfactura="+descripcionfactura;
+			
 //			String decodeURL = URLEncoder.encode(urlParam, "UTF-8");
 			URL url;
 			url = new URL(urlParam);

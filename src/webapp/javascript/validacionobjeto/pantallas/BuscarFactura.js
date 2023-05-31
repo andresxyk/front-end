@@ -76,8 +76,8 @@
   
   function visualizarNotaCredito(strRuta) {
 	  	snombre = "NotaCredito";
-		abrirVentanaOrden(strRuta,snombre);
-	}
+	  	BusquedaFacturas.findCfdiPdf(strRuta,fileNC_CallBack);
+	} 
   
   function visualizarFactura(strRuta) {
 	  BusquedaFacturas.findCfdiPdf(strRuta,file_CallBack);
@@ -86,5 +86,10 @@
   function file_CallBack(data)
 	{
 		snombre = "Factura";
+		abrirVentanaOrden(data,snombre);	 
+	}	
+  function fileNC_CallBack(data)
+	{
+		snombre = "Nota de Credito";
 		abrirVentanaOrden(data,snombre);	 
 	}	

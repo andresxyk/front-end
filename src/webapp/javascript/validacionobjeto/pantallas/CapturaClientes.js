@@ -56,6 +56,7 @@ function getMarcasUser_CallBack(data) {
 	 var idUser = document.getElementById("idUsuario").value;
 //	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGdaInit/"+idUser+"/"+data;
 	 var url = "http://10.20.20.12:8021/webInfodiamex/homeGda/"+idUser;
+//	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGda/"+idUser;
 	 window.open(url, "_blank"); 
 }
 
@@ -155,6 +156,8 @@ function cleanCliente() {
 	frmPantalla.selEstado.selectedIndex = 0;
 	frmPantalla.selTipoCliente.selectedIndex = 0;
 	frmPantalla.selGiro.selectedIndex = 0;
+	frmPantalla.selRegimenFiscal.selectedIndex = 0;
+	frmPantalla.selUsoCfdi.selectedIndex = 0;
 	frmPantalla.selZonaAsignada.selectedIndex = 0;
 	codigoBean(frmPantalla.txtEstadoCliente,true,"");
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
@@ -205,7 +208,7 @@ function VerificaModificacion()
  	if (validaFullCliente()) {
  		actualizaCliente();
 	}
-}
+} 
 
 function actualizaCliente() {	 	
 	disableDIV();
@@ -273,7 +276,11 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.txtDelegacionMunicipio.value = data.sdelegacionmunicipio;
 	frmPantalla.txtCodigoPostal.value = data.scodigopostal;
 	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);	
-	frmPantalla.selTipoCliente.selectedIndex = data.ctipocliente;
+	frmPantalla.selTipoCliente.selectedIndex = compareSelectvalue(frmPantalla.selTipoCliente,data.ctipocliente);
+	
+	frmPantalla.selRegimenFiscal.selectedIndex = data.cregimenfiscal;
+	frmPantalla.selUsoCfdi.selectedIndex = data.cusocfdi;
+	
 	frmPantalla.selGiro.selectedIndex = data.cgirocliente;
 	compareSelectvalue(frmPantalla.selZonaAsignada,data.czonaventa);		
 	compareSelectvalue(frmPantalla.selMarca,data.cmarca);			
@@ -328,6 +335,9 @@ function LoadCompletedCliente() {
 	clienteBean.ctipopersona=frmPantalla.selTipoPersona[frmPantalla.selTipoPersona.selectedIndex].value;
 	clienteBean.cmarca=frmPantalla.selMarca[frmPantalla.selMarca.selectedIndex].value;	
 	clienteBean.czonaventa=frmPantalla.selZonaAsignada[frmPantalla.selZonaAsignada.selectedIndex].value;
+	clienteBean.cregimenfiscal=frmPantalla.selRegimenFiscal[frmPantalla.selRegimenFiscal.selectedIndex].value;
+	clienteBean.cusocfdi=frmPantalla.selUsoCfdi[frmPantalla.selUsoCfdi.selectedIndex].value;
+	
 }
 
 function LoadBusquedaCliente() {
@@ -353,6 +363,8 @@ function validaFullCliente() {
 	selTipoCliente =  TypeObjeto(frmPantalla.selTipoCliente);
 	selGiro =  TypeObjeto(frmPantalla.selGiro);
 	selZonaAsignada =  TypeObjeto(frmPantalla.selZonaAsignada);	
+	cregimefiscal =  TypeObjeto(frmPantalla.selRegimenFiscal);
+	cusocfdi =  TypeObjeto(frmPantalla.selUsoCfdi);
 	
     if( !validaVacios(txtRazonSocial.value) ) {
     	alert('Existe un error en la Razon Social');
@@ -400,6 +412,14 @@ function validaFullCliente() {
     }
     else if (selGiro == 0) {
     	alert('Existe un error en el Giro');
+    	return false;	        	
+    }
+    else if (cregimefiscal == 0) {
+    	alert('Existe un error en el Regimen Fiscal');
+    	return false;	        	
+    }
+    else if (cusocfdi == 0) {
+    	alert('Existe un error en el Uso Cfdi');
     	return false;	        	
     }
 	return true;	

@@ -23,6 +23,10 @@
        		marca='JENNER PRADO'; 
        	}else if(selectedMarca==8){
        		marca='JENNER LEAN'; 
+       	}else if(selectedMarca==19){
+       		marca='FAMILYLABS NORTE'; 
+       	}else if(selectedMarca==20){
+       		marca='EXAKTA'; 
        	}
        	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {

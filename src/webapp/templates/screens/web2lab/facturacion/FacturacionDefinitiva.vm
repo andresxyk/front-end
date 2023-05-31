@@ -204,6 +204,8 @@
 						   	<option value="7">JENNER PRADO</option>
 						   	<option value="8">JENNER LEAN</option>
 						   	<option value="15">LIACSA</option>
+						   	<option value="19">FAMILYLABS NORTE</option>
+						   	<option value="20">EXAKTA</option>
 			        </select> 
 					<input type="button" id="idBuscaFactura" name="idBuscaFactura" value="Busca Factura" onClick="buscaFactura();" class="boton">
 				</td>

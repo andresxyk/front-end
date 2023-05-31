@@ -116,6 +116,69 @@
 			</td>
 			<td colspan="4" align="left">
 			</td>
+		</tr>		
+		<tr>
+			<td align="left" width="25%">
+				<b>*Regimen Fiscal:</b><br>
+				<select id="selRegimenFiscal" style="width: 300px">
+					<option value="0" >SELECCIONAR..</option>
+					<option value="1" >601 - GENERAL DE LEY PERSONAS MORALES</option>
+					<option value="2" >603 - PERSONAS MORALES CON FINES NO LUCRATIVOS</option>
+					<option value="3" >605 - SUELDOS Y SALARIOS E INGRESOS ASIMILADOS A SALARIOS</option>
+					<option value="4" >606 - ARRENDAMIENTO</option>
+					<option value="5" >608 - DEMAS INGRESOS</option>
+					<option value="6" >609 - CONSOLIDACION</option>
+					<option value="7" >610 - RESIDENTES EN EL EXTRANJERO SIN ESTABLECIMIENTO PERMANENTE EN MEXICO</option>
+					<option value="8" >611 - INGRESOS POR DIVIDENDOS (SOCIOS Y ACCIONISTAS)</option>
+					<option value="9" >612 - PERSONAS FISICAS CON ACTIVIDADES EMPRESARIALES Y PROFESIONALES</option>
+					<option value="10" >614 - INGRESOS POR INTERESES</option>
+					<option value="11" >616 - SIN OBLIGACIONES FISCALES</option>
+					<option value="12" >620 - SOCIEDADES COOPERATIVAS DE PRODUCCION QUE OPTAN POR DIFERIR SUS INGRESOS</option>
+					<option value="13" >621 - INCORPORACION FISCAL</option>
+					<option value="14" >622 - ACTIVIDADES AGRICOLAS, GANADERAS, SILVICOLAS Y PESQUERAS</option>
+					<option value="15" >623 - OPCIONAL PARA GRUPOS DE SOCIEDADES</option>
+					<option value="16" >624 - COORDINADOS</option>
+					<option value="17" >628 - HIDROCARBUROS</option>
+					<option value="18" >607 - REGIMEN DE ENAJENACION O ADQUISICION DE BIENES</option>
+					<option value="19" >629 - DE LOS REGIMENES FISCALES PREFERENTES Y DE LAS EMPRESAS MULTINACIONALES</option>
+					<option value="20" >630 - ENAJENACION DE ACCIONES EN BOLSA DE VALORES</option>
+					<option value="21" >615 - REGIMEN DE LOS INGRESOS POR OBTENCION DE PREMIOS</option>
+					<option value="22" >625 - REGIMEN DE LAS ACTIVIDADES EMPRESARIALES CON INGRESOS A TRAVES DE PLATAFORMAS TECNOLOGICAS</option>
+					<option value="23" >626 - REGIMEN SIMPLIFICADO DE CONFIANZA</option>
+					
+				</select>   
+			</td>
+			<td colspan="4" align="left">
+				<b>Uso de CFDI</b><br>
+				<select id="selUsoCfdi" style="width: 300px">
+					<option value="0" >SELECCIONAR..</option>
+					<option value="1" >G01 - ADQUISICION DE MERCANCIAS</option>
+					<option value="2" >G02 - DEVOLUCIONES, DESCUENTOS O BONIFICACIONES</option>
+					<option value="3" >G03 - GASTOS EN GENERAL</option>
+					<option value="4" >I01 - CONSTRUCCIONES</option>
+					<option value="5" >I02 - MOBILARIO Y EQUIPO DE OFICINA POR INVERSIONES</option>
+					<option value="6" >I03 - EQUIPO DE TRANSPORTE</option>
+					<option value="7" >I04 - EQUIPO DE COMPUTO Y ACCESORIOS</option>
+					<option value="8" >I05 - DADOS, TROQUELES, MOLDES, MATRICES Y HERRAMENTAL</option>
+					<option value="9" >I06 - COMUNICACIONES TELEFONICAS</option>
+					<option value="10" >I07 - COMUNICACIONES SATELITALES</option>
+					<option value="11" >I08 - OTRA MAQUINARIA Y EQUIPO</option>
+					<option value="12" >D01 - HONORARIOS MEDICOS, DENTALES Y GASTOS HOSPITALARIOS.</option>
+					<option value="13" >D02 - GASTOS MEDICOS POR INCAPACIDAD O DISCAPACIDAD</option>
+					<option value="14" >D03 - GASTOS FUNERALES.</option>
+					<option value="15" >D04 - DONATIVOS.</option>
+					<option value="16" >D05 - INTERESES REALES EFECTIVAMENTE PAGADOS POR CREDITOS HIPOTECARIOS (CASA HABITACION).</option>
+					<option value="17" >D06 - APORTACIONES VOLUNTARIAS AL SAR.</option>
+					<option value="18" >D07 - PRIMAS POR SEGUROS DE GASTOS MEDICOS.</option>
+					<option value="19" >D08 - GASTOS DE TRANSPORTACION ESCOLAR OBLIGATORIA.</option>
+					<option value="20" >D09 - DEPOSITOS EN CUENTAS PARA EL AHORRO, PRIMAS QUE TENGAN COMO BASE PLANES DE PENSIONES.</option>
+					<option value="21" >D10 - PAGOS POR SERVICIOS EDUCATIVOS (COLEGIATURAS)</option>
+					<option value="22" >P01 - POR DEFINIR</option>
+					<option value="24" >S01 - SIN EFECTOS FISCALES</option>
+				</select>   
+			</td>
+			<td colspan="4" align="left">
+			</td>
 		</tr>
 	</table>
 	<div id="gridbusquedaClientes">                
@@ -330,7 +393,7 @@
     	    </th>
         </tr>   
         <tr>
-            <td>
+            <td> 
                 *Nombre
     	    </td>	            
             <td>
