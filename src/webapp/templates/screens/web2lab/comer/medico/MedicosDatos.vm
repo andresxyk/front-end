@@ -278,9 +278,11 @@
                 <input type="checkbox" id="checkLiacsa" name="checkLiacsa" value="15">
  				<label for="checkLiacsa">Liacsa</label>
  				<input type="checkbox" id="checkFamilyLabsNorte" name="checkFamilyLabsNorte" value="19">
- 				<label for="checkFamilyLabsNorte">Liacsa</label>
+ 				<label for="checkFamilyLabsNorte">FamilyLabs Norte</label>
  				<input type="checkbox" id="checkExakta" name="checkExakta" value="20">
  				<label for="checkExakta">Exakta</label>
+ 				<input type="checkbox" id="checkAsesoresSur" name="checkAsesoresSur" value="21">
+ 				<label for="checkAsesoresSur">Asesores del Sur</label>
     	    </td>     	        
         </tr> 
         

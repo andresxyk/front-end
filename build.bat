@@ -17,39 +17,39 @@ IF "%1" == "ear" GOTO BUILD-EAR
 IF "%1" == "all" GOTO BUILD-ALL
 
 :BACK-INSTALL
-CD facturacion-empresa-backend && maven ejb:install 
+CD back-end && maven ejb:install 
 GOTO END
 
 :FRONT-WAR
-CD facturacion-empresa-front && maven war:install
+CD front-end && maven war:install
 GOTO END
 
 :FRONT-BACK
-CD facturacion-empresa-backend && maven ejb:install && CD ..\facturacion-empresa-front && maven war:install
+CD back-end && maven ejb:install && CD ..\front-end && maven war:install
 GOTO END
 
 :BACK-CLEAN 
-CD facturacion-empresa-backend && maven clean
+CD back-end && maven clean
 GOTO END
 
 :FRONT-CLEAN
-CD facturacion-empresa-front && maven clean
+CD front-end && maven clean
 GOTO END
 
 :ALL-CLEAN
-CD facturacion-empresa-backend && maven clean && CD ..\facturacion-empresa-front && maven clean && CD ..\facturacion-empresa-backend\construccion_ear && maven clean 
+CD back-end && maven clean && CD ..\front-end && maven clean && CD ..\back-end\construccion_ear && maven clean 
 GOTO END
 
 :BUILD-EAR
-CD facturacion-empresa-backend\construccion_ear && maven ear
+CD back-end\construccion_ear && maven ear
 GOTO END
 
 :EAR-CLEAN
-CD facturacion-empresa-backend\construccion_ear && maven clean
+CD back-end\construccion_ear && maven clean
 GOTO END
 
 :BUILD-ALL
-CD facturacion-empresa-backend && maven ejb:install && CD ..\facturacion-empresa-front && maven war:install && CD ..\facturacion-empresa-backend\construccion_ear && maven ear
+CD back-end && maven ejb:install && CD ..\front-end && maven war:install && CD ..\back-end\construccion_ear && maven ear
 GOTO END
 
 :END

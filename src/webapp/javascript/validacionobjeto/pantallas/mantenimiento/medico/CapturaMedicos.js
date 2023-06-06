@@ -71,6 +71,7 @@
 		frmPantalla.checkJenner.checked = false;
 		frmPantalla.checkLiacsa.checked = false;
 		frmPantalla.checkFamilyLabsNorte.checked = false;
+		frmPantalla.checkAsesoresSur.checked = false;
 		frmPantalla.checkExakta.checked = false;
 		
 		frmPantalla.hdnCodigoPostal.value = "0";
@@ -334,8 +335,9 @@
 			frmPantalla.checkSwisslab.checked = data.marcaswisslab;
 			frmPantalla.checkJenner.checked = data.marcajenner;
 			frmPantalla.checkLiacsa.checked = data.marcaliacsa;
-			frmPantalla.checkFamilyLabsNorte.checked = data.marcaliacsa;
-			frmPantalla.checkExakta.checked = data.marcaliacsa;
+			frmPantalla.checkFamilyLabsNorte.checked = data.marcafamilylabsnorte;
+			frmPantalla.checkAsesoresSur.checked = data.marcaasesoressur;
+			frmPantalla.checkExakta.checked = data.marcaexakta;
 			
 			
 			

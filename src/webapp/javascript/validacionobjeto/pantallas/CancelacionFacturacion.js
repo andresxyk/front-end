@@ -27,6 +27,8 @@
        		marca='FAMILYLABS NORTE'; 
        	}else if(selectedMarca==20){
        		marca='EXAKTA'; 
+       	}else if(selectedMarca==21){
+       		marca='ASESORES DEL SUR'; 
        	}
        	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {

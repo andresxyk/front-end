@@ -86,7 +86,6 @@ public class DatosClienteAjax extends AjaxAction {
 		switch (cmarca) {
 		case 1:
 			name="OLAB";
-//			name="DOISY";
 			break;
 		case 4:
 			name="AZTECA";
@@ -108,6 +107,9 @@ public class DatosClienteAjax extends AjaxAction {
 			break;
 		case 20:
 			name="EXAKTA";
+			break;
+		case 21:
+			name="ASESORES DEL SUR";
 			break;
 		default:
 			break;

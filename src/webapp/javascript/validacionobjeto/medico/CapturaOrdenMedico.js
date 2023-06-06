@@ -1,4 +1,7 @@
  var medicoBean = new MedicoBean();
+ 
+// var hostServerWebApp = "http://10.3.0.8:8192";
+ var hostServerWebApp = "http://10.20.26.6:8192";
 
  
  function showSubModalRegistraRegalo(frmPantalla) {
@@ -54,7 +57,7 @@
  function reasignacionOrdenes(){
 	 var frmPantalla = window.document.frmMedicos;
 	 var idUser = document.getElementById("idUsuario").value;
-	 var url = "http://10.3.0.8:8192/medicos/reasignacion-ordenes/"+idUser;
+	 var url = hostServerWebApp+"/medicos/reasignacion-ordenes/"+idUser;
 	 window.open(url, "_blank"); 
 	 
  }
@@ -134,6 +137,9 @@
 		}
 		if(frmPantalla.checkExakta.checked == true){
 			marcasventa = marcasventa+',20';
+		}
+		if(frmPantalla.checkAsesoresSur.checked == true){
+			marcasventa = marcasventa+',21';
 		}
 		if(marcasventa != '0'){
 			marcasventa = marcasventa+',0';

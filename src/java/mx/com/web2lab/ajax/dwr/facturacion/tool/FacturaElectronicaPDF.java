@@ -69,7 +69,12 @@ public class FacturaElectronicaPDF {
 		     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
 		    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Exakta");
 		     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
-	            
+            }else if (objFacturaBean.getCmarca() == 21) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_AsesoresSur");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_AsesoresSur");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            
             } else if (objFacturaBean.getCmarca() == 7) {
             	if(objFacturaBean.getSserie().equals("AJP")){
             		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_JennerPrado");

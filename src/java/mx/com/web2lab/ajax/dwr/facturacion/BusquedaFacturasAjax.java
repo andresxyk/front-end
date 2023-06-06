@@ -14,6 +14,7 @@ import mx.com.web2lab.backend.dao.facturacion.empresas.viaje.ViajeFacturacionDao
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.BusquedaFacturaDao;
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.DatosAdicionalesDao;
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao;
+import mx.com.web2lab.backend.hbm.ConfiguracionProperties;
 import mx.com.web2lab.backend.hbm.HibernateUtil;
 import mx.com.web2lab.backend.hbm.om.ap.TOrdenSucursalFac;
 import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
@@ -26,17 +27,22 @@ public class BusquedaFacturasAjax extends AjaxAction {
 	/** Log de la aplicacion */
 	private static Log iObjLog = LogFactory.getLog(BusquedaFacturasAjax.class);
 	
+	private String hostServerApache = null;
+	private String hostServerWebApp = null;
+	
 	public BusquedaFacturasAjax(){
 		iObjLog.debug("new: Generando nueva clase BusquedaFacturasAjax");
+		hostServerApache = ConfiguracionProperties.getPropiedad("host.server.apache");
+		hostServerWebApp = ConfiguracionProperties.getPropiedad("host.server.webapp");
 	}	
 	
 	public String findCfdiPdf(String path) throws Exception {
 		String strReturn = "";
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.findCfdiPdf:Entrando... ");
 		try {
-			String remplacePath = path.replaceAll("http://10.3.0.8:9085", "/mnt/gda/apache-tomcat/webapps/ROOT");
+			String remplacePath = path.replaceAll("http://"+hostServerApache, "/mnt/gda/apache-tomcat/webapps/ROOT");
 			URL url; 
-			url = new URL("http://10.3.0.8:8192/facturas/ordenes/find-cfdi-server?path="+remplacePath);
+			url = new URL("http://"+hostServerWebApp+"/facturas/ordenes/find-cfdi-server?path="+remplacePath);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 

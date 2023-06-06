@@ -137,6 +137,9 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 20){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Exakta");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta");
+					} else if (cMarca == 21){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_AsesoresSur");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur");
 					}
 					if (cMarca == 1) {
 						objMailDAO.sendEmail("OLAB Diagnósticos Médicos, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",1);
@@ -148,6 +151,8 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("FamilyLabs Norte, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					} else if (cMarca == 20) {
 						objMailDAO.sendEmail("Exakta, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 21) {
+						objMailDAO.sendEmail("Asesores del Sur, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {
@@ -222,6 +227,9 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 20) {
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Exakta");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta");
+					} else if (cMarca == 21) {
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_AsesoresSur");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur");
 					}
 					if (cMarca == 1) {
 						objMailDAO.sendEmail("OLAB Diagnósticos Médicos, Facturacion Electrónica, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",1);
@@ -233,6 +241,8 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("FamilyLabs Norte, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					} else if (cMarca == 20) {
 						objMailDAO.sendEmail("Exakta, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 21) {
+						objMailDAO.sendEmail("Asesores del Sur, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {
