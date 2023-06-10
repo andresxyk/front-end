@@ -275,13 +275,15 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.txtColonia.value = data.scolonia;
 	frmPantalla.txtDelegacionMunicipio.value = data.sdelegacionmunicipio;
 	frmPantalla.txtCodigoPostal.value = data.scodigopostal;
-	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);	
-	frmPantalla.selTipoCliente.selectedIndex = compareSelectvalue(frmPantalla.selTipoCliente,data.ctipocliente);
+	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);
+
+	valorCombo(document.getElementById('selTipoCliente'),data.ctipocliente);
 	
 	frmPantalla.selRegimenFiscal.selectedIndex = data.cregimenfiscal;
-	frmPantalla.selUsoCfdi.selectedIndex = data.cusocfdi;
 	
-	frmPantalla.selGiro.selectedIndex = data.cgirocliente;
+	valorCombo(document.getElementById('selUsoCfdi'),data.cusocfdi);
+		
+	valorCombo(document.getElementById('selGiro'),data.cgirocliente);	
 	compareSelectvalue(frmPantalla.selZonaAsignada,data.czonaventa);		
 	compareSelectvalue(frmPantalla.selMarca,data.cmarca);			
 	codigoBean(frmPantalla.txtEstadoCliente,true,data.sestadoregistro);		

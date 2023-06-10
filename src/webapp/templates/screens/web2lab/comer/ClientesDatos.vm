@@ -459,7 +459,7 @@
 				<b>Giro de la Empresa:</b> 
 			</td>
 			<td align="left">
-				<select name="selGiro" style="background:#E6E6FA">
+				<select id="selGiro" name="selGiro" style="background:#E6E6FA">
 					#foreach($objGiroCliente in $lstGirosClientes)
 						#option("$!objGiroCliente.getCgirocliente()" "$!objGiroCliente.getSgirocliente()" "0")			
 					#end
