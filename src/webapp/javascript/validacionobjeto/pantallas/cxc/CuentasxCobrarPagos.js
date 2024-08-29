@@ -135,6 +135,30 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
+       	}else if(selectedMarca==16){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Moreira/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+       	}else if(selectedMarca==22){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Polab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+       	}else if(selectedMarca==25){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_BiomedicaReferencia/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+       	}else if(selectedMarca==26){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
        	}else if (selectedMarca==9){
        		var kfactura = frmPantalla.txtkFactura.value;
        		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura2_CallBack);
@@ -173,6 +197,22 @@
        	}else if(marca==21){
 
        		strRuta = hostServerApache+"/FacturasElectronicas_AsesoresSur/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==16){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Moreira/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==22){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Polab/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==25){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_BiomedicaReferencia/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==26){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
 
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
@@ -233,6 +273,30 @@
 
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true; 
+       	}else if(selectedMarca==16){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Moreira/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
+       	}else if(selectedMarca==22){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Polab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
+       	}else if(selectedMarca==25){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_BiomedicaReferencia/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
+       	}else if(selectedMarca==26){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true; 
        	}else if (selectedMarca==9){
        		var kfactura = frmPantalla.txtkFactura.value;
        		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura_CallBack);
@@ -272,6 +336,22 @@
 
        		strRuta = hostServerApache+"/FacturasElectronicas_AsesoresSur/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
 
+       	}else if(marca==16){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Moreira/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
+       	}else if(marca==22){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Polab/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
+       	}else if(marca==25){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_BiomedicaReferencia/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
+       	}else if(marca==26){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
+
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true; 
@@ -301,7 +381,15 @@
        		marca='EXAKTA'; 
        	} else if(selectedMarca==21){
        		marca='ASESORES DEL SUR'; 
-       	} 
+       	} else if(selectedMarca==16){
+       		marca='MOREIRA'; 
+       	} else if(selectedMarca==22){
+       		marca='POLAB'; 
+       	} else if(selectedMarca==25){
+       		marca='BIOMEDICA DE REFERENCIA'; 
+       	} else if(selectedMarca==26){
+       		marca='PROMEDIC'; 
+       	}  
        	var tipoVM = frmPantalla.idVMRegistro.value;
        	var pagos ;
        	if(tipoVM == 1){

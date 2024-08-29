@@ -66,6 +66,20 @@ public class FormatoFacturaEmpresaDesgloceImpl implements FormatoFacturaEmpresa 
 				}else if(serie.equals("AJL")){
 					objSucursalTempBean = objSucursalDAO.getSucursal(1015);
 				}
+			}else if(marca==19){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1020);
+			}else if(marca==20){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1021);
+			}else if(marca==21){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1022);
+			}else if(marca==16){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1026);
+			}else if(marca==22){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1023);
+			}else if(marca==25){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1024);
+			}else if(marca==26){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(1025);
 			}
 			FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreo = new FacturacionElectronicaMayoreoDao();
 			//objFacturacionElectronicaMayoreo.getDatosFacturarSucursal(objSucursalTempBean);					
@@ -131,6 +145,20 @@ public class FormatoFacturaEmpresaDesgloceImpl implements FormatoFacturaEmpresa 
 				}else if(serie.equals("AJL")){
 					objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1015);
 				}
+			}else if(marca==19){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1020);
+			}else if(marca==20){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1021);
+			}else if(marca==21){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1022);
+			}else if(marca==16){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1026);
+			}else if(marca==22){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1023);
+			}else if(marca==25){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1024);
+			}else if(marca==26){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1025);
 			}
 			
 			objFacturaBean.setNnumeroaprobacion(objCcontrolFolio.getNaprobacion().toString());

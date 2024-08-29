@@ -111,6 +111,18 @@ public class DatosClienteAjax extends AjaxAction {
 		case 21:
 			name="ASESORES DEL SUR";
 			break;
+		case 16:
+			name="MOREIRA";
+			break;
+		case 22:
+			name="POLAB";
+			break;
+		case 25:
+			name="BIOMEDICA DE REFERENCIA";
+			break;
+		case 26:
+			name="PROMEDIC";
+			break;
 		default:
 			break;
 		}

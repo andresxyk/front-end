@@ -291,6 +291,54 @@ public class FacturacionElectronicaDomain {
 			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
 			facturaelectronicaBean.setScodigopostalemisor("06700");
 			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 16) {
+			facturaelectronicaBean.setSrazonsocialemisor("MOREIRA");
+			facturaelectronicaBean.setSrfcemisor("");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 22) {
+			facturaelectronicaBean.setSrazonsocialemisor("POLAB");
+			facturaelectronicaBean.setSrfcemisor("");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 25) {
+			facturaelectronicaBean.setSrazonsocialemisor("BIOMEDICA DE REFERENCIA");
+			facturaelectronicaBean.setSrfcemisor("");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
+		} else if (facturaelectronicaBean.getCmarca() == 26) {
+			facturaelectronicaBean.setSrazonsocialemisor("PROMEDIC");
+			facturaelectronicaBean.setSrfcemisor("");
+			facturaelectronicaBean.setScalleemisor("CALLE AVENIDA 21 PONIENTE");
+			facturaelectronicaBean.setSnexterioremisor("");
+			facturaelectronicaBean.setSninterioremisor("");
+			facturaelectronicaBean.setScoloniaemisor("ROMA NORTE");
+			facturaelectronicaBean.setSciudademisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setSmunicipioemisor("CUAUHTEMOC");
+			facturaelectronicaBean.setSestadoemisor("CIUDAD DE MEXICO");
+			facturaelectronicaBean.setScodigopostalemisor("06700");
+			facturaelectronicaBean.setSpaisemisor("MEXICO");
 		}
 		facturaelectronicaBean.setScallesuc("AV. RÍO CONSULADO ESQ. LIRAS, NO. 2727");
 		facturaelectronicaBean.setScoloniasuc("AQUILES SERDÁN");

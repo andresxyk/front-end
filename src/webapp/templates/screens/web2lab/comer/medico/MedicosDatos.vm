@@ -129,7 +129,12 @@
 						#option("$!objZonaMedico.getCzona()" "Zona - $!objZonaMedico.getCzona()" "0")							
 					#end
 				</select>    	    
-    	    </td>  	    
+    	    </td>
+    	    <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
+    	    	<input type="checkbox" id="checkSustentable" name="checkSustentable">
+  				<label for="checkSustentable">Sustentable</label>
+				<img alt='Sustentable' id="idSustentable" width="20" height="20" border='0' src='$content.getURI('images/sustentable.png')' />
+    	    </td> 	    
         </tr>   
         <tr>
         </tr>   
@@ -283,6 +288,14 @@
  				<label for="checkExakta">Exakta</label>
  				<input type="checkbox" id="checkAsesoresSur" name="checkAsesoresSur" value="21">
  				<label for="checkAsesoresSur">Asesores del Sur</label>
+ 				<input type="checkbox" id="checkMoreira" name="checkMoreira" value="16">
+ 				<label for="checkMoreira">Moreira</label>
+ 				<input type="checkbox" id="checkPolab" name="checkPolab" value="22">
+ 				<label for="checkPolab">Polab</label>
+ 				<input type="checkbox" id="checkBiomedicaReferencia" name="checkBiomedicaReferencia" value="25">
+ 				<label for="checkBiomedicaReferencia">Biomedica de Referencia</label>
+ 				<input type="checkbox" id="checkPromedic" name="checkPromedic" value="26">
+ 				<label for="checkPromedic">Promedic</label>
     	    </td>     	        
         </tr> 
         

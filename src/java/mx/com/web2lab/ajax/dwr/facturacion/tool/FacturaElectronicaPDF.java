@@ -75,6 +75,30 @@ public class FacturaElectronicaPDF {
 	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_AsesoresSur");
 	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
             
+            }else if (objFacturaBean.getCmarca() == 16) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Moreira");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Moreira");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            
+            }else if (objFacturaBean.getCmarca() == 22) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Polab");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Polab");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            
+            }else if (objFacturaBean.getCmarca() == 25) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_BiomedicaReferencia");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_BiomedicaReferencia");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            
+            }else if (objFacturaBean.getCmarca() == 26) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_Promedic");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_Promedic");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
+            
             } else if (objFacturaBean.getCmarca() == 7) {
             	if(objFacturaBean.getSserie().equals("AJP")){
             		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_JennerPrado");

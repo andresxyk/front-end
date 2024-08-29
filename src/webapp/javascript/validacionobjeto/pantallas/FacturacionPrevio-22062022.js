@@ -976,6 +976,14 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 		   marca='EXAKTA'; 
 	   } else if (selectedMarca==21){
 		   marca='ASESORES DEL SUR'; 
+	   } else if (selectedMarca==16){
+		   marca='MOREIRA'; 
+	   }  else if (selectedMarca==22){
+		   marca='POLAB'; 
+	   }  else if (selectedMarca==25){
+		   marca='BIOMEDICA DE REFERENCIA'; 
+	   }  else if (selectedMarca==26){
+		   marca='PROMEDIC'; 
 	   } 
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
@@ -1327,6 +1335,62 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 				facturaelectronicaBean.scodigopostalemisor="64060";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 21; 
+			} else if (document.getElementById('cMarca').value == 16){
+				facturaelectronicaBean.sserie="AM";
+				facturaelectronicaBean.srazonsocialemisor="MOREIRA";
+				facturaelectronicaBean.srfcemisor="AEL9703115B0";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 16; 
+			} else if (document.getElementById('cMarca').value == 22){
+				facturaelectronicaBean.sserie="AP";
+				facturaelectronicaBean.srazonsocialemisor="POLAB";
+				facturaelectronicaBean.srfcemisor="AEL9703115B0";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 22; 
+			} else if (document.getElementById('cMarca').value == 25){
+				facturaelectronicaBean.sserie="ABR";
+				facturaelectronicaBean.srazonsocialemisor="BIOMEDICA DE REFERENCIA";
+				facturaelectronicaBean.srfcemisor="AEL9703115B0";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 25; 
+			} else if (document.getElementById('cMarca').value == 26){
+				facturaelectronicaBean.sserie="AP";
+				facturaelectronicaBean.srazonsocialemisor="PROMEDIC";
+				facturaelectronicaBean.srfcemisor="AEL9703115B0";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 26; 
 			}
 			//variables del emisorSucursal
 			facturaelectronicaBean.scallesuc="AV. VASCO DE QUIROGA NO.3380 P.B.";

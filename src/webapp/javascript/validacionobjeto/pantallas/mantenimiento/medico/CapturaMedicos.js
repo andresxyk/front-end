@@ -73,6 +73,13 @@
 		frmPantalla.checkFamilyLabsNorte.checked = false;
 		frmPantalla.checkAsesoresSur.checked = false;
 		frmPantalla.checkExakta.checked = false;
+		frmPantalla.checkMoreira.checked = false;
+		frmPantalla.checkPolab.checked = false;
+		frmPantalla.checkBiomedicaReferencia.checked = false;
+		frmPantalla.checkPromedic.checked = false;
+		
+		
+		frmPantalla.checkSustentable.checked = false;
 		
 		frmPantalla.hdnCodigoPostal.value = "0";
 		
@@ -282,7 +289,7 @@
 		} 
 	}
 
-	 function medicoAceptado_CallBack(data) 
+	 function medicoAceptado_CallBack(data)  
 	 {
 			var frmPantalla = window.document.frmMedicos;
 			
@@ -338,8 +345,12 @@
 			frmPantalla.checkFamilyLabsNorte.checked = data.marcafamilylabsnorte;
 			frmPantalla.checkAsesoresSur.checked = data.marcaasesoressur;
 			frmPantalla.checkExakta.checked = data.marcaexakta;
+			frmPantalla.checkMoreira.checked = data.marcamoreira;
+			frmPantalla.checkPolab.checked = data.marcapolab;
+			frmPantalla.checkBiomedicaReferencia.checked = data.marcabiomedicareferencia;
+			frmPantalla.checkPromedic.checked = data.marcapromedic;
 			
-			
+			frmPantalla.checkSustentable.checked = data.bsustentable;
 			
 //			adminDIV("divGridDirecciones","visible","inline");
 //		 	codeDIVHTML("divGridDirecciones",data.sgriddirecciones);	

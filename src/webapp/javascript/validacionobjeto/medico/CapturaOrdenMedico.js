@@ -40,7 +40,7 @@
 
  function medicoAceptado(cMedico) 
  {
-	 	DatosMedico.buscarMedico(cMedico,medicoAceptado_CallBack);
+	 	DatosMedico.buscarMedico(cMedico,medicoAceptado_CallBack); 
  }
 
  function medicoAceptadoClave(cMedicoClave) 
@@ -141,11 +141,24 @@
 		if(frmPantalla.checkAsesoresSur.checked == true){
 			marcasventa = marcasventa+',21';
 		}
+		if(frmPantalla.checkMoreira.checked == true){
+			marcasventa = marcasventa+',16';
+		}
+		if(frmPantalla.checkPolab.checked == true){
+			marcasventa = marcasventa+',22';
+		}
+		if(frmPantalla.checkBiomedicaReferencia.checked == true){
+			marcasventa = marcasventa+',25';
+		}
+		if(frmPantalla.checkPromedic.checked == true){
+			marcasventa = marcasventa+',26';
+		}
 		if(marcasventa != '0'){
 			marcasventa = marcasventa+',0';
 		}
 		
 		medicoBean.smarcasventa = marcasventa;
+		medicoBean.bsustentable = frmPantalla.checkSustentable.checked;
 		
 		
  }
