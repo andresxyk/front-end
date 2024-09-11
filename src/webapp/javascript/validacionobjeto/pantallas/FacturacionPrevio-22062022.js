@@ -1,9 +1,9 @@
 /******************** General ********************************/
 var facturaelectronicaBean = new FacturaElectronicaBean();
 
-//var hostServerWebApp = "http://10.3.0.8:8192";
+var hostServerWebApp = "http://10.3.0.8:8192";
 
-var hostServerWebApp = "http://10.20.26.6:8192";
+//var hostServerWebApp = "http://10.20.26.6:8192";
 
    function init() 
    {
@@ -1308,7 +1308,7 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 19; 
 			} else if (document.getElementById('cMarca').value == 20){
-				facturaelectronicaBean.sserie="AEX";
+				facturaelectronicaBean.sserie="AJK";
 				facturaelectronicaBean.srazonsocialemisor="LABORATORIOS BIO ANALISIS SC";
 				facturaelectronicaBean.srfcemisor="";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
