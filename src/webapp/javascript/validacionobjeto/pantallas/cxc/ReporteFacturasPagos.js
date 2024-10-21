@@ -15,7 +15,7 @@ function repFacturas(liga, nombre){
 }
 
 /**
- * Versión 25 de Marzo 2013 
+ * Versiï¿½n 25 de Marzo 2013 
  BY 
  */
 function repRefacturas(liga, nombre){
@@ -34,7 +34,7 @@ function repRefacturas(liga, nombre){
 	return  true;
 }
 
-
+ 
 function repPagos(liga, nombre){
     var frmPantalla = window.document.frmReportesPagoFactura;		
 	var fecha1 = frmPantalla.txtFechaInicio.value;
