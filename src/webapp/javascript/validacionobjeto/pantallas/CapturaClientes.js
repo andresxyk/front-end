@@ -55,8 +55,8 @@ function getMarcasUser_CallBack(data) {
 	 var frmPantalla = window.document.frmOpConvenios;
 	 var idUser = document.getElementById("idUsuario").value;
 //	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGdaInit/"+idUser+"/"+data;
-//	 var url = "http://10.20.20.12:8021/webInfodiamex/homeGda/"+idUser;
-	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGda/"+idUser;
+	 var url = "http://10.20.20.12:8021/webInfodiamex/homeGda/"+idUser;
+//	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGda/"+idUser;
 	 window.open(url, "_blank"); 
 }
 
@@ -158,6 +158,7 @@ function cleanCliente() {
 	frmPantalla.selGiro.selectedIndex = 0;
 	frmPantalla.selRegimenFiscal.selectedIndex = 0;
 	frmPantalla.selUsoCfdi.selectedIndex = 0;
+	frmPantalla.selDias.selectedIndex = 0;
 	frmPantalla.selZonaAsignada.selectedIndex = 0;
 	codigoBean(frmPantalla.txtEstadoCliente,true,"");
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
@@ -213,7 +214,7 @@ function VerificaModificacion()
 function actualizaCliente() {	 	
 	disableDIV();
 	LoadCompletedCliente();
-	DatosCliente.actualizaCliente(clienteBean,actualizaCliente_CallBack);
+	DatosCliente.actualizaCliente(clienteBean,actualizaCliente_CallBack); 
 }	
 		
 function actualizaCliente_CallBack(data)
@@ -282,6 +283,8 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.selRegimenFiscal.selectedIndex = data.cregimenfiscal;
 	
 	valorCombo(document.getElementById('selUsoCfdi'),data.cusocfdi);
+	
+	valorCombo(document.getElementById('selDias'),data.udiascredito);
 		
 	valorCombo(document.getElementById('selGiro'),data.cgirocliente);	
 	compareSelectvalue(frmPantalla.selZonaAsignada,data.czonaventa);		
@@ -339,7 +342,8 @@ function LoadCompletedCliente() {
 	clienteBean.czonaventa=frmPantalla.selZonaAsignada[frmPantalla.selZonaAsignada.selectedIndex].value;
 	clienteBean.cregimenfiscal=frmPantalla.selRegimenFiscal[frmPantalla.selRegimenFiscal.selectedIndex].value;
 	clienteBean.cusocfdi=frmPantalla.selUsoCfdi[frmPantalla.selUsoCfdi.selectedIndex].value;
-	
+	clienteBean.udiascredito=frmPantalla.selDias[frmPantalla.selDias.selectedIndex].value;
+	 
 }
 
 function LoadBusquedaCliente() {

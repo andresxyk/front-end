@@ -123,6 +123,9 @@ public class DatosClienteAjax extends AjaxAction {
 		case 26:
 			name="PROMEDIC";
 			break;
+		case 9:
+			name="SWISS HOSPITAL";
+			break;
 		default:
 			break;
 		}

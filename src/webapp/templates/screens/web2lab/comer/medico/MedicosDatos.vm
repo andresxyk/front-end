@@ -296,6 +296,8 @@
  				<label for="checkBiomedicaReferencia">Biomedica de Referencia</label>
  				<input type="checkbox" id="checkPromedic" name="checkPromedic" value="26">
  				<label for="checkPromedic">Promedic</label>
+ 				<input type="checkbox" id="checkSwissHospital" name="checkSwissHospital" value="9">
+ 				<label for="checkSwissHospital">Swiss Hospital</label>
     	    </td>     	        
         </tr> 
         

@@ -1,9 +1,9 @@
 
-// var hostServerApache = "http://10.3.0.8:9085"; 
-// var hostServerWebApp = "http://10.3.0.8:8192"; 
+ var hostServerApache = "http://10.3.0.8:9085"; 
+ var hostServerWebApp = "http://10.3.0.8:8192"; 
  
- var hostServerApache = "http://10.20.26.6:9085"; 
- var hostServerWebApp = "http://10.20.26.6:8192";
+// var hostServerApache = "http://10.20.26.6:9085"; 
+// var hostServerWebApp = "http://10.20.26.6:8192";
 
 	function init() {
 		DWRUtil.useLoadingMessage();
@@ -160,8 +160,12 @@
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true;
        	}else if (selectedMarca==9){
-       		var kfactura = frmPantalla.txtkFactura.value;
-       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura2_CallBack);
+       		strRuta = hostServerApache+"/FacturasElectronicas_SwissHospital/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+//       		var kfactura = frmPantalla.txtkFactura.value;
+//       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura2_CallBack);
        	}	
 	}
 	
@@ -213,6 +217,10 @@
        	}else if(marca==26){
 
        		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf"; 
+
+       	}else if(marca==9){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_SwissHospital/XMLTMP/PDF/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".pdf";
 
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
@@ -298,8 +306,12 @@
        		abrirVentanaOrden(strRuta,snombre);	   			     			    
     	    return true; 
        	}else if (selectedMarca==9){
-       		var kfactura = frmPantalla.txtkFactura.value;
-       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura_CallBack);
+       		strRuta = hostServerApache+"/FacturasElectronicas_SwissHospital/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
+       		abrirVentanaOrden(strRuta,snombre);	   			     			    
+    	    return true;
+//       		var kfactura = frmPantalla.txtkFactura.value;
+//       		CuentasxCobrarMayoreo.getMarcaKfactura(kfactura,marcaKfactura_CallBack);
        	}		
 		
 	}
@@ -352,6 +364,10 @@
 
        		strRuta = hostServerApache+"/FacturasElectronicas_Promedic/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml"; 
 
+       	}else if(marca==9){
+
+       		strRuta = hostServerApache+"/FacturasElectronicas_SwissHospital/XML/FacturacionElectronica_" + frmPantalla.txtNumeroFactura.value + ".xml";
+
        	}
 		abrirVentanaOrden(strRuta,snombre);	   			     			    
 	    return true; 
@@ -371,7 +387,7 @@
        		marca='JENNER PRADO'; 
        	}else if(selectedMarca==8){
        		marca='JENNER LEAN'; 
-       	}else if(selectedMarca==9){
+       	}else if(selectedMarca==10){
        		marca='SERIE B'; 
        	} else if(selectedMarca==15){
        		marca='LIACSA'; 
@@ -387,9 +403,11 @@
        		marca='POLAB'; 
        	} else if(selectedMarca==25){
        		marca='BIOMEDICA DE REFERENCIA'; 
-       	} else if(selectedMarca==26){
+       	} else if(selectedMarca==26){ 
        		marca='PROMEDIC'; 
-       	}  
+       	} else if(selectedMarca==9){
+       		marca='SWISS HOSPITAL'; 
+       	} 
        	var tipoVM = frmPantalla.idVMRegistro.value;
        	var pagos ;
        	if(tipoVM == 1){
@@ -397,7 +415,7 @@
        	}else{
        		pagos= false;
        	}
-       	
+       	 
        	if (confirm("Estas seguro de buscar el folio " + window.document.frmPagoFactura.txtFolioFactura.value + " de la marca "+marca+" ?")) {
 			CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,pagos,initFactura_CallBack);
 			adminDIV("gridEstadoFactura","visible","inline");

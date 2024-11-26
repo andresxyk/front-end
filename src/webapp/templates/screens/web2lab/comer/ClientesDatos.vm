@@ -271,10 +271,11 @@
     	    </td>
             <td>
                 <select id="selDias" >
-            		<option value="1" >0 dias</option>
-            		<option value="2" >15 dias</option>
-            		<option value="3" selected>30 dias</option>
-            		<option value="4" >45 dias</option>
+            		<option value="0" >0 dias</option>
+            		<option value="15" >15 dias</option>
+            		<option value="30" selected>30 dias</option>
+            		<option value="45" >45 dias</option>
+            		<option value="60" >60 dias</option>
                 </select>	DIAS DE CREDITO
     	    </td>
         </tr>   

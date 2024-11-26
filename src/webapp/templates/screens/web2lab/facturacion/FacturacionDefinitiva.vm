@@ -211,6 +211,7 @@
 						   	<option value="22">POLAB</option>
 						   	<option value="25">BIOMEDICA DE REFERENCIA</option>
 						   	<option value="26">PROMEDIC</option>
+						   	<option value="9">SWISS HOSPITAL</option>
 			        </select> 
 					<input type="button" id="idBuscaFactura" name="idBuscaFactura" value="Busca Factura" onClick="buscaFactura();" class="boton">
 				</td>

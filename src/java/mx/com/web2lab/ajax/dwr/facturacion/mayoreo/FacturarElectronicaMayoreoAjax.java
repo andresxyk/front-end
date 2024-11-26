@@ -152,6 +152,9 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 26){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Promedic");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic");
+					} else if (cMarca == 9){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissHospital");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital");
 					}
 					
 					
@@ -175,6 +178,8 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("Biomedica de Referencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					} else if (cMarca == 26) {
 						objMailDAO.sendEmail("Promedic, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 9) {
+						objMailDAO.sendEmail("SwissHospital, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {
@@ -264,6 +269,9 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 					} else if (cMarca == 26){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Promedic");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic");
+					}  else if (cMarca == 9){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissHospital");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital");
 					}
 					
 					
@@ -287,6 +295,8 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 						objMailDAO.sendEmail("Biomedica de Referencia, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					} else if (cMarca == 26) {
 						objMailDAO.sendEmail("Promedic, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
+					} else if (cMarca == 9) {
+						objMailDAO.sendEmail("SwissHospital, Facturacion Electrónica, gracias por su preferencia, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml","","",5);
 					}
 				}
 			} else {

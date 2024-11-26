@@ -142,6 +142,9 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 					} else if (objFacturaBean.getCmarca() == 26){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Promedic");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic");
+					} else if (objFacturaBean.getCmarca() == 9){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissHospital");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital");
 					}else{
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Azteca");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca");
@@ -221,6 +224,9 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 					
 					} else if(objFacturaBean.getCmarca() == 26){
 						objMailDAO.sendEmail("Promedic, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 9){
+						objMailDAO.sendEmail("SWISS HOSPITAL, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					}else{
 						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,4);

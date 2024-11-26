@@ -111,6 +111,11 @@ public class FacturaElectronicaPDF {
     	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_JennerLean");
     	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);  
             	}	
+            } else if (objFacturaBean.getCmarca() == 9) {
+	    		sPdfPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfwrite_SwissHospital");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sPdfPath);    	
+	    		sHttpPath = ConfiguracionProperties.getPropiedad("reporte.ruta.pdfreadURL_SwissHospital");
+	     		iObjLog.debug("Entrando FacturaElectronicaPDF.createFactura..... " + sHttpPath);    	
             }
             DataOutputStream dos = new DataOutputStream(new FileOutputStream(sPdfPath + strNomArchivo + ".fo"));
             dos.writeBytes(objFacturaBean.getSfop());

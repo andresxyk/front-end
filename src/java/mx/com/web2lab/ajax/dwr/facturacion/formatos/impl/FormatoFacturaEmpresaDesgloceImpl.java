@@ -80,6 +80,8 @@ public class FormatoFacturaEmpresaDesgloceImpl implements FormatoFacturaEmpresa 
 				 objSucursalTempBean = objSucursalDAO.getSucursal(1024);
 			}else if(marca==26){
 				 objSucursalTempBean = objSucursalDAO.getSucursal(1025);
+			}else if(marca==9){
+				 objSucursalTempBean = objSucursalDAO.getSucursal(9999);
 			}
 			FacturacionElectronicaMayoreoDao objFacturacionElectronicaMayoreo = new FacturacionElectronicaMayoreoDao();
 			//objFacturacionElectronicaMayoreo.getDatosFacturarSucursal(objSucursalTempBean);					
@@ -159,6 +161,8 @@ public class FormatoFacturaEmpresaDesgloceImpl implements FormatoFacturaEmpresa 
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1024);
 			}else if(marca==26){
 				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(1025);
+			}else if(marca==9){
+				objCcontrolFolio=objFacturacionElectronicaMayoreo.buscaControlFoliol(9999);
 			}
 			
 			objFacturaBean.setNnumeroaprobacion(objCcontrolFolio.getNaprobacion().toString());

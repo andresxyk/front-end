@@ -37,6 +37,8 @@
        		marca='BIOMEDICA DE REFERENCIA'; 
        	}else if(selectedMarca==26){
        		marca='PROMEDIC'; 
+       	}else if(selectedMarca==9){
+       		marca='SWISS HOSPITAL'; 
        	}
        	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {

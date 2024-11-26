@@ -77,6 +77,7 @@
 		frmPantalla.checkPolab.checked = false;
 		frmPantalla.checkBiomedicaReferencia.checked = false;
 		frmPantalla.checkPromedic.checked = false;
+		frmPantalla.checkSwissHospital.checked = false;
 		
 		
 		frmPantalla.checkSustentable.checked = false;
@@ -349,6 +350,7 @@
 			frmPantalla.checkPolab.checked = data.marcapolab;
 			frmPantalla.checkBiomedicaReferencia.checked = data.marcabiomedicareferencia;
 			frmPantalla.checkPromedic.checked = data.marcapromedic;
+			frmPantalla.checkSwissHospital.checked = data.marcaswisshospital;
 			
 			frmPantalla.checkSustentable.checked = data.bsustentable;
 			

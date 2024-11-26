@@ -117,7 +117,7 @@ public String buscarFacturaSustitucion(String factura, int idMarca, int tipofact
 		strReturn = objBusquedaFactura.getBusquedaFacturasSustitucion(factura, idMarca,tipofactura,cconvenio);
 		iObjLog.debug("Saliendo de BusquedaGacturasAjax.buscarFacturaSustitucion("+strReturn+"," + idMarca+")");		
 	} catch (Exception e) {
-		e.printStackTrace();
+		e.printStackTrace(); 
 	}	
 	return strReturn;	
 }

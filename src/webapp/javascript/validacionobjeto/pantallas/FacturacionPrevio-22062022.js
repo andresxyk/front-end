@@ -1,9 +1,9 @@
 /******************** General ********************************/
 var facturaelectronicaBean = new FacturaElectronicaBean();
 
-//var hostServerWebApp = "http://10.3.0.8:8192";
+var hostServerWebApp = "http://10.3.0.8:8192";
 
-var hostServerWebApp = "http://10.20.26.6:8192";
+//var hostServerWebApp = "http://10.20.26.6:8192";
 
    function init() 
    {
@@ -984,6 +984,8 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 		   marca='BIOMEDICA DE REFERENCIA'; 
 	   }  else if (selectedMarca==26){
 		   marca='PROMEDIC'; 
+	   }  else if (selectedMarca==9){
+		   marca='SWISS HOSPITAL'; 
 	   } 
 	       if ((ufoliofactura>0) ||(ufoliofactura !="")) {
 	    	   if(confirm("¿Esta seguro de mostrar la factura con folio "+ufoliofactura+" de la marca "+marca+" ?")){
@@ -1391,6 +1393,20 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 				facturaelectronicaBean.scodigopostalemisor="64060";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 26; 
+			} else if (document.getElementById('cMarca').value == 9){
+				facturaelectronicaBean.sserie="ASH";
+				facturaelectronicaBean.srazonsocialemisor="SWISSHOSPITAL";
+				facturaelectronicaBean.srfcemisor="RFCSWISSHOSP";
+				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
+				facturaelectronicaBean.snexterioremisor="";
+				facturaelectronicaBean.sninterioremisor="";
+				facturaelectronicaBean.scoloniaemisor="OBISPADO";
+				facturaelectronicaBean.sciudademisor="MONTERREY";
+				facturaelectronicaBean.smunicipioemisor="MONTERREY";
+				facturaelectronicaBean.sestadoemisor="NUEVO LEON";
+				facturaelectronicaBean.scodigopostalemisor="64060";
+				facturaelectronicaBean.spaisemisor="MEXICO";				
+				facturaelectronicaBean.cmarca = 9; 
 			}
 			//variables del emisorSucursal
 			facturaelectronicaBean.scallesuc="AV. VASCO DE QUIROGA NO.3380 P.B.";
