@@ -127,7 +127,24 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 					} else if (objFacturaBean.getCmarca() == 20){
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Exakta");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta");
-					
+					} else if (objFacturaBean.getCmarca() == 21){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_AsesoresSur");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur");
+					} else if (objFacturaBean.getCmarca() == 16){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Moreira");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Moreira");
+					} else if (objFacturaBean.getCmarca() == 22){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Polab");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Polab");
+					} else if (objFacturaBean.getCmarca() == 25){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_BiomedicaReferencia");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_BiomedicaReferencia");
+					} else if (objFacturaBean.getCmarca() == 26){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Promedic");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic");
+					} else if (objFacturaBean.getCmarca() == 9){
+						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_SwissHospital");
+						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital");
 					}else{
 						strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread_Azteca");
 						strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Azteca");
@@ -193,6 +210,23 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 						objMailDAO.sendEmail("FamilyLabs Norte, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					} else if(objFacturaBean.getCmarca() == 20){
 						objMailDAO.sendEmail("Exakta, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					} else if(objFacturaBean.getCmarca() == 21){
+						objMailDAO.sendEmail("Asesores del Sur, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 16){
+						objMailDAO.sendEmail("Moreira, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 22){
+						objMailDAO.sendEmail("Polab, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 25){
+						objMailDAO.sendEmail("Biomedica de Referencia, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 26){
+						objMailDAO.sendEmail("Promedic, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+					
+					} else if(objFacturaBean.getCmarca() == 9){
+						objMailDAO.sendEmail("SWISS HOSPITAL, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					}else{
 						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,4);

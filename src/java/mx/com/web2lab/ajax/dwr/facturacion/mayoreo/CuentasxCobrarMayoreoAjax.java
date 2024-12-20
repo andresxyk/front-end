@@ -18,6 +18,7 @@ import mx.com.web2lab.backend.beans.facturacion.electronica.FacturaElectronicaBe
 import mx.com.web2lab.backend.dao.comer.PagoFacturaDao;
 import mx.com.web2lab.backend.dao.facturacion.electronica.orden.OrdenDatosFacturacionDao;
 import mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionMayoreoDao;
+import mx.com.web2lab.backend.hbm.ConfiguracionProperties;
 import mx.com.web2lab.backend.hbm.om.ap.TFactura;
 import mx.com.web2lab.backend.util.exceptions.AjaxDwrException;
 import mx.com.web2lab.backend.util.formatos.Formatos;
@@ -29,8 +30,13 @@ import org.apache.commons.logging.LogFactory;
 public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	private static Log iObjLog = LogFactory.getLog(CuentasxCobrarMayoreoAjax.class);
 	
+	private String hostServerApache = null;
+	private String hostServerWebApp = null;
+	 
 	public CuentasxCobrarMayoreoAjax(){
 		iObjLog.debug("new: Generando nueva clase FacturarElectronicaMayoreoAjax");
+		hostServerApache = ConfiguracionProperties.getPropiedad("host.server.apache");
+		hostServerWebApp = ConfiguracionProperties.getPropiedad("host.server.webapp");
 	} 
 	
 	public String findCfdiPdf(String path) throws Exception {
@@ -38,9 +44,9 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.findCfdiPdf:Entrando... ");
 		try {
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
-			String remplacePath = path.replaceAll("http://10.3.0.8:9085", "/mnt/gda/apache-tomcat/webapps/ROOT");
+			String remplacePath = path.replaceAll("http://"+hostServerApache, "/mnt/gda/apache-tomcat/webapps/ROOT");
 			URL url; 
-			url = new URL("http://10.3.0.8:8192/facturas/ordenes/find-cfdi-server?path="+remplacePath);
+			url = new URL("http://"+hostServerWebApp+"/facturas/ordenes/find-cfdi-server?path="+remplacePath);
 			HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 			conn.setRequestMethod("GET");
 

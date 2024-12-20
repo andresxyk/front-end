@@ -71,7 +71,16 @@
 		frmPantalla.checkJenner.checked = false;
 		frmPantalla.checkLiacsa.checked = false;
 		frmPantalla.checkFamilyLabsNorte.checked = false;
+		frmPantalla.checkAsesoresSur.checked = false;
 		frmPantalla.checkExakta.checked = false;
+		frmPantalla.checkMoreira.checked = false;
+		frmPantalla.checkPolab.checked = false;
+		frmPantalla.checkBiomedicaReferencia.checked = false;
+		frmPantalla.checkPromedic.checked = false;
+		frmPantalla.checkSwissHospital.checked = false;
+		
+		
+		frmPantalla.checkSustentable.checked = false;
 		
 		frmPantalla.hdnCodigoPostal.value = "0";
 		
@@ -281,7 +290,7 @@
 		} 
 	}
 
-	 function medicoAceptado_CallBack(data) 
+	 function medicoAceptado_CallBack(data)  
 	 {
 			var frmPantalla = window.document.frmMedicos;
 			
@@ -334,10 +343,16 @@
 			frmPantalla.checkSwisslab.checked = data.marcaswisslab;
 			frmPantalla.checkJenner.checked = data.marcajenner;
 			frmPantalla.checkLiacsa.checked = data.marcaliacsa;
-			frmPantalla.checkFamilyLabsNorte.checked = data.marcaliacsa;
-			frmPantalla.checkExakta.checked = data.marcaliacsa;
+			frmPantalla.checkFamilyLabsNorte.checked = data.marcafamilylabsnorte;
+			frmPantalla.checkAsesoresSur.checked = data.marcaasesoressur;
+			frmPantalla.checkExakta.checked = data.marcaexakta;
+			frmPantalla.checkMoreira.checked = data.marcamoreira;
+			frmPantalla.checkPolab.checked = data.marcapolab;
+			frmPantalla.checkBiomedicaReferencia.checked = data.marcabiomedicareferencia;
+			frmPantalla.checkPromedic.checked = data.marcapromedic;
+			frmPantalla.checkSwissHospital.checked = data.marcaswisshospital;
 			
-			
+			frmPantalla.checkSustentable.checked = data.bsustentable;
 			
 //			adminDIV("divGridDirecciones","visible","inline");
 //		 	codeDIVHTML("divGridDirecciones",data.sgriddirecciones);	

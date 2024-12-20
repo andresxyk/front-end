@@ -261,6 +261,20 @@ public class FacturaElectronicaXML
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_FamilyLabs") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       } else if(objfilexmlbean.getCmarca() == 20) {
     	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Exakta") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      } else if(objfilexmlbean.getCmarca() == 21) {
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_AsesoresSur") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      } else if(objfilexmlbean.getCmarca() == 16) {
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Moreira") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      } else if(objfilexmlbean.getCmarca() == 22) {
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Polab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      } else if(objfilexmlbean.getCmarca() == 25) {
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_BiomedicaReferencia") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      } else if(objfilexmlbean.getCmarca() == 26) {
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_Promedic") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       
       } else if(objfilexmlbean.getCmarca() == 7) {
     	  if(objfilexmlbean.getSserie().equals("AJP")){
@@ -268,6 +282,8 @@ public class FacturaElectronicaXML
     	  }else if(objfilexmlbean.getSserie().equals("AJL")){
     		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
     	  }
+      } else if(objfilexmlbean.getCmarca() == 9){
+    	  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmlcfdlocalread_SwissHospital") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }
       out.output(doc, file);
       file.flush();
@@ -286,6 +302,20 @@ public class FacturaElectronicaXML
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
           }else if (objfilexmlbean.getCmarca() == 20){
         	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          }else if (objfilexmlbean.getCmarca() == 21){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          
+          }else if (objfilexmlbean.getCmarca() == 16){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Moreira") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          
+          }else if (objfilexmlbean.getCmarca() == 22){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Polab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          
+          }else if (objfilexmlbean.getCmarca() == 25){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_BiomedicaReferencia") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+          
+          }else if (objfilexmlbean.getCmarca() == 26){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
           
           }else if (objfilexmlbean.getCmarca() == 7){
         	  if(objfilexmlbean.getSserie().equals("AJP")){
@@ -293,6 +323,8 @@ public class FacturaElectronicaXML
         	  }else if(objfilexmlbean.getSserie().equals("AJL")){
         		  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
         	  }
+          } else if (objfilexmlbean.getCmarca() == 9){
+        	  archivo = new File(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
           }
         if (archivo.exists()) {
           no_exit = false;
@@ -315,6 +347,20 @@ public class FacturaElectronicaXML
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }else if(objfilexmlbean.getCmarca() == 20){
     	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      }else if(objfilexmlbean.getCmarca() == 21){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }else if(objfilexmlbean.getCmarca() == 16){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Moreira") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }else if(objfilexmlbean.getCmarca() == 22){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Polab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }else if(objfilexmlbean.getCmarca() == 25){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_BiomedicaReferencia") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }else if(objfilexmlbean.getCmarca() == 26){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       
       } else if(objfilexmlbean.getCmarca() == 7){
     	  if(objfilexmlbean.getSserie().equals("AJP")){
@@ -322,6 +368,8 @@ public class FacturaElectronicaXML
     	  }else if(objfilexmlbean.getSserie().equals("AJL")){
     		  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
     	  }
+      } else if(objfilexmlbean.getCmarca() == 9){
+    	  lector = new FileReader(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }
       BufferedReader contenido = new BufferedReader(lector);
       while ((strFileCFDI = contenido.readLine()) != null) {
@@ -344,6 +392,20 @@ public class FacturaElectronicaXML
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }	else if(objfilexmlbean.getCmarca() == 20){
     	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      }	else if(objfilexmlbean.getCmarca() == 21){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if(objfilexmlbean.getCmarca() == 16){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Moreira") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if(objfilexmlbean.getCmarca() == 22){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Polab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if(objfilexmlbean.getCmarca() == 25){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_BiomedicaReferencia") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if(objfilexmlbean.getCmarca() == 26){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       
       } else if(objfilexmlbean.getCmarca() == 7){
     	  if(objfilexmlbean.getSserie().equals("AJP")){
@@ -351,6 +413,8 @@ public class FacturaElectronicaXML
     	  }else if(objfilexmlbean.getSserie().equals("AJL")){
     		  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
     	  }
+      } else if(objfilexmlbean.getCmarca() == 9){
+    	  document = builder.parse(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }
       Node root1 = document.getDocumentElement();
       NodeList childNodes = root1.getChildNodes();
@@ -617,6 +681,20 @@ public class FacturaElectronicaXML
           file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_FamilyLabs") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       }	else if (objfilexmlbean.getCmarca() == 20) {
           file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Exakta") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      }	else if (objfilexmlbean.getCmarca() == 21) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_AsesoresSur") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if (objfilexmlbean.getCmarca() == 16) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Moreira") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if (objfilexmlbean.getCmarca() == 22) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Polab") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if (objfilexmlbean.getCmarca() == 25) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_BiomedicaReferencia") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      
+      }	else if (objfilexmlbean.getCmarca() == 26) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_Promedic") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
       
       } else if (objfilexmlbean.getCmarca() == 7) {
     	  if(objfilexmlbean.getSserie().equals("AJP")){
@@ -624,7 +702,9 @@ public class FacturaElectronicaXML
     	  }else if(objfilexmlbean.getSserie().equals("AJL")){
     		  file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_JennerLean") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
     	  }
-	  }
+	  }	else if (objfilexmlbean.getCmarca() == 9) {
+          file = new FileOutputStream(ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread_SwissHospital") + "FacturacionElectronica_" + objfilexmlbean.getSseriofoliocompleto() + ".xml");
+      }
       out.output(doc, file);
       file.flush();
       file.close();

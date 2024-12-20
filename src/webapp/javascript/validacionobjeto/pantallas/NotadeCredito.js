@@ -1,6 +1,8 @@
 
 
-
+ var hostServerWebApp = "http://10.3.0.8:8192";
+ 
+// var hostServerWebApp = "http://10.20.26.6:8192";
 
 
 /********************* Negocio *******************************/
@@ -467,12 +469,9 @@
 		  }else{
 			  uuid=uuidFactura;
 		  }
-		window.open("http://10.3.0.8:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
+		window.open(hostServerWebApp+"/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
 			"&metodoPago="+metodoPago+"&uuid="+uuid+"&concepto="+concepto+"&cantidad="+cantidad+
 			"&iva="+iva+"&sustitucion="+checkboxSustitucion, "_blank");
-//			window.open("http://localhost:8192/facturas/nota-credito/emitir?numeroNC="+numNotaCre+"&numeroFactura="+numFactura+"&formaPago="+formaPago+
-//					"&metodoPago="+metodoPago+"&uuid="+uuid+"&concepto="+concepto+"&cantidad="+cantidad+
-//					"&iva="+iva+"&sustitucion="+checkboxSustitucion, "_blank");
 	  }
   }
            

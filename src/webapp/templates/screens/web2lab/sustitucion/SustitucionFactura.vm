@@ -25,7 +25,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 		
 	</div>
 	
-	 	
+	 	 
 </form> 
 <script>
 		 window.onload = init;		

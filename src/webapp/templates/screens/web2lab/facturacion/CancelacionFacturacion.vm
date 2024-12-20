@@ -34,6 +34,12 @@
 						   	<option value="8">JENNER LEAN</option>
 						   	<option value="19">FAMILYLABS NORTE</option>
 						   	<option value="20">EXAKTA</option>
+						   	<option value="21">ASESORES DEL SUR</option>
+						   	<option value="16">MOREIRA</option>
+						   	<option value="22">POLAB</option>
+						   	<option value="25">BIOMEDICA DE REFERENCIA</option>
+						   	<option value="26">PROMEDIC</option>
+						   	<option value="9">SWISS HOSPITAL</option>
 			     </select>
     	    </td>    
             <td>

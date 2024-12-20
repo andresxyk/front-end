@@ -27,6 +27,18 @@
        		marca='FAMILYLABS NORTE'; 
        	}else if(selectedMarca==20){
        		marca='EXAKTA'; 
+       	}else if(selectedMarca==21){
+       		marca='ASESORES DEL SUR'; 
+       	}else if(selectedMarca==16){
+       		marca='MOREIRA'; 
+       	}else if(selectedMarca==22){
+       		marca='POLAB'; 
+       	}else if(selectedMarca==25){
+       		marca='BIOMEDICA DE REFERENCIA'; 
+       	}else if(selectedMarca==26){
+       		marca='PROMEDIC'; 
+       	}else if(selectedMarca==9){
+       		marca='SWISS HOSPITAL'; 
        	}
        	 
 		if (confirm("Estas seguro de cancelar la factura A-" + facturaCancelar + " de la marca "+marca+" ?")) {
