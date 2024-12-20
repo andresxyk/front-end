@@ -165,7 +165,7 @@
 		
 	     
     function altaMedico() {
-        var frmPantalla = window.document.frmConsultaOrden;
+        var frmPantalla = window.document.frmConsultaOrden; 
     	htmlOb=document.getElementById("MedicoBusqueda");
     	if (frmPantalla.hdnkMedico.value == 0) {
     		strApellidoPaterno = trim(frmPantalla.txtApellidoPaternoMedico.value);

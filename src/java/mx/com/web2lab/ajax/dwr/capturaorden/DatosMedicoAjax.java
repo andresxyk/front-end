@@ -21,7 +21,7 @@ import org.apache.turbine.services.security.torque.om.TurbineUser;
 public class DatosMedicoAjax extends AjaxAction {
 	private static Log iObjLog = LogFactory.getLog(DatosMedicoAjax.class);	
 	
-	public MedicoBean buscarMedico(int intCodigoMedico) throws Exception
+	public MedicoBean buscarMedico(int intCodigoMedico) throws Exception 
 	{
 		iObjLog.debug("Entrando DatosMedicoAjax.buscarMedico:Entrando... ");		
 		MedicoBean objMedico = new MedicoBean();

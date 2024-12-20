@@ -1,4 +1,7 @@
  var medicoBean = new MedicoBean();
+ 
+ var hostServerWebApp = "http://10.3.0.8:8192";
+// var hostServerWebApp = "http://10.20.26.6:8192";
 
  
  function showSubModalRegistraRegalo(frmPantalla) {
@@ -37,7 +40,7 @@
 
  function medicoAceptado(cMedico) 
  {
-	 	DatosMedico.buscarMedico(cMedico,medicoAceptado_CallBack);
+	 	DatosMedico.buscarMedico(cMedico,medicoAceptado_CallBack); 
  }
 
  function medicoAceptadoClave(cMedicoClave) 
@@ -54,7 +57,7 @@
  function reasignacionOrdenes(){
 	 var frmPantalla = window.document.frmMedicos;
 	 var idUser = document.getElementById("idUsuario").value;
-	 var url = "http://10.3.0.8:8192/medicos/reasignacion-ordenes/"+idUser;
+	 var url = hostServerWebApp+"/medicos/reasignacion-ordenes/"+idUser;
 	 window.open(url, "_blank"); 
 	 
  }
@@ -135,11 +138,30 @@
 		if(frmPantalla.checkExakta.checked == true){
 			marcasventa = marcasventa+',20';
 		}
+		if(frmPantalla.checkAsesoresSur.checked == true){
+			marcasventa = marcasventa+',21';
+		}
+		if(frmPantalla.checkMoreira.checked == true){
+			marcasventa = marcasventa+',16';
+		}
+		if(frmPantalla.checkPolab.checked == true){
+			marcasventa = marcasventa+',22';
+		}
+		if(frmPantalla.checkBiomedicaReferencia.checked == true){
+			marcasventa = marcasventa+',25';
+		}
+		if(frmPantalla.checkPromedic.checked == true){
+			marcasventa = marcasventa+',26';
+		}
+		if(frmPantalla.checkSwissHospital.checked == true){
+			marcasventa = marcasventa+',9';
+		}
 		if(marcasventa != '0'){
 			marcasventa = marcasventa+',0';
 		}
 		
 		medicoBean.smarcasventa = marcasventa;
+		medicoBean.bsustentable = frmPantalla.checkSustentable.checked;
 		
 		
  }

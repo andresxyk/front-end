@@ -258,15 +258,21 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 							   	<option value="5">SWISSLAB</option>
 							   	<option value="7">JENNER PRADO</option> 
 							   	<option value="8">JENNER LEAN</option>
-							   	<option value="9">SERIE B</option>
+							   	<option value="10">SERIE B</option>
 							   	<option value="15">LIACSA</option> 
 							   	<option value="19">FAMILYLABS NORTE</option>
-							   	<option value="20">EXAKTA</option>  
+							   	<option value="20">EXAKTA</option> 
+							   	<option value="21">ASESORES DEL SUR</option>
+							   	<option value="16">MOREIRA</option>
+							   	<option value="22">POLAB</option>
+							   	<option value="25">BIOMEDICA DE REFERENCIA</option>
+							   	<option value="26">PROMEDIC</option> 
+							   	<option value="9">SWISS HOSPITAL</option> 
 				     </select>
     	   		 </td> 		
     		</tr>
     	</table>               
-		<input type="button" value="Buscar Folio" name="Buscar Folio" class="boton" onclick="buscarFolio();">
+		<input type="button" value="Buscar Folio" name="Buscar Folio" class="boton" onclick="buscarFolio();"> 
     </div> 
 	<div id="gridEstadoFactura" style="display:none">
 		<table border="0" cellpadding="2" cellspacing="3" width="100%" class="tabla">
