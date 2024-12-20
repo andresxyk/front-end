@@ -1338,7 +1338,7 @@ var hostServerWebApp = "http://10.3.0.8:8192";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 21; 
 			} else if (document.getElementById('cMarca').value == 16){
-				facturaelectronicaBean.sserie="AM";
+				facturaelectronicaBean.sserie="AIO";
 				facturaelectronicaBean.srazonsocialemisor="MOREIRA";
 				facturaelectronicaBean.srfcemisor="AEL9703115B0";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
@@ -1352,7 +1352,7 @@ var hostServerWebApp = "http://10.3.0.8:8192";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 16; 
 			} else if (document.getElementById('cMarca').value == 22){
-				facturaelectronicaBean.sserie="AP";
+				facturaelectronicaBean.sserie="AIM";
 				facturaelectronicaBean.srazonsocialemisor="POLAB";
 				facturaelectronicaBean.srfcemisor="AEL9703115B0";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
@@ -1366,7 +1366,7 @@ var hostServerWebApp = "http://10.3.0.8:8192";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 22; 
 			} else if (document.getElementById('cMarca').value == 25){
-				facturaelectronicaBean.sserie="ABR";
+				facturaelectronicaBean.sserie="AMZ";
 				facturaelectronicaBean.srazonsocialemisor="BIOMEDICA DE REFERENCIA";
 				facturaelectronicaBean.srfcemisor="AEL9703115B0";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
@@ -1380,7 +1380,7 @@ var hostServerWebApp = "http://10.3.0.8:8192";
 				facturaelectronicaBean.spaisemisor="MEXICO";				
 				facturaelectronicaBean.cmarca = 25; 
 			} else if (document.getElementById('cMarca').value == 26){
-				facturaelectronicaBean.sserie="AP";
+				facturaelectronicaBean.sserie="AIN";
 				facturaelectronicaBean.srazonsocialemisor="PROMEDIC";
 				facturaelectronicaBean.srfcemisor="AEL9703115B0";
 				facturaelectronicaBean.scalleemisor="AV. MIGUEL HIDALGO 1729 PTE.";
