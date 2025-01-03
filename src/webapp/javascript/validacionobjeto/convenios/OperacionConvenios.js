@@ -16,3 +16,8 @@
 //	 var url = "http://10.20.26.6:8021/webInfodiamex/homeGda/"+idUser;
 	 window.open(url, "_blank"); 
  }
+ 
+ function cargaMasiva() {
+	 var url = "http://10.3.0.8:9012/gda/administracion-clientes-convenios/home";
+	 window.open(url, "_blank");  
+}

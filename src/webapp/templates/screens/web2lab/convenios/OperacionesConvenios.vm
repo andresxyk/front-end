@@ -26,7 +26,12 @@
 			<td colspan="2">
 				<input type="button" id="idModConvenios" name="idModConvenios" value="Administracion de Convenios y Productos" onClick="operacionConvenios();" class="boton">
 			</td>		
-		</tr>	 
+		</tr>
+		<tr>
+			<td colspan="2">
+				<input type="button" id="idCargaMasiva" name="idCargaMasiva" value="Carga Masiva" onClick="cargaMasiva();" class="boton">
+			</td>		
+		</tr> 
 	</table>
 </form>
 
