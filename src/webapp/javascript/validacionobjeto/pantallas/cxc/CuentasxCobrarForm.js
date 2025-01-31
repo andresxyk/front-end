@@ -1,5 +1,5 @@
-//var hostServerWebApp = "http://10.3.0.8:8192"; 
-var hostServerWebApp = "http://10.20.26.6:8192";
+var hostServerWebApp = "http://10.3.0.8:8192"; 
+//var hostServerWebApp = "http://10.20.26.6:8192";
 
 function showSubModalPago(kfactura,formatFactura) {
 	var frmPantalla = window.document.frmAdminClientes;changeMontoPagar
@@ -901,7 +901,7 @@ function buscaXconvenio_CallBack(data){
 }
 
 function LoadBusquedaClienteConvenio(data) {
-	var frmPantalla = document.getElementById("frmAdminClientes");
+	var frmPantalla = window.document.frmAdminClientes;
 	clienteBean.ccliente=data;
 	clienteBean.srazonsocial=frmPantalla.txtRazonSocial.value;
 	clienteBean.srfc=frmPantalla.txtRFC.value;

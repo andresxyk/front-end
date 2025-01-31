@@ -38,10 +38,10 @@
 	<input type="hidden" id="hdenRutaNotaCredito" name="hdenRutaNotaCredito" value="$ligaNotaCredito">
 	<input type="hidden" id="hdenRutaFactura" name="hdenRutaPago" value="$ligaActPago">
 	<table	border="0" class="tabla" width="100%">	
-		<tr><th colspan="5">Generación de Notas de Crédito</th></tr>
+		<tr><th colspan="5">GeneraciÃ³n de Notas de CrÃ©dito</th></tr>
 		<tr>
 			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                Busqueda de convenio por código
+                Busqueda de convenio por cÃ³digo
     	    </td>    
     	    <td>
 		        <a href="javascript:doNothing()" onclick="javascript:buscarFactura();">

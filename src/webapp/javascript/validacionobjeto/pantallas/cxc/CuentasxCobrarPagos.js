@@ -2,7 +2,7 @@
 // var hostServerApache = "http://10.3.0.8:9085"; 
 // var hostServerWebApp = "http://10.3.0.8:8192"; 
  
- var hostServerApache = "http://10.20.26.6:9085"; 
+var hostServerApache = "http://10.20.26.6:9085"; 
  var hostServerWebApp = "http://10.20.26.6:8192";
 
 	function init() {
@@ -17,6 +17,8 @@
 	}
 	
 	function nuevoFactura() {
+		var frmPantalla = window.document.frmPagoFactura;
+		frmPantalla.btnRegPago.disabled = false;
 	    adminDIV("gridRegistroPago","hidden","none");			
 	    adminDIV("gridBuscarFactura","visible","inline");	    			
 	    adminDIV("gridPagos","hidden","none");			
@@ -30,7 +32,10 @@
     	var frmPantalla = window.document.frmPagoFactura;							
         adminDIV("gridBuscarFactura","hidden","none");	
         cargarHora();
-    							
+    	
+			if(data.msaldo === 0)
+				frmPantalla.btnRegPago.disabled = true;
+				
     		document.getElementById('txtTotalFactura').className = 'textflat';					
     		frmPantalla.txtTotalFactura.disabled = true;					
     		frmPantalla.txtTotalFactura.value = "$" + data.mtotalfactura;					
@@ -70,10 +75,13 @@
     			} else {				
     				adminDIV("gridRegistroPago","visible","inline");			
     			}				
-    							
+    			try{		
     			document.getElementById('txtFechaDeposito').value = "";				
     			document.getElementById('txtImportePago').value = "";				
-    			document.getElementById("txtImportePago").focus(); 				
+    			document.getElementById("txtImportePago").focus(); 		
+				}catch (error){
+					console.log(error);
+				}		
         }							
     }
 
@@ -479,14 +487,22 @@
 					if (confirm("Estas seguro de registrar el pago por $" + pago + " para la factura " + strfactura + "?")) {
 						if(checkboxOpcional){
 							if(confirm("Estas seguro de agregar los siguientes campos opcionales?\n"+txtConfirmacionOpcionales)){
+								frmPantalla.btnRegPago.disabled = true;
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
 									checkbox,parseInt(cFormaPago),selectedMarca,txtRfcBanco,txtNomBanco,txtNomCuentaClabe,txtNomOperacion,
 									checkboxSustitucion,txtfoliosustitucion,txtUuidSustitucion,pagoFactura_CallBack);
+									pagos = true;
+									CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,pagos,initFactura_CallBack);
+									adminDIV("gridEstadoFactura","visible","inline");
 							}
 						}else{
+							frmPantalla.btnRegPago.disabled = true;
 							CuentasxCobrarMayoreo.pagoFactura(intFactura,anticipo,pago,saldo,cTipoPago,idUsuario,sFechaPagoCompleta,1,
 									checkbox,parseInt(cFormaPago),selectedMarca,"","","","",
 									checkboxSustitucion,txtfoliosustitucion,txtUuidSustitucion,pagoFactura_CallBack);
+									pagos = true;
+									CuentasxCobrarMayoreo.buscaFacturaFolio(window.document.frmPagoFactura.txtFolioFactura.value,frmPantalla.selMarca.value,pagos,initFactura_CallBack);
+									adminDIV("gridEstadoFactura","visible","inline");
 						} 
 					}
 				}else{
