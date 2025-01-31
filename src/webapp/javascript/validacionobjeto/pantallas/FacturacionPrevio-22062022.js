@@ -1,9 +1,9 @@
 /******************** General ********************************/
 var facturaelectronicaBean = new FacturaElectronicaBean();
 
-var hostServerWebApp = "http://10.3.0.8:8192";
+//var hostServerWebApp = "http://10.3.0.8:8192";
 
-//var hostServerWebApp = "http://10.20.26.6:8192";
+var hostServerWebApp = "http://10.20.26.6:8192";
 
    function init() 
    {
@@ -11,6 +11,11 @@ var hostServerWebApp = "http://10.3.0.8:8192";
    }
 
 /********************* Negocio *******************************/
+   
+   function cargaMasiva() {
+		 var url = "http://10.20.26.6:9012/gda/administracion-clientes-convenios/home";
+		 window.open(url, "_blank");  
+	}
    
    function agregarKFactura(kfactura){
 	   document.getElementById("txtTipoPago").value=kfactura;
