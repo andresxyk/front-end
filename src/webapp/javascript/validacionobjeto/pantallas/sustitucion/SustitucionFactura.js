@@ -6,7 +6,7 @@
 				window.document.frmSustitucion.cmarca.value,
 				window.document.frmSustitucion.tipofactura.value,
 				window.document.frmSustitucion.cconvenio.value,
-				buscarFacturaSustitucion_CallBack);
+				buscarFacturaSustitucion_CallBack); 
 		
 	}
 	
