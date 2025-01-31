@@ -36,7 +36,7 @@
 </form>
 
 
-<form action="http://10.3.0.8:8192/facturas/operacion" method="post" target="_blank">	
+<form action="http://10.20.26.6:8192/facturas/operacion" method="post" target="_blank">	
 
 
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
