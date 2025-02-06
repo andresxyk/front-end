@@ -52,6 +52,7 @@ public class DatosImprimeFacturaAjax extends AjaxAction {
 			iObjLog.error("Error DatosClienteAjax.buscarClientes:Exception....", aObjException);
 			objClienteBean = null;
 			throw aObjException;
+			
 		}
 		return strReturn;
 	}	

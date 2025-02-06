@@ -88,7 +88,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
     				<b>Fecha Deposito:</b> 				
     			</td>
     	        <td>
-                    <input type="text" name="txtFechaDeposito" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);validafechafrm(document.frmPagoFactura.txtFechaDeposito);" onFocus="javascript:validafechafrm(document.frmPagoFactura.txtFechaDeposito);" />		
+                    <input type="text" name="txtFechaDeposito" id="txtFechaDeposito" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);validafechafrm(document.frmPagoFactura.txtFechaDeposito);" onFocus="javascript:validafechafrm(document.frmPagoFactura.txtFechaDeposito);" />		
     		        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmPagoFactura.txtFechaDeposito); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
     		            <img alt='Seleccione una fecha' id="imgFechaDeposito" border='0' src='$content.getURI('images/icono_calend.gif')' />
     		        </a>	

@@ -1,9 +1,9 @@
-SET JAVA_HOME=C:\Java\j2sdk1.4.2_19
-SET PATH=C:\Java\j2sdk1.4.2_19\bin;%PATH%
+SET JAVA_HOME=C:\Users\soporte\Documents\GDA\j2sdk1.4.2_19
+SET PATH=C:\Users\soporte\Documents\GDA\j2sdk1.4.2_19\bin;%PATH%
 java -version
 
-SET MAVEN_HOME=C:\maven
-SET PATH=C:\maven\bin;%PATH%
+SET MAVEN_HOME=C:\Users\soporte\Documents\GDA\maven
+SET PATH=C:\Users\soporte\Documents\GDA\maven\bin;%PATH%
 
 CD .. 
 IF "%1" == "back" GOTO BACK-INSTALL

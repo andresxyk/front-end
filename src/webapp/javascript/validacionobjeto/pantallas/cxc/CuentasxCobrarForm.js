@@ -320,7 +320,7 @@ function LoadCompletedCliente() {
 }
 
 function LoadBusquedaCliente() {
-	var frmPantalla = document.getElementById("frmAdminClientes");
+	var frmPantalla = window.document.frmAdminClientes;
 	clienteBean.ccliente=frmPantalla.txtCliente.value;
 	clienteBean.srazonsocial=frmPantalla.txtRazonSocial.value;
 	clienteBean.srfc=frmPantalla.txtRFC.value;

@@ -337,7 +337,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	}
 	
 	/**
-     * Versión 25 de Marzo 2013 
+     * Versiï¿½n 25 de Marzo 2013 
      BY
      */
 	
@@ -357,7 +357,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	}
 	
 	/**
-     * Versión 25 de Marzo 2013 
+     * Versiï¿½n 25 de Marzo 2013 
      BY
      */
 	
@@ -377,7 +377,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 	}
 	
 	/**
-     * Versión 25 de Marzo 2013 
+     * Versiï¿½n 25 de Marzo 2013 
      BY
      */
 	public int getCcliente(int cconvenio){

@@ -29,7 +29,7 @@
 </script>	
 
 
-<form name="frmNotasdeCredito" action="$ligaAct" method="post" >
+<form name="frmNotasdeCredito" id="frmNotasdeCredito" action="$ligaAct" method="post" >
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="hdenFacturasNotas" >
 	<input type="hidden" id="hdenmontoFactura">
@@ -38,10 +38,10 @@
 	<input type="hidden" id="hdenRutaNotaCredito" name="hdenRutaNotaCredito" value="$ligaNotaCredito">
 	<input type="hidden" id="hdenRutaFactura" name="hdenRutaPago" value="$ligaActPago">
 	<table	border="0" class="tabla" width="100%">	
-		<tr><th colspan="5">Generación de Notas de Crédito</th></tr>
+		<tr><th colspan="5">Generaci&oacute;n de Notas de Cr&eacute;dito</th></tr>
 		<tr>
 			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                Busqueda de convenio por código
+                Busqueda de convenio por c&oacute;digo
     	    </td>    
     	    <td>
 		        <a href="javascript:doNothing()" onclick="javascript:buscarFactura();">
@@ -82,4 +82,3 @@
 <SCRIPT language="javascript" for=window event=onload>
 	document.getElementById("txtBuscarConvenio").focus();
 </SCRIPT>	
-	

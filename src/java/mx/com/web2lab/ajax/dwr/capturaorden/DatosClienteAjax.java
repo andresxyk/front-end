@@ -188,7 +188,7 @@ public class DatosClienteAjax extends AjaxAction {
 	}	
 	
 	/**
-     * Versión 25 de Marzo 2013 
+     * Versiï¿½n 25 de Marzo 2013 
      BY
      */
 	
@@ -263,6 +263,7 @@ public class DatosClienteAjax extends AjaxAction {
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = this.showClientes(objDAOCliente.buscarCliente(objClienteBean));
+		
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarClientes:Saliendo...  ");
 			objDAOCliente = null; 
 		} catch (Exception aObjException){
