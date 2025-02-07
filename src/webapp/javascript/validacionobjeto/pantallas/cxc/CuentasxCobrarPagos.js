@@ -608,7 +608,7 @@ var hostServerApache = "http://10.20.26.6:9085";
 			var checkbox =	document.getElementById("chkCrearComplento").checked;
 			document.getElementById('txtFechaDeposito').value = "";
 			document.getElementById('txtImportePago').value = "";
-			//CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);	
+			CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);	
 			if((data.smensaje=="Exito en el registro del Pago") && (checkbox)){
 				window.open(hostServerWebApp+"/facturas/complemento-pagos/"+data.keypago, "_blank");
 				CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);
