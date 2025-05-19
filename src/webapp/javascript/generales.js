@@ -133,7 +133,7 @@ function buscaTextoSelect(objSelect,strCompare) {
 }
 
 function compareSelectvalue(objSelect,intCompare) {
-	for(var x=0; x <= document.getElementById(objSelect.id).length; x = x+1) { 
+	for(var x=0; x < document.getElementById(objSelect.id).length; x = x+1) { 
 		if (objSelect[x].value == intCompare) {
 			objSelect.options[x].selected=true;
 			return true;

@@ -76,7 +76,8 @@
 			<td align="left" width="25%">
 			
 				<b>Marca</b>
-                <select id="selMarca" >
+                <select id="selMarca" name="selMarca" style="background:#E6E6FA">
+                	<option value="0" >SELECCIONAR..</option>
                 </select>	
 				<b>*Cliente</b>
 				<input type="text" id="txtCliente" value="0" onKeyPress="numero();" size="5"  onkeyup="consultaClienteGrid(window.document.frmAdminClientes);"> 
@@ -272,10 +273,15 @@
             <td>
                 <select id="selDias" >
             		<option value="0" >0 dias</option>
+            		<option value="8" >8 dias</option>
+            		<option value="10" >10 dias</option>
             		<option value="15" >15 dias</option>
             		<option value="30" selected>30 dias</option>
             		<option value="45" >45 dias</option>
             		<option value="60" >60 dias</option>
+            		<option value="90" >90 dias</option>
+            		<option value="100" >100 dias</option>
+            		<option value="120" >120 dias</option>
                 </select>	DIAS DE CREDITO
     	    </td>
         </tr>   
@@ -542,7 +548,7 @@
 	            	&nbsp;*Nombre Convenio
 	    	    </td>  
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	            	&nbsp;*Clasificación de convenio
+	            	&nbsp;*Clasificaciï¿½n de convenio
 	    	  	</td>	
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	            	&nbsp;*Tipo Copago
@@ -612,7 +618,7 @@
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	    	    </td>     
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	                <b id="idTextEnvioInternet">Expediente Clinico Electrónico - </b> <b id="idTextCorreoElectronico"></b> 
+	                <b id="idTextEnvioInternet">Expediente Clinico Electrï¿½nico - </b> <b id="idTextCorreoElectronico"></b> 
 	    	    </td>     
 			</tr>
 			<tr>
