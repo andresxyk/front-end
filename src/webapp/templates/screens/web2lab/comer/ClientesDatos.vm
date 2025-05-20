@@ -490,7 +490,7 @@
 			</td>
 			<td align="left">
 				<b><font color="$339933" size=2 aling="center">
-                <input type="text" id="txtEstadoCliente" />
+                <input type="text" id="txtEstadoCliente" name="txtEstadoCliente" />
 				</font></b>
 			</td>
 		</tr>

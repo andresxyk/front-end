@@ -492,6 +492,7 @@ public class DatosClienteAjax extends AjaxAction {
 			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
 			iObjLog.debug("getCregimenfiscal:"+objClienteBean.getCregimenfiscal());
 			iObjLog.debug("getCusocfdi:"+objClienteBean.getCusocfdi());
+			iObjLog.info("snombrecontacto: " + objClienteBean.getSnombrecontacto());
 			objClienteBean = objDAOCliente.setClienteActualizacion(objClienteBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizaCliente:Saliendo...  ");
 			objDAOCliente = null;
