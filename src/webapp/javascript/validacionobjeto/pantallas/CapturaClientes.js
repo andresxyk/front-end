@@ -277,6 +277,7 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.txtDelegacionMunicipio.value = data.sdelegacionmunicipio;
 	frmPantalla.txtCodigoPostal.value = data.scodigopostal;
 	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);
+	frmPantalla.txtNombreComercial[1].value = data.snombrecontacto;
 
 	valorCombo(document.getElementById('selTipoCliente'),data.ctipocliente);
 	
@@ -343,7 +344,7 @@ function LoadCompletedCliente() {
 	clienteBean.cregimenfiscal=frmPantalla.selRegimenFiscal[frmPantalla.selRegimenFiscal.selectedIndex].value;
 	clienteBean.cusocfdi=frmPantalla.selUsoCfdi[frmPantalla.selUsoCfdi.selectedIndex].value;
 	clienteBean.udiascredito=frmPantalla.selDias[frmPantalla.selDias.selectedIndex].value;
-	 
+	clienteBean.snombrecontacto = frmPantalla.txtNombreComercial[1].value;	 
 }
 
 function LoadBusquedaCliente() {
