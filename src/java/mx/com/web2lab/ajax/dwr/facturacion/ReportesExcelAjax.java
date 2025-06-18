@@ -22,7 +22,7 @@ public class ReportesExcelAjax extends AjaxAction {
 		try
 		{
 			ReportesExcelDao objReportesExcelDao = new ReportesExcelDao();		
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
     		strRespuesta = objReportesExcelDao.generarReporte(cConvenio, cReporte);
 		}
 		catch (Exception e){

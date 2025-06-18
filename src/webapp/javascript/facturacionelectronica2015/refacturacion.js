@@ -139,14 +139,14 @@ $(document).ready(function(){
 		promptPosition: 'inline',
 		onValidationComplete: function(form, status) {
 			if ( status ) {
-				notification(["Tu n�mero de �rden es: 29381"], 'http://www.zudulio.com/olab2/refacturacion-paso2.html');
+				notification(["Tu n&uacute;mero de &oacute;rden es: 29381"], 'http://www.zudulio.com/olab2/refacturacion-paso2.html');
 			}
 		}
 	});
 
 	$(".fileButton").click(notification);
 
-	if (!isMobile())�{
+	if (!isMobile()){
 		var native_width = 0;
 		var native_height = 0;
 

@@ -8,7 +8,7 @@
 				alert("Seleccione un Periodo por favor");
 			}
 		} else {
-			alert("Seleccione una Clave de M�dico por favor");
+			alert("Seleccione una Clave de m&eacute;dico por favor");
 		}
 	}
 

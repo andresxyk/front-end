@@ -33,11 +33,11 @@ function elegirOpcion() {
 				document.getElementById("txtEleccion").focus();
 			}
 			else{
-				alert('La opción que ha elegido no se encuentra en el menu favor de rectificar');
+				alert('La opci&oacute;n que ha elegido no se encuentra en el menu favor de rectificar');
 				document.getElementById("txtEleccion").focus();
 			}
 		}else{
-			alert('La opción que ha elegido no se encuentra en el menu favor de rectificar');
+			alert('La opci&oacute;n que ha elegido no se encuentra en el menu favor de rectificar');
 			document.getElementById("txtEleccion").focus();
 		}
 	}

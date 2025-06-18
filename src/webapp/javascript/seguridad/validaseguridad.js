@@ -5,7 +5,7 @@
 function inhabilitarUsuario(aStrLiga,imodo) {
 		if(imodo==0)
 		{
-			      if(confirm('¿Esta seguro de inhabilitar el usuario?'))
+			      if(confirm('Â¿Esta seguro de inhabilitar el usuario?'))
         		    {         
         		              window.document.frmUsuario.action= aStrLiga +'?imodo=' +imodo + '&eventSubmit_doAlta=action';
 						 	  window.document.frmUsuario.submit();
@@ -18,7 +18,7 @@ function inhabilitarUsuario(aStrLiga,imodo) {
 			     	}	
 		}//fin de if 0
 		else
-		{ if(confirm('¿Esta seguro de habilitar el usuario?'))
+		{ if(confirm('Â¿Esta seguro de habilitar el usuario?'))
         		    {         
         		    		  window.document.frmUsuario.action= aStrLiga +'?imodo=' +imodo + '&eventSubmit_doAlta=action';
 						 	  window.document.frmUsuario.submit();
@@ -32,7 +32,7 @@ function inhabilitarUsuario(aStrLiga,imodo) {
 		}//fin de else
 		//-----------------------
 	}
-//valida la caja de contraseña para Usuarios_Form
+//valida la caja de contrase&ntilde;a para Usuarios_Form
 function validapass(){
 var username= window.document.frmUsuario.username.value;
 var password= window.document.frmUsuario.password.value;
@@ -44,7 +44,7 @@ if(username=="" || password=="")
  return flag;
  
  }else if(password.length < 6){
-	alert('Su password debe de tener al menos seis dígitos');
+	alert('Su password debe de tener al menos seis d&iacute;gitos');
 	flag=false;
     return flag;
 	
@@ -74,12 +74,12 @@ if(username=="" || password=="")
 			//alert('NUMEROS--el contador es---'+cont+''+'la longitud que tiene es '+password.length);
 			if(cont==password.length)
 			   { 
-			     alert('¡Debe ingresar al menos una letra¡');
+			     alert('Â¿Debe ingresar al menos una letra?');
 			     flag=false;
                  return flag;
 			   }
 			   else{
-			    var letras="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+			    var letras="ABCDEFGHIJKLMNÃ‘OPQRSTUVWXYZabcdefghijklmnÃ±opqrstuvwxyz"
 			    cont=0;
 			       for(i=0;i<password.length;i++)
 					  {   a=num.charAt(i);
@@ -94,7 +94,7 @@ if(username=="" || password=="")
 						//alert('LETRAS--el contador es---'+cont+''+'la longitud que tiene es '+password.length);
 						if(cont==password.length)
 						   { 
-						     alert('¡Debe ingresar al menos un dígito¡');
+						     alert('Â¿Debe ingresar al menos un d&iacute;gito?');
 						     flag=false;
                              return flag;
 						   }
@@ -114,7 +114,7 @@ return flag;
 
 	
 }
-//valida la caja de contraseña para Usuarios_Form
+//valida la caja de contrase&ntilde;a para Usuarios_Form
 function validapassCam(){
 var username= window.document.frmCamContras.hdnLoginName.value;
 var password= window.document.frmCamContras.txtNuevaContras.value;
@@ -126,7 +126,7 @@ if(username=="" || password=="")
  return flag;
  
  }else if(password.length < 6){
-	alert('Su password debe de tener al menos seis dígitos');
+	alert('Su password debe de tener al menos seis d&iacute;gitos');
 	flag=false;
 	return flag;
 	
@@ -156,12 +156,12 @@ if(username=="" || password=="")
 			//alert('NUMEROS--el contador es---'+cont+''+'la longitud que tiene es '+password.length);
 			if(cont==password.length)
 			   { 
-			     alert('¡Debe ingresar al menos una letra¡');
+			     alert('Â¿Debe ingresar al menos una letra?');
 			     flag=false;
 			     return flag;
 			   }
 			   else{
-			    var letras="ABCDEFGHIJKLMNÑOPQRSTUVWXYZabcdefghijklmnñopqrstuvwxyz"
+			    var letras="ABCDEFGHIJKLMNÃ‘OPQRSTUVWXYZabcdefghijklmnÃ±opqrstuvwxyz"
 			    cont=0;
 			       for(i=0;i<password.length;i++)
 					  {   a=num.charAt(i);
@@ -176,7 +176,7 @@ if(username=="" || password=="")
 						//alert('LETRAS--el contador es---'+cont+''+'la longitud que tiene es '+password.length);
 						if(cont==password.length)
 						   { 
-						     alert('¡Debe ingresar al menos un dígito¡');
+						     alert('Â¿Debe ingresar al menos un d&iacute;gito?');
 						     flag=false;
 						     return flag;
 						   }
@@ -380,5 +380,5 @@ var flag=validapassCam();
      
 }
 
-// valida la entrada del password (Aún no esta terminada)
+// valida la entrada del password (Aï¿½n no esta terminada)
 

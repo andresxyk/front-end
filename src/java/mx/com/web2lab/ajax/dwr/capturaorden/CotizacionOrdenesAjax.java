@@ -200,7 +200,7 @@ public class CotizacionOrdenesAjax extends AjaxAction {
 			 			  "<table border='1' align='center' style='width: 883px' class='tabla' bordercolor='#000000'>" + 
 							"<tr>" + 
 								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
-								"	<b><font color='black'>Cotización" + 
+								"	<b><font color='black'>Cotizaci&oacute;n" + 
 								"	</font></b>" +
 								"</th>" + 
 								"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +

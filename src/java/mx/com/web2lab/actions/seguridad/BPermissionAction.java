@@ -150,7 +150,7 @@ public class BPermissionAction extends SecureAction implements Serializable{
         }catch (DataBackendException dbe){
         	objContexto.put("bolNoBorro", "true");
         	objContexto.put("strPermisoNoBorrado", ""+strPermiso+"" );
-        	iObjLog.debug(">>>>>>>Se captura la excepción de permiso: "+dbe);
+        	iObjLog.debug(">>>>>>>Se captura la excepci&oacute;n de permiso: "+dbe);
         }
     }
 

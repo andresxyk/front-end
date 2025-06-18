@@ -1651,5 +1651,104 @@ function asignarValoresConvenio() {
 	function trimStr(str) {
 	  return str.replace(/^\s+|\s+$/g, '');
 	}
+	
+	function crearSpinner() {
+	  if (document.getElementById("spinner-overlay")) return;
+
+	  const style = document.createElement("style");
+	  style.innerHTML = `
+	    #spinner-overlay {
+	      position: fixed;
+	      top: 0; left: 0;
+	      width: 100%; height: 100%;
+	      z-index: 9999;
+	      display: none;
+	    }
+	    #spinner-background {
+	      position: absolute;
+	      top: 0; left: 0;
+	      width: 100%; height: 100%;
+	      background-color: black;
+	      opacity: 0.5;
+	    }
+	    #spinner-content {
+	      position: absolute;
+	      top: 50%; left: 50%;
+	      transform: translate(-50%, -50%);
+	      text-align: center;
+	      position: relative;
+	    }
+	    #spinner-content img {
+	      width: 80px;
+	      height: 80px;
+	    }
+	    #spinner-close {
+	      position: absolute;
+	      top: -10px;
+	      right: -10px;
+	      color: white;
+	      font-size: 24px;
+	      font-weight: bold;
+	      text-decoration: none;
+	      background: transparent;
+	      border: none;
+	      cursor: pointer;
+	    }
+	  `;
+	  document.head.appendChild(style);
+
+	  const overlay = document.createElement("div");
+	  overlay.id = "spinner-overlay";
+
+	  const background = document.createElement("div");
+	  background.id = "spinner-background";
+
+	  const content = document.createElement("div");
+	  content.id = "spinner-content";
+
+	  const img = document.createElement("img");
+	  img.src = "/web2labportal/images/spinner.gif";
+	  img.alt = "Cargando...";
+
+	  const closeLink = document.createElement("a");
+	    closeLink.id = "spinner-close";
+	    closeLink.href = "#";
+	    closeLink.innerHTML = "&times;"; // símbolo ×
+	    closeLink.onclick = function(e) {
+	      e.preventDefault();
+	      deshabilitarSpinner();
+	    };
+
+		content.appendChild(closeLink);
+	  	content.appendChild(img);
+
+	  overlay.appendChild(background);
+	  overlay.appendChild(content);
+	  document.body.appendChild(overlay);
+	}
+
+	function habilitarSpinner() {
+	  const overlay = document.getElementById("spinner-overlay");
+	  if (overlay) overlay.style.display = "block";
+	}
+
+	function deshabilitarSpinner() {
+	  const overlay = document.getElementById("spinner-overlay");
+	  if (overlay) overlay.style.display = "none";
+	}
+
+	// Llamar al cargar la página
+	window.addEventListener("DOMContentLoaded", () => {
+	  crearSpinner();
+
+	  // Integración con DWR
+	  if (DWREngine) {
+		console.log("DWREngine === window.DWREngine:", DWREngine === window.DWREngine);
+	    window.DWREngine.setPreHook(habilitarSpinner);
+	    window.DWREngine.setPostHook(deshabilitarSpinner);
+	  } else {
+	    console.warn("DWR no está cargado. No se puede enganchar el spinner.");
+	  }
+	});
 
 

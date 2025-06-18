@@ -1,13 +1,17 @@
 #set ($titlePage = "Datos del Cliente" )
+
+
+
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+
+
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/CapturaClientes.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
-
-<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 
 
 #set ($ligaAct = $link.setPage("web2lab,comer,ClientesDatos.vm").setAction("fundacion.DatosOrden").toString())
@@ -548,7 +552,7 @@
 	            	&nbsp;*Nombre Convenio
 	    	    </td>  
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	            	&nbsp;*Clasificaci�n de convenio
+	            	&nbsp;*Clasificaci&oacute;n de convenio
 	    	  	</td>	
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	            	&nbsp;*Tipo Copago
@@ -618,7 +622,7 @@
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	    	    </td>     
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	                <b id="idTextEnvioInternet">Expediente Clinico Electr�nico - </b> <b id="idTextCorreoElectronico"></b> 
+	                <b id="idTextEnvioInternet">Expediente Clinico Electr&oacute;nico - </b> <b id="idTextCorreoElectronico"></b> 
 	    	    </td>     
 			</tr>
 			<tr>

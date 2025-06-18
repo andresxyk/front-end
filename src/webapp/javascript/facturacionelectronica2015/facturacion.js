@@ -104,7 +104,7 @@ $(document).ready(function(){
 		promptPosition: 'inline',
 		onValidationComplete: function(form, status) {
 			if ( status ) {
-				$('#tipoPersonaInfo').text($('#moral').is(':checked')?'Moral':'Física');
+				$('#tipoPersonaInfo').text($('#moral').is(':checked')?'Moral':'F&iacute;sica');
 				$('#rfcInfo').text($('#rfc').val());
 				$('#direccionInfo').text($('#direccion').val());
 				$('#delegacionInfo').text($('#delegacion').val());				
@@ -154,7 +154,7 @@ $(document).ready(function(){
 		$('#razonSocial').inputmask('?{0,}', {
 			definitions: {
 				'?': {
-					validator: '[A-Za-zñÑáéíóúÁÉÍÓÚ\\ 0-9\\-\\.@&]+',
+					validator: '[A-Za-zñÑ&aacute;&eacute;&iacute;&oacute;&uacute;&aacute;&eacute;&iacute;&oacute;&uacute;\\ 0-9\\-\\.@&]+',
 					cardinality: 1,
 					casing: 'upper'
 				}
@@ -165,7 +165,7 @@ $(document).ready(function(){
 			.inputmask('?{0,}', {
 				definitions: {
 					'?': {
-						validator: '[A-Za-záéíóúÁÉÍÓÚ\\ 0-9\\-]+',
+						validator: '[A-Za-z&aacute;&eacute;&iacute;&oacute;&uacute;&aacute;&eacute;&iacute;&oacute;&uacute;\\ 0-9\\-]+',
 						cardinality: 1,
 						casing: 'upper'
 					}
@@ -365,25 +365,25 @@ var validateData = function (data) {
 	if (data.year.length == 2) {
 		data.valid.year = true;
 	} else {
-		errorPrompt += '* El año debe incluir 2 dígitos<br>';
+		errorPrompt += '* El año debe incluir 2 d&iacute;gitos<br>';
 	}
 
 	if (data.month.length == 2) {
 		data.valid.month = true;
 	} else {
-		errorPrompt += '*Se debe incluir un mes válido<br>';
+		errorPrompt += '*Se debe incluir un mes v&aacute;lido<br>';
 	}
 
 	if (data.day.length == 2) {
 		data.valid.day = true;
 	} else {
-		errorPrompt += '* Se debe incluir un día válido<br>';
+		errorPrompt += '* Se debe incluir un d&iacute;a v&aacute;lido<br>';
 	}
 
 	if (data.homoKey.length == 3) {
 		data.valid.homoKey = true;
 	} else {
-		errorPrompt += '* La homoclave deben ser 3 caracteres alfanuméricos<br>';
+		errorPrompt += '* La homoclave deben ser 3 caracteres alfanum&eacute;ricos<br>';
 	}
 
 	if (errorPrompt === '') {

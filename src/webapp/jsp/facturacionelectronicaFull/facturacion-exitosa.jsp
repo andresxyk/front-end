@@ -65,7 +65,7 @@
             </div>
         </div>
         <div id="footer">
-        	Grupo Diagnóstico Aries © Todos los derechos reservados 2015-2016.
+        	Grupo Diagn&oacute;stico Aries © Todos los derechos reservados 2015-2016.
         </div>
     </div>
 </body>

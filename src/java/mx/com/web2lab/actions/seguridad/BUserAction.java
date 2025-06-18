@@ -28,7 +28,7 @@ import org.apache.velocity.context.Context;
 
 public class BUserAction extends SecureAction implements Serializable{
 	
-	/**log de la aplicación*/	
+	/**log de la aplicaci&oacute;n*/	
 	private static Log iObjLog = LogFactory.getLog(BUserAction.class);
 
     /**

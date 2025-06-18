@@ -198,7 +198,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction {
 					objFacturaBean.getSserie());
 			if (objTFactura != null) {
 				if (!isSesionValida())
-					throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+					throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 				objFacturaBean.setBolredondear(true);
 				switch (itipofactura) {
 				case 1:
@@ -252,7 +252,7 @@ public class FacturaElectronicaEmpresasAjax extends AjaxAction {
 			objFacturaElectronicaMayoreoDAO.persistirMetodoPago(strnocuenta.trim(), strmetodopago.trim(),
 					objTFactura.getCconvenio());
 			if (!isSesionValida())
-				throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+				throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objFacturaBean.setBolredondear(true);
 			switch (itipofactura) {
 			case 1:

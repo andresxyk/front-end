@@ -38,7 +38,7 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 		DatosFiscalesBean objDatosFiscalesBean = null;
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.crearOrdenFacturarElectronica:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesiÃ³n vÃ¡lida ...");
 			objDatosFiscalesBean = objDatosFiscalesDao.buscarDatosFiscalesOrden(-1, objFacturaBean.gethDatosFiscal());
 			if (objDatosFiscalesBean != null) {
 				objFacturaBean.sethDatosFiscal(objDatosFiscalesBean.getkDatosFiscales());
@@ -77,7 +77,7 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 		FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario + " Marca " + objFacturaBean.getCmarca());
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesiÃ³n vÃ¡lida ...");
 			objFacturaBean.setBolredondear(true);
 			objFacturaBean.setkOrdenSucursal(strkAdmision);
 			objFacturaBean.setTurbine_User(cUsuario);
@@ -203,33 +203,33 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 						strCorreoCopy = "oliver_rubio@hotmail.com";
 					}
 					if (objFacturaBean.getCmarca() == 1) {
-						objMailDAO.sendEmail("OLAB Diagnósticos Médicos, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,1);
+						objMailDAO.sendEmail("OLAB Diagn&oacute;sticos m&eacute;dicos, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,1);
 					} else if(objFacturaBean.getCmarca() == 5){
-						objMailDAO.sendEmail("SWISSLAB S.A. de C.V., Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("SWISSLAB S.A. de C.V., Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					} else if(objFacturaBean.getCmarca() == 19){
-						objMailDAO.sendEmail("FamilyLabs Norte, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("FamilyLabs Norte, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					} else if(objFacturaBean.getCmarca() == 20){
-						objMailDAO.sendEmail("Exakta, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Exakta, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					} else if(objFacturaBean.getCmarca() == 21){
-						objMailDAO.sendEmail("Asesores del Sur, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Asesores del Sur, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					} else if(objFacturaBean.getCmarca() == 16){
-						objMailDAO.sendEmail("Moreira, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Moreira, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					} else if(objFacturaBean.getCmarca() == 22){
-						objMailDAO.sendEmail("Polab, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Polab, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					} else if(objFacturaBean.getCmarca() == 25){
-						objMailDAO.sendEmail("Biomedica de Referencia, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Biomedica de Referencia, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					} else if(objFacturaBean.getCmarca() == 26){
-						objMailDAO.sendEmail("Promedic, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("Promedic, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					} else if(objFacturaBean.getCmarca() == 9){
-						objMailDAO.sendEmail("SWISS HOSPITAL, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
+						objMailDAO.sendEmail("SWISS HOSPITAL, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,5);
 					
 					}else{
-						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, Facturacion Electrónica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,4);
+						objMailDAO.sendEmail("Azteca, Laboratorio Quimico Clinico Azteca, Facturacion electr&oacute;nica, " + objFacturaBean.getSrazonsocialreceptor(), strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml",objFacturaBean.getSrazonsocialreceptor(),strCorreoCopy,4);
 					}
 				}
 			} else {

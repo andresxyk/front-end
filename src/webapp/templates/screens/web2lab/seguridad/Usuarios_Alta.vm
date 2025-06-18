@@ -69,7 +69,7 @@
 	#if ($strModo == "modificar")
 		<input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar"/>
 	#elseif ($strModo == "eliminar")
-    	<input type="submit" name="eventSubmit_doElimina" class="boton" value="Confirma Eliminar" onclick="return confirm('¿Se eliminará al usuario y todas sus relaciones?');"/>
+    	<input type="submit" name="eventSubmit_doElimina" class="boton" value="Confirma Eliminar" onclick="return confirm('Â¿Se eliminar&aacute; al usuario y todas sus relaciones?');"/>
 	#else
     	<input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onclick="irAurl()"/>
 	#end

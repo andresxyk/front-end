@@ -157,13 +157,13 @@
       
    function tomaMuestraPendiente(kOrdenExamenSucursal,objcheck) {
 	    if (objcheck.checked) {
-			if(confirm("¿Otro dia se tomara la muestra?")) {
+			if(confirm("Â¿Otro dia se tomara la muestra?")) {
 				TomaMuestraAjax.tomaMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 			} else {
 				objcheck.checked = false;				
 			}
 		} else { 
-			if(confirm("¿Hoy se va a tomar la muestra?")) {
+			if(confirm("Â¿Hoy se va a tomar la muestra?")) {
 				TomaMuestraAjax.tomarHoyMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 			} else {
 				objcheck.checked = true;

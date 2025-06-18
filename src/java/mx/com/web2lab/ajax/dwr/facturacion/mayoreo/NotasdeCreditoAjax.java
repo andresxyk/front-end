@@ -48,7 +48,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenio(cconvenio);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenio:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -67,7 +67,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioAsignacion(cconvenio,abloques);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenio:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -85,7 +85,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioElegidas(strfacturasElegidas);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenioElegidas:Saliendo...  "+strReturn);
 		} catch (Exception aObjException){
@@ -104,7 +104,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioElegidasAsignacionBloque(strfacturasElegidas,sbloque);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenioElegidasAsignacionBloque:Saliendo...  "+strReturn);
 		} catch (Exception aObjException){
@@ -222,7 +222,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 						MailDao objMailDAO = new MailDao();
 						String strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread");
 						String strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread");
-						objMailDAO.sendEmail("Factura Electr髇ica, OLAB Diagn髎ticos M閐icos, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml");
+						objMailDAO.sendEmail("Factura electr&oacute;nica, OLAB Diagn&oacute;sticos m&eacute;dicos, gracias por su preferencia", strCorreoElectronico, strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml");
 					}
 				
 				iObjLog.debug("Saliendo a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Saliendo...  ");
@@ -243,7 +243,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		FacturaElectronicaBean objFacturaBean = new FacturaElectronicaBean();
 		try {			
-			   if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");						
+			   if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");						
 			   
 			   objFacturaBean=this.crearFacturaElectronica(objNotadeCreditoDAO.generarNota(strfacturasElegidas,cconvenio,strdescripcionnota,dmontonotacredito));
 			   																			
@@ -252,7 +252,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 					MailDao objMailDAO = new MailDao();
 					String strPDFRead = ConfiguracionProperties.getPropiedad("reporte.ruta.pdflocalread");
 					String strXMLRead = ConfiguracionProperties.getPropiedad("reporte.ruta.xmllocalread");
-					objMailDAO.sendEmail("Factura Electr髇ica, OLAB Diagn髎ticos M閐icos, gracias por su preferencia", "bibiana.yanez@olab.com.m", strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml");
+					objMailDAO.sendEmail("Factura electr&oacute;nica, OLAB Diagn&oacute;sticos m&eacute;dicos, gracias por su preferencia", "bibiana.yanez@olab.com.m", strPDFRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".pdf", strXMLRead + "FacturacionElectronica_" +  objFacturaBean.getSseriofoliocompleto() + ".xml");
 				}
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.crearNota:Saliendo...  ");
 		} catch (Exception aObjException){

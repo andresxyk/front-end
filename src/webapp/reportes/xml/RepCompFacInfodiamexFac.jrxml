@@ -74,7 +74,7 @@ select
 	initcap(nvl(trim(cc.sdelegacionmunicipio),' ')) sdelmunf,
 	nvl(trim(tp.stelefono),' ') stelefonof,
 	initcap ( 
-			nvl(tp.sdireccion, 'Sin Dirección ') || ' ' || 
+			nvl(tp.sdireccion, 'Sin Direcci&oacute;n ') || ' ' || 
 			nvl(ccp.sasentamiento,' ') || ' ' || 
 			nvl(ccp.scolonia,' ') )  || ' '||
 			nvl(ccp.cpostal,0 ) sdir,
@@ -83,7 +83,7 @@ select
 	nvl(trim(tp.stelefono),' ') stelefono, 
 	' ' srfc,
 	' ' scurp,
-	nvl(decode(tos.cmedico,5228,'A Quién Corresponda', 'Dr(a).' || tos.smedico), 'A Quién Corresponda') smedico, 
+	nvl(decode(tos.cmedico,5228,'A Qui&eacute;n Corresponda', 'Dr(a).' || tos.smedico), 'A Qui&eacute;n Corresponda') smedico, 
 	cm.cclave clvmedico,
 	tos.dregistro, to_char(tos.dregistro,'hh24:mi') dhoracaptura, 
 	tos.dresultadoentrega, to_char(tos.dresultadoentrega,'hh24:mi') dhorapromesa, 

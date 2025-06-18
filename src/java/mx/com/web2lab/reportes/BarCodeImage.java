@@ -40,7 +40,7 @@ public class BarCodeImage  implements Serializable{
 	}
 	
 	/**
-	 * Método encargado de generar una imagen con el código de barras 
+	 * M&eacute;todo encargado de generar una imagen con el c&oacute;digo de barras 
 	 * del tipo indicado en el primer argumento y con el texto indicado
 	 * en el segundo argumento. 
 	 * @param type
@@ -62,11 +62,11 @@ public class BarCodeImage  implements Serializable{
 	}
 	
 	/**
-	 * Método encargado de generar una imagen con el código de barras 
+	 * M&eacute;todo encargado de generar una imagen con el c&oacute;digo de barras 
 	 * del tipo indicado en el primer argumento y con el texto indicado
 	 * en el segundo argumento, se manda en el tercer argumentotambien 
 	 * una bandera para imprimir el texto enviado en el segundo argumento 
-	 * y una bandera para incluir o no el checksum como parte del código 
+	 * y una bandera para incluir o no el checksum como parte del c&oacute;digo 
 	 * de barras. 
 	 * @param type
 	 * @param data

@@ -44,7 +44,7 @@ import com.workingdogs.village.Record;
 
 public class CSeguridadTool implements Recyclable, ApplicationTool, Serializable{
 	
-/**Log de la aplicación*/
+/**Log de la aplicaci&oacute;n*/
 private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 
   /**
@@ -131,7 +131,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
   }
 
   /**
-   * Obtiene el modo en el que se desplegara la página consecuente
+   * Obtiene el modo en el que se desplegara la pï¿½gina consecuente
    */
   public String getModo(){
       return iObjDatos.getParameters().getString("strModo");
@@ -819,7 +819,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
  	String strGrupoMenu = iObjDatos.getParameters().getString("txtGrupoMenu");
  	String strSeleccionaTodo = iObjDatos.getParameters().getString("chkSeleccionaTodo");
  	if(strSeleccionaTodo != null && strSeleccionaTodo.length() > 0){
- 		iObjLog.debug(">>>>>>>>>>>>>ENTRÉ al tool");
+ 		iObjLog.debug(">>>>>>>>>>>>>ENTRï¿½ al tool");
  		bolbandera=true;
  		
  	}
@@ -838,7 +838,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 
   /**
    * Este metodo obtiene los valores de un bean para utilizar la pantalla 
-   * CamContras cambio de contraseña.
+   * CamContras cambio de contrase&ntilde;a.
    * @return UsuarioBean
    */
   public UsuarioBean getInformacionUsuario() throws Exception{
@@ -867,7 +867,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
   }
 
   /**
-   * Metodo para formatear un date a un string del tipo mes dia y año
+   * Metodo para formatear un date a un string del tipo mes dia y aï¿½o
    */
   public String getFechaModiParaDate(Date aStrFecha) 
   throws Exception{
@@ -954,7 +954,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
   }
   
   /**
-   * Este método esta encargado de obtener
+   * Este M&eacute;todo esta encargado de obtener
    * el role del vm Roles.vm
    */     
   public String getTxtRole(){
@@ -967,7 +967,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 	}
 		
    /**
-   * Este método esta encargado de obtener
+   * Este M&eacute;todo esta encargado de obtener
    * el role del vm Roles.vm
    */     
   public String getChkSel(){
@@ -980,7 +980,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 	}
 	
    /**
-   * Este método esta encargado de obtener
+   * Este M&eacute;todo esta encargado de obtener
    * el grupo del vm Grupos.vm
    */     
   public String getTxtGrupo(){
@@ -993,7 +993,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 	}
 		
    /**
-   * Este método esta encargado de obtener
+   * Este M&eacute;todo esta encargado de obtener
    * el role del vm Grupos.vm y Permisos.vm
    */     
   public String getChkSelTodos(){
@@ -1006,7 +1006,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
 	}
 	
    /**
-   * Este método esta encargado de obtener
+   * Este M&eacute;todo esta encargado de obtener
    * el grupo del vm Permisos.vm
    */     
   public String getTxtPermiso(){
@@ -1229,7 +1229,7 @@ private static Log iObjLog = LogFactory.getLog(CSeguridadTool.class);
   }
   
   /**
-   * Este método esta encargado de 
+   * Este M&eacute;todo esta encargado de 
    * indicarnos si el query es con like
    */     
   public boolean esSinLike(){

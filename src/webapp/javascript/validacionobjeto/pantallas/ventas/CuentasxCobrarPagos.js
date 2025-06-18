@@ -173,7 +173,7 @@
 				CuentasxCobrarMayoreo.actualizarFactura(intFactura,idUsuario,opcion,actualizarEstadoFactura_CallBack);			
 			}
 		}else{
-			alert('Debes buscar una factura v�lida');
+			alert('Debes buscar una factura v&aacute;lida');
 		}
 	}
 	

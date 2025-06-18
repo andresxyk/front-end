@@ -36,7 +36,7 @@
     <div class="clearfix colelem" id="u7533"><!-- group -->
      <div class="clearfix grpelem" id="u7534-6"><!-- content -->
       <p>© 2013 Todos los Derechos Reservados</p>
-      <p>Olab Diagnósticos Médicos</p>
+      <p>Olab Diagn&oacute;sticos M&eacute;dicos</p>
      </div>
     </div>
    </div>

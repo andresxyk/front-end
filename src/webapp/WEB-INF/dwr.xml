@@ -83,6 +83,7 @@
       <include method="buscaFacturaFolio"/>
       <include method="actualizarFactura"/>
       <include method="reversarPago"/>
+      <include method="reversarPagoSeleccionado"/>
       <include method="getCcliente"/>
       <include method="findCfdiPdf"/>
       

@@ -695,7 +695,7 @@ public class DatosExamenAjax extends AjaxAction {
 					"	</font></b>" +
 					"</th>" + 
 					"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>" +
-					"	<b><font color='black'>No Exám" + 
+					"	<b><font color='black'>No Ex&aacute;m" + 
 					"	</font></b>" +
 					"</th>" + 
 					"<th nowrap style='font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal;'>");
@@ -1159,7 +1159,7 @@ public class DatosExamenAjax extends AjaxAction {
 		boolean bolExamen = true;
 		List lstExamenes = new ArrayList();
 		String strReturn = "";		
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");	
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesiÃ³n vÃ¡lida ...");	
 		try {
 			if (strExamen.trim().length() >= 2) {
 				iObjLog.debug("Entrando a DatosExamenAjax.consultaExamenesGrid:Entrando...Parametros... " + strExamen.trim());
@@ -1356,9 +1356,9 @@ public class DatosExamenAjax extends AjaxAction {
 	
 	
 	/**
-	 *  Versión 28/03/2013
+	 *  Versi&oacute;n 28/03/2013
 	 * BY 
-	 * incidencia de Facturación
+	 * incidencia de Facturaci&oacute;n
 	 * */
 	private String showBodyExamen(OrdenExamenBean objDExamen,String strColor, boolean bolLive, boolean bolGerente) {
 		String strPerfil = "";

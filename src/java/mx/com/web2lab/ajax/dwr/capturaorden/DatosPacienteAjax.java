@@ -35,7 +35,7 @@ public class DatosPacienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosPacienteAjax.actualizaPaciente:Entrando... " + objPacienteBean.getKpacientefundacion() + " expediente del metro " + objPacienteBean.getSvalorexpediente());		
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");
 				objPacienteBean.setBregistroactivo(true);
 				if (objPacienteBean.getSnacimiento().trim().length() > 2) {
 					objPacienteBean.setDnacimiento(new Formatos().getFecha(objPacienteBean.getSnacimiento()));
@@ -70,7 +70,7 @@ public class DatosPacienteAjax extends AjaxAction {
 		String strReturn = "Error en el reseteo del Password";
 		PacientesDao objDAOPaciente = new PacientesDao();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");
 			strReturn = objDAOPaciente.ressetPasswordECE(objPacienteBean);
 			iObjLog.debug("Saliendo DatosPacienteAjax.ressetPasswordECE:Saliendo...  " + objPacienteBean.toString());
     	}catch (Exception aObjException){
@@ -88,7 +88,7 @@ public class DatosPacienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosPacienteAjax.buscarPaciente:Entrando... ");		
 		PacientesDao objDAOPaciente = new PacientesDao();
 		try {			
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");			
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");			
 			objPacienteBean.setSvalorexpediente("");
 			objPacienteBean = objDAOPaciente.buscarPaciente(objPacienteBean);
 			iObjLog.debug("Saliendo DatosPacienteAjax.buscarPaciente:Consulta...Nombre..." + objPacienteBean.getSappaterno() + " " + objPacienteBean.getSapmaterno());
@@ -111,7 +111,7 @@ public class DatosPacienteAjax extends AjaxAction {
 		List lstPacientes = new ArrayList();
 		String strNumeroElegibilidad = objPacienteBean.getSvalorexpediente();
 		try {			
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");			
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");			
 	        java.lang.String buscaOrdenLaboratorio13mtemp = sampleWSRecepcionExtSoapProxyid.buscaOrdenLaboratorio("1",strNumeroElegibilidad);		
 			iObjLog.debug("Saliendo DatosPacienteAjax.buscarPaciente:Saliendo...WEbServices 1..." + buscaOrdenLaboratorio13mtemp);	    			
 		    NodeList nodes = ToolXML.parserString(buscaOrdenLaboratorio13mtemp).getElementsByTagName("Consulta");
@@ -227,7 +227,7 @@ public class DatosPacienteAjax extends AjaxAction {
 		WSDataSTCProxy sampleWSRecepcionExtSoapProxyid = new WSDataSTCProxy();
 		PacienteBean objPacienteBean = null;
 		try {			
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");			
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");			
 	        PasesLG[] lstPase = sampleWSRecepcionExtSoapProxyid.getPase(strPase, "97fbfde1edcd2001cc1841c604967681");
 	        if (lstPase == null) {
 				objPacienteBean = new PacienteBean();	        	
@@ -243,7 +243,7 @@ public class DatosPacienteAjax extends AjaxAction {
 						PacientesDao objDAOPaciente = new PacientesDao();
 						objPacienteBean = objDAOPaciente.buscarPaciente(objPacienteBean);
 						objPacienteBean.setBvitamedica(2);
-						if (objPasesLG.getClinicareferencia().trim().toString() == "TAXQUE袮" || objPasesLG.getClinicareferencia().trim().toString().equals("TAXQUE袮")) {
+						if (objPasesLG.getClinicareferencia().trim().toString() == "TAXQUE脩A" || objPasesLG.getClinicareferencia().trim().toString().equals("TAXQUE脩A")) {
 							objPacienteBean.setCconvenio(311);
 						} else if (objPasesLG.getClinicareferencia().trim().toString() == "TICOMAN" || objPasesLG.getClinicareferencia().trim().toString().equals("TICOMAN")) {
 							objPacienteBean.setCconvenio(312);
@@ -312,7 +312,7 @@ public class DatosPacienteAjax extends AjaxAction {
 
 	public String consultaPacienteGrid(PacienteBean objPacienteBean) throws Exception	
 	{
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");		
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");		
 		iObjLog.debug("Entrando a DatosPacienteAjax.consultaPacienteGrid:Entrando...Parametros... " + objPacienteBean.getSappaterno().trim() + " " + objPacienteBean.getSapmaterno().trim() + " " + objPacienteBean.getSnombre().trim());
 		objPacienteBean.setSnombre(objPacienteBean.getSnombre().trim() + "");
 		objPacienteBean.setSappaterno(objPacienteBean.getSappaterno().trim() + "");
@@ -328,7 +328,7 @@ public class DatosPacienteAjax extends AjaxAction {
 
 	public String consultaPacienteConvenioGrid(PacienteBean objPacienteBean) throws Exception	
 	{
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");		
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");		
 		iObjLog.debug("Entrando a DatosPacienteAjax.consultaPacienteConvenioGrid:Entrando...Parametros... " + objPacienteBean.getSappaterno().trim() + " " + objPacienteBean.getSapmaterno().trim() + " " + objPacienteBean.getSnombre().trim() + " Convenio " + objPacienteBean.getCconvenio());
 		objPacienteBean.setSnombre(objPacienteBean.getSnombre().trim() + "");
 		objPacienteBean.setSappaterno(objPacienteBean.getSappaterno().trim() + "");
@@ -425,7 +425,7 @@ public class DatosPacienteAjax extends AjaxAction {
 	
 	public String consultaPacienteGridNewFacturacion(PacienteBean objPacienteBean) throws Exception	
 	{
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");		
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi贸n v谩lida ...");		
 		iObjLog.debug("Entrando a DatosPacienteAjax.consultaPacienteGrid:Entrando...Parametros... " + objPacienteBean.getSappaterno().trim() + " " + objPacienteBean.getSapmaterno().trim() + " " + objPacienteBean.getSnombre().trim());
 		objPacienteBean.setSnombre(objPacienteBean.getSnombre().trim() + "");
 		objPacienteBean.setSappaterno(objPacienteBean.getSappaterno().trim() + "");

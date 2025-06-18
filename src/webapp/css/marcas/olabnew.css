@@ -1,0 +1,749 @@
+
+/* .tabla tbody{ */
+/*   display:block; */
+/*   overflow:auto; */
+/*   height:200px; */
+/*   width:100%; */
+/* } */
+/* .tabla thead tr{ */
+/*   display:block; */
+/* } */
+
+#popup_container {
+	font-family: Arial, sans-serif;
+	font-size: 12px;
+	min-width: 300px; /* Dialog will be no smaller than this */
+	max-width: 600px; /* Dialog will wrap after this width */
+	background: #FFF;
+	border: solid 5px #999;
+	color: #000;
+	-moz-border-radius: 5px;
+	-webkit-border-radius: 5px;
+	border-radius: 5px;
+}
+
+#popup_title {
+	font-size: 14px;
+	font-weight: bold;
+	text-align: center;
+	line-height: 1.75em;
+	color: #666;
+	background: #CCC url(../images/alerts/title.gif) top repeat-x;
+	border: solid 1px #FFF;
+	border-bottom: solid 1px #999;
+	cursor: default;
+	padding: 0em;
+	margin: 0em;
+}
+
+#popup_content {
+	background: 16px 16px no-repeat url(../images/alerts/info.gif);
+	padding: 1em 1.75em;
+	margin: 0em;
+}
+
+#popup_content.alert {
+	background-image: url(../images/alerts/info.gif);
+}
+
+#popup_content.confirm {
+	background-image: url(../images/alerts/important.gif);
+}
+
+#popup_content.prompt {
+	background-image: url(../images/alerts/help.gif);
+}
+
+#popup_message {
+	padding-left: 48px;
+}
+
+#popup_panel {
+	text-align: center;
+	margin: 1em 0em 0em 1em;
+}
+
+#popup_prompt {
+	margin: .5em 0em;
+}
+
+
+/******************************SubModal***********************************************/
+/**
+ * POPUP CONTAINER STYLES
+ */
+#popupMask {
+	position: absolute;
+	z-index: 200;
+	top: 0px;
+	left: 0px;
+	width: 100%;
+	height: 100%;
+	opacity: .4;
+	filter: alpha(opacity=40);
+	/* this hack is so it works in IE
+	 * I find setting the color in the css gives me more flexibility 
+	 * than the PNG solution.
+	 */
+	background-color:transparent !important;
+	background-color: #333333;
+	/* this hack is for opera support
+	 * you can uncomment the background-image if you don't care about opera.
+	 * this gives you the flexibility to use any bg color that you want, instead of the png
+	 */
+	background-image/**/:  url(../images/maskBG.png) !important; // For browsers Moz, Opera, etc.
+	background-image:none;
+	background-repeat: repeat;
+	display:none;
+}
+#popupContainer {
+	position: absolute;
+	z-index: 201;
+	top: 0px;
+	left: 0px;
+	display:none;
+	padding: 0px;
+}
+#popupInner {
+	border: 2px solid #000000;
+	background-color: #ffffff;
+}
+
+#popupFrame {
+	margin: 0px;
+	width: 100%;
+	height: 100%;
+	position: relative;
+	z-index: 202;
+}
+#popupTitleBar {
+	background-color: #486CAE;
+	color: #ffffff;
+	font-weight: bold;
+	height: 1.3em;
+	padding: 5px;
+	border-bottom: 2px solid #000000;
+	border-top: 1px solid #78A3F2;
+	border-left: 1px solid #78A3F2;
+	border-right: 1px solid #204095;
+	position: relative;
+	z-index: 203;
+}
+#popupTitle {
+	float:left;
+	font-size: 1.1em;
+}
+#popupControls {
+	float: right;
+	cursor: pointer;
+	cursor: hand;
+}
+
+
+
+A:link
+{
+   font-weight : bold;
+   color : #11BBB5;
+	font-size:10px;
+	text-align : center;
+	text-decoration :  underline;
+
+}
+A:visited
+{
+     font-weight : bold;
+    color : #11BBB5;
+    font-size: 10px;
+	text-align : center;
+	text-decoration :  underline;
+
+	
+}
+A:active
+{
+    font-weight : bold;
+    color : #11BBB5;
+    font-size: 10px;
+	text-align : center;
+	text-decoration :   underline;
+
+
+}
+
+TD
+{
+    font-size: 12px;
+    color : black;
+    font-weight: bold;
+    line-height : normal;
+    font-family : Arial, Helvetica, sans-serif;
+}
+
+BODY
+{
+
+    font-size: 10px;
+    font-family : arial, Helvetica, sans-serif;
+   	background-color: #11BBB5;
+	padding:0;
+	
+}
+
+
+
+input, select, textarea {
+  font-family: Arial, Helvetica, Verdana, sans-serif;
+  font-size: 12px;
+  color: #333333;
+  background-color: #F5FEEE;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  padding: 6px 10px;
+  box-sizing: border-box;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, select:focus, textarea:focus {
+  outline: none;
+  border-color: #11BBB5;
+  box-shadow: 0 0 5px rgba(17, 187, 181, 0.6);
+  background-color: #e6f7f6;
+}
+
+.textopie {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 10pt;
+  color: #fff;
+  background-color: #11BBB5;
+  text-align: left;
+  vertical-align: middle;
+  height: 28px;
+  padding: 4px 10px;
+  border-radius: 5px;
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.2);
+}
+
+/* Ocultar el checkbox original */
+input[type="checkbox"] {
+  appearance: none;
+  -webkit-appearance: none;
+  width: 18px;
+  height: 18px;
+  border: 2px solid #ccc;
+  border-radius: 4px;
+  background-color: #F5FEEE;
+  cursor: pointer;
+  position: relative;
+  transition: border-color 0.3s ease, background-color 0.3s ease;
+  vertical-align: middle;
+  margin-right: 6px;
+}
+
+/* Cuando está marcado */
+input[type="checkbox"]:checked {
+  background-color: #11BBB5;
+  border-color: #11BBB5;
+}
+
+/* Marca de check */
+input[type="checkbox"]:checked::after {
+  content: '';
+  position: absolute;
+  top: 2px;
+  left: 6px;
+  width: 4px;
+  height: 9px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+}
+
+/* Hover */
+input[type="checkbox"]:hover {
+  border-color: #0fa9a3;
+}
+
+/* Focus */
+input[type="checkbox"]:focus {
+  outline: none;
+  box-shadow: 0 0 4px rgba(17, 187, 181, 0.6);
+}
+
+.select-netscape
+{
+    font-size: 9px;
+    font-family : Courier, sans-serif, monospace
+}
+.textarea-netscape
+{
+    font-size : 9px;
+    font-family : Courier, sans-serif, monospace
+}
+.titulologin {
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 12pt;
+	font-weight: bold;
+	color: white;
+	background-color: #11BBB5;
+	text-align: left;
+	vertical-align: middle;
+	height: 25px;
+     border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+}
+	
+
+.small
+{
+    font-size: 9px;
+    color: #03507A;
+    font-family: Arial, Helvetica, Verdana
+}
+.plainlink
+{
+    text-decoration: none
+}
+.BasicText
+{
+     font-size: 11px;
+    color: #03507A;
+    line-height: normal;
+    font-family: Verdana, Arial, Helvetica, sans-serif
+}
+.menu
+{
+   font-weight: normal;
+#    color: #838587;
+    color: #11BBB5;
+    text-decoration: none
+}
+.BasicTextGrey
+{
+    font-size: 11px;
+    color: #666666;
+    font-family: Arial, Helvetica, Verdana
+}
+
+th {
+  background-color: #11BBB5;
+  color: #fff; /* texto blanco para buen contraste */
+  font-weight: 700; /* negrita más marcada */
+  font-size: 1rem; /* tamaño legible y escalable */
+  text-align: left; /* alineación más común para encabezados */
+  padding: 5px 12px; /* espacio interno para mejor lectura */
+  border: 1px solid #928F8F; /* borde uniforme */
+  border-collapse: collapse;
+  user-select: none; /* evitar selección accidental */
+  box-shadow: inset 0 -2px 4px rgba(0,0,0,0.15); /* sombra interna sutil para profundidad */
+}
+
+
+tho
+{
+	 background-color: #11BBB5;
+	 color: black;
+	 font-weight :  bold;
+	 font-size: medium;
+	 font-style: normal; 
+	 font-variant: normal	 	 
+}
+
+
+ths
+{
+	 background-color : #11BBB5;
+	 border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+	 color: black;
+	 font-weight :  bold;
+	 font-size: small;
+	 font-style: normal; 
+	 font-variant: normal	 	 
+}
+
+
+table
+{
+    font-size: 11px;
+    color: #000000;
+    line-height: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color : #F5FEEE;
+}
+
+.colorExamen
+{
+    background-color : #FFFFCC;
+}
+
+
+.tr1 { background-color : #F5FEEE }
+.tr2 { background-color : #F5FEEE }
+
+.botonmenu{
+ 
+ background-color : #11BBB5;  
+ border-bottom: 2px solid #5F5F5F;
+ border-right : 2px solid #5F5F5F;
+ height : 40px;
+ color : black;
+ font-weight :  bold;
+ text-align :  center;
+ }
+
+
+.boton {
+  background-color: #11bbb5;
+  border: none;
+  border-radius: 6px;
+  padding: 8px 16px;
+  color: white;
+  font-weight: bold;
+  text-align: center;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+.boton:hover {
+  background-color: #0fa9a3;
+  transform: translateY(-1px);
+}
+
+.boton:active {
+  background-color: #0d9994;
+  transform: translateY(0);
+}
+ 
+.azul2
+{
+	 background-color : #E7EDF5;
+}
+
+.azul3
+{
+	 color : #11BBB5;
+}
+
+.griz
+{
+	 background-color : #666666;
+}
+
+.fondo
+{
+	 background-color : #FFFFFF;
+}
+
+.titulotabla
+{
+	 background-color : #11BBB5;
+	 border-bottom: 1px solid #928F8F;
+     border-right : 1px solid #928F8F;
+	 border-left : 1px solid #928F8F;
+	 border-top : 1px solid #928F8F;
+	 color: #031A44;
+	 font-weight :  bold;
+}
+
+.textflat 
+{
+  border-width: 0px;
+  background-color: #11BBB5;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.btncalculator{
+ 
+ background-color : #11BBB5;  
+ border-bottom: 2px solid #5F5F5F;
+ border-right : 2px solid #5F5F5F;
+ height : 20px;
+ width : 40px;
+ color : black;
+ font-weight :  bold;
+ text-align :  center;
+ }
+
+#menu 
+{
+	height: 25px;
+	margin: 2em 0; padding:0 2em;
+	border-bottom: 1px solid black;
+}
+
+div.outer 
+{
+	float: left;
+	width: 100px; height: 38px;
+	margin: 0 3px 0 0;
+	background: #A9C6EA 0 -50px no-repeat;
+}
+div.outer a 
+{
+	display: block;
+	margin: 0; padding:0;
+	width:100%; height:100%;
+	overflow:hidden;
+	font-family: Arial, Helvetica, sans-serif;
+	color:#000000;
+	text-decoration: none;
+	background: #A9C6EA top left no-repeat;
+}
+div.outer span 
+{
+	display: block;
+	margin:0; padding: 7px 0 0 7px;
+}
+div.outer a:hover 
+{
+	background-image: url('none');
+	color: yellow
+}
+div.outer a:active 
+{
+	color: black;
+}
+
+/* CoolMenus 4 - default styles - do not edit */
+/*.clCMAbs{position:absolute; visibility:hidden; left:0; top:0}*/
+/* CoolMenus 4 - default styles - end */
+  
+/*Style for the background-bar*/
+.clBar{position:absolute; width:10; height:10; background-color:#11BBB5; layer-background-color:#11BBB5; visibility:hidden}
+
+/*Styles for level 0*/
+.clLevel0, .clLevel0over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel0{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel0over{background-color:#F5FEEE; layer-background-color:#F5FEEE;  color:black; cursor:pointer; cursor:hand; }
+.clLevel0border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:red}
+
+/*Styles for level 1*/
+.clLevel1, .clLevel1over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel1{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel1over{background-color:#F5FEEE; layer-background-color:#F5FEEE; color:black; cursor:pointer; cursor:hand; }
+.clLevel1border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:#11BBB5}
+
+/*Styles for level 2*/
+.clLevel2, .clLevel2over{position:absolute; padding:1px; font-family:tahoma,arial,helvetica; font-size:9px; font-weight:bold}
+.clLevel2{background-color:#11BBB5; layer-background-color:#11BBB5; color:black;}
+.clLevel2over{background-color:#F5FEEE; layer-background-color:#F5FEEE; color:black; cursor:pointer; cursor:hand; }
+.clLevel2border{position:absolute; visibility:hidden; background-color:#11BBB5; color:black; layer-background-color:FF6600}
+
+/*Styles for grid containers*/
+.clgrid
+{
+	font-size: 11px;color: #000000;
+	line-height: normal;
+	font-family: Arial, Helvetica, sans-serif;
+	background-color : #11BBB5;
+	overflow: auto;width: 100%;
+	/*height: 150;*/
+	border-left: 1px black solid; 
+	border-right: 1px black solid;
+	border-bottom: 1px black solid; 
+	border-top: 1px black solid;
+	padding: 0px;margin: 0px
+}
+
+/**
+ * The automcomplete box styling
+ */
+div.auto_complete {
+    width: 350px;
+    background: #fff;
+}
+
+div.auto_complete ul {
+    border: 1px solid #31430f;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    list-style-type: none;
+}
+
+div.auto_complete ul li {
+    margin: 0;
+    padding: 3px;
+    text-align: left;
+}
+
+div.auto_complete ul li.selected {
+    background-color: #dcedad;
+}
+
+div.auto_complete ul strong.highlight {
+    color: #800;
+    margin: 0;
+    padding: 0;
+}
+
+
+/* color de campos de texto requeridos en la forma */
+.required{background-color : #ffffde}
+
+/* color de campos de texto como solo label o invisibles */
+.invisible{background: none;border: none;color: none}
+
+/* color de fondo de solo lectura */
+.readonly{background-color : #EDB5A5}
+
+/* color de fondo de solo lectura */
+.bgblanco{background-color : #FFFFFF}
+
+/* color de fondo de inconsistencia de sexo */
+.inconsistente{background-color : orange}
+
+/* JCalendar */
+/* default dimensions and justification for each month including title */
+.jCal {
+	/* each day width + border-left + border-right */
+	width:224px;
+	height:21px;
+	text-align:center;
+	vertical-align:top;
+}
+/* default dimensions and justification for each month not including title */
+.jCalMo {
+	width:224px;		/* each day width + border-left + border-right */
+	float:left;
+	overflow:visible;
+	height:100%;
+	padding-right:2px;
+	padding-left:2px;
+	white-space:nowrap;
+}
+/* top month display block - i.e. January */
+.jCal .month, .jCal .monthSelect, .jCal .monthName, .jCal .monthYear {
+	line-height:16px;
+	height:16px;
+	text-align:center;
+	vertical-align:bottom;
+	font-family:Tahoma;
+	font-size:8pt;
+	color:#000000;
+	cursor:pointer;
+	float:left;
+}
+/* month name per calendar style - includes left/right padding and alignment */
+.jCal .monthName {
+	padding-left:2px;
+	padding-right:2px; 
+	text-align:right;
+}
+/* year per calendar style - includes left/right padding and alignment */
+.jCal .monthYear {
+	float:right;
+	padding-left:2px;
+	padding-right:2px;
+	text-align:left;
+}
+/* hilight style for new month combobox pulldown for hover */
+.jCal .monthSelect {
+	background:#EEE   url(../images/jcal/eeGrad2.gif) bottom repeat-x;
+}
+/* do not edit - this enables the new month combobox selector */
+.jCal .monthSelector {
+	position:absolute;
+}
+/* do not edit - this enables the new month combobox selector "shadow" for capturing auto-hide */
+.jCal .monthSelectorShadow {
+	position:absolute;
+	background:#808080;
+	padding:0px;
+}
+/* this is the hover for the month name */
+.jCal .monthNameHover {
+	background:#EDEDED url(../images/jcal/double-arrow-vert.gif) center left no-repeat;
+	color:#808080;
+}
+/* this is the hover for the year */
+.jCal .monthYearHover {
+	background:#EDEDED url(../images/jcal/double-arrow-vert.gif) center right no-repeat;
+	color:#808080;
+}
+/* this is the hover for the new month or year hover in the new combobox selection */
+.jCal .monthSelectHover {
+	background:#069;
+	color:#FFF;
+}
+/* day block dimensions and style - for all day blocks */
+.jCalMo .dow, .jCalMo .day, .jCalMo .pday, .jCalMo .aday, .jCalMo .overDay, .jCalMo .invday, .jCalMo .selectedDay {
+	width:30px;
+	font-family:Tahoma;
+	font-size:8pt;
+	color:#000000;
+	border-right:1px solid #CCC;
+	border-bottom:1px solid #CCC;
+	border-left:1px solid #EEE;
+	text-align:center;
+	cursor:default;
+	float:left;
+}
+/* day of week header specific style */
+.jCalMo .dow {
+	background:#EEE url(../images/jcal/eeGrad.gif) bottom repeat-x;
+	border-bottom:0px;
+}
+/* actual calendar day default style */
+.jCalMo .day, .jCalMo .invday {
+	height:30px;
+	text-align:center;
+}
+/* selectable calendar day specific style */
+.jCalMo .day {
+	cursor:pointer;
+	background:#FFF;
+}
+/* blacked-out calendar day specific style */
+.jCalMo .invday {
+	color:#808080;
+	background:#eeeeee;
+	text-decoration:line-through;
+}
+/* previous and subsequent months calendar day specific style */
+.jCalMo .pday, .jCalMo .aday {
+	height:30px;
+	background:#e3e3e3;
+	color:#CCC;
+}
+/* selected day */
+.jCalMo .selectedDay {
+	color:#FFF;
+	/* must use rgb() syntax for jquery.color.js compliance */
+	background:rgb(0, 143, 214);
+}
+/* mouseover hilighted selectable day */
+.jCalMo .overDay {
+	color:#FFF;
+	/* must use rgb() syntax for jquery.color.js compliance */
+	background:rgb(0, 102, 153);
+}
+/* left month navigation button - no need to change */
+.jCal .left {
+	background:url(../images/jcal/_left.gif) center center no-repeat;
+	width:16px;
+	height:16px;
+	vertical-align:middle;
+	cursor:pointer;
+	float:left;
+}
+/* right month navigation button - no need to change */
+.jCal .right {
+	background:url(../images/jcal/_right.gif) center center no-repeat;
+	width:16px;
+	height:16px;
+	vertical-align:middle;
+	cursor:pointer;
+	float:right;
+}
+/* no need to change - this is for carousel opacity */
+.jCalMask, .jCalMove {
+	position:absolute;
+	overflow:hidden;
+}

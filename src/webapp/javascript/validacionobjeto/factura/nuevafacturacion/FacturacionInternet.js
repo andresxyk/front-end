@@ -41,7 +41,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 			adminDIV("RegistraUsuario","hidden","none");	
 			adminDIV("RegistraPago","hidden","none");		    	    
 			if (data.strFactura != "") {
-				alert("Esta Orden ya est� facturada con el numero " + data.strFactura);
+				alert("Esta Orden ya est&aacute; facturada con el numero " + data.strFactura);
 				adminDIV("BusquedaFiscal","hidden","none");	
 				codeDIVHTML("gridbusquedaDatosFiscales","");
 				adminDIV("gridbusquedaDatosFiscales","hidden","none");	 
@@ -53,7 +53,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 		}	 	     
 		 
 		function reimprimirFactura(sfactura) {
-			alert("Esta Orden ya est� facturada con el numero " + sfactura);
+			alert("Esta Orden ya est&aacute; facturada con el numero " + sfactura);
 			return false;
 		}
 		 
@@ -64,7 +64,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
     			frmPantalla.idLimpiarDatosFiscales.disabled=true;
 	            LoadFacturaElectronica();
 				if (trim(frmPantalla.txtCorreoElectronico.value) != "") {
-					if (confirm("�Quieres enviar la factura al correo electr�nico del paciente, el cual es " + trim(frmPantalla.txtCorreoElectronico.value) + " ?")) {
+					if (confirm("¿Quieres enviar la factura al correo electr&oacute;nico del paciente, el cual es " + trim(frmPantalla.txtCorreoElectronico.value) + " ?")) {
 						if (frmPantalla.txtCorreoElectronico.value.length > 3) {
 							OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false,frmPantalla.txtCorreoElectronico.value,generarFactura_CallBack);
 						} else {
@@ -72,18 +72,18 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 							frmPantalla.idGuardarFactura.disabled=false;		
 						}
 					} else {
-						if (confirm("�Quieres enviar la factura a otro correo electr�nico?")) {
+						if (confirm("¿Quieres enviar la factura a otro correo electr&oacute;nico?")) {
 							alert('Recuerda la estructura de un correo electronico: \n En tu Explorer debe estar habilitado la opcion de ventana emergente \n No lleva espacios \n Debe contener un @ \n Debe tener un dominio ejemplo @olab.com.mx \n Si escribes mal el correo no sale la Factura y tendras que refacturar');
-							emaila = prompt("�Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
+							emaila = prompt("¿Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
 							OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false,emaila,generarFactura_CallBack);
 						} else {
 							OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false," ",generarFactura_CallBack);
 						}
 					}
 				} else {
-					if (confirm("No existe correo electronico del Paciente, �Quieres enviar la factura a otro correo electr�nico?")) {
+					if (confirm("No existe correo electronico del Paciente, ¿Quieres enviar la factura a otro correo electr&oacute;nico?")) {
 						alert('Recuerda la estructura de un correo electronico: \n En tu Explorer debe estar habilitado la opcion de ventana emergente \n No lleva espacios \n Debe contener una sola @ \n Debe tener un dominio ejemplo @olab.com.mx \n Si escribes mal el correo no sale la Factura y tendras que refacturar');
-						emailb = prompt("�Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
+						emailb = prompt("¿Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
 						OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false,emailb,generarFactura_CallBack);
 					} else {
 						OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false," ",generarFactura_CallBack);
@@ -111,10 +111,10 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 				alert("Verificamos y la orden ya tiene una factura, la cual es " + data); 
 				if (!reimprimirFactura(data)) {
 					if (frmPantalla.IdUnidadActual.value != 1003) {
-						if (confirm("�Quieres RE-FACTURAR la orden?")) {
+						if (confirm("¿Quieres RE-FACTURAR la orden?")) {
 							frmPantalla.idGuardarFactura.disabled=true;								
 							if (trim(frmPantalla.txtCorreoElectronico.value) != "") {
-								if (confirm("�Quieres enviar la factura al correo electr�nico del paciente, el cual es " + trim(frmPantalla.txtCorreoElectronico.value) + " ?")) {
+								if (confirm("¿Quieres enviar la factura al correo electr&oacute;nico del paciente, el cual es " + trim(frmPantalla.txtCorreoElectronico.value) + " ?")) {
 									if (frmPantalla.txtCorreoElectronico.value.length > 3) {
 										OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,true,frmPantalla.txtCorreoElectronico.value,generarFactura_CallBack);
 									} else {
@@ -122,18 +122,18 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 										frmPantalla.idGuardarFactura.disabled=false;		
 									}
 								} else {
-									if (confirm("�Quieres enviar la factura a otro correo electr�nico?")) {
+									if (confirm("¿Quieres enviar la factura a otro correo electr&oacute;nico?")) {
 										alert('Recuerda la estructura de un correo electronico: \n En tu Explorer debe estar habilitado la opcion de ventana emergente \n No lleva espacios \n Debe contener un @ \n Debe tener un dominio ejemplo @olab.com.mx \n Si escribes mal el correo no sale la Factura y tendras que refacturar');
-										emaila = prompt("�Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
+										emaila = prompt("¿Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
 										OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,true,emaila,generarFactura_CallBack);
 									} else {
 										OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,true," ",generarFactura_CallBack);
 									}
 								}
 							} else {
-								if (confirm("No existe correo electronico del Paciente, �Quieres enviar la factura a otro correo electr�nico?")) {
+								if (confirm("No existe correo electronico del Paciente, ¿Quieres enviar la factura a otro correo electr&oacute;nico?")) {
 									alert('Recuerda la estructura de un correo electronico: \n En tu Explorer debe estar habilitado la opcion de ventana emergente \n No lleva espacios \n Debe contener una sola @ \n Debe tener un dominio ejemplo @olab.com.mx \n Si escribes mal el correo no sale la Factura y tendras que refacturar');
-									emailb = prompt("�Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
+									emailb = prompt("¿Cual es la direccion del correo electronico?", "borrasoloesto@borrasoloesto.com.mx");
 									OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,true,emailb,generarFactura_CallBack);
 								} else {
 									OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,true," ",generarFactura_CallBack);

@@ -5,10 +5,10 @@
             $.validationEngineLanguage.allRules = {
                 "required": {
                     "regex": "none",
-                    "alertText": "* Este campo é obrigatório",
+                    "alertText": "* Este campo &eacute; obrigat&oacute;rio",
                     "alertTextCheckboxMultiple": "* Favor selecionar uma opção",
-                    "alertTextCheckboxe": "* Este checkbox é obrigatório",
-                    "alertTextDateRange": "* Ambas as datas do intervalo são obrigatórias"
+                    "alertTextCheckboxe": "* Este checkbox &eacute; obrigat&oacute;rio",
+                    "alertTextDateRange": "* Ambas as datas do intervalo são obrigat&oacute;rias"
                 },
                 "requiredInFunction": { 
                     "func": function(field, rules, i, options){
@@ -18,20 +18,20 @@
                 },
                 "dateRange": {
                     "regex": "none",
-                    "alertText": "* Intervalo de datas inválido"
+                    "alertText": "* Intervalo de datas inv&aacute;lido"
                 },
                 "dateTimeRange": {
                     "regex": "none",
-                    "alertText": "* Intervalo de data e hora inválido"
+                    "alertText": "* Intervalo de data e hora inv&aacute;lido"
                 },
                 "minSize": {
                     "regex": "none",
-                    "alertText": "* Permitido o mínimo de ",
+                    "alertText": "* Permitido o m&iacute;nimo de ",
                     "alertText2": " caractere(s)"
                 },
                 "maxSize": {
                     "regex": "none",
-                    "alertText": "* Permitido o máximo de ",
+                    "alertText": "* Permitido o m&aacute;ximo de ",
                     "alertText2": " caractere(s)"
                 },
 				"groupRequired": {
@@ -40,11 +40,11 @@
                 },
                 "min": {
                     "regex": "none",
-                    "alertText": "* Valor mínimo é "
+                    "alertText": "* Valor m&iacute;nimo &eacute; "
                 },
                 "max": {
                     "regex": "none",
-                    "alertText": "* Valor máximo é "
+                    "alertText": "* Valor m&aacute;ximo &eacute; "
                 },
                 "past": {
                     "regex": "none",
@@ -56,7 +56,7 @@
                 },	
                 "maxCheckbox": {
                     "regex": "none",
-                    "alertText": "* Máximo de ",
+                    "alertText": "* M&aacute;ximo de ",
                     "alertText2": " opções permitidas"
                 },
                 "minCheckbox": {
@@ -70,39 +70,39 @@
                 },
                 "creditCard": {
                     "regex": "none",
-                    "alertText": "* Número de cartão de crédito inválido"
+                    "alertText": "* N&uacute;mero de cartão de cr&eacute;dito inv&aacute;lido"
                 },
                 "phone": {
                     "regex": /^([\+][0-9]{1,3}[ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/,
-                    "alertText": "* Número de telefone inválido"
+                    "alertText": "* N&uacute;mero de telefone inv&aacute;lido"
                 },
                 "email": {
                     "regex": /^((([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+(\.([a-z]|\d|[!#\$%&'\*\+\-\/=\?\^_`{\|}~]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])+)*)|((\x22)((((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(([\x01-\x08\x0b\x0c\x0e-\x1f\x7f]|\x21|[\x23-\x5b]|[\x5d-\x7e]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(\\([\x01-\x09\x0b\x0c\x0d-\x7f]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF]))))*(((\x20|\x09)*(\x0d\x0a))?(\x20|\x09)+)?(\x22)))@((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?$/i,
-                    "alertText": "* Endereço de email inválido"
+                    "alertText": "* Endereço de email inv&aacute;lido"
                 },
                 "integer": {
                     "regex": /^[\-\+]?\d+$/,
-                    "alertText": "* Número inteiro inválido"
+                    "alertText": "* N&uacute;mero inteiro inv&aacute;lido"
                 },
                 "number": {
                     "regex": /^[\-\+]?((([0-9]{1,3})([,][0-9]{3})*)|([0-9]+))?([\.]([0-9]+))?$/,
-                    "alertText": "* Número decimal inválido"
+                    "alertText": "* N&uacute;mero decimal inv&aacute;lido"
                 },
                 "date": {
                     "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,
-                    "alertText": "* Data inválida, deve ser no formato AAAA-MM-DD"
+                    "alertText": "* Data inv&aacute;lida, deve ser no formato AAAA-MM-DD"
                 },
                 "ipv4": {
                     "regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
-                    "alertText": "* Endereço IP inválido"
+                    "alertText": "* Endereço IP inv&aacute;lido"
                 },
                 "url": {
                     "regex": /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
-                    "alertText": "* URL inválida"
+                    "alertText": "* URL inv&aacute;lida"
                 },
                 "onlyNumberSp": {
                     "regex": /^[0-9\ ]+$/,
-                    "alertText": "* Apenas números"
+                    "alertText": "* Apenas n&uacute;meros"
                 },
                 "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
@@ -115,7 +115,7 @@
                 "real": {
                 	// Brazilian (Real - R$) money format
                 	"regex": /^([1-9]{1}[\d]{0,2}(\.[\d]{3})*(\,[\d]{0,2})?|[1-9]{1}[\d]{0,}(\,[\d]{0,2})?|0(\,[\d]{0,2})?|(\,[\d]{1,2})?)$/,
-                    "alertText": "* Número decimal inválido"
+                    "alertText": "* N&uacute;mero decimal inv&aacute;lido"
                 }
             };
             

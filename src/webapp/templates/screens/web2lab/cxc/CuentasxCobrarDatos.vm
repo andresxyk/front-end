@@ -1,4 +1,11 @@
 #set ($titlePage = "Cuentas x Cobrar" )
+
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script> 
+<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/CuentasxCobrarMayoreo.js'></script>
+
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/CalculaEdad.js")"></script>
@@ -6,12 +13,6 @@
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/tools/Tools.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/common.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/tooljquery/submodal/subModal.js")"></script>
-
-<script type='text/javascript' src='/web2labportal/dwr/interface/ToolsAjax.js'></script> 
-<script type='text/javascript' src='/web2labportal/dwr/interface/DatosCliente.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/CuentasxCobrarMayoreo.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 
 #set ($intcCliente = $data.getSession().getAttribute('cClienteMarca') )
 
@@ -86,7 +87,7 @@
 	<table border="0" cellspacing="2" cellpadding="3" width="100%" class="tabla">
 		<tr>
 			 <td style="font-weight: bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                Busqueda de convenio por código
+                Busqueda de convenio por c&oacute;digo
     	    </td>    
 		</tr> 
 		<tr>
@@ -317,7 +318,7 @@
 	            	&nbsp;*Nombre Convenio
 	    	    </td>  
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	            	&nbsp;*Clasificación de convenio
+	            	&nbsp;*Clasificaci&oacute;n de convenio
 	    	  	</td>			
 	        </tr> 
 			<tr>
@@ -372,7 +373,7 @@
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 	    	    </td>     
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-	                <b id="idTextEnvioInternet">Expediente Clinico Electrónico - </b> <b id="idTextCorreoElectronico"></b> 
+	                <b id="idTextEnvioInternet">Expediente Clinico electr&oacute;nico - </b> <b id="idTextCorreoElectronico"></b> 
 	    	    </td>     
 			</tr>
 			<tr>

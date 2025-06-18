@@ -209,7 +209,7 @@
 	if (window.document.frmMedicos.hdnActualizacion.value == 0) { 
 		window.document.frmMedicos.hdnActualizacion.value = 1; 
 	 	if (validaAltaMedico()) {
-			if (confirm("Desea dar de alta los datos del M�dico?")) {	 	
+			if (confirm("Desea dar de alta los datos del m&eacute;dico?")) {	 	
 			 	loadBeanMedico(1);
 			 	DatosMedico.actualizaMedico(medicoBean,actualizaMedico_CallBack);	 	
 			}

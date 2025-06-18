@@ -79,7 +79,7 @@
 	    	        //} 
 //	        	} 
 			} else {
-				alert("Para consultar debe tener m�nimo 5 letras o ser un numero, si requiere b�squedas menores utilice el bot�n")
+				alert("Para consultar debe tener m&iacute;nimo 5 letras o ser un numero, si requiere b&uacute;squedas menores utilice el bot&oacute;n")
 			}
 		}
 	}	
@@ -180,13 +180,13 @@
     
     function tomaMuestraPendiente(kOrdenExamenSucursal,objcheck) {
 	    if (objcheck.checked) {
-			if(confirm("�Otro dia se tomara la muestra?")) {
+			if(confirm("¿Otro dia se tomara la muestra?")) {
 				TomaMuestraAjax.tomaMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 			} else {
 				objcheck.checked = false;				
 			}
 		} else { 
-			if(confirm("�Hoy se va a tomar la muestra?")) {
+			if(confirm("¿Hoy se va a tomar la muestra?")) {
 				TomaMuestraAjax.tomarHoyMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 			} else {
 				objcheck.checked = true;
@@ -195,10 +195,10 @@
 	}
 
 //    function tomaMuestraPendiente(kOrdenExamenSucursal) {
-//       	if(confirm("�Es una muestra pendiente?")) {
+//       	if(confirm("¿Es una muestra pendiente?")) {
 //       		TomaMuestraAjax.tomaMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 //       	} else {
-//       	   	if(confirm("�Se va a tomar hoy la muestra?")) {
+//       	   	if(confirm("¿Se va a tomar hoy la muestra?")) {
 //       	   		TomaMuestraAjax.tomarHoyMuestraPendiente(kOrdenExamenSucursal,1,tomaMuestraPendiente_CallBack);
 //       	   	}    	
 //       	}    	

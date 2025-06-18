@@ -203,7 +203,7 @@
      <div class="clearfix" id="u7728_align_to_page">
       <div class="clearfix grpelem" id="u7729-6"><!-- content -->
        <p>© 2013 Todos los Derechos Reservados</p>
-       <p>Olab Diagnósticos Médicos</p>
+       <p>Olab Diagn&oacute;sticos M&eacute;dicos</p>
       </div>
      </div>
     </div>

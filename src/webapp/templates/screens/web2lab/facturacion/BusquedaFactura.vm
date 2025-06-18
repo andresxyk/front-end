@@ -1,4 +1,4 @@
-#set ($titlePage = "Buscar Facturas/Notas de Crédito" )
+#set ($titlePage = "Buscar Facturas/Notas de cr&eacute;dito" )
 
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/BuscarFactura.js")"></script>
@@ -18,10 +18,10 @@
 
 <form name="frmBusqudaFactura"  method="post" >
 	<table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5" >Búsqueda de Facturas/Notas de Crédito</th></tr>
+    	<tr><th colspan="5" >b&uacute;squeda de Facturas/Notas de cr&eacute;dito</th></tr>
 		<tr>
 			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                Folio de Factura/Nota de Crédito
+                Folio de Factura/Nota de cr&eacute;dito
     	    </td>    
 		</tr>
 		<tr>

@@ -100,7 +100,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 							if (data.strFactura != "") {
 								reimprimirFactura(data.strFactura);
 							} else {
-								if (confirm("Esta Orden no est� facturada, �Quieres Facturar la Orden?")) {
+								if (confirm("Esta Orden no est&aacute; facturada, ¿Quieres Facturar la Orden?")) {
 									 frmPantalla.idGenerarFactura.disabled=true;		
 								     adminDIV("BusquedaFiscal","visible","inline");	
 									 adminDIV("DireccionFiscal","hidden","none");
@@ -203,7 +203,7 @@ var facturaelectronicaBean = new FacturaElectronicaBean();
 							}
 						}
 					} else {
-						if (confirm("No existe correo electronico del Paciente, �Quieres enviar la factura a otro correo electr&oacute;nico?")) {
+						if (confirm("No existe correo electronico del Paciente, ¿Quieres enviar la factura a otro correo electr&oacute;nico?")) {
 							alert('Recuerda la estructura de un correo electronico: \n En tu Explorer debe estar habilitado la opcion de ventana emergente \n No lleva espacios \n Debe contener una sola @ \n Debe tener un dominio ejemplo @olab.com.mx \n Si escribes mal el correo no sale la Factura y tendras que refacturar');
 							emailb = prompt("&iquest;Cual es la direccion del correo electr&oacute;nico?", "borrasoloesto@borrasoloesto.com.mx");
 							OrdenFacturarAjax.crearOrdenFacturar(facturaelectronicaBean,frmPantalla.txtAdmision.value,frmPantalla.IdUnidadActual.value,frmPantalla.idUsuario.value,false,emailb,generarFactura_CallBack);

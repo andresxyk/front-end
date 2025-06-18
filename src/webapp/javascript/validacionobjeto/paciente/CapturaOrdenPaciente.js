@@ -168,7 +168,7 @@ screenBean.uConsultaECEConvenio = 0;
 			if (TypeObjeto(frmPantalla.radTipo[0])) { 
 				if (strCorreoElectronico != "") {			
 		    		if(!valEmail(frmPantalla.txtCorreoElectronico.value)){
-		    			alert('La dirección de correo no es correcta, debe corregirla e intentar de nuevo.');
+		    			alert('La direcci&oacute;n de correo no es correcta, debe corregirla e intentar de nuevo.');
 		    			return false;
 		    		}
 				}
@@ -191,7 +191,7 @@ screenBean.uConsultaECEConvenio = 0;
 	    } else {	
 			if (strCorreoElectronico != "") {			
 	    		if(!valEmail(frmPantalla.txtCorreoElectronico.value)){
-	    			alert('La dirección de correo no es correcta, debe corregirla e intentar de nuevo.');
+	    			alert('La direcci&oacute;n de correo no es correcta, debe corregirla e intentar de nuevo.');
 	    			return false;
 	    		}
 			}			
@@ -353,13 +353,13 @@ screenBean.uConsultaECEConvenio = 0;
 				if (document.getElementById('txtPaseMetro').value  != "") {
 					buscarPacienteMetroWebService();
 				} else {
-					alert('Ingrese un número de Pase del Metro, por favor');
+					alert('Ingrese un n&uacute;mero de Pase del Metro, por favor');
 				}
 			} else if ((document.getElementById('txtExpedienteMetro').value != "") && (frmPantalla.txtCodigoPaciente.value == "0")) {
 				if (document.getElementById('txtPaseMetro').value  != "") {
 					buscarPacienteMetroWebService();				
 				} else {
-					alert('Ingrese un número de Pase del Metro, por favor');
+					alert('Ingrese un n&uacute;mero de Pase del Metro, por favor');
 				}
 			} else if ((document.getElementById('txtExpedienteMetro').value != "") && (frmPantalla.txtCodigoPaciente.value != "0") && (frmPantalla.txtCodigoPaciente.value != "")) {
 				LoadCompletedPaciente();
@@ -379,7 +379,7 @@ screenBean.uConsultaECEConvenio = 0;
 		if (data.kpacientefundacion > 0) {
 			buscarPaciente_CallBack(data);
 		} else {
-			alert('¡¡¡¡NO localizamos el número del expediente (ES NUEVO el paciente O el paciente no tiene asignado su número de expediente)!!!!');
+			alert('Â¿Â¡Â¡Â¡NO localizamos el n&uacute;mero del expediente (ES NUEVO el paciente O el paciente no tiene asignado su n&uacute;mero de expediente)!!!!');
 		}
 	}
 
@@ -393,7 +393,7 @@ screenBean.uConsultaECEConvenio = 0;
 					alert('Ingrese el Expediente del Metro por favor');
 				}
 			} else {
-				alert('Ingrese un número de Pase del Metro, por favor');
+				alert('Ingrese un n&uacute;mero de Pase del Metro, por favor');
 			}
 		}
 	}	
@@ -403,7 +403,7 @@ screenBean.uConsultaECEConvenio = 0;
      	if (data.kpacientefundacion > 0) {
 			buscarPaciente_CallBack(data);
     	} else {
-			alert('¡¡¡¡El número del pase no se encuentra registrado en el Metro!!!!');
+			alert('Â¿Â¡Â¡Â¡El n&uacute;mero del pase no se encuentra registrado en el Metro!!!!');
 			PacienteMayoreo.buscarPacienteMetro(document.getElementById('txtExpedienteMetro').value,buscarPacienteMetro_CallBack);    		
     	}
      }     
@@ -420,7 +420,7 @@ screenBean.uConsultaECEConvenio = 0;
 	 		    adminDIV("gridbusquedaPacientes","hidden","none"); 		
 	 			DatosPaciente.buscarPacienteVitaMedica(pacienteBean,buscarPaciente_CallBack);
 	 		} else {
-	 			alert('Ingrese un número de Elegibilidad, por favor');
+	 			alert('Ingrese un n&uacute;mero de Elegibilidad, por favor');
 	 		}
     	}
  	 }	
@@ -864,7 +864,7 @@ screenBean.uConsultaECEConvenio = 0;
 		var frmPantalla = window.document.frmDatosOrdenFundacion;
 		var intTypeShow = frmPantalla.hdlTypeShow.value;
 		if (((frmPantalla.optResultado.checked == true) || (frmPantalla.optPromocion.checked == true)) && (frmPantalla.txtCorreoElectronico.value.length > 7) && (intTypeShow == 0)) {
-			var r=confirm("¿Quieres modificar el Correo Electronico?");
+			var r=confirm("Â¿Quieres modificar el Correo Electronico?");
 			if (r==true) {
 				frmPantalla.txtCorreoElectronico.disabled = false;			
 			}			
@@ -874,7 +874,7 @@ screenBean.uConsultaECEConvenio = 0;
 	function resetPassword() {
 		var frmPantalla = window.document.frmDatosOrdenFundacion;
 		if (((frmPantalla.optResultado.checked == true) || (frmPantalla.optPromocion.checked == true)) && (frmPantalla.txtCorreoElectronico.value.length > 7)) {
-			var r=confirm("¿Quieres un NUEVO password para el Expediente Clinico Electronico para el paciente " + frmPantalla.txtCodigoPaciente.value + "?");
+			var r=confirm("Â¿Quieres un NUEVO password para el Expediente Clinico Electronico para el paciente " + frmPantalla.txtCodigoPaciente.value + "?");
 			if (r==true) {
 			    document.getElementById('idTextEnvioInternet').innerHTML = "Resultados, Factura y Expediente Clinico ";
 			    document.getElementById('idTextEnvioInternet').style.color  = "black";

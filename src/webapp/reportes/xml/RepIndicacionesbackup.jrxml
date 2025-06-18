@@ -120,7 +120,7 @@ order by 2,5]]></queryString>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["En Laboratorio Médico del Chopo deseamos brindarle la mejor atención posible. El(los) estudio(s) que usted ha solicitado, denominado(s):"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["En Laboratorio M&eacute;dico del Chopo deseamos brindarle la mejor atenci&oacute;n posible. El(los) estudio(s) que usted ha solicitado, denominado(s):"]]></textFieldExpression>
 				</textField>
 			</band>
 			</groupHeader>
@@ -768,7 +768,7 @@ order by 2,5]]></queryString>
 					<textElement textAlignment="Center" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["Centro de Información al Paciente: 5541 9605 "]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Centro de Informaci&oacute;n al Paciente: 5541 9605 "]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -835,7 +835,7 @@ $F{CP}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Center" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["DIAGNÓSTICOS MÉDICOS"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["DIAGN&oacute;STICOS M&eacute;DICOS"]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageFooter>

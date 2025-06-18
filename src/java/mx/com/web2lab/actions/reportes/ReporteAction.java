@@ -606,7 +606,7 @@ public class ReporteAction extends SecureAction {
     	    }
 
 	/**
-	 * Metodo que llama la generación del Formato de indicaciones para el paciente,   
+	 * Metodo que llama la generaci&oacute;n del Formato de indicaciones para el paciente,   
 	 * @param data
 	 * @param context
 	 * @throws Exception
@@ -640,7 +640,7 @@ public class ReporteAction extends SecureAction {
     }
     
     /**
-     * Versión 25 de Marzo 2013 
+     * Versi&oacute;n 25 de Marzo 2013 
      BY
      */
     public void doReporterefacturas(RunData aObjDatos, Context aObjContexto)

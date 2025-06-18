@@ -328,7 +328,7 @@ var buscarordenesviajeBean = new BuscarOrdenesViajeBean();
     }  
     
     function levantarIncidencia_CallBack(data) {
-    	alert("La incidencia fue levantada con el n�mero: " + data);
+    	alert("La incidencia fue levantada con el n&uacute;mero: " + data);
     }
     
     

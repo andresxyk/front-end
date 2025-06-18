@@ -7,7 +7,7 @@ plupload.addI18n({
 'Add files' : 'Dodaj pliki',
 'Stop current upload' : 'Przerwij aktualny transfer',
 'Start uploading queue' : 'Rozpocznij wysyłanie',
-'Uploaded %d/%d files': 'Wysłano %d/%d plików',
+'Uploaded %d/%d files': 'Wysłano %d/%d plik&oacute;w',
 'N/A' : 'Nie dostępne',
 'Drag files here.' : 'Przeciągnij tu pliki',
 'File extension error.': 'Nieobsługiwany format pliku.',
@@ -15,10 +15,10 @@ plupload.addI18n({
 'Init error.': 'Błąd inicjalizacji.',
 'HTTP Error.': 'Błąd HTTP.',
 'Security error.': 'Błąd bezpieczeństwa.',
-'Generic error.': 'Błąd ogólny.',
+'Generic error.': 'Błąd og&oacute;lny.',
 'IO error.': 'Błąd IO.',
 'Stop Upload': 'Przerwij transfer.',
 'Add Files': 'Dodaj pliki',
 'Start upload': 'Rozpocznij transfer.',
-'%d files queued': '%d plików w kolejce.'
+'%d files queued': '%d plik&oacute;w w kolejce.'
 });

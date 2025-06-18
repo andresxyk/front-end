@@ -40,15 +40,15 @@
                 },
 		        "past": {
                     "regex": "none",
-                    "alertText": "* Date antérieure au "
+                    "alertText": "* Date ant&eacute;rieure au "
                 },
                 "future": {
                     "regex": "none",
-                    "alertText": "* Date postérieure au "
+                    "alertText": "* Date post&eacute;rieure au "
                 },
                 "maxCheckbox": {
                     "regex": "none",
-                    "alertText": "* Nombre max de choix excédé"
+                    "alertText": "* Nombre max de choix exc&eacute;d&eacute;"
                 },
                 "minCheckbox": {
                     "regex": "none",
@@ -61,12 +61,12 @@
                 },
                 "creditCard": {
                     "regex": "none",
-                    "alertText": "* Numéro de carte bancaire valide"
+                    "alertText": "* Num&eacute;ro de carte bancaire valide"
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
                     "regex": /^([\+][0-9]{1,3}[ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9 \.\-\/]{3,20})((x|ext|extension)[ ]?[0-9]{1,4})?$/,
-                    "alertText": "* Numéro de téléphone invalide"
+                    "alertText": "* Num&eacute;ro de t&eacute;l&eacute;phone invalide"
                 },
                 "email": {
                     // Shamelessly lifted from Scott Gonzalez via the Bassistance Validation plugin http://projects.scottsplayground.com/email_address_validation/
@@ -96,26 +96,26 @@
                 },
                 "onlyNumberSp": {
                     "regex": /^[0-9\ ]+$/,
-                    "alertText": "* Seuls les chiffres sont acceptés"
+                    "alertText": "* Seuls les chiffres sont accept&eacute;s"
                 },
                 "onlyLetterSp": {
                     "regex": /^[a-zA-Z\u00C0-\u00D6\u00D9-\u00F6\u00F9-\u00FD\ \']+$/,
-                    "alertText": "* Seules les lettres sont acceptées"
+                    "alertText": "* Seules les lettres sont accept&eacute;es"
                 },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z\u00C0-\u00D6\u00D9-\u00F6\u00F9-\u00FD]+$/,
-                    "alertText": "* Aucun caractère spécial n'est accepté"
+                    "alertText": "* Aucun caractère sp&eacute;cial n'est accept&eacute;"
                 },
 				// --- CUSTOM RULES -- Those are specific to the demos, they can be removed or changed to your likings
                 "ajaxUserCall": {
                     "url": "ajaxValidateFieldUser",
                     "extraData": "name=eric",
                     "alertTextLoad": "* Chargement, veuillez attendre",
-                    "alertText": "* Ce nom est déjà pris"
+                    "alertText": "* Ce nom est d&eacute;jà pris"
                 },
                 "ajaxNameCall": {
                     "url": "ajaxValidateFieldName",
-                    "alertText": "* Ce nom est déjà pris",
+                    "alertText": "* Ce nom est d&eacute;jà pris",
                     "alertTextOk": "*Ce nom est disponible",
                     "alertTextLoad": "* Chargement, veuillez attendre"
                 },

@@ -9,7 +9,7 @@
     window.onload = init; 
 </script>	
 	
-#set ($titlePage = "Preparación de viaje para el Laboratorio" )
+#set ($titlePage = "Preparaci&oacute;n de viaje para el Laboratorio" )
 #set ($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
 #set ($ligaDaosOrden = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
 #set ($dteFecActual = $CUtilTool.getFechaActual() )

@@ -450,25 +450,25 @@
             		return false;
     			}
     			if (strApellidoPaterno.indexOf("RESPONDA") > -1){
-            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci�n de los c�rculos');    				
+            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci&oacute;n de los c&iacute;rculo');    				
             		return false;
     			}
     			if (strApellidoPaterno.indexOf("QUIEN") > -1){
-            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci�n de los c�rculos');    				
+            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci&oacute;n de los c&iacute;rculo');    				
             		return false;
     			}
     			if (strApellidoPaterno == "A QUIEN"){
-            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci�n de los c�rculos');    				
+            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci&oacute;n de los c&iacute;rculo');    				
             		return false;
     			}
     			if (strApellidoPaterno.indexOf("CORRESPONA") > -1){
-            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci�n de los c�rculos');    				
+            		alert('No debes capturar A QUIEN CORRESPONDA, selecciona una opci&oacute;n de los c&iacute;rculo');    				
             		return false;
     			}
     			if (strCorreoElectronico == "" || strCorreoElectronico.length < 4) {
-    				alert('Preg�ntale al Paciente si su M�dico TIENE CORREO ELECTRONICO?, por favor');
-    				if (confirm("Tiene correo Electr�nico su M�dico?")) {
-                		alert('Escr�belo y despu�s guarda al M�dico, por favor');    				
+    				alert('Preg&uacute;ntale al Paciente si su m&eacute;dico TIENE CORREO ELECTRONICO?, por favor');
+    				if (confirm("Tiene correo electr&oacute;nico su m&eacute;dico?")) {
+                		alert('Escr&iacute;belo y despu&eacute;s guarda al m&eacute;dico, por favor');    				
                 		return false;    					
     				}
     			}
@@ -691,7 +691,7 @@
 	
 	
 	function visualizarOrden(liga, nombre,intAdmision) {
-		alert('�Se dieron indicaciones previas al paciente?');
+		alert('¿Se dieron indicaciones previas al paciente?');
 		url = liga+'?kAdmision=' + intAdmision + '&eventSubmit_doRecibo=action';	
 		showPopWin(url, 800, 500, nombre);			
 	}
@@ -703,7 +703,7 @@
 	
 	
 	function visualizarOrdenFOP(intAdmision) {
-		alert('�Se dieron indicaciones previas al paciente?');
+		alert('¿Se dieron indicaciones previas al paciente?');
 		DatosReportesAjax.createFileFOPOrden(intAdmision,visualizarOrdenFOP_CallBack)
 	}
 	
@@ -741,7 +741,7 @@
 			if (strCorreoElectronico == "" || strCorreoElectronico.length < 4) {
 		   		frmPantalla.txtCorreoElectronicoMedico.disabled = false;		
 				document.getElementById('txtCorreoElectronicoMedico').className = 'text';
-        		alert('Escr�be el correo y despu�s oprime de nuevo "Cambiar Correo Electronico", por favor');    				
+        		alert('Escr&iacute;be el correo y despu&eacute;s oprime de nuevo "Cambiar Correo Electronico", por favor');    				
 			} else {
     			DatosMedico.actualizaCorreoElectronicoMedico(frmPantalla.hdnkMedico.value,strCorreoElectronico,actualizaCorreoElectronicoMedico_CallBack);
     		}
@@ -807,7 +807,7 @@
 	
 	function cerrarTicketSucursal(kticketsucursal) {
 		limpiaPantalla();
-		if(confirm("�CONTINUAS atendiendo al mismo Turno?")) {
+		if(confirm("¿CONTINUAS atendiendo al mismo Turno?")) {
 
 		} else {
 /*			StopTheClock();

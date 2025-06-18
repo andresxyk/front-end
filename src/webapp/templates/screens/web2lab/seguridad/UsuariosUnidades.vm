@@ -12,7 +12,7 @@
 			 <tr>
        			<td>
 		       		#if($!bolModif == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
 					#end	
 				</td>
@@ -20,7 +20,7 @@
 			<tr>
        			<td>
 		       		#if($!bolActualizado == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; Los roles del usuario: $!strMensajeActualizado, se actualizaron con &eacute;xito.</font></b>
 					#end	
 				</td>

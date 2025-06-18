@@ -21,7 +21,7 @@ public class MedicosPuntosAjax extends AjaxAction {
 		MedicosPuntosDao objMedicosPuntosDao = new MedicosPuntosDao();
 		iObjLog.debug("Entrando DatosMedicoAjaxMedicosPuntosAjax.altRegaloMedicos:Entrando... " + objRegalo.getSregalo());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objRegalo = objMedicosPuntosDao.altaRegalosMedicos(objRegalo);
 			iObjLog.debug("Saliendo MedicosPuntosAjaxDatosMedicoAjax.altRegaloMedicos:Saliendo...  " +objRegalo.getCregalo().intValue());
     	}catch (Exception aObjException){

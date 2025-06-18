@@ -18,12 +18,12 @@
                 },
                 "minSize": {
                     "regex": "none",
-                    "alertText": "* Minimalna liczba znaków to ",
+                    "alertText": "* Minimalna liczba znak&oacute;w to ",
                     "alertText2": ""
                 },
                 "maxSize": {
                     "regex": "none",
-                    "alertText": "* Maksymalna liczba znaków to ",
+                    "alertText": "* Maksymalna liczba znak&oacute;w to ",
                     "alertText2": ""
                 },
 	     "groupRequired": {
@@ -44,7 +44,7 @@
                 },
                 "future": {
                     "regex": "none",
-                    "alertText": "* Data musi być późniejsza niż "
+                    "alertText": "* Data musi być p&oacute;źniejsza niż "
                 },	
                 "maxCheckbox": {
                     "regex": "none",

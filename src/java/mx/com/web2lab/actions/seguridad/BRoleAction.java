@@ -121,7 +121,7 @@ public class BRoleAction extends SecureAction implements Serializable{
     }
 
     /**
-     * acción responsable de remover un role de la tabla
+     * acci&oacute;n responsable de remover un role de la tabla
      * @param hdnNombre
      * @throws Exception cuando no encuentra valor en la tabla igual a txtNombre
      */

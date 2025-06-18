@@ -39,7 +39,7 @@ public class CorreoPromocionesAjax extends AjaxAction {
 		iObjLog.debug("CorreoPromocionesAjax.envioPromocionEmail:Entrando..." + cPromocion);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesiÃ³n vÃ¡lida ...");
 			iObjLog.debug("CorreoPromocionesAjax.envioPromocionEmail:Validacion....");
 			objPacienteBean.setSapmaterno("");
 			objPacienteBean.setSappaterno("");
@@ -63,7 +63,7 @@ public class CorreoPromocionesAjax extends AjaxAction {
 					objPacienteMarketing.setTpaciente(objPacienteHB);
 					objPacienteMarketing.setUserId(1);
 					objPacienteMarketing = objMarketingDao.guardarPacienteMarketing(objPacienteMarketing);
-					strHTML = "<html><head><title>Olab</title></head><body><b>Buenas tardes " + objPaciente.getSnombre().toUpperCase() + " " + objPaciente.getSappaterno().toUpperCase() + " " + objPaciente.getSapmaterno().toUpperCase() + "</b>" + objPromocionMarketing.getShtmlpromocion() + "<center>Si deseas cancelar tu suscripción a esta lista, sólo tienes que hacer clic en la siguiente liga:<a href='http://201.148.87.156/unsuscribe.asp?kcliente=" + objPacienteMarketing.getKpacientemarketing().intValue() + "'> Unsubscribe</a></center></body></html>";
+					strHTML = "<html><head><title>Olab</title></head><body><b>Buenas tardes " + objPaciente.getSnombre().toUpperCase() + " " + objPaciente.getSappaterno().toUpperCase() + " " + objPaciente.getSapmaterno().toUpperCase() + "</b>" + objPromocionMarketing.getShtmlpromocion() + "<center>Si deseas cancelar tu suscripci&oacute;n a esta lista, s&oacute;lo tienes que hacer clic en la siguiente liga:<a href='http://201.148.87.156/unsuscribe.asp?kcliente=" + objPacienteMarketing.getKpacientemarketing().intValue() + "'> Unsubscribe</a></center></body></html>";
 					if (objMailDAO.sendEmailMarketing(objPromocionMarketing.getSsubject(), objPaciente.getScorreoelectronico(), strHTML, "") == -1) {
 						objPacienteMarketing.setUserId(-1);
 						objMarketingDao.actualizarPacienteMarketing(objPacienteMarketing);

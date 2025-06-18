@@ -81,7 +81,7 @@
       </tr>
       <tr>
         <td>
-          Escribe la contraseña de la orden:
+          Escribe la contrase&ntilde;a de la orden:
         </td>
         <td>
           <input id="idPassword" size="16" STYLE="font-size: 30px;" />
@@ -101,8 +101,8 @@
         </td>
         <td>
      		<input type="radio" name="radTipo" value="0" checked>Consulta de Resultado
-     		<input type="radio" name="radTipo" value="1" >Cambio de Password de su Expediente Clínico Electrónico				
-     		<input type="radio" name="radTipo" value="2" >Facturación Electrón				
+     		<input type="radio" name="radTipo" value="1" >Cambio de Password de su Expediente Cl&iacute;nico Electr&oacute;nico				
+     		<input type="radio" name="radTipo" value="2" >Facturaci&oacute;n Electr&oacute;n				
         </td>
       </tr>
       <tr>

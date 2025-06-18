@@ -253,7 +253,7 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 													   notaDescuentos,checkRetencion,descripcionfactura,GenerarFacturacionDefinitivo_CallBack); 											
 										   }				   
 									   }else{
-										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+										   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con raz&oacute;n social de Azteca del convenio? "+cconvenio)) {	 	
 											   FacturaElectronicaEmpresaAjax.generarFacturacionDefinitivo(cconvenio,userid,strbloques,tiporeporte,"1",monto,razonSocial,
 													   tipofactura,smetodopago,nocuenta,uuidSustitucion,checkSustitucion,checkDescuento,descuentosRm,
 													   notaDescuentos,checkRetencion,descripcionfactura,GenerarFacturacionDefinitivo_CallBack); 											   											   
@@ -282,7 +282,7 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 										   										   
 									   }				   
 								   }else{
-									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con razón social de Azteca del convenio? "+cconvenio)) {	 	
+									   if (confirm("¿Esta seguro de generar la facturacion definitiva JENNER con raz&oacute;n social de Azteca del convenio? "+cconvenio)) {	 	
 										   
 										   FacturaElectronicaEmpresaAjax.generarFacturacionDefinitivo(cconvenio,userid,strbloques,tiporeporte,"1",monto,razonSocial,
 												   tipofactura,smetodopago,nocuenta,uuidSustitucion,checkSustitucion,checkDescuento,descuentosRm,
@@ -744,12 +744,12 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 	   } else {
 		   var nocuenta = '';
 	   }
-	   //alert('M�todo pago' + smetodopago);
+	   //alert('M&eacute;todo pago' + smetodopago);
 	   if((tipofactura>0)&&(ufoliofactura>0)){
 			if((tipofactura==1)){
 				var descripcionfactura = document.getElementById("txtDescripcion").value;
 				if(descripcionfactura==""){
-					alert("Debe ingresar una descripci�n para la factura");
+					alert("Debe ingresar una descripci&oacute;n para la factura");
 					document.getElementById("txtDescripcion").focus();
 				}else{
 					LoadFacturaElectronica(descripcionfactura);

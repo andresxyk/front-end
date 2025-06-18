@@ -71,7 +71,7 @@
       </div>
       <div class="fld-grp clearfix grpelem" id="widgetu7952" data-required="true" data-type="email"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u7955-4" for="widgetu7952_input"><!-- content -->
-        <span class="actAsPara">Correo electrónico:</span>
+        <span class="actAsPara">Correo electr&oacute;nico:</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7953-3"><!-- content --><input class="wrapped-input" type="text" spellcheck="false" id="widgetu7952_input" name="widgetu7952_input" value="<%=sEmail%>" tabindex="3"/></span>
       </div>
@@ -87,17 +87,17 @@
       <input class="submit-btn NoWrap grpelem" id="u7962-17" type="submit" value="" tabindex="5"/><!-- state-based BG images -->
       <div class="fld-grp clearfix grpelem" id="widgetu7973" data-required="true"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u7977-4" for="widgetu7973_input"><!-- content -->
-        <span class="actAsPara">Contraseña</span>
+        <span class="actAsPara">contrase&ntilde;a</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7976-3"><!-- content --><input class="wrapped-input" type="text" id="widgetu7973_input" name="widgetu7973_input"  value="<%=sPassword%>"  tabindex="2"/></span>
       </div>
       <div class="fld-grp clearfix grpelem" id="widgetu7978" data-required="true" data-type="captcha"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u7980-4" for="widgetu7978_input"><!-- content -->
-        <span class="actAsPara">Comprobación de imagen:</span>
+        <span class="actAsPara">Comprobaci&oacute;n de imagen:</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7982-3"><!-- content --><input class="wrapped-input" type="text" autocomplete="off" spellcheck="false" id="widgetu7978_input" name="widgetu7978_input" tabindex="4"/></span>
        <%= captchas.image() %><br><br><br>     
-<!--   <img class="grpelem" src="/web2labportal/images/consultaresultados/captcha2.png" alt="Imagen de marcador de posición de CAPTCHA" title="Esta imagen es un marcador de posición para una imagen CAPTCHA. Si publica el sitio con Adobe Business Catalyst, esta imagen será reemplazada por una imagen CAPTCHA generada por el servidor." id="u7983"/><!-- captcha placeholder -->
+<!--   <img class="grpelem" src="/web2labportal/images/consultaresultados/captcha2.png" alt="Imagen de marcador de posici&oacute;n de CAPTCHA" title="Esta imagen es un marcador de posici&oacute;n para una imagen CAPTCHA. Si publica el sitio con Adobe Business Catalyst, esta imagen ser&aacute; reemplazada por una imagen CAPTCHA generada por el servidor." id="u7983"/><!-- captcha placeholder -->
       </div>
      </form>
      <div class="rounded-corners grpelem" id="u8075"><!-- simple frame --></div>
@@ -109,7 +109,7 @@
      <div class="clearfix" id="u4224_align_to_page">
       <div class="clearfix grpelem" id="u4223-6"><!-- content -->
        <p>© 2013 Todos los Derechos Reservados</p>
-       <p>Olab Diagnósticos Médicos</p>
+       <p>Olab Diagn&oacute;sticos M&eacute;dicos</p>
       </div>
      </div>
     </div>

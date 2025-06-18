@@ -17,7 +17,7 @@
 		<tr>
 			<td align="left" colspan="3">
 		       		#if($bolActualizado)
-						<img align="middle" src="$content.getURI('images/icon_success_sml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_success_sml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="blue" aling="center">&nbsp; Los roles del usuario: $!strNomUser, se actualizaron con &eacute;xito.</font></b>
 					#else
 						&nbsp;

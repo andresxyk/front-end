@@ -48,7 +48,7 @@
 				<tr>
 					<td>
 						#if($!bolModif == "true")
-							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de liga exitosa"/>&nbsp;&nbsp;
+							<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de liga exitosa"/>&nbsp;&nbsp;
 							<b><font color="$ff0030" aling="center">&nbsp; Se actualiz&oacute; la liga exitosamente</font></b>
 						#end	
 					</td>

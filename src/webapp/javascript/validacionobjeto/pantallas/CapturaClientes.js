@@ -17,7 +17,7 @@ function init()
 	var frmPantalla = window.document.frmAdminClientes;
 	var userid = frmPantalla.idUsuario.value;
 	var marca = frmPantalla.idMarca.value;
-    DWRUtil.useLoadingMessage();
+    //DWRUtil.useLoadingMessage();
     disableDIV(); 
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
  	codeDIVHTML("gridbusquedaConvenios","");
@@ -211,7 +211,8 @@ function VerificaModificacion()
 	}
 } 
 
-function actualizaCliente() {	 	
+function actualizaCliente() {	 
+	habilitarSpinner();	
 	disableDIV();
 	LoadCompletedCliente();
 	DatosCliente.actualizaCliente(clienteBean,actualizaCliente_CallBack); 
@@ -219,6 +220,8 @@ function actualizaCliente() {
 		
 function actualizaCliente_CallBack(data)
 {
+	deshabilitarSpinner();
+	alert("Usuario creado/modificado exitosamente");
 	var frmPantalla = window.document.frmAdminClientes;
 	codigoBean(frmPantalla.txtCliente,true,data.ccliente);		
 	CleanScreen();
@@ -277,7 +280,27 @@ function clienteAceptado_CallBack(data) {
 	frmPantalla.txtDelegacionMunicipio.value = data.sdelegacionmunicipio;
 	frmPantalla.txtCodigoPostal.value = data.scodigopostal;
 	frmPantalla.selEstado.selectedIndex = compareSelect(frmPantalla.selEstado,data.sestado);
-	frmPantalla.txtNombreComercial[1].value = data.snombrecontacto;
+	
+	frmPantalla.txtNombreComercial[1].value = data.snombreejecutivocomercial;
+	frmPantalla.txtDepartamentoComercial.value = data.sdeptoejecomer;
+	frmPantalla.txtDireccionComercial.value = data.sdirejecomer;
+	frmPantalla.txtEmailComercial.value = data.scorreoejecutivocomercial;
+	frmPantalla.txtTelefonoComercial.value = data.stelejecomer;
+
+	frmPantalla.txtNombreRevision.value = data.snombrecontacto;
+	frmPantalla.txtDepartamentoRevision.value = data.sdeptocontacto;
+	frmPantalla.txtDireccionRevision.value = data.sdircontacto;
+	frmPantalla.txtDiasHoraRevision.value = data.sdiashrscontacto;
+	frmPantalla.txtEmailRevision.value = data.scorreocontacto;
+	frmPantalla.txtTelefonoRevision.value = data.stelefonocontacto;
+	frmPantalla.txtFechaCierreRevision.value = data.dfeccierrecontacto;
+
+	frmPantalla.txtNombreCobranza.value = data.sejecutivocobranza;
+	frmPantalla.txtEmailCobranza.value = data.scorreoejecutivocobranza;
+	frmPantalla.txtDepartamentoCobranza.value = data.sdeptoejecob;
+	frmPantalla.txtDireccionCobranza.value = data.sdirejecob;
+	frmPantalla.txtTelefonoCobranza.value = data.stelejecob;
+	
 
 	valorCombo(document.getElementById('selTipoCliente'),data.ctipocliente);
 	
@@ -344,7 +367,27 @@ function LoadCompletedCliente() {
 	clienteBean.cregimenfiscal=frmPantalla.selRegimenFiscal[frmPantalla.selRegimenFiscal.selectedIndex].value;
 	clienteBean.cusocfdi=frmPantalla.selUsoCfdi[frmPantalla.selUsoCfdi.selectedIndex].value;
 	clienteBean.udiascredito=frmPantalla.selDias[frmPantalla.selDias.selectedIndex].value;
-	clienteBean.snombrecontacto = frmPantalla.txtNombreComercial[1].value;	 
+	
+	
+	clienteBean.snombreejecutivocomercial = frmPantalla.txtNombreComercial[1].value;	 
+	clienteBean.sdeptoejecomer = frmPantalla.txtDepartamentoComercial.value;
+	clienteBean.sdirejecomer = frmPantalla.txtDireccionComercial.value;
+	clienteBean.scorreoejecutivocomercial = frmPantalla.txtEmailComercial.value
+	clienteBean.stelejecomer = frmPantalla.txtTelefonoComercial.value;
+
+	clienteBean.snombrecontacto = frmPantalla.txtNombreRevision.value;
+	clienteBean.sdeptocontacto = frmPantalla.txtDepartamentoRevision.value;
+	clienteBean.sdircontacto = frmPantalla.txtDireccionRevision.value;
+	clienteBean.sdiashrscontacto = frmPantalla.txtDiasHoraRevision.value;
+	clienteBean.scorreocontacto = frmPantalla.txtEmailRevision.value;
+	clienteBean.stelefonocontacto = frmPantalla.txtTelefonoRevision.value;
+	clienteBean.dfeccierrecontacto = frmPantalla.txtFechaCierreRevision.value;
+
+	clienteBean.sejecutivocobranza =  frmPantalla.txtNombreCobranza.value;
+	clienteBean.scorreoejecutivocobranza =  frmPantalla.txtEmailCobranza.value;
+	clienteBean.sdeptoejecob = frmPantalla.txtDepartamentoCobranza.value;
+	clienteBean.sdirejecob = frmPantalla.txtDireccionCobranza.value;
+	clienteBean.stelejecob = frmPantalla.txtTelefonoCobranza.value;
 }
 
 function LoadBusquedaCliente() {
@@ -734,7 +777,7 @@ function AltaPorcentaje() {
 
 function altaExamen(examen) {
     var frmPantalla = window.document.frmAdminClientes;
-	var pMontoFacturarNew = parseFloat(prompt('�Cual es el $ facturar sin IVA?',0));
+	var pMontoFacturarNew = parseFloat(prompt('¿Cual es el $ facturar sin IVA?',0));
 	if (confirm("Quieres dar de alta para el convenio " + frmPantalla.txtConvenio.value + " el $ " + pMontoFacturarNew + " para el examen " + examen + "?")) {
 		DatosCliente.altaPorcentajeExamenConvenio(frmPantalla.txtConvenio.value,examen,pMontoFacturarNew,AltaPorcentaje_CallBack);					
 	}		
@@ -745,7 +788,7 @@ function actualizarExamen(kConvenioDetalle,examen) {
 		alert('El Convenio no es del tipo por Clasificacion Comercial');
 	} else {
 	    var frmPantalla = window.document.frmAdminClientes;
-		var pMontoFacturarNew = parseFloat(prompt('�Cual es el $ facturar sin IVA?',0));
+		var pMontoFacturarNew = parseFloat(prompt('¿Cual es el $ facturar sin IVA?',0));
 		if (confirm("Quieres actualizar para el convenio " + frmPantalla.txtConvenio.value + " el $ " + pMontoFacturarNew + " para el examen " + examen + "?")) {
 			DatosCliente.actualizarPorcentajeExamenConvenio(kConvenioDetalle,frmPantalla.txtConvenio.value,examen,pMontoFacturarNew,AltaPorcentaje_CallBack);					
 		    adminDIV("gridGridClienteConvenios","hidden","none");			
@@ -764,7 +807,7 @@ function eliminarExamenConvenio(kConvenioDetalle,examen,pMontoFacturarNew) {
 
 function actualizarClasificacion(kClasificacion,uClasificacion) {
     var frmPantalla = window.document.frmAdminClientes;
-	var pDescuentoNew = parseFloat(prompt('�Cual es el nuevo % de Descuento?',0));
+	var pDescuentoNew = parseFloat(prompt('¿Cual es el nuevo % de Descuento?',0));
 	if (pDescuentoNew > -1 && pDescuentoNew < 100) {		
 		if (confirm("Quieres actualizar el convenio " + frmPantalla.txtConvenio.value + " el " + pDescuentoNew + "% a la Clasificacion " + uClasificacion + "?")) {
 			DatosCliente.actualizarPorcentajeClasificacionConvenio(kClasificacion,frmPantalla.txtConvenio.value,uClasificacion,pDescuentoNew,AltaPorcentaje_CallBack);					

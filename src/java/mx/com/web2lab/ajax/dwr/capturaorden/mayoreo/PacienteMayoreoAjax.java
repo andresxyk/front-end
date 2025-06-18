@@ -18,7 +18,7 @@ public class PacienteMayoreoAjax extends AjaxAction {
 		PacienteBean objPacienteBean = null;
 		iObjLog.debug("Entrando PacienteMayoreoAjax.buscarPacienteMetro:Entrando... " + strExpediente);		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			PacientesMayoreoDao objDAOPacienteMayoreo = new PacientesMayoreoDao();
 			objPacienteBean = new PacienteBean(strExpediente.trim());
 			objPacienteBean = objDAOPacienteMayoreo.buscarPacienteMetro(objPacienteBean);

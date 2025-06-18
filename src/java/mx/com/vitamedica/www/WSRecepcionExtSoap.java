@@ -10,7 +10,7 @@ package mx.com.vitamedica.www;
 public interface WSRecepcionExtSoap extends java.rmi.Remote {
 
     /**
-     * Búsqueda de Ordenes de laboratorio
+     * B&uacute;squeda de Ordenes de laboratorio
      */
     public java.lang.String buscaOrdenLaboratorio(java.lang.String tipo, java.lang.String elegibilidad) throws java.rmi.RemoteException;
 
@@ -25,13 +25,13 @@ public interface WSRecepcionExtSoap extends java.rmi.Remote {
     public java.lang.String validaServicioPorRealizar(java.lang.String tipo, java.lang.String proveedorConsulta, java.lang.String grupoID, java.lang.String proveedorLaboratorio, java.lang.String elegibilidad, java.lang.String ICD, java.lang.String CPT, java.lang.String fechaConsulta, java.lang.String preautorizacion, int unidades) throws java.rmi.RemoteException;
 
     /**
-     * Obtiene el número de la reclamación que se genera para el pago
+     * Obtiene el n&uacute;mero de la reclamaci&oacute;n que se genera para el pago
      * (salud) o guarda CPT (GMn)
      */
     public java.lang.String generaReclamacion(java.lang.String tipo, java.lang.String proveedorConsulta, java.lang.String grupoID, java.lang.String proveedorLaboratorio, java.lang.String elegibilidad, java.lang.String ICD, java.lang.String CPT, java.lang.String fechaConsulta, java.lang.String preautorizacion, int unidades) throws java.rmi.RemoteException;
 
     /**
-     * Genera la cancelación total o parcial de los servicios
+     * Genera la cancelaci&oacute;n total o parcial de los servicios
      */
     public java.lang.String cancelaServicios(java.lang.String tipo, java.lang.String proveedorLaboratorio, java.lang.String elegibilidad, java.lang.String CPT, java.lang.String reclamacion) throws java.rmi.RemoteException;
 

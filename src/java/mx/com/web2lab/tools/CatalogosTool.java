@@ -23,7 +23,7 @@ import org.apache.turbine.util.pool.Recyclable;
 
 public class CatalogosTool implements Recyclable, ApplicationTool, Serializable
 {
-	/**log de la aplicación */
+	/**log de la aplicaci&oacute;n */
 	private static Log iObjLog = LogFactory.getLog(CatalogosTool.class);	
 	/** The object containing request specific data */
 	private RunData iObjDatos;

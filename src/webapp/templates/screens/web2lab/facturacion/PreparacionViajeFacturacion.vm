@@ -9,7 +9,7 @@
     window.onload = init; 
 </script>	
 	
-#set ($titlePage = "Preparación de viaje para el departamento de Facturación" )
+#set ($titlePage = "Preparaci&oacute;n de viaje para el departamento de Facturaci&oacute;n" )
 #set ($ligaReporteZebra = $link.setPage("web2lab,ap,ImprimeEtiquetaZebra.vm").toString())
 #set ($ligaDaosOrden = $link.setPage("web2lab,ap,DatosOrden.vm").toString())
 #set ($dteFecActual = $CUtilTool.getFechaActual() )
@@ -44,7 +44,7 @@
 			<td>
                 <select id="selOrdenar" style="width: 200px" >
 					<option VALUE="1">Consecutivo</option>
-					<option VALUE="2">Alfabéticamente Nombre Paciente</option>
+					<option VALUE="2">Alfab&eacute;ticamente Nombre Paciente</option>
 					<option VALUE="3">Convenio</option>
 					<option VALUE="4">Viaje</option>
 	            </select>						

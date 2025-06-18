@@ -16,8 +16,8 @@
  * File Authors:
  * 		Marcin Pietrzak (fck@iworks.pl)
  */
-FCKLang.PlaceholderBtn			= 'Wstaw/Edytuj nagłówek' ;
-FCKLang.PlaceholderDlgTitle		= 'Właśności nagłóweka' ;
-FCKLang.PlaceholderDlgName		= 'Nazwa nagłóweka ;
-FCKLang.PlaceholderErrNoName	= 'Proszę wprowadzić nazwę nagłówka' ;
+FCKLang.PlaceholderBtn			= 'Wstaw/Edytuj nagł&oacute;wek' ;
+FCKLang.PlaceholderDlgTitle		= 'Właśności nagł&oacute;weka' ;
+FCKLang.PlaceholderDlgName		= 'Nazwa nagł&oacute;weka ;
+FCKLang.PlaceholderErrNoName	= 'Proszę wprowadzić nazwę nagł&oacute;wka' ;
 FCKLang.PlaceholderErrNameInUse	= 'Podana nazwa jest już w użyciu' ;

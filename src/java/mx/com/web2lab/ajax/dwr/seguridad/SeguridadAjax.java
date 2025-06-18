@@ -56,7 +56,7 @@ public class SeguridadAjax extends AjaxAction {
 	public User getUser(String username) throws AjaxDwrException{
 		User objUser = null;
     	try{
-    		if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");    		
+    		if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");    		
     		objUser = TurbineSecurity.getUser(username);
     	} catch(Exception e) {
 			iObjLog.error("SeguridadAjax.getUser:ERROR",e);

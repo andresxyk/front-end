@@ -22,7 +22,7 @@ public class ConfiguracionExamenAjax extends AjaxAction {
 		String strReturn = "";
 		iObjLog.debug("Entrando a ConfiguracionExamenAjax.showGrid:Entrando...  ");
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			strReturn = objConfiguracionExamenDao.showGrid(objExamenConfiguracionBean);
 			iObjLog.debug("Saliendo a ConfiguracionExamenAjax.showGrid:Saliendo...  ");
 		}catch (TorqueException aObjException){

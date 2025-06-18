@@ -30,17 +30,22 @@ $data.setLayoutTemplate("web2lab/DefaultLogin.vm")
 #end
 #set ( $actLnk = $link.setAction("seguridad.BActivaDepartamentoAction").toString())
 
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
 <SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/generales.js")"></SCRIPT> 
 <SCRIPT language="javascript">
 // funcion que valida que se seleccione una unidad o depto
 function validaDepto(){
+	habilitarSpinner();
 	forma =  window.document.departamentosForm;
 	radio = "departamento";
 	selRegistro = selectedRadio(forma, radio);
 	if(selRegistro == null || selRegistro == ''){
+		deshabilitarSpinner();
 		alert("Debe de seleccionar " + "$uniDep");
 		return false;
 	}else {
+		deshabilitarSpinner();
 		return true;
 	}
 }

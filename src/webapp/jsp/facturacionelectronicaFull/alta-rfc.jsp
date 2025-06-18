@@ -57,7 +57,7 @@
 			<p>Alta de Datos Fiscales, orden <%=skOrdenSucursal%> se enviara al correo <%=sEmail%></p>
         </div>
         <div class="mensaje">
-            El RFC debe tener 12 caracteres para persona moral y 13 caracteres para persona física
+            El RFC debe tener 12 caracteres para persona moral y 13 caracteres para persona f&iacute;sica
         </div>
     	<div id="form_dat" class="main clearfix">
 			<form id="facturaDatos" method="post">
@@ -71,16 +71,16 @@
                         <input type="radio" value="fisica" id="fisica" name="tipoPersona" checked/>
                         <label for="checkbox"></label>
                     </div>
-                    <p class="tipoPersona">Persona física</p>
+                    <p class="tipoPersona">Persona f&iacute;sica</p>
 <!--                      <p class="right"><label for="idRFC" >RFC:</label><p class="right"><input name="rfc" type="text" class="validate[required,funcCall[ValidaRfc],funcCall[ValidaIniciales],funcCall[ValidaAno],funcCall[ValidaMes],funcCall[ValidaDia],funcCall[ValidaHomoclave]] text-input" id="rfc" placeholder="RFC:" /></p>-->
                     <p class="right"><label for="idRFC" >RFC:</label><p class="right"><input name="rfc" type="text" class="validate[required,funcCall[ValidaRfc]] text-input" id="rfc" placeholder="RFC:" /></p>
-                    <p class="right"><label for="idDireccion" >Dirección:</label><p class="right"><textarea name="direccion" rows="2" class="validate[required] text-input right" id="direccion" placeholder="Dirección: " size="50"></textarea></p>
-                    <p class="right"><label for="idDelegacion" >Delegación/Municipio:</label><p class="right"><input class="validate[required] text-input" type="text" id="delegacion" name="delegacion" placeholder="Delegación/Municipio:"  /></p>
+                    <p class="right"><label for="idDireccion" >Direcci&oacute;n:</label><p class="right"><textarea name="direccion" rows="2" class="validate[required] text-input right" id="direccion" placeholder="Direcci&oacute;n: " size="50"></textarea></p>
+                    <p class="right"><label for="idDelegacion" >Delegaci&oacute;n/Municipio:</label><p class="right"><input class="validate[required] text-input" type="text" id="delegacion" name="delegacion" placeholder="Delegaci&oacute;n/Municipio:"  /></p>
                     <p class="right"><label for="idEstado" >Estado:</label><p class="right"><input class="validate[required] text-input" type="text" id="estado" name="estado" placeholder="Estado:"  />
                     	<!--<select id="selEstado" name="selEstado">
                               <option value="-1">--Elige un estado--</option> 
                             <option value="9" selected>DISTRITO FEDERAL</option>
-                            <option value="11">ESTADO DE MÉXICO</option>
+                            <option value="11">ESTADO DE M&eacute;XICO</option>
                             <option value="1">AGUASCALIENTES</option>
                             <option value="2">BAJA CALIFORNIA NORTE</option>
                             <option value="3">BAJA CALIFORNIA SUR</option>
@@ -114,7 +114,7 @@
 					</select>--></p>
 			</div>
             <div class="column">
-            	<p class="left"><label for="idRazonSocial" >Persona Física (Nombre), Persona Moral (Razón o Denominación fiscal):</label><p class="left"><input class="validate[required] text-input" type="text" id="razonSocial" name="razonSocial" placeholder="Razon social:"  /></p>
+            	<p class="left"><label for="idRazonSocial" >Persona F&iacute;sica (Nombre), Persona Moral (Raz&oacute;n o Denominaci&oacute;n fiscal):</label><p class="left"><input class="validate[required] text-input" type="text" id="razonSocial" name="razonSocial" placeholder="Razon social:"  /></p>
                 <p class="left"><label for="idColonia" >Colonia:</label><p class="left"><input class="validate[required] text-input" type="text" id="colonia" name="colonia" placeholder="Colonia:"  /></p>
                 <p class="left"><label for="idCodigoPostal" >Codigo Postal:</label><p class="left"><input class="validate[required,funcCall[ValidaCP]] text-input" type="text" id="codigoPostal" name="codigoPostal" placeholder="Codigo Postal:" maxlength="5"  /></p>
 <!--                  <p class="left"><label for="idCorreo" >Correo:</label><p class="left"><input data-prompt-position="inline" class="validate[required, funcCall[ValidaCorreo]] text-input texto email" type="text" name="email" id="email" placeholder="Correo" data-inputmask="'alias': 'email'"></p>-->
@@ -137,12 +137,12 @@
             </form>
 		</div>
         <div id="footer">
-	        Grupo Diagnóstico Aries © Todos los derechos reservados 2015-2016.
+	        Grupo Diagn&oacute;stico Aries © Todos los derechos reservados 2015-2016.
         </div>
         <div id="modal">
             <div class="overlay"></div>
             <div class="content">
-                <h3>Asegúrate de que estén bien tus datos fiscales</h3>
+                <h3>Aseg&uacute;rate de que est&eacute;n bien tus datos fiscales</h3>
                 <table>
                     <tr>
                         <th>Tipo de persona</th>
@@ -153,15 +153,15 @@
                         <td id="rfcInfo"></td>
                     </tr>
                     <tr>
-                        <th>Razón Social</th>
+                        <th>Raz&oacute;n Social</th>
                         <td id="razonSocialInfo"></td>
                     </tr>
                     <tr>
-                        <th>Dirección</th>
+                        <th>Direcci&oacute;n</th>
                         <td id="direccionInfo"></td>
                     </tr>
                     <tr>
-                        <th>Delegación</th>
+                        <th>Delegaci&oacute;n</th>
                         <td id="delegacionInfo"></td>
                     </tr>
                     <tr>
@@ -178,7 +178,7 @@
                     </tr>
 <!--                      
                     <tr>
-                        <th>Correo electrónico</th>
+                        <th>Correo electr&oacute;nico</th>
                         <td id="emailInfo"></td>
                     </tr>
 -->                    

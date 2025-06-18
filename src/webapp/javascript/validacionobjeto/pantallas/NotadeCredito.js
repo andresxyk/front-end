@@ -224,7 +224,7 @@
 				//alert ("revisar"+frm.hdenRutaNotaCredito.value+ "?strKfacturas="+ frm.hdenFacturasNotas.value+ "&montoTotalNota="+ frm.hdenmontoFactura.value+"&cConvenio="+ frm.hdnCconvenio.value, 900, 500, "CrearNotaCredito");
 				showPopWin(frm.hdenRutaNotaCredito.value + "?strKfacturas="+ frm.hdenFacturasNotas.value+ "&montoTotalNota="+ frm.hdenmontoFactura.value+"&cConvenio="+ frm.hdnCconvenio.value, 900, 500, "CrearNotaCredito");   
 			}else{
-				alert('Debe seleccionar por lo menos una factura para generar la nota de cr�dito');
+				alert('Debe seleccionar por lo menos una factura para generar la nota de cr&eacute;dito');
 			}
 			
    }
@@ -502,7 +502,7 @@
 		 var montonota=eval("frm."+name+".value");
 		 //alert(montonota);
 		 if(parseFloat(eval(montonota))>parseFloat(eval(montofactura))){
-			 alert("El monto es mas alto a la factura, por favor verif�quelo");
+			 alert("El monto es mas alto a la factura, por favor verif&iacute;quelo");
 			 document.getElementById(name).value="";
 			 document.getElementById(name).focus();
 		 }else{

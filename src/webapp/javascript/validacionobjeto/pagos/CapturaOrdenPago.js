@@ -44,7 +44,7 @@ function validaPago()
 	}
     if(!validaSoloNumeros(txtPaga))
     {
-		alert(corrigeAcentos("Solo se permite ingresar n�meros."));
+		alert(corrigeAcentos("Solo se permite ingresar n&uacute;meros."));
 		frmPantalla.txtPago.value="";
 		return false;
 	} 		

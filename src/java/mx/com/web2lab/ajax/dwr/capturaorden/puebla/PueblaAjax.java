@@ -25,7 +25,7 @@ public class PueblaAjax extends AjaxAction {
 		PueblaDao objPueblaDao = new PueblaDao();
 		iObjLog.debug("Entrando PueblaAjax.persistirCuestionario:Entrando... " + objCuestionarioPantallaBean.getkPaciente());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objCuestionarioPantallaBean = objPueblaDao.persistirCuestionario(objCuestionarioPantallaBean);
 			iObjLog.debug("Saliendo PueblaAjax.persistirCuestionario:Saliendo...  " +objCuestionarioPantallaBean.getKcuestionariopacientepuebla());
     	} catch (Exception aObjException) {
@@ -39,7 +39,7 @@ public class PueblaAjax extends AjaxAction {
 		PueblaDao objPueblaDao = new PueblaDao();
 		iObjLog.debug("Entrando PueblaAjax.buscarCuestionario:Entrando... " + objCuestionarioPantallaBean.getkPaciente());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objCuestionarioPantallaBean = objPueblaDao.buscarCuestionario(objCuestionarioPantallaBean);
 			iObjLog.debug("Saliendo PueblaAjax.buscarCuestionario:Saliendo...  " +objCuestionarioPantallaBean.getKcuestionariopacientepuebla());
     	} catch (Exception aObjException) {
@@ -54,7 +54,7 @@ public class PueblaAjax extends AjaxAction {
 		CuestionarioPDF objPrincipalCuestionario = new CuestionarioPDF();
 		iObjLog.debug("Entrando PueblaAjax.imprimirCuestionario:Entrando... " + objCuestionarioPantallaBean.getkPaciente());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objCuestionarioPantallaBean = objPueblaDao.imprimirCuestionario(objCuestionarioPantallaBean);
 			objCuestionarioPantallaBean.setSmensajeoperacion(objPrincipalCuestionario.imprimirCuestionario(objCuestionarioPantallaBean));
 			iObjLog.debug("Saliendo PueblaAjax.imprimirCuestionario:Saliendo...  " +objCuestionarioPantallaBean.getKcuestionariopacientepuebla());
@@ -69,7 +69,7 @@ public class PueblaAjax extends AjaxAction {
 		PueblaInterpretacionDao objPueblaInterpretacionDao = new PueblaInterpretacionDao();
 		iObjLog.debug("Entrando PueblaAjax.persistirFormato:Entrando... " + objCuestionarioPantallaInterpretacionBean.getKordensucursal());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			 iObjLog.debug("Entrando PueblaAjax.persistirFormato:Entrando... "+objCuestionarioPantallaInterpretacionBean.getUmastografiaadecuada());
 			 
 			 if(objCuestionarioPantallaInterpretacionBean.getSfechaultimamastografia().equals(""))
@@ -122,7 +122,7 @@ public class PueblaAjax extends AjaxAction {
 		PueblaInterpretacionDao objPueblaInterpretacionDao = new PueblaInterpretacionDao();
 		iObjLog.debug("Entrando PueblaAjax.buscarFormato:Entrando... " + objCuestionarioPantallaInterpretacionBean.getKordensucursal());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objCuestionarioPantallaInterpretacionBean = objPueblaInterpretacionDao.buscarInterpretacion(objCuestionarioPantallaInterpretacionBean);
 			iObjLog.debug("Saliendo PueblaAjax.buscarFormato:Saliendo...  " +objCuestionarioPantallaInterpretacionBean.getKcuestionariopacienteinterpretacionpuebla());
     	} catch (Exception aObjException) {
@@ -137,7 +137,7 @@ public class PueblaAjax extends AjaxAction {
 		FormatoPDF objPrincipalInterpretacion = new FormatoPDF();
 		iObjLog.debug("Entrando PueblaAjax.imprimirFormato:Entrando... " + objCuestionarioPantallaInterpretacionBean.getKordensucursal());		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			objCuestionarioPantallaInterpretacionBean = objPueblaInterpretacionDao.imprimirInterpretacion(objCuestionarioPantallaInterpretacionBean);
 			objCuestionarioPantallaInterpretacionBean.setSmensajeoperacion(objPrincipalInterpretacion.imprimirFormato(objCuestionarioPantallaInterpretacionBean));
 			iObjLog.debug("Saliendo PueblaAjax.imprimirFormato:Saliendo...  " +objCuestionarioPantallaInterpretacionBean.getKcuestionariopacienteinterpretacionpuebla());

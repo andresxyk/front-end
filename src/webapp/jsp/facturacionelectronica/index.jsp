@@ -34,11 +34,11 @@
   			<img src="/web2labportal/images/facturacionelectronica2015/slogan_olab.png" height="87px" alt="" class="f_right" /> 
 		</div>
 		<div class="facturacion clearfix">
-			<p>facturación electrónica</p>
+			<p>facturaci&oacute;n electr&oacute;nica</p>
 		</div>
 -->		
 		<div class="mensaje">
-			Estimado paciente, te recordamos que para poder generar tu factura electrónica
+			Estimado paciente, te recordamos que para poder generar tu factura electr&oacute;nica
 			<br><br>
 			***   Es necesario que su orden se encuentre pagada al 100%.
 			<br>
@@ -46,11 +46,11 @@
 			<br>
 			***   Solo tienes el año corriente como limite.
 			<br>
-			***   Si existe algún problema con mucho gusto lo atenderemos:
+			***   Si existe alg&uacute;n problema con mucho gusto lo atenderemos:
 			<br>
-			.......... Envíanos un correo a soporte.facturacion@grupodiagnosticoaries.com.mx, nombre completo, número telefónico, contraseña y número de orden(es).
+			.......... Env&iacute;anos un correo a soporte.facturacion@grupodiagnosticoaries.com.mx, nombre completo, n&uacute;mero telef&oacute;nico, contrase&ntilde;a y n&uacute;mero de orden(es).
 			<br><br>
-			*** AYUDA: Pase por encima de la imagen del recibo (círculos naranjas) el puntero del mouse.
+			*** AYUDA: Pase por encima de la imagen del recibo (c&iacute;rculos naranjas) el puntero del mouse.
 		</div>
 		<div class="main clearfix">
 			<div class="column image">
@@ -63,7 +63,7 @@
 			<div class="column">
 				<form id="facturas" method="post" action="">
 					<p><label for="idConsecutivo" >Consecutivo</label><p><input data-prompt-position="inline" class="validate[required] text-input texto" type="text" name="consecutivo" id="consecutivo" maxlength="7" autofocus placeholder="Consecutivo"></p>
-					<p><label for="idPassword" >Password</label><p><input data-prompt-position="inline" class="validate[required, funcCall[ValidaPassword]] text-input texto pass" type="text" name="password" id="password" maxlength="4" placeholder="Contraseña"></p>
+					<p><label for="idPassword" >Password</label><p><input data-prompt-position="inline" class="validate[required, funcCall[ValidaPassword]] text-input texto pass" type="text" name="password" id="password" maxlength="4" placeholder="contrase&ntilde;a"></p>
 					<p><label for="idCorreo" >Correo</label><p><input data-prompt-position="inline" class="validate[required, funcCall[ValidaCorreo]] text-input texto email" type="text" name="email" id="email" placeholder="Correo" data-inputmask="'alias': 'email'"></p>
 					<p>
 						<button type="submit" id="notification-trigger" class="progress-button">
@@ -74,7 +74,7 @@
 				</form>
 			</div>
 		</div>
-		<div id="footer">Grupo Diagnóstico Aries © Todos los derechos reservados 2015-2016.</div>
+		<div id="footer">Grupo Diagn&oacute;stico Aries © Todos los derechos reservados 2015-2016.</div>
 	</div>
 	<script src="/web2labportal/javascript/facturacionelectronica2015/classie.js"></script>
 	<script src="/web2labportal/javascript/facturacionelectronica2015/notificationFx.js"></script>

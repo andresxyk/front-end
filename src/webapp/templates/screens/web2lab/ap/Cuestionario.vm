@@ -103,7 +103,7 @@
 			    </div>				
 	        </td>     
             <td style="font-weight: normal; font-size: 12px; color: white; font-style: normal; font-variant: normal">
-                <b>Edad (años-meses-dias)</b
+                <b>Edad (aÃ±os-meses-dias)</b
     	    </td>     
             <td style="width: 158px">
                 <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
@@ -134,7 +134,7 @@
 					<b>* Menarca</b>
 				</td>
 				<td style="width: 204px">
-					<input type="text" maxlength="2" style="width: 60px" id="txtMenarca" onKeyPress="javascript:return numero();">Años
+					<input type="text" maxlength="2" style="width: 60px" id="txtMenarca" onKeyPress="javascript:return numero();">AÃ±os
 				</td>
 				<td style="width: 127px">
 					<strong>* Ritmo</strong>
@@ -158,7 +158,7 @@
 					<strong>* V.S.A</strong>
 				</td>
 				<td style="height: 25px; width: 204px;">
-					<input type="text" maxlength="2" style="width: 60px" id="txtVidaSexualActiva" onKeyPress="javascript:return numero();">Años
+					<input type="text" maxlength="2" style="width: 60px" id="txtVidaSexualActiva" onKeyPress="javascript:return numero();">AÃ±os
 				</td>
 				<td style="height: 25px; width: 127px;"> 
 					<strong>* Parejas sexuales</strong>
@@ -181,7 +181,7 @@
 					<input type="text" maxlength="2" style="width: 60px" id="txtPartosNormales" onKeyPress="javascript:return numero();">
 				</td>
 				<td style="width: 127px">
-					<strong>* Cesáreas</strong>
+					<strong>* Ces&aacute;reas</strong>
 				</td>
 				<td style="width: 155px">
 					<input type="text" maxlength="2" style="width: 60px" id="txtCesareas" onKeyPress="javascript:return numero();">
@@ -198,7 +198,7 @@
 					<strong>Primer embarazo</strong>
 				</td>
 				<td style="width: 204px">
-					<input type="text" maxlength="2" style="width: 60px" id="txtPrimerEmbarazo" onKeyPress="javascript:return numero();">Años
+					<input type="text" maxlength="2" style="width: 60px" id="txtPrimerEmbarazo" onKeyPress="javascript:return numero();">AÃ±os
 				</td>
 				<td style="width: 127px">
 					<strong>* Lactancia</strong>
@@ -211,7 +211,7 @@
 					<strong>* Climaterio</strong>
 				</td>
 				<td style="width: 181px"> 
-					<input type="text" maxlength="2" style="width: 60px" id="txtClimaterio" onKeyPress="javascript:return numero();">Años
+					<input type="text" maxlength="2" style="width: 60px" id="txtClimaterio" onKeyPress="javascript:return numero();">AÃ±os
 				</td>
 		    </tr>
 			<tr>
@@ -223,7 +223,7 @@
 					<input type="radio" name="radMastografias" value="0">NO 
 				</td>
 				<td style="width: 15%">
-					<strong>En que Año?</strong>
+					<strong>En que AÃ±o?</strong>
 				</td>
 				<td style="width: 35%">
 					<input type="text" style="width: 220px" id="txtAnoMastografia" onKeyPress="mayuscula();">
@@ -231,7 +231,7 @@
 			</tr>
 			<tr>
 				<td style="width: 30%">
-					<b>* Ha tenido cáncer de mama?</b>
+					<b>* Ha tenido c&aacute;ncer de mama?</b>
 				</td>
 				<td style="width: 20%">
 					<input type="radio" name="radCancerMama" value="1">SI &nbsp;
@@ -247,7 +247,7 @@
 	    </table>              
 		<table border="1" align="center" style="width: 980px" frame="border">
 			<th colspan="6">
-				Historia de Cáncer en la Familia 
+				Historia de C&aacute;ncer en la Familia 
 			</th>
 			<tr>
 				<td style="width: 20%">
@@ -332,7 +332,7 @@
 					<input type="radio" name="radMastografias" value="0">NO 
 				</td>
 				<td style="width: 15%">
-					<strong>En que Año?</strong>
+					<strong>En que AÃ±o?</strong>
 				</td>
 				<td style="width: 35%">
 					<input type="text" style="width: 220px" id="txtAnoMastografia" onKeyPress="mayuscula();">
@@ -545,7 +545,7 @@
 					</select>
 				</td>
 	        	<td style="width: 175px; height: 26px;">
-	                <strong>* Sintomatología actual</strong>
+	                <strong>* Sintomatolog&iacute;a actual</strong>
 				</td>
 				<td colspan="2" style="height: 26px">
 					<input type="text" id="txtSintomatologiaActual" maxlength="50" style="width: 317px"  onKeyPress="mayuscula();">

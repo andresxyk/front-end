@@ -19,7 +19,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.generarFacturaGlobal:Entrando... " + cSucursal);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.generarFacturaGlobalSucursal(cSucursal, intUser);
 			objToolFacturacionSucursalDAO = null;
@@ -34,7 +34,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.listaFacturarOrden:Entrando... " + kAdmision);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.changeEstatusOrdenes(kAdmision, 37,intGrupo);
 			objToolFacturacionSucursalDAO = null;
@@ -50,7 +50,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.retenerFacturarOrden:Entrando... " + kAdmision);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.changeEstatusOrdenes(kAdmision, 38,0);
 			objToolFacturacionSucursalDAO = null;
@@ -66,7 +66,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.retenerFacturarOrden:Entrando... " + kAdmision);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.changeEstatusOrdenes(kAdmision, 48,0);
 			objToolFacturacionSucursalDAO = null;
@@ -82,7 +82,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.getEstadoFacturarOrden:Entrando... " + kAdmision);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			String strResult = objToolFacturacionSucursalDAO.getEstatusOrdenes(kAdmision);
 			objToolFacturacionSucursalDAO = null;
@@ -99,7 +99,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.changeConvenioOrdenesFac:Entrando... " + kAdmision + " Convenio " + cConvenio);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.changeConvenioOrdenesFac(kAdmision, cConvenio);
 			objToolFacturacionSucursalDAO = null;
@@ -115,7 +115,7 @@ public class ToolFacturarcionSucursalesAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando a ToolFacturarcionSucursalesAjax.changeExamenOrdenesFac:Entrando... " + kAdmision + " Examen " + cExamen);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			ToolFacturacionSucursalesDao objToolFacturacionSucursalDAO = new ToolFacturacionSucursalesDao();
 			objToolFacturacionSucursalDAO.changeEstatusExamenOrdenesFac(kAdmision, cExamen, cPerfil);
 			objToolFacturacionSucursalDAO = null;

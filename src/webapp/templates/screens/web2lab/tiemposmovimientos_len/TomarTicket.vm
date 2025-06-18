@@ -27,10 +27,10 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 		</tr>
 		<tr>
 			<td bgcolor="#F3E2A9" style="height:234px" >
-				<input type='button' name='bntEntrega' onClick="javascript:crearTicket('RE');" value='1.- Realización de Estudios.' style='width:920px; height:234px; font-size: 65px; line-height: normal;'> 			
+				<input type='button' name='bntEntrega' onClick="javascript:crearTicket('RE');" value='1.- Realizaci&oacute;n de Estudios.' style='width:920px; height:234px; font-size: 65px; line-height: normal;'> 			
 			</td>
 			<td  bgcolor="#F3E2A9" style="height:234px">
-				<input type='button' id='btnCotizacion'onClick="javascript:crearTicket('CO');" value='2. Cotización e Informes.' style='width:920px; height:234px; font-size: 65px; line-height: normal;'> 			
+				<input type='button' id='btnCotizacion'onClick="javascript:crearTicket('CO');" value='2. Cotizaci&oacute;n e Informes.' style='width:920px; height:234px; font-size: 65px; line-height: normal;'> 			
 			</td>		
 		</tr>
 		<tr>

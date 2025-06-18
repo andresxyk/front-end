@@ -5,7 +5,7 @@ import="mx.com.web2lab.backend.dao.facturacion.mayoreo.FacturacionPrevioDao,java
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Previos Facturación</title>
+<title>Previos Facturaci&oacute;n</title>
 </head>
 
 <script>

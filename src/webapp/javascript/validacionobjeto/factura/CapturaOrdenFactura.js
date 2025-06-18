@@ -54,7 +54,7 @@
 					frmPantalla.txtExpedienteMetro.disabled = false;			
 		    		return false;		    							
 				} else if (((TypeObjeto(frmPantalla.selConvenios) == 309) || (TypeObjeto(frmPantalla.selConvenios) == 310) || (TypeObjeto(frmPantalla.selConvenios) == 311) || (TypeObjeto(frmPantalla.selConvenios) == 312)) && (frmPantalla.txtPaseMetro.value == '')) {
-		    		alert("Es necesario poner el n�mero de pase del Metro.");
+		    		alert("Es necesario poner el n&uacute;mero de pase del Metro.");
 		    		frmPantalla.txtPaseMetro.value = "";
 					document.getElementById('txtPaseMetro').className = 'text';
 					frmPantalla.txtPaseMetro.disabled = false;			
@@ -104,7 +104,7 @@
 		        									  TypeObjeto(frmPantalla.selSucursales),
 		        									  actualizarOrdenExamenTicket_CallBack);
 					} else {
-						alert("Es necesario agregar un m�dico a la orden");
+						alert("Es necesario agregar un m&eacute;dico a la orden");
 					}
 		    	}	 	
 		 }	
@@ -140,7 +140,7 @@
 						CotizacionOrdenes.guardarCotizacion(hdnExamenesCotizados.value,frmPantalla.hdnVolumenesExamenesCotizados.value,intSucursal,hdnkPaciente.value,frmPantalla.idUsuario.value,frmPantalla.hdnkMedico.value,strNombreMedico,TypeObjeto(frmPantalla.selConvenios),frmPantalla.txtObservaciones.value,guardarCotizacion_CallBack);
 //		        		window.document.frmDatosOrdenFundacion.idGuardarNuevaOrden.disabled=true;		
 					} else {
-						alert("Es necesario agregar un m�dico a la orden");
+						alert("Es necesario agregar un m&eacute;dico a la orden");
 					}
 		    	}	 	
 		 }	
@@ -178,11 +178,11 @@
 		 
 		 function buscarCotizacion() {
 	            var frmPantalla = window.document.frmDatosOrdenFundacion;
-	            kCotizacion = prompt("Cual es el n�mero de Cotizaci�n?", "");
+	            kCotizacion = prompt("Cual es el n&uacute;mero de Cotizaci&oacute;n?", "");
 				if ((kCotizacion != "") && (kCotizacion != null)) {
 					CotizacionOrdenes.expedientePacienteCotizacion(kCotizacion,buscarCotizacion_CallBack);
 		    	} else {
-		    		alert("Se requiere un numero de Cotizaci�n!!!!");
+		    		alert("Se requiere un numero de Cotizaci&oacute;n!!!!");
 		    	}
 		 }
 		 
@@ -439,9 +439,9 @@
 				}
 				imprimirEtiquetas();
 				persistentesExamenes();
-				//Versi�n 29 Marzo 2013 Warning BY
+				//Versi&oacute;n 29 Marzo 2013 Warning BY
 //				if(data.csucursal == 10) {
-				//Versi�n 22 Mayo 2013 Warning OR
+				//Versi&oacute;n 22 Mayo 2013 Warning OR
 				if((data.csucursal == 10) || (data.csucursal == 12)) {
 					atendidoPaciente();	
 				}		        						

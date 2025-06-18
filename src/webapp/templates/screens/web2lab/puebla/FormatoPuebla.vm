@@ -85,7 +85,7 @@
     		    </div>				
             </td>     
             <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
-                <b>Edad (años-meses-dias)</b
+                <b>Edad (AÃ±os-meses-dias)</b
     	    </td>     
             <td style="width: 158px">
                 <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
@@ -590,14 +590,14 @@
                 					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
                 					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
                 					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
-                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option>
+                					<option value="VEGL680928">Dr. Luis Enrique Vega Garc&iacute;a</option>
 									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
-									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
-									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
-									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
-									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
-									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
-									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Sol&iacute;s</option>
+									<option value="COCE740211">Dr. Edgar Jos&eacute; Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mej&iacute;a</option>
+									<option value="GURC561122">Dr. Cecilio Guzm&aacute;n Rodr&iacute;guez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ru&iacute;z Lara </option>
+									<option value="MESH461205">Dr. H&eacute;ctor Mendoza Solis </option>
             						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
             						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
             						<option value="AIAE801108CK3">Dr. Emmanuel Avila Anguiano</option>
@@ -625,14 +625,14 @@
                 					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
                 					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
                 					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
-                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option>
+                					<option value="VEGL680928">Dr. Luis Enrique Vega Garc&iacute;a</option>
 									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
-									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
-									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
-									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
-									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
-									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
-									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Sol&iacute;s</option>
+									<option value="COCE740211">Dr. Edgar Jos&eacute; Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mej&iacute;a</option>
+									<option value="GURC561122">Dr. Cecilio Guzm&aacute;n Rodr&iacute;guez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ru&iacute;z Lara </option>
+									<option value="MESH461205">Dr. H&eacute;ctor Mendoza Solis </option>
             						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
             						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
                 				</select>													
@@ -659,14 +659,14 @@
                 					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
                 					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
                 					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
-                					<option value="VEGL680928">Dr. Luis Enrique Vega García</option> 
+                					<option value="VEGL680928">Dr. Luis Enrique Vega Garc&iacute;a</option> 
 									<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
-									<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
-									<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
-									<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
-									<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
-									<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
-									<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+									<option value="ROSC540105">Dr. Carlos Rafael Rosas Sol&iacute;s</option>
+									<option value="COCE740211">Dr. Edgar Jos&eacute; Contreras Cabrera</option>
+									<option value="MOMM610702">Dra. Martha Patricia Morales Mej&iacute;a</option>
+									<option value="GURC561122">Dr. Cecilio Guzm&aacute;n Rodr&iacute;guez</option>
+									<option value="RULR631020">Dra. Rosa Iliana Ru&iacute;z Lara </option>
+									<option value="MESH461205">Dr. H&eacute;ctor Mendoza Solis </option>
             						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
             						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
                 				</select>													
@@ -751,14 +751,14 @@
     					<option value="AASA700616">Dr. Arturo Albrandt Salmeron</option>
     					<option value="PERL680510">Dr. Luis Peraza Ramirez</option>
     					<option value="VIAY661001">Dra. Yennys Vicente Andrews</option>
-                		<option value="VEGL680928">Dr. Luis Enrique Vega García</option> 
+                		<option value="VEGL680928">Dr. Luis Enrique Vega Garc&iacute;a</option> 
 						<option value="AESJ680905">Dr. Jorge Arellano Sotelo</option>
-						<option value="ROSC540105">Dr. Carlos Rafael Rosas Solís</option>
-						<option value="COCE740211">Dr. Edgar José Contreras Cabrera</option>
-						<option value="MOMM610702">Dra. Martha Patricia Morales Mejía</option>
-						<option value="GURC561122">Dr. Cecilio Guzmán Rodríguez</option>
-						<option value="RULR631020">Dra. Rosa Iliana Ruíz Lara </option>
-						<option value="MESH461205">Dr. Héctor Mendoza Solis </option>
+						<option value="ROSC540105">Dr. Carlos Rafael Rosas Sol&iacute;s</option>
+						<option value="COCE740211">Dr. Edgar Jos&eacute; Contreras Cabrera</option>
+						<option value="MOMM610702">Dra. Martha Patricia Morales Mej&iacute;a</option>
+						<option value="GURC561122">Dr. Cecilio Guzm&aacute;n Rodr&iacute;guez</option>
+						<option value="RULR631020">Dra. Rosa Iliana Ru&iacute;z Lara </option>
+						<option value="MESH461205">Dr. H&eacute;ctor Mendoza Solis </option>
 						<option value="SAHP780907">Dra. Perla Yadira Sanchez Herrera </option>
 						<option value="GAHG650903">Dr. Gerardo Daniel Garcia Hernandez </option>
     				</select>													

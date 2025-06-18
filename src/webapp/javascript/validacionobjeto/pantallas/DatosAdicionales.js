@@ -15,7 +15,7 @@ var pacienteBean = new PacienteBean();
 					 //DatosOrden.getOrdenbyAdmision(frmPantalla.txtBusqueda.value,getkPaciente_CallBack);
 					 DatosOrden.getOrden(frmPantalla.txtBusqueda.value,consultaOrden_CallBack);
 				} else {
-					alert('Ingrese un codigo de orden, v�lido por favor');
+					alert('Ingrese un codigo de orden, v&aacute;lido por favor');
 					frmPantalla.txtBusqueda.value="";
 				}
 		    }
@@ -37,7 +37,7 @@ var pacienteBean = new PacienteBean();
 	   if(data!=null){
 		   DatosAdicionales.ordenGrid(data,pintarOrdenGrid_CallBack);
 	   }else{
-		   alert('No existen datos para esa busqueda, verifique el c�digo');
+		   alert('No existen datos para esa busqueda, verifique el c&oacute;digo');
 	   }
    }
    
@@ -55,7 +55,7 @@ var pacienteBean = new PacienteBean();
 	   adminDIV("gridbusquedaPacientes","visible","inline");
 	   codeDIVHTML("gridbusquedaPacientes",data);
    	  }else{
-   		alert('No existen datos para esa busqueda, verifique el c�digo');
+   		alert('No existen datos para esa busqueda, verifique el c&oacute;digo');
    	  }
    }
    
@@ -91,7 +91,7 @@ var pacienteBean = new PacienteBean();
 	    adminDIV("gridbusquedaPacientes","visible","inline");
 	 	codeDIVHTML("gridbusquedaPacientes",data[0]);	
 	   }else{
-		   alert('No existen datos para esa busqueda, verifique el c�digo');  
+		   alert('No existen datos para esa busqueda, verifique el c&oacute;digo');  
 	   }
    }
    

@@ -14,7 +14,7 @@
  * 	Placholder German language file.
  * 
  * File Authors:
- * 		José Fontanil
+ * 		Jos&eacute; Fontanil
  */
 FCKLang.PlaceholderBtn			= 'Einfügen/editieren Platzhalter' ;
 FCKLang.PlaceholderDlgTitle		= 'Platzhalter Eigenschaften' ;

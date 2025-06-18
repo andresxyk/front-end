@@ -33,7 +33,7 @@
    
    function setInicioTicket_CallBack(data) {
 	   document.getElementById("kticketcaja").value = data;
-	   document.getElementById("idConfirmacionTicket").value = "Termino Atención Ticket: " + data;
+	   document.getElementById("idConfirmacionTicket").value = "Termino Atenci&oacute;n Ticket: " + data;
 	   if ((document.getElementById("IdSucursalActual").value == 10) || (document.getElementById("IdSucursalActual").value == 12)) {
 		   adminDIV("divConfirmacionTicket","visible","inline");
 		   adminDIV("divTimer","hidden","none");

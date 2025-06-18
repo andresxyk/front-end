@@ -116,7 +116,7 @@
 			<img src="/web2labportal/images/facturacionelectronica2015/slogan_olab.png" height="87px" alt="" class="f_right" />
 		</div>
 		<div class="facturacion clearfix">
-			<p>Confirmación de datos fiscales</p>
+			<p>Confirmaci&oacute;n de datos fiscales</p>
 		</div>
 		<div class="main clearfix">
 			<div class="row column">
@@ -182,28 +182,28 @@
 								out.println("<label><p><strong>REFACTURACION " + (objOrdenBean.getNofacturas() +1) + " ,Factura anterior " + objOrdenBean.getStrFactura().trim() + "</strong></p></label>");
 								out.println("<p>Puedes reimprir el <a href=javascript:void(window.open('http://192.237.150.66:9085/FacturasElectronicas_Olab/PDF/FacturacionElectronica_" + objOrdenBean.getStrFactura().trim() + ".pdf'))><img src='/web2labportal/images/icoPdf.png' alt='Factura PDF'></a> y <a href=javascript:void(window.open('http://192.237.150.66:9085/FacturasElectronicasCFDPROCESADOSXML/FacturacionElectronica_" + objOrdenBean.getStrFactura().trim() + ".xml'))><img src='/web2labportal/images/icoXml.png' alt='Factura XML'></a></p>");
 								out.println("<p>RFC:" + strRFC  + "</p>"); 
-								out.println("<label><p><strong>Razón social</strong></p></label>");
+								out.println("<label><p><strong>Raz&oacute;n social</strong></p></label>");
 								out.println("<p>" + strRazonSocial  + "</p>");
-								out.println("<label><p><strong>Dirección</strong></p></label>");
+								out.println("<label><p><strong>Direcci&oacute;n</strong></p></label>");
 								out.println("<p>" + strCalle + "</p>");
 								out.println("<p>COLONIA " + strColonia  + "</p>");
 								out.println("<p>DELEGACION " + strMunicipio + "</p>");
 								out.println("<p>ESTADO " + strEstado  + "</p>");
 								out.println("<p>CP " + strCodigoPostal  + "</p>");
-								out.println("<label><p><strong>Correo electrónico</strong></p></label>");
+								out.println("<label><p><strong>Correo electr&oacute;nico</strong></p></label>");
 								out.println("<p>" + sEmail  + "</p>");			
 							} else {
 								out.println("<label><p><strong>RFC</strong></p></label>");
 								out.println("<p>" + strRFC  + "</p>"); 
-								out.println("<label><p><strong>Razón social</strong></p></label>");
+								out.println("<label><p><strong>Raz&oacute;n social</strong></p></label>");
 								out.println("<p>" + strRazonSocial  + "</p>");
-								out.println("<label><p><strong>Dirección</strong></p></label>");
+								out.println("<label><p><strong>Direcci&oacute;n</strong></p></label>");
 								out.println("<p>" + strCalle + "</p>");
 								out.println("<p>COLONIA " + strColonia  + "</p>");
 								out.println("<p>DELEGACION " + strMunicipio + "</p>");
 								out.println("<p>ESTADO " + strEstado  + "</p>");
 								out.println("<p>CP " + strCodigoPostal  + "</p>");
-								out.println("<label><p><strong>Correo electrónico</strong></p></label>");
+								out.println("<label><p><strong>Correo electr&oacute;nico</strong></p></label>");
 								out.println("<p>" + sEmail  + "</p>");			
 							}
 						%>
@@ -262,11 +262,11 @@
             <div class="overlay"></div>
             <div class="content">
                 <h3>Aviso importante</h3>
-                <p class='msg'>ESTIMADO PACIENTE, EN CASO DE HABER INGRESADO SUS DATOS FISCALES ERRÓNEAMENTE, USTED TIENE HASTA EL 31 DE DICIEMBRE DEL 2015 PARA REALIZAR 2 RE FACTURACIONES.</p>
-                <p class='msg'>FAVOR DE INGRESAR NUEVAMENTE LOS DATOS DE SU ORDEN, NUESTRO SISTEMA LE INDICARÁ EL PROCESO</p>
-<!--            <p class='reMsg'>ESTIMADO PACIENTE LE PEDIMOS VERIFICAR NUEVAMENTE SUS DATOS FISCALES YA QUE NO PODRÁ MODIFICARSE LA FACTURA GENERADA</p>   --> 
-                <p class='reMsg'>ESTIMADO PACIENTE, EN CASO DE HABER INGRESADO SUS DATOS FISCALES ERRÓNEAMENTE, USTED TIENE HASTA EL 31 DE DICIEMBRE DEL 2015 PARA REALIZAR 2 RE FACTURACIONES.</p>    
-                <p class='reMsg'>FAVOR DE INGRESAR NUEVAMENTE LOS DATOS DE SU ORDEN, NUESTRO SISTEMA LE INDICARÁ EL PROCESO</p>    
+                <p class='msg'>ESTIMADO PACIENTE, EN CASO DE HABER INGRESADO SUS DATOS FISCALES ERR&oacute;NEAMENTE, USTED TIENE HASTA EL 31 DE DICIEMBRE DEL 2015 PARA REALIZAR 2 RE FACTURACIONES.</p>
+                <p class='msg'>FAVOR DE INGRESAR NUEVAMENTE LOS DATOS DE SU ORDEN, NUESTRO SISTEMA LE INDICAR&aacute; EL PROCESO</p>
+<!--            <p class='reMsg'>ESTIMADO PACIENTE LE PEDIMOS VERIFICAR NUEVAMENTE SUS DATOS FISCALES YA QUE NO PODR&aacute; MODIFICARSE LA FACTURA GENERADA</p>   --> 
+                <p class='reMsg'>ESTIMADO PACIENTE, EN CASO DE HABER INGRESADO SUS DATOS FISCALES ERR&oacute;NEAMENTE, USTED TIENE HASTA EL 31 DE DICIEMBRE DEL 2015 PARA REALIZAR 2 RE FACTURACIONES.</p>    
+                <p class='reMsg'>FAVOR DE INGRESAR NUEVAMENTE LOS DATOS DE SU ORDEN, NUESTRO SISTEMA LE INDICAR&aacute; EL PROCESO</p>    
                 <div class="buttons">
 						<%
 // 							String browser = request.getHeader("User-Agent");
@@ -296,7 +296,7 @@
             </div>
         </div>
 		<div id="footer">
-			Grupo Diagnóstico Aries © Todos los derechos reservados 2015-2016.
+			Grupo Diagn&oacute;stico Aries © Todos los derechos reservados 2015-2016.
 		</div>
 	</div>
 	</body>

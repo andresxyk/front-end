@@ -1,7 +1,7 @@
 <%@ page session="true" language="java" import="mx.com.web2lab.tools.CaptchasDotNet" errorPage="/jsp/error.jsp"%>
 <html>
   <head>
-    <title>Facturación Electrónica</title>
+    <title>Facturaci&oacute;n Electr&oacute;nica</title>
 	<link rel="stylesheet" type="text/css" href="/web2labportal/css/web2lab.css" />
 	<script language="javascript" SRC="/web2labportal/javascript/generales.js"></script>
 	<script language='javascript' src="/web2labportal/javascript/calendarfoco.js"></script>
@@ -36,7 +36,7 @@
 <div id="header"> <a href="http://www.olab.com.mx"><img src="/web2labportal/images/logo_olab.png" border="0" align="left" width="300" height="150"/></a>
 </div>
 </div>
-  <h1>Facturación Electrónica</h1>
+  <h1>Facturaci&oacute;n Electr&oacute;nica</h1>
 	<%
 		CaptchasDotNet captchas = new CaptchasDotNet(request.getSession(true),"ECEOlab","3HtGXyW4X1Uri2FBfGGgjbktAxtLd0Y0fNUWZx7k");
 		String strusername  = request.getParameter("strusername").trim();
@@ -81,7 +81,7 @@
       </tr>
       <tr>
         <td>
-          Escribe la contraseña de la orden:
+          Escribe la contrase&ntilde;a de la orden:
         </td>
         <td>
           <input id="idPassword" size="16" STYLE="font-size: 30px;" />

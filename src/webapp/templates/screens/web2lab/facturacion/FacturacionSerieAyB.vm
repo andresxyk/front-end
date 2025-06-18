@@ -25,7 +25,7 @@
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Generación Serie A y B</th></tr>
+    	<tr><th colspan="5">Generaci&oacute;n Serie A y B</th></tr>
 		<tr>
 			 <td align="right" width="50%">Tipo de Factura: 
 				<select id="selTipoSerieFactura" style="width: 120px" align="up">

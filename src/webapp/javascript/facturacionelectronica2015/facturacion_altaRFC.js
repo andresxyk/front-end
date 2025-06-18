@@ -154,7 +154,7 @@ $(document).ready(function(){
 		$('#razonSocial').inputmask('?{0,}', {
 			definitions: {
 				'?': {
-					validator: '[a-zA-ZáéíóúÁÉÍÓÚ\\ 0-9\\-\\.@& \\u00F1]+',
+					validator: '[a-zA-Z&aacute;&eacute;&iacute;&oacute;&uacute;&aacute;&eacute;&iacute;&oacute;&uacute;\\ 0-9\\-\\.@& \\u00F1]+',
 					cardinality: 1,
 					casing: 'upper'
 				}
@@ -166,7 +166,7 @@ $(document).ready(function(){
 			.inputmask('?{0,}', {
 				definitions: {
 					'?': {
-						validator: '[A-Za-záéíóúÁÉÍÓÚ\\ 0-9\\-]+',
+						validator: '[A-Za-z&aacute;&eacute;&iacute;&oacute;&uacute;&aacute;&eacute;&iacute;&oacute;&uacute;\\ 0-9\\-]+',
 						cardinality: 1,
 						casing: 'upper'
 					}

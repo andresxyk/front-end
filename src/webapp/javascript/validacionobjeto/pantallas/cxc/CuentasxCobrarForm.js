@@ -1,5 +1,5 @@
-var hostServerWebApp = "http://10.3.0.8:8192"; 
-//var hostServerWebApp = "http://10.20.26.6:8192";
+//var hostServerWebApp = "http://10.3.0.8:8192"; 
+var hostServerWebApp = "http://10.20.26.6:8192";
 
 function showSubModalPago(kfactura,formatFactura) {
 	var frmPantalla = window.document.frmAdminClientes;changeMontoPagar
@@ -25,7 +25,7 @@ function showAntiguedadCxC() {
 function init() 
 {	
 	var frmPantalla = window.document.frmAdminClientes;
-    DWRUtil.useLoadingMessage();
+    //DWRUtil.useLoadingMessage();
     disableDIV();
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
  	codeDIVHTML("gridbusquedaConvenios","");
@@ -43,7 +43,7 @@ function init()
 function initEmpresas() 
 {
 	var frmPantalla = document.getElementById("frmAdminClientes");
-    DWRUtil.useLoadingMessage();
+    //DWRUtil.useLoadingMessage();
     disableDIVEmpresas();
     adminDIV("gridbusquedaConvenios","hidden","none");	    	
  	codeDIVHTML("gridbusquedaConvenios","");
@@ -869,7 +869,7 @@ function showCheckSustitucion(){
 	}
 }
 
-/****************Versi�n 25 de Marzo 2013 BY*******************/
+/****************Versi&oacute;n 25 de Marzo 2013 BY*******************/
 function buscarConvenioRapido(objConvenio,strBuscar) {
     var frmPantalla = window.document.frmAdminClientes;		
 		if ((strBuscar.length == 9) && (validaSoloNumeros(strBuscar))) {

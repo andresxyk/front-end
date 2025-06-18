@@ -13,7 +13,7 @@ import org.apache.velocity.context.Context;
 
 
 public class BGrupoMenuAction extends SecureAction implements Serializable{
-	/** Log de la aplicación*/
+	/** Log de la aplicaci&oacute;n*/
 	private static Log iObjLog = LogFactory.getLog(BGrupoMenuAction.class);
 	
 	/**
@@ -36,7 +36,7 @@ public class BGrupoMenuAction extends SecureAction implements Serializable{
 		}
 		if ( bolGrupoMenu == false ){
 			objBGrupoMenuUtil.setInserta(strNombre);
-			iObjLog.debug(">>>>dato: "+strNombre+" - es nuevo y se insertó" );
+			iObjLog.debug(">>>>dato: "+strNombre+" - es nuevo y se insertï¿½" );
 			String strContextoMensaje = objDatos.getParameters().getString("txtNombre");
 			objContexto.put("strMensaje", ""+strContextoMensaje+"" ); 
 			objContexto.put("bolCreado", "true");
@@ -45,7 +45,7 @@ public class BGrupoMenuAction extends SecureAction implements Serializable{
 	
 	
 	/**
-	 * Este metodo doActualiza lo utilizamos para realizar la modificación de la tabla
+	 * Este metodo doActualiza lo utilizamos para realizar la modificaci&oacute;n de la tabla
 	 * GRUPO_MENU en uno de sus registros.
 	 * @param txtNombre
 	 * @param hndNombreAnterior

@@ -93,7 +93,7 @@ public class BGrupoAction extends SecureAction implements Serializable{
         }catch (DataBackendException dbe){
         	aobjContexto.put("bolNoBorro", "true");
         	aobjContexto.put("strGrupoNoBorrado", ""+strTurbineGrupo+"" );
-        	iObjLog.debug(">>>>>>>Se captura la excepción : "+dbe);
+        	iObjLog.debug(">>>>>>>Se captura la excepci&oacute;n : "+dbe);
         }
 	}
 

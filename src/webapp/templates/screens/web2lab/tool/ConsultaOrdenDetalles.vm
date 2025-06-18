@@ -103,7 +103,7 @@
             <tr>
         	    <th colspan="6">
         	        <center>
-        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Expediente Médico</b>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Expediente m&eacute;dico</b>
         	         </center>
         	    </th>     
         	</tr>
@@ -112,7 +112,7 @@
                     Numero de Empleado
         	    </td>     	                
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Número de Seguro Social
+                    n&uacute;mero de Seguro Social
         	    </td>     
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
         	    </td>     
@@ -140,7 +140,7 @@
         	    </td>     
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
 			        <a href="javascript:doNothing()" onclick="javascript:agregarOption(document.frmConsultaOrden.selClinica);" style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-			            Clínica
+			            Cl&iacute;nica
 			        </a>	                                        
         	    </td>     
             </tr>   
@@ -192,33 +192,33 @@
 			<tr>
         	    <th colspan="6">
         	        <center>
-        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Información Médica</b>
+        	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Informaci&oacute;n M&eacute;dica</b>
         	         </center>
         	    </th>     
         	</tr>
 			<tr>
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    TA Sistólica (60–250)
+                    TA Sist&oacute;lica (60/250)
         	    </td>     	                
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    TA Diastólica (40–250)
+                    TA Diast&oacute;lica (40/250)
         	    </td>     	                
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Glucosa en Sangre (10–1500)
+                    Glucosa en Sangre (10/1500)
         	    </td>     
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Colesterol (50–1000)
+                    Colesterol (50/1000)
         	    </td>
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Trigliceridos (50–1000)
+                    Trigliceridos (50/1000)
         	    </td>     
 			</tr>   
 			<tr>
                 <td>
-					<input type="text" id="txtSistolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,60,250,'Sistólica');" size="4" MAXLENGTH=3/>
+					<input type="text" id="txtSistolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,60,250,'Sist&oacute;lica');" size="4" MAXLENGTH=3/>
         	    </td>     
                 <td>
-					<input type="text" id="txtDiastolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,40,250,'Diastólica');" size="4" MAXLENGTH=3/>
+					<input type="text" id="txtDiastolica" style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,40,250,'Diast&oacute;lica');" size="4" MAXLENGTH=3/>
         	    </td>     
                 <td>
                     <input type="text" id="txtDod"  style="color: black; font-size: x-small; font-weight : bold;"  onKeyPress="numero();" onblur="validaTextNumerico(this,10,1500,'Glucosa en Sangre');" size="5" MAXLENGTH=4/>
@@ -244,12 +244,12 @@
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
         	    </td>     	                
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    NEUMO (Espirómetro Compu) Normal
+                    NEUMO (Espir&oacute;metro Compu) Normal
         	    </td>     
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
         	    </td>     	                
 				<td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Catálogo de Vacunas
+                    Cat&aacute;logo de Vacunas
         	    </td>     
             </tr>   
 			<tr>
@@ -257,7 +257,7 @@
                     <table>
 						<tr>
 							<td>
-								1°&nbsp;<input type="checkbox" id="chktetdif1">
+								1*&nbsp;<input type="checkbox" id="chktetdif1">
 							</td>
 							<td>
                                 <input type="text" name="txtFechaTetDif1" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
@@ -268,7 +268,7 @@
 						</tr>
 						<tr>
             				<td>
-            					2°&nbsp;<input type="checkbox" name="chktetdif2">
+            					2*&nbsp;<input type="checkbox" name="chktetdif2">
             				</td>
             				<td>
                                 <input type="text" name="txtFechaTetDif2" size="12" value="$!strFecFormat" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		
@@ -372,7 +372,7 @@
             			</tr>
 						<tr>
     						<td>
-            					2 veces al año&nbsp;
+            					2 veces al aÃ±o&nbsp;
             				</td>
             				<td>
             					<input type="radio" name="rad2">
@@ -380,7 +380,7 @@
             			</tr>
 						<tr>
     						<td>
-            					1 vez al año&nbsp;
+            					1 vez al aÃ±o&nbsp;
             				</td>
             				<td>
             					<input type="radio" name="rad3">
@@ -398,7 +398,7 @@
         	</tr>
 			<tr>
                 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Reporte de Mastografía
+                    Reporte de Mastograf&iacute;a
         	    </td>     	                
 			</tr>   
 			<tr>
@@ -491,7 +491,7 @@
 			    </div>				
 	        </td>     
             <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
-                <b>Edad (años-meses-dias)</b
+                <b>Edad (AÃ±os-meses-dias)</b
     	    </td>     
             <td style="width: 158px">
                 <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">

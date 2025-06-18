@@ -1,4 +1,4 @@
-#set ($titlePage = "Operaciones Facturación" )
+#set ($titlePage = "Operaciones Facturaci&oacute;n" )
 
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
@@ -34,10 +34,10 @@
 	<input type="hidden" id="web2labtoken" name="web2labtoken" value="TNXdaFYKYP-qZQIdo9Q7g">
 	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Operaciones Facturación</th></tr>
+    	<tr><th colspan="5">Operaciones Facturaci&oacute;n</th></tr>
 		<tr>
 			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                Operación
+                Operaci&oacute;n
     	    </td>
 			    
 		</tr>
@@ -45,15 +45,15 @@
 			<td colspan="2">
                 <select name="operacion"  style="width: 600px">
                 	<optgroup label="Facturas">
-					<option value="0">Emisión Antincipada Serie A</option>
-					<option value="1">Emisión Serie B (Convenio)</option>
-					<option value="2">Emisión Serie B (RFC)</option>
-					<option value="3">Emisión Nota de Crédito</option>
-					<option value="5">Emisión Copago</option>
+					<option value="0">Emisi&oacute;n Antincipada Serie A</option>
+					<option value="1">Emisi&oacute;n Serie B (Convenio)</option>
+					<option value="2">Emisi&oacute;n Serie B (RFC)</option>
+					<option value="3">Emisi&oacute;n Nota de cr&eacute;dito</option>
+					<option value="5">Emisi&oacute;n Copago</option>
 										
 					<option value="22">Cambio de Convenio</option>
-					<option value="23">Carga de Exámenes/Perfiles</option>
-					<option value="24">Descarga de Órdenes a Facturas Anticipadas</option>
+					<option value="23">Carga de Ex&aacute;menes/Perfiles</option>
+					<option value="24">Descarga de &oacute;rdenes a Facturas Anticipadas</option>
 					<option value="26">Reportes Facturacion</option>
 					<option value="27">Cambio de bloque</option>
 					<option value="29">Cambio Masivo No Facturable</option>

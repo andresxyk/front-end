@@ -10,7 +10,7 @@
 			window.location.href =liga;
 	    	return true;    		
 		} else {
-			alert('Correo Electrónico No Valido !!!!!')
+			alert('Correo Electr&oacute;nico No Valido !!!!!')
 	    	return false;    		
 		}
 	}

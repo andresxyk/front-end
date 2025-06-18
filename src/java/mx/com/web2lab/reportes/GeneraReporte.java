@@ -53,7 +53,7 @@ public class GeneraReporte  implements Serializable{
 	/**
 	 * Este metodo genera el reporte solicitado, ya sea como 
 	 * un archivo pdf o un stream de bytes que se manda al 
-	 * browser, dependiendo de la configuraci�n del 
+	 * browser, dependiendo de la configuraci&oacute;n del 
 	 * Configuracion.properties en la propiedad <b>reporte.genera.stream<b>. 
 	 * nombre que esta configurada en el archivo 
 	 * <b>Configuracion.properties</b>. 
@@ -106,7 +106,7 @@ public class GeneraReporte  implements Serializable{
 	/**
 	 * Este metodo genera el reporte solicitado, ya sea como 
 	 * un archivo pdf o un stream de bytes que se manda al 
-	 * browser, dependiendo de la configuraci�n del 
+	 * browser, dependiendo de la configuraci&oacute;n del 
 	 * Configuracion.properties en la propiedad <b>reporte.genera.stream<b>. 
 	 * nombre que esta configurada en el archivo 
 	 * <b>Configuracion.properties</b>. 
@@ -144,7 +144,7 @@ public class GeneraReporte  implements Serializable{
 	/**
 	 * Este metodo genera el reporte solicitado, ya sea como 
 	 * un archivo pdf o un stream de bytes que se manda al 
-	 * browser, dependiendo de la configuraci�n del 
+	 * browser, dependiendo de la configuraci&oacute;n del 
 	 * Configuracion.properties en la propiedad <b>reporte.genera.stream<b>. 
 	 * nombre que esta configurada en el archivo 
 	 * <b>Configuracion.properties</b>. 

@@ -13,7 +13,7 @@
 		                                          RefreshGrid_CallBack);
 	}	
 
- 	/*****Versión 28/03/2013
+ 	/*****Versi&oacute;n 28/03/2013
  	 * BY*/
  	function persistentesExamenesFac() {		
         var frmPantalla = window.document.frmConsultaOrden;

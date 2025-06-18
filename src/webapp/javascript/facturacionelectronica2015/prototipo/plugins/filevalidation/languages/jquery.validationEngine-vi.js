@@ -9,33 +9,33 @@
                     "alertText": "* Trường này bắt buộc",
                     "alertTextCheckboxMultiple": "* Vui lòng chọn một tùy chọn",
                     "alertTextCheckboxe": "* Checkbox này bắt buộc",
-                    "alertTextDateRange": "* Cả hai trường ngày tháng đều bắt buộc"
+                    "alertTextDateRange": "* Cả hai trường ngày th&aacute;ng đều bắt buộc"
                 },
                 "requiredInFunction": { 
                     "func": function(field, rules, i, options){
                         return (field.val() == "test") ? true : false;
                     },
-                    "alertText": "* Giá trị của trường phải là test"
+                    "alertText": "* Gi&aacute; trị của trường phải là test"
                 },
                 "dateRange": {
                     "regex": "none",
-                    "alertText": "* Không đúng ",
-                    "alertText2": "Khoảng ngày tháng"
+                    "alertText": "* Không đ&uacute;ng ",
+                    "alertText2": "Khoảng ngày th&aacute;ng"
                 },
                 "dateTimeRange": {
                     "regex": "none",
-                    "alertText": "* Không đúng ",
+                    "alertText": "* Không đ&uacute;ng ",
                     "alertText2": "Khoảng thời gian"
                 },
                 "minSize": {
                     "regex": "none",
                     "alertText": "* Tối thiểu ",
-                    "alertText2": " số ký tự được cho phép"
+                    "alertText2": " số ký tự được cho ph&eacute;p"
                 },
                 "maxSize": {
                     "regex": "none",
                     "alertText": "* Tối đa ",
-                    "alertText2": " số ký tự được cho phép"
+                    "alertText2": " số ký tự được cho ph&eacute;p"
                 },
 				"groupRequired": {
                     "regex": "none",
@@ -43,15 +43,15 @@
                 },
                 "min": {
                     "regex": "none",
-                    "alertText": "* Giá trị nhỏ nhất là "
+                    "alertText": "* Gi&aacute; trị nhỏ nhất là "
                 },
                 "max": {
                     "regex": "none",
-                    "alertText": "* Giá trị lớn nhất là "
+                    "alertText": "* Gi&aacute; trị lớn nhất là "
                 },
                 "past": {
                     "regex": "none",
-                    "alertText": "* Ngày kéo dài tới "
+                    "alertText": "* Ngày k&eacute;o dài tới "
                 },
                 "future": {
                     "regex": "none",
@@ -60,20 +60,20 @@
                 "maxCheckbox": {
                     "regex": "none",
                     "alertText": "* Tối đa ",
-                    "alertText2": " số tùy chọn được cho phép"
+                    "alertText2": " số tùy chọn được cho ph&eacute;p"
                 },
                 "minCheckbox": {
                     "regex": "none",
                     "alertText": "* Vui lòng chọn ",
-                    "alertText2": " các tùy chọn"
+                    "alertText2": " c&aacute;c tùy chọn"
                 },
                 "equals": {
                     "regex": "none",
-                    "alertText": "* Giá trị các trường không giống nhau"
+                    "alertText": "* Gi&aacute; trị c&aacute;c trường không giống nhau"
                 },
                 "creditCard": {
                     "regex": "none",
-                    "alertText": "* Số thẻ tín dụng sai"
+                    "alertText": "* Số thẻ t&iacute;n dụng sai"
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
@@ -87,16 +87,16 @@
                 },
                 "integer": {
                     "regex": /^[\-\+]?\d+$/,
-                    "alertText": "* Không đúng là số nguyên"
+                    "alertText": "* Không đ&uacute;ng là số nguyên"
                 },
                 "number": {
                     // Number, including positive, negative, and floating decimal. credit: orefalo
                     "regex": /^[\-\+]?((([0-9]{1,3})([,][0-9]{3})*)|([0-9]+))?([\.]([0-9]+))?$/,
-                    "alertText": "* Không đúng là số thập phân"
+                    "alertText": "* Không đ&uacute;ng là số thập phân"
                 },
                 "date": {
                     "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,
-                    "alertText": "* Ngày sai, phải có định dạng YYYY-MM-DD"
+                    "alertText": "* Ngày sai, phải c&oacute; định dạng YYYY-MM-DD"
                 },
                 "ipv4": {
                     "regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
@@ -124,16 +124,16 @@
                     // you may want to pass extra data on the ajax call
                     "extraData": "name=eric",
                     "alertText": "* Tên này được dùng",
-                    "alertTextLoad": "* Đang xác nhận, vui lòng chờ"
+                    "alertTextLoad": "* Đang x&aacute;c nhận, vui lòng chờ"
                 },
 				"ajaxUserCallPhp": {
                     "url": "phpajax/ajaxValidateFieldUser.php",
                     // you may want to pass extra data on the ajax call
                     "extraData": "name=eric",
                     // if you provide an "alertTextOk", it will show as a green prompt when the field validates
-                    "alertTextOk": "* Tên người dùng này có thể dùng được",
+                    "alertTextOk": "* Tên người dùng này c&oacute; thể dùng được",
                     "alertText": "* Tên người dùng này đã được sử dụng",
-                    "alertTextLoad": "* Đang xác nhận, vui lòng chờ"
+                    "alertTextLoad": "* Đang x&aacute;c nhận, vui lòng chờ"
                 },
                 "ajaxNameCall": {
                     // remote json service location
@@ -141,9 +141,9 @@
                     // error
                     "alertText": "* Tên này được dùng",
                     // if you provide an "alertTextOk", it will show as a green prompt when the field validates
-                    "alertTextOk": "* Tên này có thể dùng",
+                    "alertTextOk": "* Tên này c&oacute; thể dùng",
                     // speaks by itself
-                    "alertTextLoad": "* Đang xác nhận, vui lòng chờ"
+                    "alertTextLoad": "* Đang x&aacute;c nhận, vui lòng chờ"
                 },
 				 "ajaxNameCallPhp": {
 	                    // remote json service location
@@ -151,7 +151,7 @@
 	                    // error
 	                    "alertText": "* Tên này được dùng",
 	                    // speaks by itself
-	                    "alertTextLoad": "* Đang xác nhận, vui lòng chờ"
+	                    "alertTextLoad": "* Đang x&aacute;c nhận, vui lòng chờ"
 	                },
                 "validate2fields": {
                     "alertText": "* Vui lòng nhập vào HELLO"
@@ -165,7 +165,7 @@
 				"dateTimeFormat": {
 	                "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1}$|^(?:(?:(?:0?[13578]|1[02])(\/|-)31)|(?:(?:0?[1,3-9]|1[0-2])(\/|-)(?:29|30)))(\/|-)(?:[1-9]\d\d\d|\d[1-9]\d\d|\d\d[1-9]\d|\d\d\d[1-9])$|^((1[012]|0?[1-9]){1}\/(0?[1-9]|[12][0-9]|3[01]){1}\/\d{2,4}\s+(1[012]|0?[1-9]){1}:(0?[1-5]|[0-6][0-9]){1}:(0?[0-6]|[0-6][0-9]){1}\s+(am|pm|AM|PM){1})$/,
                     "alertText": "* Ngày sai hoặc định dạng ngày sai",
-                    "alertText2": "Định dạng đúng là: ",
+                    "alertText2": "Định dạng đ&uacute;ng là: ",
                     "alertText3": "mm/dd/yyyy hh:mm:ss AM|PM hay ", 
                     "alertText4": "yyyy-mm-dd hh:mm:ss AM|PM"
 	            }

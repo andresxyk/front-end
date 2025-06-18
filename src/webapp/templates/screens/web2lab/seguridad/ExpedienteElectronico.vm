@@ -1,5 +1,5 @@
 $data.setLayoutTemplate("web2lab/DefaultLogin.vm")
-#set ( $titlePage = "Autentificación" )
+#set ( $titlePage = "Autentificaci&oacute;n" )
 #set ( $actLnk = $link.setPage("web2lab,ap,PantallaInicio.vm"))
 #set ( $actLnk = $link.setAction("seguridad.LoginExpedienteClinicoElectronicoAction").toString())
 <form method="post" action="$actLnk" name="login">        
@@ -15,7 +15,7 @@ $data.setLayoutTemplate("web2lab/DefaultLogin.vm")
 				<td><b>Usuario ECE:</b><br><input type="text" name="username" id="username" value=""></td>
 				</tr>
 				<tr>
-	           		 <td><b>Contraseña:</b><br><input type="password" name="password" id="password" value=""></td>
+	           		 <td><b>contrase&ntilde;a:</b><br><input type="password" name="password" id="password" value=""></td>
 				</tr>
 			   </table>				
 			</td>	

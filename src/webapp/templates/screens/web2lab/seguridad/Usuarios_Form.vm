@@ -32,9 +32,9 @@
 			<b>NOTA:  Recuerda las siguientes reglas al cambiar tu password</b>
 	           </tr>
 			<tr>&nbsp;</tr>
-			<tr>• Longitud mínima de 6 caracteres </tr>
-			<tr>• La contraseña no puede ser igual a la del usuario </tr>
-			<tr>• La contraseña debe de contener al menos un dígito y una letra</tr>
+			<tr>* Longitud m&iacute;nima de 6 caracteres </tr>
+			<tr>* La contrase&ntilde;a no puede ser igual a la del usuario </tr>
+			<tr>* La contrase&ntilde;a debe de contener al menos un d&iacute;gito y una letra</tr>
 			<tr>
        			<td>
 		       		#if($!bolCreado == "true")
@@ -66,13 +66,13 @@
        		</tr>							
 			#if($strModo != "eliminar")
        		<tr>
-       			<th>Contraseña</th>
+       			<th>contrase&ntilde;a</th>
        				<td>					
        					<input type="password" name="password" value="$!objUsuario.Password" onFocus="frmUsuario.password.value='';frmUsuario.hdnCambioPass.value='true';" onBlur="return validapass();">			
 					</td>
        		</tr>
        		<tr>
-       			<th>Confirma contraseña</th>
+       			<th>Confirma contrase&ntilde;a</th>
        				<td>
        					<input type="password" name="txtCofirmaContra" value="$!objUsuario.Password" onFocus="frmUsuario.txtCofirmaContra.value='';">				
         			</td>
@@ -118,7 +118,7 @@
 	#if ($strModo == "modificar")
 		<input type="submit" name="eventSubmit_doActualiza" class="boton" value="Actualizar" />
 	#elseif ($strModo == "eliminar")
-    	<input type="submit" name="eventSubmit_doElimina" class="boton" value="Confirma Eliminar" onclick="return confirm('¿Se eliminará al usuario y todas sus relaciones?');"/>
+    	<input type="submit" name="eventSubmit_doElimina" class="boton" value="Confirma Eliminar" onclick="return confirm('Â¿Se eliminar&aacute; al usuario y todas sus relaciones?');"/>
 	#else
     	<input type="submit" name="eventSubmit_doInserta" class="boton" value="Crear" onclick="irAurl()"onclick="return validapass();"/>
 	#end

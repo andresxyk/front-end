@@ -170,7 +170,7 @@
                     <tr>
                 	    <th colspan="6">
                 	        <center>
-                	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">Búsquedas Paciente</b>
+                	            <b style="font-weight: bold; font-size: medium; color: black; font-style: normal; font-variant: normal">b&uacute;squedas Paciente</b>
                 	         </center>
                 	    </th>     
                 	</tr>
@@ -179,10 +179,10 @@
                             Expediente Metro
                 	    </td>     	                
                         <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                            Número Pase Metro
+                            n&uacute;mero Pase Metro
                 	    </td>     	                
                         <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                            Número de Elegibilidad (MediAccess o VitaMedica)
+                            n&uacute;mero de Elegibilidad (MediAccess o VitaMedica)
                 	    </td>     
                     </tr>   
                     <tr>
@@ -271,7 +271,7 @@
         			    </div>				
         	        </td>     
                     <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
-                        <b>Edad (años-meses-dias)</b
+                        <b>Edad (AÃ±os-meses-dias)</b
             	    </td>     
                     <td style="width: 158px">
                         <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
@@ -315,7 +315,7 @@
                         <input type="checkbox" id="optResultado" name="optResultado" onClick="onCorreoElectronico(this);" value="100"><b id="idTextEnvioInternet">Resultados, Factura y Expediente Clinico </b>
                         <input type="text" id="txtCorreoElectronico" size="30"  onblur="javascript:if(iscorrectEmail()){VerificaModificacion_ClickCorreoElectronico();}" onChange="onChangeUpdatePaciente();" disabled/><b id="idTextResetPassword" onClick="resetPassword();"> Reset Pass</b>		
                         <br>
-                        <input type="checkbox" id="optPromocion" name="optPromocion" onClick="onCorreoElectronico(this);" value="5">Envío promociones por correo<br>				
+                        <input type="checkbox" id="optPromocion" name="optPromocion" onClick="onCorreoElectronico(this);" value="5">Env&iacute;o promociones por correo<br>				
                         <input type="checkbox" id="optCapacidadDiferente" onChange="onChangeUpdatePaciente();" value="1">Persona con Diferentes Capacidades<br>				
            	        </td>        	        
                 </tr>   
@@ -474,7 +474,7 @@
 		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="2">Examenes Solicitado Paciente<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">NO TRAE DOCTOR O NO SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b><br> 
 		    	    </td>     
 		            <td>
-		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="3">Examenes Solicitado Empresa Crédito<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">NO TRAE DOCTOR O NO SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b> 
+		                <input type="radio" name="radAQuienCorresponda" onClick="activardivmedico(this)"; value="3">Examenes Solicitado Empresa cr&eacute;dito<br><b style="font-weight: normal; font-size: x-small; color: red; font-style: normal; font-variant: normal">NO TRAE DOCTOR O NO SABE EL NOMBRE</b><br><b style="font-weight: normal; font-size: x-small; color: blue; font-style: normal; font-variant: normal">(Resultado Imprimir A Quien Corresponda)</b> 
 		    	    </td>     
 		        </tr>   
 		   </table>	

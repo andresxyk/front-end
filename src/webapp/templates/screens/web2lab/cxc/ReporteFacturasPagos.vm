@@ -78,7 +78,7 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenuSinLogout.vm")
 					Pendientes Sucursal
 				</td>
 				<td>
-					Pendientes Facturación
+					Pendientes Facturaci&oacute;n
 				</td>
 				<td>
 					Refacturaciones

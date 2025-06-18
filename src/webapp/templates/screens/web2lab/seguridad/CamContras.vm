@@ -1,7 +1,7 @@
 $data.setLayoutTemplate("web2lab/DefaultSinMenu.vm")
 <SCRIPT language="javascript1.2" SRC="$content.getURI("javascript/seguridad/validaseguridad.js")"></SCRIPT> 
 
-#set ( $titlePage = "Cambiar Contraseña") 
+#set ( $titlePage = "Cambiar contrase&ntilde;a") 
 
 ## #set ( $strLigaActual = $link.setPage("web2lab,seguridad,CamContras.vm").setAction(seguridad.BCambiaPasswd).toString())
 #set ( $strLigaActual = $link.setPage("web2lab,seguridad,CamContras.vm"))
@@ -90,8 +90,8 @@ $data.setLayoutTemplate("web2lab/DefaultSinMenu.vm")
 	<tr>
 		<b>Nota:</br>Recuerda las siguientes reglas al cambiar tu password:
 	</tr>
-		<tr>• Longitud mínima de 6 caracteres </tr>
-		<tr>• La contraseña no puede ser igual a la del usuario </tr>
-		<tr>• La contraseña debe de contener al menos un dígito y una letra</tr>
+		<tr>* Longitud m&iacute;nima de 6 caracteres </tr>
+		<tr>* La contrase&ntilde;a no puede ser igual a la del usuario </tr>
+		<tr>* La contrase&ntilde;a debe de contener al menos un d&iacute;gito y una letra</tr>
 	</tr>
 </form> 

@@ -7,9 +7,9 @@
                 "required": { // Add your regex rules here, you can take telephone as an example
                     "regex": "none",
                     "alertText": "* Ezt a mezőt ki kell tölteni",
-                    "alertTextCheckboxMultiple": "* Kérem válasszon egy opciót",
-                    "alertTextCheckboxe": "* Ez az opció be kell legyen jelölve",
-                    "alertTextDateRange": "* Mindkét dátum mezőt ki kell tölteni"
+                    "alertTextCheckboxMultiple": "* K&eacute;rem v&aacute;lasszon egy opci&oacute;t",
+                    "alertTextCheckboxe": "* Ez az opci&oacute; be kell legyen jelölve",
+                    "alertTextDateRange": "* Mindk&eacute;t d&aacute;tum mezőt ki kell tölteni"
                 },
                 "requiredInFunction": { 
                     "func": function(field, rules, i, options){
@@ -19,13 +19,13 @@
                 },
                 "dateRange": {
                     "regex": "none",
-                    "alertText": "* Érvénytelen ",
-                    "alertText2": "Dátum tartomány"
+                    "alertText": "* &eacute;rv&eacute;nytelen ",
+                    "alertText2": "D&aacute;tum tartom&aacute;ny"
                 },
                 "dateTimeRange": {
                     "regex": "none",
-                    "alertText": "* Érvénytelen ",
-                    "alertText2": "Dátum-idő tartomány"
+                    "alertText": "* &eacute;rv&eacute;nytelen ",
+                    "alertText2": "D&aacute;tum-idő tartom&aacute;ny"
                 },
                 "minSize": {
                     "regex": "none",
@@ -39,33 +39,33 @@
                 },
 				"groupRequired": {
                     "regex": "none",
-                    "alertText": "* Az alábbi mezők valamelyikét ki kell tölteni"
+                    "alertText": "* Az al&aacute;bbi mezők valamelyik&eacute;t ki kell tölteni"
                 },
                 "min": {
                     "regex": "none",
-                    "alertText": "* A minimum érték "
+                    "alertText": "* A minimum &eacute;rt&eacute;k "
                 },
                 "max": {
                     "regex": "none",
-                    "alertText": "* A maximum érték "
+                    "alertText": "* A maximum &eacute;rt&eacute;k "
                 },
                 "past": {
                     "regex": "none",
-                    "alertText": "* Dátum ez előtt "
+                    "alertText": "* D&aacute;tum ez előtt "
                 },
                 "future": {
                     "regex": "none",
-                    "alertText": "* Dátum ez után "
+                    "alertText": "* D&aacute;tum ez ut&aacute;n "
                 },	
                 "maxCheckbox": {
                     "regex": "none",
                     "alertText": "* Maximum ",
-                    "alertText2": " opció lehet bejelölve"
+                    "alertText2": " opci&oacute; lehet bejelölve"
                 },
                 "minCheckbox": {
                     "regex": "none",
-                    "alertText": "* Kérjük válasszon ",
-                    "alertText2": " opciót"
+                    "alertText": "* K&eacute;rjük v&aacute;lasszon ",
+                    "alertText2": " opci&oacute;t"
                 },
                 "equals": {
                     "regex": "none",
@@ -73,42 +73,42 @@
                 },
                 "creditCard": {
                     "regex": "none",
-                    "alertText": "* Érvénytelen kártyaszám"
+                    "alertText": "* &eacute;rv&eacute;nytelen k&aacute;rtyasz&aacute;m"
                 },
                 "phone": {
                     // credit: jquery.h5validate.js / orefalo
-                    "regex": /^([\+][0-9]{1,3}[\ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9\ \.\-\/]{3,20})((m|mell|mellék)[\ ]?[0-9]{1,4})?$/,
-                    "alertText": "* Érvénytelen telefonszám"
+                    "regex": /^([\+][0-9]{1,3}[\ \.\-])?([\(]{1}[0-9]{2,6}[\)])?([0-9\ \.\-\/]{3,20})((m|mell|mell&eacute;k)[\ ]?[0-9]{1,4})?$/,
+                    "alertText": "* &eacute;rv&eacute;nytelen telefonsz&aacute;m"
                 },
                 "email": {
                     // HTML5 compatible email regex ( http://www.whatwg.org/specs/web-apps/current-work/multipage/states-of-the-type-attribute.html#    e-mail-state-%28type=email%29 )
                     "regex": /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/,
-                    "alertText": "* Hibás E-mail cím"
+                    "alertText": "* Hib&aacute;s E-mail c&iacute;m"
                 },
                 "integer": {
                     "regex": /^[\-\+]?\d+$/,
-                    "alertText": "* Nem érvényes (egész) szám"
+                    "alertText": "* Nem &eacute;rv&eacute;nyes (eg&eacute;sz) sz&aacute;m"
                 },
                 "number": {
                     // Number, including positive, negative, and floating decimal. credit: orefalo
                     "regex": /^[\-\+]?((([0-9]{1,3})([,][0-9]{3})*)|([0-9]+))?([\.]([0-9]+))?$/,
-                    "alertText": "* Érvénytelen szám"
+                    "alertText": "* &eacute;rv&eacute;nytelen sz&aacute;m"
                 },
                 "date": {
                     "regex": /^\d{4}[\/\-](0?[1-9]|1[012])[\/\-](0?[1-9]|[12][0-9]|3[01])$/,
-                    "alertText": "* Érvénytelen dátum, ÉÉÉÉ-HH-NN formátumban kell megadni"
+                    "alertText": "* &eacute;rv&eacute;nytelen d&aacute;tum, &eacute;&eacute;&eacute;&eacute;-HH-NN form&aacute;tumban kell megadni"
                 },
                 "ipv4": {
                     "regex": /^((([01]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))[.]){3}(([0-1]?[0-9]{1,2})|(2[0-4][0-9])|(25[0-5]))$/,
-                    "alertText": "* Érvénytelen IP cím"
+                    "alertText": "* &eacute;rv&eacute;nytelen IP c&iacute;m"
                 },
                 "url": {
                     "regex": /^(https?|ftp):\/\/(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i,
-                    "alertText": "* Érvénytelen URL"
+                    "alertText": "* &eacute;rv&eacute;nytelen URL"
                 },
                 "onlyNumberSp": {
                     "regex": /^[0-9\ ]+$/,
-                    "alertText": "* Csak számokat"
+                    "alertText": "* Csak sz&aacute;mokat"
                 },
                 "onlyLetterSp": {
                     "regex": /^[a-zA-Z\ \']+$/,
@@ -116,7 +116,7 @@
                 },
                 "onlyLetterNumber": {
                     "regex": /^[0-9a-zA-Z]+$/,
-                    "alertText": "* Spéci karakterek nem engedélyezettek"
+                    "alertText": "* Sp&eacute;ci karakterek nem enged&eacute;lyezettek"
                 },
                 // --- CUSTOM RULES -- Those are specific to the demos, they can be removed or changed to your likings
                 "ajaxUserCall": {

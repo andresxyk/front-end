@@ -13,7 +13,7 @@
 		if ((txtValidar.length > 3) && (txtValidar.length < 11)) {
 	        FacturacionAjax.validaOrdenViaje(txtValidar ,txtUnidad,txtLiberar,txtIdUsuario,validaOrden_CallBack);
 		} else {
-			alert('La orden debe ser mayor a 3 y menor a 10 dígitos!!!');
+			alert('La orden debe ser mayor a 3 y menor a 10 d&iacute;gitos!!!');
 		}	
      }
 
@@ -22,7 +22,7 @@
 		var txtValidado = window.document.frmPrepViajeFacturacion.txtNumOrden.value;
 		if (data[0] == "1") {
 			alert(data[1]);		
-			if(confirm("¿Quiere sacar la orden del viaje?")) {
+			if(confirm("Â¿Quiere sacar la orden del viaje?")) {
 				window.document.frmPrepViajeFacturacion.hdnLiberar.value = "1";
 				validaOrden();
 			}

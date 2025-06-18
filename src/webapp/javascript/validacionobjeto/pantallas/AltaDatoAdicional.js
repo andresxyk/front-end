@@ -52,7 +52,7 @@
  
  function setdatos_CallBack(data) {
 	   if(data=="Existente"){
-		   if(confirm('�Desea Actualizar los Datos Existentes?')){
+		   if(confirm('¿Desea Actualizar los Datos Existentes?')){
 			   var frm=document.getElementById("frmAltaDatoAdicional");
 			   var datos="";
 			   var bactualiza=true;

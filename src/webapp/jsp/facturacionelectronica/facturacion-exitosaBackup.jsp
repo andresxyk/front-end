@@ -28,13 +28,13 @@
        </div>
        <div class="clearfix grpelem" id="u8067"><!-- group -->
         <div class="clearfix grpelem" id="u8068-4"><!-- content -->
-         <p>Facturación Electrónica</p>
+         <p>Facturaci&oacute;n Electr&oacute;nica</p>
         </div>
        </div>
       </div>
       <div class="clearfix colelem" id="u8055"><!-- group -->
        <div class="clearfix grpelem" id="u8056-4"><!-- content -->
-        <p>¡Su factura se ha generado con éxito!</p>        
+        <p>¡Su factura se ha generado con &eacute;xito!</p>        
        </div>
       </div>
       <div class="clearfix colelem" id="pu8044"><!-- group -->
@@ -57,7 +57,7 @@
      <div class="clearfix" id="u7728_align_to_page">
       <div class="clearfix grpelem" id="u7729-6"><!-- content -->
        <p>© 2013 Todos los Derechos Reservados</p>
-       <p>Olab Diagnósticos Médicos</p>
+       <p>Olab Diagn&oacute;sticos M&eacute;dicos</p>
       </div>
      </div>
     </div>

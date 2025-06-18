@@ -12,7 +12,7 @@
 			<tr>
 				<td>
 		       		#if($!bolExiste == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif ya se encuentra dado de baja</font></b>
 					#end	
 				</td>
@@ -20,7 +20,7 @@
 			 <tr>
 				<td>
 		       		#if($!bolAlta == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif fue dado de alta; con &eacute;xito.</font></b>
 					#end	
 				</td>
@@ -28,7 +28,7 @@
 			 <tr>
 				<td>
 		       		#if($!bolBaja == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif  fue dado de baja; con &eacute;xito.</font></b>
 					#end	
 				</td>
@@ -36,7 +36,7 @@
 			 <tr>
        			<td>
 		       		#if($!bolModif == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeModif, se actualiz&oacute; con &eacute;xito.</font></b>
 					#end	
 				</td>
@@ -44,7 +44,7 @@
 			<tr>
        			<td>
 		       		#if($!bolBorrado == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Eliminación de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Eliminaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; El usuario: $!strMensajeBorrado, se elimin&oacute; con &eacute;xito.</font></b>
 					#end	
 				</td>
@@ -52,7 +52,7 @@
 			<tr>
        			<td>
 		       		#if($!bolActualizado == "true")
-						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualización de usuario exitosa"/>&nbsp;&nbsp;
+						<img align="middle" src="$content.getURI('images/icon_alertsml.gif')" alt="Actualizaci&oacute;n de usuario exitosa"/>&nbsp;&nbsp;
 						<b><font color="$ff0030" aling="center">&nbsp; Los roles del usuario: $!strMensajeActualizado, se actualizaron con &eacute;xito.</font></b>
 					#end	
 				</td>

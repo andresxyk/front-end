@@ -28,7 +28,7 @@
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Generación Previos</th></tr>
+    	<tr><th colspan="5">Generaci&oacute;n Previos</th></tr>
 		<tr>
 			 <td colspan="2" style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
                 Convenio
@@ -69,10 +69,10 @@
 					    <option value="0">Seleccionar</option>
     					<option value="1">Detalle Examenes</option>
     					<option value="2">Detalle Orden</option>
-    					<option value="3">Detalle Agrupación</option>
+    					<option value="3">Detalle Agrupaci&oacute;n</option>
 		            </select>
 			</td>
-			<td>Monto máximo a facturar con IVA
+			<td>Monto m&aacute;ximo a facturar con IVA
 				$<input type="text" id="txtMontoMaximo"  onKeyPress="numero();" size="15" style="width:100px;" value="0">
 			</td>
 			<td>
@@ -116,11 +116,11 @@
 		</tr>
 		<tr>
 			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-				Método de pago:
+				M&eacute;todo de pago:
 				<input type="text" id="txtTipoPago"  onKeyPress="mayuscula();" size="25" style="width:220px;" value="99">
 			</td>
 			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-				<input type="checkbox" id="chkSustitucion" onClick="showFormSustitucion();" >Sustitución				
+				<input type="checkbox" id="chkSustitucion" onClick="showFormSustitucion();" >Sustituci&oacute;n				
 				
 			</td>
 			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
@@ -140,7 +140,7 @@
 				</select>
 			</td>
 			<td style="font-weight:  bold; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-				<label id="labelfactura" style="width:125px;display:none">Descripción Factura</label>
+				<label id="labelfactura" style="width:125px;display:none">Descripci&oacute;n Factura</label>
 				<input type="text" id="txtDescripcion" onKeyPress="mayuscula();" size="30" style="width:300px;display:none" value="ESTUDIOS REALIZADOS SEGUN RELACION ADJUNTA"> 
 				<label id="labelordencompra" style="width:125px;display:none">Orden Compra</label>
 				<input type="text" id="txtOrdenCompra" onKeyPress="numero();" size="30" style="width:100px;display:none" value="0"> 
@@ -169,10 +169,10 @@
 		</tr>
 		<tr>
 			<td>
-				<input type="button" id="idGenerarPrevio" name="idGenerarPrevio" value="Facturación Previo" onClick="GeneracionPrevioFactura();" class="boton">
+				<input type="button" id="idGenerarPrevio" name="idGenerarPrevio" value="Facturaci&oacute;n Previo" onClick="GeneracionPrevioFactura();" class="boton">
 			</td>
 			<td>
-				<input type="button" id="idGenerarDefinitivo" value="Facturación Definitivo" onClick="GeneracionDefinitivoFactura();" class="boton"> 
+				<input type="button" id="idGenerarDefinitivo" value="Facturaci&oacute;n Definitivo" onClick="GeneracionDefinitivoFactura();" class="boton"> 
 			</td>
 			<td> 
 				<input type="button" name="agregar" value="Limpia Pantalla" onClick="limpiaPantalla();" class="boton">

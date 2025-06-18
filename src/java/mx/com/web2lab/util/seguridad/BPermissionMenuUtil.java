@@ -15,7 +15,7 @@ public class BPermissionMenuUtil implements Serializable{
 	private static Log iObjlog = LogFactory.getLog(BPermissionMenuUtil.class);
 
 	/**
-	 * Este metodo realiza un inserción de la
+	 * Este metodo realiza un inserci&oacute;n de la
 	 * BD, en la tabla MENU_PERMISSION
 	 * @param int id permiso
 	 * @param int id grupo_menu

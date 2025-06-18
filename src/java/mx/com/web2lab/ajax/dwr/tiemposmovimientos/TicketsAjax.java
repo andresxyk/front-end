@@ -158,7 +158,7 @@ public class TicketsAjax extends AjaxAction {
 			
 			
 			
-			String[] dias={"Domingo","Lunes","Martes", "Miércoles","Jueves","Viernes","Sábado"};
+			String[] dias={"Domingo","Lunes","Martes", "Mi&eacute;rcoles","Jueves","Viernes","S&aacute;bado"};
 			Date hoy=new Date();
 			int numeroDia=0;
 			Calendar cal= Calendar.getInstance();
@@ -237,7 +237,7 @@ public class TicketsAjax extends AjaxAction {
 							strHTMLReturn = strHTMLReturn + "	<tr> 															" +
 							        						"   	<td align='center'> 														" +
 															"			<a href=\"javascript:cerrarTicketAnteriores(" + objTTicketSucursal.getKticketsucursal().intValue() + ");\"  align='bottom' style='font-weight: normal; font-size: xx-small; color: black; font-style: normal; font-variant: normal;'>"  +  
-															"				Ticket NO CERRADO,¿Lo quieres Cerrar?  				" +
+															"				Ticket NO CERRADO,Â¿Lo quieres Cerrar?  				" +
 															"			</a>													" + 													
 															"   	</td> 														" +     	                
 													        "   	<td align='center'> 										" +

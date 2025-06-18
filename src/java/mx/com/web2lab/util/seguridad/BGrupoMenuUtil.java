@@ -20,19 +20,19 @@ import com.workingdogs.village.DataSetException;
 import com.workingdogs.village.Record;
 
 /**
- * La clase utilitaría GrupoMenuUtil se dedica a insertar y modificar la tabla GRUPO_MENU
+ * La clase utilitarï¿½a GrupoMenuUtil se dedica a insertar y modificar la tabla GRUPO_MENU
  */
 
 
 public class BGrupoMenuUtil implements Serializable{
 	
-	/** Log de la aplicación*/
+	/** Log de la aplicaci&oacute;n*/
     private static Log iObjLog = LogFactory.getLog(BGrupoMenuUtil.class);
   
     /**
-     * El metodo setInserta obtiene un parametro String para completar el query de inserción
+     * El metodo setInserta obtiene un parametro String para completar el query de inserci&oacute;n
      * @param aStrNombre
-     * @return true, si se logra la inserción
+     * @return true, si se logra la inserci&oacute;n
      */
 
     public boolean setInserta(String aStrNombre) throws Exception{
@@ -44,7 +44,7 @@ public class BGrupoMenuUtil implements Serializable{
         int intI = BasePeer.executeStatement(strQuery);
         if(intI > 0){
         	bolInserto = true;   // si inserto
-            iObjLog.debug(">>>>>>>>>>>>>>>Si insertó");
+            iObjLog.debug(">>>>>>>>>>>>>>>Si insertï¿½");
         }
         return bolInserto;
     }
@@ -53,7 +53,7 @@ public class BGrupoMenuUtil implements Serializable{
      * El metodo actualiza un dato de la tabla
      * @param aStrNombre
      * @param aStrNombreAntrior
-     * @return true, si se logra la modificación
+     * @return true, si se logra la modificaci&oacute;n
      */
 
 	public boolean setActualiza(String aStrNombre, String aStrNombreAnterior) throws Exception{
@@ -67,7 +67,7 @@ public class BGrupoMenuUtil implements Serializable{
 		int intI = BasePeer.executeStatement(strQuery);
 		if(intI > 0){
 			bolActualiza = true; // si inserto
-			iObjLog.debug(">>>>>>>>>>>>>>>>Si modificó");
+			iObjLog.debug(">>>>>>>>>>>>>>>>Si modificï¿½");
 		}
 		return bolActualiza;
 	}
@@ -78,7 +78,7 @@ public class BGrupoMenuUtil implements Serializable{
 	 */
 
 	public List getGrupoMenuUtil() throws Exception{
-		iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRÉ al Util");		
+		iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRï¿½ al Util");		
     	String strQuery="select * from GRUPO_MENU order by 2";
 		List objLista = BasePeer.executeQuery(strQuery);
 		
@@ -98,7 +98,7 @@ public class BGrupoMenuUtil implements Serializable{
 	 */
     
     public List getGrupoUtil(String aStrGrupoMenu) throws Exception{
-    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRÉ al Util");		
+    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRï¿½ al Util");		
     	String strQuery="select * from GRUPO_MENU where DESC_GRUPO like '%"+aStrGrupoMenu+"%' order by 2";
     	iObjLog.debug("QueryGrupoUtil="+strQuery);
 		List objLista = BasePeer.executeQuery(strQuery);
@@ -119,7 +119,7 @@ public class BGrupoMenuUtil implements Serializable{
 	 * 					igual al parametro y false en caso contrario.
 	 */    
     public boolean getGrupoExistente(String aStrGrupoMenu) throws Exception{
-    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRÉ al Util");	
+    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRï¿½ al Util");	
     	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>Buscando :"+aStrGrupoMenu);
     	String strQuery="select * from GRUPO_MENU where DESC_GRUPO = '"+aStrGrupoMenu+"' order by 2";
     	iObjLog.debug("QueryGrupoExistente="+strQuery);
@@ -127,7 +127,7 @@ public class BGrupoMenuUtil implements Serializable{
 		List objList = BasePeer.executeQuery(strQuery);
 		if(objList != null && objList.size() > 0){
 			bolExistente = true; // si hay dato
-			iObjLog.debug(">>>>>>>>>>>>>>>>Encontró un dato igual");
+			iObjLog.debug(">>>>>>>>>>>>>>>>Encontrï¿½ un dato igual");
 		}
 		return bolExistente;
 		
@@ -140,14 +140,14 @@ public class BGrupoMenuUtil implements Serializable{
 	 * 					igual al parametro y false en caso contrario.
 	 */    
     public boolean isGerente(String user_id) throws Exception{
-    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRÉ al BgrupoMenuUtil.isGerente");	
+    	iObjLog.debug(">>>>>>>>>>>>>>>>>>>>>>>>>>>ENTRï¿½ al BgrupoMenuUtil.isGerente");	
     	String strQuery="SELECT ROLE_ID FROM TURBINE_USER_GROUP_ROLE WHERE USER_ID IN (" + user_id + ") AND ROLE_ID IN (330,611,612,614)";
     	iObjLog.debug("Consulta BgrupoMenuUtil.isGerente "+strQuery);
 		boolean bolExistente = false; 
 		List objList = BasePeer.executeQuery(strQuery);
 		if(objList != null && objList.size() > 0){
 			bolExistente = true; // si hay dato
-			iObjLog.debug(">>>>>>>>>>>>>>>>Encontró un dato igual");
+			iObjLog.debug(">>>>>>>>>>>>>>>>Encontrï¿½ un dato igual");
 		}
 		return bolExistente;		
     }

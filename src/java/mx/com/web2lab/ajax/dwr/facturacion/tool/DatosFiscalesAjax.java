@@ -51,7 +51,7 @@ public class DatosFiscalesAjax extends AjaxAction {
 		DatosFiscalesDao objDatosFiscalesDAO = new DatosFiscalesDao();
 		iObjLog.debug("Entrando a DatosFiscalesAjax.crearDatosFiscales:Entrando...  ");
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			if (objDatosFiscalesBean.getcCodigoPostal() == 0) {
 				objDatosFiscalesBean.setcCodigoPostal(objDatosFiscalesDAO.newDatosSepomex(objDatosFiscalesBean));				
 			}
@@ -70,7 +70,7 @@ public class DatosFiscalesAjax extends AjaxAction {
 		DatosFiscalesDao objDatosFiscalesDAO = new DatosFiscalesDao();
 		iObjLog.debug("Entrando a DatosFiscalesAjax.getOneDatoFiscal:Entrando...  ");
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			iObjLog.debug("Saliendo a DatosFiscalesAjax.getOneDatoFiscal:Saliendo...  ");
 			return objDatosFiscalesDAO.getOneDatoFiscal(objDatosFiscalesBean);						
 		}catch (TorqueException aObjException){
@@ -87,7 +87,7 @@ public class DatosFiscalesAjax extends AjaxAction {
 		String strReturn = "";
 		iObjLog.debug("Entrando a DatosFiscalesAjax.showDatosFiscales:Entrando...  ");
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			strReturn = objDatosFiscalesDAO.showGridDatoFiscal(objDatosFiscalesBean);						
 			objDatosFiscalesDAO = null;
 			iObjLog.debug("Saliendo a DatosFiscalesAjax.showDatosFiscales:Saliendo...  ");

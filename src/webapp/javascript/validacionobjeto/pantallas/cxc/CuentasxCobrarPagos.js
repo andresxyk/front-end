@@ -6,7 +6,7 @@ var hostServerApache = "http://10.20.26.6:9085";
  var hostServerWebApp = "http://10.20.26.6:8192";
 
 	function init() {
-		DWRUtil.useLoadingMessage();
+		//DWRUtil.useLoadingMessage();
 		if (parseInt(window.document.frmPagoFactura.txtkFactura.value) > 0) {
 			CuentasxCobrarMayoreo.getPagoFactura(window.document.frmPagoFactura.txtkFactura.value,initFactura_CallBack);					
 		} else {
@@ -618,7 +618,7 @@ var hostServerApache = "http://10.20.26.6:9085";
 	}	
 	
 	
-	/*** Versi�n 25 de Marzo 2013*/ 
+	/*** Versi&oacute;n 25 de Marzo 2013*/ 
 	function reversarPago() {
 		var frmPantalla = window.document.frmPagoFactura;
 		var intFactura = frmPantalla.txtkFactura.value;
@@ -631,13 +631,51 @@ var hostServerApache = "http://10.20.26.6:9085";
 				
 	}
 	
-	/*** Versi�n 25 de Marzo 2013*/
+	function reversarPagoSeleccionado() {
+			var frmPantalla = window.document.frmPagoFactura;
+			var intFactura = frmPantalla.txtkFactura.value;
+			var idUsuario = frmPantalla.idUsuario.value; 
+			var strfactura = frmPantalla.strNumeroFactura.value;
+			var chkBox = frmPantalla.chkBoxFactura.value;
+			const checkboxes = frmPantalla.chkBoxFactura;
+			const checkArray = [];
+
+			if (checkboxes instanceof NodeList || checkboxes instanceof HTMLCollection || Array.isArray(checkboxes)) {
+			  for (let i = 0; i < checkboxes.length; i++) {
+			    checkArray.push(checkboxes[i]);
+			  }
+			} else if (checkboxes) {
+			  checkArray.push(checkboxes);
+			}
+		
+			const valoresSeleccionados = Array.from(checkArray)
+			  .filter(checkbox => checkbox.checked)
+			  .map(checkbox => checkbox.value);
+			const kfactura = [];
+			const kpagofactura = [];
+
+			valoresSeleccionados.forEach(item => {
+			  const [factura, pagofactura] = item.split('-');
+			  kfactura.push(factura);
+			  kpagofactura.push(pagofactura);
+			});
+
+			const strKfactura = kfactura.join(',');
+			const strKpagofactura = kpagofactura.join(',');
+			
+			if (confirm("Estas seguro de reversar el ultimo pago registrado para las facturas " + strKpagofactura + "?")) {
+				CuentasxCobrarMayoreo.reversarPagoSeleccionado(strKfactura,idUsuario, strKpagofactura,reversarPago_CallBack);			
+			}
+					
+		}
+	
+	/*** Versi&oacute;n 25 de Marzo 2013*/
 	function reversarPago_CallBack(data) {
 		alert(data);
 		nuevoFactura();
 	}
 	
-	/*** Versi�n 25 de Marzo 2013*/
+	/*** Versi&oacute;n 25 de Marzo 2013*/
 	function actualizaFactura(opcion){
 		var frmPantalla = window.document.frmPagoFactura;
 		var intFactura = frmPantalla.txtkFactura.value;
@@ -649,7 +687,7 @@ var hostServerApache = "http://10.20.26.6:9085";
 				CuentasxCobrarMayoreo.actualizarFactura(intFactura,idUsuario,opcion,actualizarEstadoFactura_CallBack);			
 			}
 		}else{
-			alert('Debes buscar una factura v�lida');
+			alert('Debes buscar una factura v&aacute;lida');
 		}
 	} 
 	

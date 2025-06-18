@@ -73,7 +73,7 @@ initcap( nvl(trim(cc.sciudad), ' ') || ' ' || nvl(trim(cc.sestado), ' ')) sciuda
 initcap(nvl(trim(cc.sdelegacionmunicipio),' ')) sdelmunf,
 nvl(trim(tp.stelefono),' ') stelefonof,
 initcap ( 
-		nvl(tp.sdireccion, 'Sin Dirección ') || ' ' || 
+		nvl(tp.sdireccion, 'Sin Direcci&oacute;n ') || ' ' || 
 		nvl(ccp.sasentamiento,' ') || ' ' || 
 		nvl(ccp.scolonia,' ') )  || ' '||
 		nvl(ccp.cpostal,0 ) sdir,
@@ -82,7 +82,7 @@ initcap( nvl(trim(ccp.sdelegacionmunicipio), ' ') ) sdelmun,
 nvl(trim(tp.stelefono),' ') stelefono, 
 ' ' srfc,
 ' ' scurp,
-nvl(decode(tos.cmedico,5228,'A Quién Corresponda', 'Dr(a).' || tos.smedico), 'A Quién Corresponda') smedico, 
+nvl(decode(tos.cmedico,5228,'A Qui&eacute;n Corresponda', 'Dr(a).' || tos.smedico), 'A Qui&eacute;n Corresponda') smedico, 
 cm.cclave clvmedico,
 tos.dregistro, to_char(tos.dregistro,'hh24:mi') dhoracaptura, 
 tos.dresultadoentrega, to_char(tos.dresultadoentrega,'hh24:mi') dhorapromesa, 
@@ -166,7 +166,7 @@ initcap( nvl(trim(cc.sciudad), ' ') || ' ' || nvl(trim(cc.sestado), ' ')) sciuda
 initcap(nvl(trim(cc.sdelegacionmunicipio),' ')) sdelmunf,
 nvl(trim(tp.stelefono),' ') stelefonof,
 initcap ( 
-		nvl(tp.sdireccion, 'Sin Dirección ') || ' ' || 
+		nvl(tp.sdireccion, 'Sin Direcci&oacute;n ') || ' ' || 
 		nvl(ccp.sasentamiento,' ') || ' ' || 
 		nvl(ccp.scolonia,' ') )  || ' '||
 		nvl(ccp.cpostal,0 ) sdir,
@@ -175,7 +175,7 @@ initcap( nvl(trim(ccp.sdelegacionmunicipio), ' ') ) sdelmun,
 nvl(trim(tp.stelefono),' ') stelefono, 
 ' ' srfc,
 ' ' scurp,
-nvl(decode(tos.cmedico,5228,'A Quién Corresponda', 'Dr(a).' || tos.smedico), 'A Quién Corresponda') smedico, 
+nvl(decode(tos.cmedico,5228,'A Qui&eacute;n Corresponda', 'Dr(a).' || tos.smedico), 'A Qui&eacute;n Corresponda') smedico, 
 cm.cclave clvmedico,
 tos.dregistro, to_char(tos.dregistro,'hh24:mi') dhoracaptura, 
 tos.dresultadoentrega, to_char(tos.dresultadoentrega,'hh24:mi') dhorapromesa, 
@@ -259,7 +259,7 @@ initcap( nvl(trim(cc.sciudad), ' ') || ' ' || nvl(trim(cc.sestado), ' ')) sciuda
 initcap(nvl(trim(cc.sdelegacionmunicipio),' ')) sdelmunf,
 nvl(trim(tp.stelefono),' ') stelefonof,
 initcap ( 
-		nvl(tp.sdireccion, 'Sin Dirección ') || ' ' || 
+		nvl(tp.sdireccion, 'Sin Direcci&oacute;n ') || ' ' || 
 		nvl(ccp.sasentamiento,' ') || ' ' || 
 		nvl(ccp.scolonia,' ') )  || ' '||
 		nvl(ccp.cpostal,0 ) sdir,
@@ -268,7 +268,7 @@ initcap( nvl(trim(ccp.sdelegacionmunicipio), ' ') ) sdelmun,
 nvl(trim(tp.stelefono),' ') stelefono, 
 ' ' srfc,
 ' ' scurp,
-nvl(decode(tos.cmedico,5228,'A Quién Corresponda', 'Dr(a).' || tos.smedico), 'A Quién Corresponda') smedico, 
+nvl(decode(tos.cmedico,5228,'A Qui&eacute;n Corresponda', 'Dr(a).' || tos.smedico), 'A Qui&eacute;n Corresponda') smedico, 
 cm.cclave clvmedico,
 tos.dregistro, to_char(tos.dregistro,'hh24:mi') dhoracaptura, 
 tos.dresultadoentrega, to_char(tos.dresultadoentrega,'hh24:mi') dhorapromesa, 
@@ -2172,7 +2172,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SERVICIOINTERNET}.equals("PROXIMAMENTE")?"     ":"www.facturacionolab.mx    Contraseña: "+$F{SERVICIOINTERNET}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SERVICIOINTERNET}.equals("PROXIMAMENTE")?"     ":"www.facturacionolab.mx    contrase&ntilde;a: "+$F{SERVICIOINTERNET}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2194,7 +2194,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["Usted tiene 20 días naturales a partir de la fecha de emisión de su orden de servicio para liquidarla al 100% y elaborar su factura."]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Usted tiene 20 d&iacute;as naturales a partir de la fecha de emisi&oacute;n de su orden de servicio para liquidarla al 100% y elaborar su factura."]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2216,7 +2216,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["En caso de dudas llamar a los teléfonos 52431489  52431490  52431491 Extensión 132"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["En caso de dudas llamar a los tel&eacute;fonos 52431489  52431490  52431491 Extensi&oacute;n 132"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2238,7 +2238,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SERVICIOINTERNET}.equals("PROXIMAMENTE")?"     ":"www.facturacionolab.mx    Contraseña: "+$F{SERVICIOINTERNET}]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA[$F{SERVICIOINTERNET}.equals("PROXIMAMENTE")?"     ":"www.facturacionolab.mx    contrase&ntilde;a: "+$F{SERVICIOINTERNET}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2260,7 +2260,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Top" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["Usted tiene 20 días naturales a partir de la fecha de emisión de su orden de servicio para liquidarla al 100% y elaborar su factura."]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Usted tiene 20 d&iacute;as naturales a partir de la fecha de emisi&oacute;n de su orden de servicio para liquidarla al 100% y elaborar su factura."]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -2282,7 +2282,7 @@ $F{SMEDICO}.trim()]]></textFieldExpression>
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="7" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["En caso de dudas llamar a los teléfonos 52431489  52431490  52431491 Extensión 132"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["En caso de dudas llamar a los tel&eacute;fonos 52431489  52431490  52431491 Extensi&oacute;n 132"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement

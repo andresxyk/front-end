@@ -164,7 +164,7 @@ public class DatosAdicionalesAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.getDatosAdicionalesIndividuales:Entrando..." + cconvenio);
 		try
 		{
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesi&oacute;n v&aacute;lida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
 			DatosAdicionalesDao objFacuracionPrevioDAO = new DatosAdicionalesDao();
 			List lstDatosAdicionales = objFacuracionPrevioDAO.getDatoAdicional(cconvenio);
 			boolean bmostrarsniveldatoadicional=false;

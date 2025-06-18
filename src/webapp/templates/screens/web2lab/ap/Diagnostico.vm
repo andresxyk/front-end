@@ -79,7 +79,7 @@
 			    </div>				
 	        </td>     
             <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
-                <b>Edad (años-meses-dias)</b
+                <b>Edad (AÃ±os-meses-dias)</b
     	    </td>     
             <td style="width: 158px">
                 <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">
@@ -185,7 +185,7 @@
 	        </tr>
 	    </table>
         <!-- ***************************************************************************************************************************************************  -->
-        <!-- Impresión colposcopica   -->
+        <!-- Impresi&oacute;n colposcopica   -->
 	    <table border="1" align="center" style="width: 980px" frame="border">
 	        <th colspan="3">
 				Impresi&oacuten colposc&oacutepica
@@ -281,11 +281,11 @@
 					</select>
 				</td>
 				<td style="width: 144px">
-					<strong>Tamaño</strong>
-					<input type="text" id="txtTamaEctropion" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'Tamaño Ectropion');">%
+					<strong>TamaÃ±o</strong>
+					<input type="text" id="txtTamaEctropion" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'TamaÃ±o Ectropion');">%
 				</td>
 				<td style="width: 120px">
-					<B>Pólipo</B>
+					<B>P&oacute;lipo</B>
 				</td>
 				<td>        
 					<select id="selPolipo" style="width: 210px">
@@ -295,8 +295,8 @@
 					</select>
 				</td>
 				<td style="width: 144px">
-					<strong>Tamaño</strong>
-					<input type="text" id="txtTamaPolipo" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'Tamaño Pólipo');">cm
+					<strong>TamaÃ±o</strong>
+					<input type="text" id="txtTamaPolipo" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'TamaÃ±o P&oacute;lipo');">cm
 				</td>
 			</tr>
 			<tr>
@@ -370,7 +370,7 @@
 			</th>
 	        <tr>
 	            <td style="width: 559px" align="left">
-					<B>Pólipo</B>
+					<B>P&oacute;lipo</B>
 					<select id="selPolipoVagino" style="width: 210px">
 	    				#foreach($objPolipoVagino in $lstPolipoVagino )
 	    					#option("$!objPolipoVagino.getCpolipovagino()" "$!objPolipoVagino.getCpolipovagino() - $!objPolipoVagino.getSpolipovagino()" "0")							
@@ -378,8 +378,8 @@
 					</select>
 				</td>
 	            <td style="width: 436px" align="left">
-					<strong>Tamaño</strong>
-					<input type="text" id="txtTamaPolipo" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'Tamaño Pólipo');">%
+					<strong>TamaÃ±o</strong>
+					<input type="text" id="txtTamaPolipo" maxlength="20" style="width: 60px" onKeyPress="javascript:return numero();" onblur="porcentaje(this,'TamaÃ±o P&oacute;lipo');">%
 				</td>
 	            <td style="width: 422px" align="left">
 					<B>Mucosa atr&oacutefica</B>

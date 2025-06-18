@@ -47,7 +47,7 @@ $data.setLayoutTemplate("web2lab/SoloPlecaAP.vm")
         </tr>
         <tr>
 			<td>
-               Contraseña: 
+               contrase&ntilde;a: 
             </td>
             <td>
                <input type="password" name="password" value="">

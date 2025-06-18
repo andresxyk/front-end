@@ -52,7 +52,7 @@
          </div>
          <div class="clearfix colelem" id="u8053"><!-- group -->
           <div class="clearfix grpelem" id="u6586-4"><!-- content -->
-           <p>Por favor, regístrese con sus datos fiscales</p>
+           <p>Por favor, reg&iacute;strese con sus datos fiscales</p>
           </div>
          </div>
         </div>
@@ -67,7 +67,7 @@
      <form class="form-grp clearfix grpelem" id="widgetu7824" method="post" enctype="multipart/form-data" onSubmit="altaDatosFiscales();"><!-- group -->
       <div class="fld-grp clearfix grpelem" id="widgetu7841" data-required="true"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u7844-4" for="widgetu7841_input"><!-- content -->
-        <span class="actAsPara">Nombre o Razón Social</span>
+        <span class="actAsPara">Nombre o Raz&oacute;n Social</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7842-3"><!-- content --><input class="wrapped-input" type="text" spellcheck="false" id="widgetu7846_input" name="FormFieldName" tabindex="2"/></span>
       </div>
@@ -89,7 +89,7 @@
       <input class="submit-btn NoWrap grpelem" id="u7856-17" type="submit" value="" tabindex="8"/><!-- state-based BG images -->
       <div class="fld-grp clearfix grpelem" id="widgetu7987" data-required="true"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u7989-4" for="widgetu7987_input"><!-- content -->
-        <span class="actAsPara">Dirección</span>
+        <span class="actAsPara">Direcci&oacute;n</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7988-3"><!-- content --><input class="wrapped-input" type="text" id="widgetu7987_input" name="FormFieldName" tabindex="3"/></span>
       </div>
@@ -101,7 +101,7 @@
       </div>
       <div class="fld-grp clearfix grpelem" id="widgetu7997" data-required="true"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u8000-4" for="widgetu7997_input"><!-- content -->
-        <span class="actAsPara">Delegación o Municipio</span>
+        <span class="actAsPara">Delegaci&oacute;n o Municipio</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u7999-3"><!-- content --><input class="wrapped-input" type="text" id="widgetu7997_input" name="FormFieldName" tabindex="5"/></span>
       </div>
@@ -113,7 +113,7 @@
       </div>
       <div class="fld-grp clearfix grpelem" id="widgetu8008" data-required="true"><!-- group -->
        <label class="fld-label actAsDiv clearfix grpelem" id="u8010-4" for="widgetu8008_input"><!-- content -->
-        <span class="actAsPara">Código Postal</span>
+        <span class="actAsPara">C&oacute;digo Postal</span>
        </label>
        <span class="fld-input NoWrap actAsDiv clearfix grpelem" id="u8011-3"><!-- content --><input class="wrapped-input" type="text" id="widgetu8008_input" name="FormFieldName" tabindex="7"/></span>
       </div>
@@ -123,7 +123,7 @@
      <div class="clearfix" id="u7728_align_to_page">
       <div class="clearfix grpelem" id="u7729-6"><!-- content -->
        <p>© 2013 Todos los Derechos Reservados</p>
-       <p>Olab Diagnósticos Médicos</p>
+       <p>Olab Diagn&oacute;sticos M&eacute;dicos</p>
       </div>
      </div>
     </div>

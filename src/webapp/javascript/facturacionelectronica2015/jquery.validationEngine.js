@@ -35,7 +35,7 @@ function ValidaAno (field, rules, i, options) {
 		data = $field.data();
 
 	if (!data.valid.year) {
-		return '* El año debe incluir 2 dígitos';
+		return '* El aÃ±o debe incluir 2 digitos';
 	}
 }
 
@@ -44,7 +44,7 @@ function ValidaMes (field, rules, i, options) {
 		data = $field.data();
 
 	if (!data.valid.month) {
-		return '* Se debe incluir un mes válido';
+		return '* Se debe incluir un mes v&aacute;lido';
 	}
 }
 
@@ -53,7 +53,7 @@ function ValidaDia (field, rules, i, options) {
 		data = $field.data();
 
 	if (!data.valid.day) {
-		return '* Se debe incluir un día válido';
+		return '* Se debe incluir un d&iacute;a v&aacute;lido';
 	}
 }
 
@@ -62,14 +62,14 @@ function ValidaHomoclave (field, rules, i, options) {
 		data = $field.data();
 
 	if (!data.valid.homoKey) {
-		return '* La homoclave deben ser 3 caracteres alfanuméricos';
+		return '* La homoclave deben ser 3 caracteres alfanum&uacute;ricos';
 	}
 }
 
 function ValidaCP(field, rules, i, options) {
 	var cp = field.val();
 	if (cp.length < 5) {
-		return "* El código postal debe contener 5 dígitos";
+		return "* El c&oacute;digo postal debe contener 5 d&iacute;gitos";
 	}
 }
 

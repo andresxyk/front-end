@@ -19,7 +19,7 @@ public class Formatos  implements Serializable{
 	/** constructor default */
 	public Formatos(){
 	}
-	/**log de la aplicación */
+	/**log de la aplicaci&oacute;n */
 	private static Log iObjLog = LogFactory.getLog(Formatos.class);
 	/**
 	 * Este metodo recibe un string con el formato dd-mm-yyyy hh:mm:ss 
@@ -433,7 +433,7 @@ public class Formatos  implements Serializable{
 	}
 		
 	/**
-	 * Método que regresa una cadena que representa el objeto 
+	 * M&eacute;todo que regresa una cadena que representa el objeto 
 	 * que se pasa, dicho objeto puede ser una subclase de Number
 	 * o un String, el formato es de miles separado por coma  
 	 * @param aObjNum Object
@@ -476,7 +476,7 @@ public class Formatos  implements Serializable{
 	}
 	
 	/**
-	 * Método que regresa una cadena que representa el objeto 
+	 * M&eacute;todo que regresa una cadena que representa el objeto 
 	 * que se pasa, dicho objeto puede ser una subclase de Number
 	 * o un String, el formato es solo con dos decimales sin separador 
 	 * de miles.   
@@ -590,11 +590,11 @@ public class Formatos  implements Serializable{
 	}
 	
 	/**
-	 * Método que sustituye un string (searchString) 
+	 * M&eacute;todo que sustituye un string (searchString) 
 	 * por otro string (replaceString), dentro de 
 	 * una tercera cadena (evaluateString) y regresa 
-	 * el resultado de la operación, la sustitución es 
-	 * no es sensible a mayúsculas o minúsculas 
+	 * el resultado de la operaci&oacute;n, la sustituci&oacute;n es 
+	 * no es sensible a mayï¿½sculas o minï¿½sculas 
 	 * @param searchString
 	 * @param replaceString
 	 * @param evaluateString
@@ -615,7 +615,7 @@ public class Formatos  implements Serializable{
 	}
 	
 	/**
-	 * Metodo que sustituye los meses en ingles por su equivalente en español
+	 * Metodo que sustituye los meses en ingles por su equivalente en espaï¿½ol
 	 * (JAN - ENERO ...) 
 	 * @param aStrFecha
 	 * @return
@@ -639,7 +639,7 @@ public class Formatos  implements Serializable{
 	 	return strFecha;
 	}
 	/**
-	 * Metodo que sustituye los meses en ingles por su equivalente en español
+	 * Metodo que sustituye los meses en ingles por su equivalente en espaï¿½ol
 	 * (JAN - ENE ...) 
 	 * @param aStrFecha
 	 * @return
@@ -663,7 +663,7 @@ public class Formatos  implements Serializable{
 	 	return strFecha;
 	}
 	/**
-	 * Metodo que sustituye los meses en español  por su equivalente en ingles
+	 * Metodo que sustituye los meses en espaï¿½ol  por su equivalente en ingles
 	 * (ENE - JAN ...) 
 	 * @param aStrFecha
 	 * @return
@@ -687,7 +687,7 @@ public class Formatos  implements Serializable{
 	 	return strFecha;
 	}
 	/**
-	 * Metodo que sustituye el numero de mes en ingles por su equivalente en español
+	 * Metodo que sustituye el numero de mes en ingles por su equivalente en espaï¿½ol
 	 * (01 - ENE, 02 - FEB,  ...) 
 	 * @param aStrFecha
 	 * @return
@@ -712,7 +712,7 @@ public class Formatos  implements Serializable{
 	 	return strFecha;
 	}
 	/**
-	 * Metodo que sustituye el numero de mes en ingles por su equivalente en español
+	 * Metodo que sustituye el numero de mes en ingles por su equivalente en espaï¿½ol
 	 * (ENE - 01, FEB - 02,  ...) 
 	 * @param aObjFecha - Date
 	 * @return String 
@@ -736,7 +736,7 @@ public class Formatos  implements Serializable{
 	 	return strFecha;
 	}
 	/**
-	 * Metodo que sustituye el dia en ingles por su equivalente en español
+	 * Metodo que sustituye el dia en ingles por su equivalente en espaï¿½ol
 	 * (SUN - DOMINGO, MON - LUNES,  ...) 
 	 * @param aStrFecha
 	 * @return
@@ -757,7 +757,7 @@ public class Formatos  implements Serializable{
 	
 	/**
 	 * Metodo que obtiene la localidad (Locale) para crear los formatos de fecha
-	 * si no se encuentra para idioma español se crea uno con el default del jvm 
+	 * si no se encuentra para idioma espaï¿½ol se crea uno con el default del jvm 
 	 * @return Locale 
 	 */
 	public Locale getLocale() {
@@ -771,8 +771,8 @@ public class Formatos  implements Serializable{
 	}
 	
 	/**
-	 * Método que evalua que una cadena contenga un valor 
-	 * numérico, la cadena siempre debe contener la parte entera, 
+	 * M&eacute;todo que evalua que una cadena contenga un valor 
+	 * numï¿½rico, la cadena siempre debe contener la parte entera, 
 	 * la parte decimal es opcional 
 	 * @param evaluateString
 	 * @return boolean 
@@ -909,7 +909,7 @@ public class Formatos  implements Serializable{
 	}
 	
 	/**
-	 * Metodo que sustituye el numero de mes en ingles por su equivalente en español
+	 * Metodo que sustituye el numero de mes en ingles por su equivalente en espaï¿½ol
 	 * (ENE - 01, FEB - 02,  ...) 
 	 * @param aObjFecha - Date
 	 * @return String 
@@ -938,7 +938,7 @@ public class Formatos  implements Serializable{
 	}	
 
 	/**
-	 * Metodo que sustituye el numero de mes en ingles por su equivalente en español
+	 * Metodo que sustituye el numero de mes en ingles por su equivalente en espaï¿½ol
 	 * (ENE - 01, FEB - 02,  ...) 
 	 * @param aObjFecha - Date
 	 * @return String 

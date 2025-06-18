@@ -11,7 +11,7 @@ public class CalculaFechas  implements Serializable{
 	/** constructor default */
 	public CalculaFechas(){
 	}
-	/**log de la aplicación */
+	/**log de la aplicaci&oacute;n */
 	private static Log iObjLog = LogFactory.getLog(CalculaFechas.class);
 	
 	/*

@@ -54,9 +54,9 @@
 				<td>
 	                <select id="selReporte" style="width: 210px">
 							<option value="1">Notas de Credito</option>
-							<option value="2">Facturación</option>
+							<option value="2">Facturaci&oacute;n</option>
 							<option value="3">Pases Pendientes Sucursales</option>
-							<option value="4">Pases Pendientes Facturación</option>
+							<option value="4">Pases Pendientes Facturaci&oacute;n</option>
 							
 		            </select>					
 					<input type="button" onclick="return repFacturacionSelect('$ligaReporte','ImprimeReporteFacturacion')" value="Executa Reporte" name="Generar Reporte" class="boton" style="width:200px">
@@ -67,7 +67,7 @@
 			</tr>
     		<tr>
     			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
-                    Busqueda de convenio por código
+                    Busqueda de convenio por c&oacute;digo
         	    </td>    
 			</tr>
     		<tr>

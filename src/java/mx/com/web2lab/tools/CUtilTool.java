@@ -20,7 +20,7 @@ public class CUtilTool implements Recyclable, ApplicationTool, Serializable{
 	
 	//metodos necesarios para la implementacion de un tool
 	
-	/**log de la aplicación */
+	/**log de la aplicaci&oacute;n */
 	private static Log iObjLog = LogFactory.getLog(CUtilTool.class);	
 	/** The object containing request specific data */
 	private RunData iObjDatos;
@@ -203,12 +203,12 @@ public class CUtilTool implements Recyclable, ApplicationTool, Serializable{
 		
 	
 	/**
-	 * Metodo que realiza el calculo de la edad en AÑOS comparando la
+	 * Metodo que realiza el calculo de la edad en AÃ±os comparando la
 	 * fecha de nacimiento contra la fecha de captura.
 	 * 
 	 * @param aObjFechaNac. Fecha de nacimiento.
 	 * @param aObjFechaCap. Fecha de captura.
-	 * @return Edad en años.
+	 * @return Edad en AÃ±os.
 	 * @throws Exception
 	 */
 	public int getEdadAnios(Date aObjFechaNac, Date aObjFechaCap) 

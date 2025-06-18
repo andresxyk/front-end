@@ -2,7 +2,7 @@ $data.setLayoutTemplate("/web2lab/Default.vm")
 
 ##Obtiene el bean de session que a su vez contiene el bean de DExamen
 #set ( $objSesionActual = $data.getSession() )
-#set ( $titlePage = "Configuración Exámenes Gabinetes <br>" )
+#set ( $titlePage = "Configuraci&oacute;n Ex&aacute;menes Gabinetes <br>" )
 
 #set ($lstDepartamentos = $CatalogosTool.obtenAll("Departamento","0"))
 #set ($lstIndicaciones = $CatalogosTool.obtenAll("CondicionPreanalitica","0"))

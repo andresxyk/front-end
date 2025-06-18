@@ -118,7 +118,7 @@ order by 3,5]]></queryString>
 					<textElement textAlignment="Left" verticalAlignment="Middle" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["En Olab Diagnósticos Médicos deseamos brindarle la mejor atención.\nA continuación encontrará Usted el costo y las indicaciones de cada uno del o los estudios que ha solicitado"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["En Olab Diagn&oacute;sticos M&eacute;dicos deseamos brindarle la mejor atenci&oacute;n.\nA continuaci&oacute;n encontrar&aacute; Usted el costo y las indicaciones de cada uno del o los estudios que ha solicitado"]]></textFieldExpression>
 				</textField>
 			</band>
 			</groupHeader>
@@ -403,7 +403,7 @@ order by 3,5]]></queryString>
 						<font fontName="Arial" pdfFontName="Helvetica" size="18" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
 				<textFieldExpression   class="java.lang.String"><![CDATA["SUCURSAL " + $F{SUNIDAD}.trim() + "\r\n" + 
-"Cotización: " + new DecimalFormat("##0").format($P{kordensucursalcotizacion}) + " Total $" + new DecimalFormat("##0.00").format($F{PRECIOORDEN})]]></textFieldExpression>
+"Cotizaci&oacute;n: " + new DecimalFormat("##0").format($P{kordensucursalcotizacion}) + " Total $" + new DecimalFormat("##0.00").format($F{PRECIOORDEN})]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="false" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -657,7 +657,7 @@ order by 3,5]]></queryString>
 					<textElement textAlignment="Center" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="8" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["Centro de Información al Paciente: 4040 6522 "]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["Centro de Informaci&oacute;n al Paciente: 4040 6522 "]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -727,7 +727,7 @@ $F{CP}.trim()
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="false" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["¿Sabía Usted que la Hemoglobina glucosilada refleja el valor promedio de su glucosa de los tres meses previos?"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["¿Sab&iacute;a Usted que la Hemoglobina glucosilada refleja el valor promedio de su glucosa de los tres meses previos?"]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true" pattern="" isBlankWhenNull="true" evaluationTime="Now" hyperlinkType="None"  hyperlinkTarget="Self" >
 					<reportElement
@@ -749,7 +749,7 @@ $F{CP}.trim()
 					<textElement textAlignment="Left" verticalAlignment="Bottom" rotation="None" lineSpacing="Single">
 						<font fontName="Arial" pdfFontName="Helvetica" size="10" isBold="true" isItalic="false" isUnderline="false" isPdfEmbedded ="false" pdfEncoding ="Cp1252" isStrikeThrough="false" />
 					</textElement>
-				<textFieldExpression   class="java.lang.String"><![CDATA["La presente cotizacion tiene vigencia de un mes a partir de la fecha de impresión"]]></textFieldExpression>
+				<textFieldExpression   class="java.lang.String"><![CDATA["La presente cotizacion tiene vigencia de un mes a partir de la fecha de impresi&oacute;n"]]></textFieldExpression>
 				</textField>
 			</band>
 		</pageFooter>

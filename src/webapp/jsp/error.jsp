@@ -11,7 +11,7 @@
 </div>
 <center>
 <h1><font color="black">Error Interno</font></H1>
-<h2><font color="black">Contacte con el administrador para más información expedientelectronico_sugerencias@olab.com.mx</font></H2>
+<h2><font color="black">Contacte con el administrador para m&aacute;s informaci&oacute;n expedientelectronico_sugerencias@olab.com.mx</font></H2>
 </center>
 <div id="main-container" align="center">
 <table width="600px">

@@ -18,7 +18,7 @@
 
 <form name="frmBusqudaComplemento"  method="post" >
 	<table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5" >Búsqueda de Complemento de Pago</th></tr>
+    	<tr><th colspan="5" >b&uacute;squeda de Complemento de Pago</th></tr>
 		<tr>
 			 <td style="font-weight: normal; font-size: x-small; color: black; font-style: normal; font-variant: normal">
                 Folio del Complemento de Pago

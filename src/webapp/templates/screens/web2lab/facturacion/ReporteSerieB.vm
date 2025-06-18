@@ -30,7 +30,7 @@
 	<input type="hidden" id="idUsuario" name="idUsuario" value="$data.getUser().getId()">	
 	<input type="hidden" id="IdSucursalActual" name="IdUnidadActual" value="$data.getSession().getAttribute("idgrupo")">	
     <table	border="0" class="tabla" width="100%">	
-    	<tr><th colspan="5">Generación de Reportes</th></tr>
+    	<tr><th colspan="5">Generaci&oacute;n de Reportes</th></tr>
     	
     	<tr><th colspan="4">Reporte - Seleccione el Rango de Fechas</th></tr>
     		<tr>

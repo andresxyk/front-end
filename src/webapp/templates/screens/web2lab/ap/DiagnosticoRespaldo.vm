@@ -183,7 +183,7 @@
 			    </div>				
 	        </td>     
             <td style="font-weight: normal; font-size: 12px; color: black; font-style: normal; font-variant: normal">
-                <b>Edad (años-meses-dias)</b
+                <b>Edad (AÃ±os-meses-dias)</b
     	    </td>     
             <td style="width: 158px">
                 <input type="hidden" name="hdnAnios" value="$!objDemPaciente.getIStrAnios()">

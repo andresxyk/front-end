@@ -78,7 +78,7 @@
             </div>
         </div>
         <div id="footer">
-        	Grupo Diagnóstico Aries  SA de CV. © Todos los derechos reservados 2015-2016
+        	Grupo Diagn&oacute;stico Aries  SA de CV. © Todos los derechos reservados 2015-2016
         </div>
     </div>
 </body>

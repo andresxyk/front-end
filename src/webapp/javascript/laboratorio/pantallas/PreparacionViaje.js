@@ -13,7 +13,7 @@
 		if ((txtValidar.length > 3) && (txtValidar.length < 11)) {
 	        LaboratorioAjax.validaOrden(txtValidar ,txtUnidad,txtLiberar,txtIdUsuario,validaOrden_CallBack);
 		} else {
-			alert('La orden debe ser mayor a 3 y menor a 10 dígitos!!!');
+			alert('La orden debe ser mayor a 3 y menor a 10 d&iacute;gitos!!!');
 		}	
      }
 
@@ -21,18 +21,18 @@
     {
 		var txtValidado = window.document.frmPrepViajeFacturacion.txtNumOrden.value;
 		if(data == "ORDENNOVALIDA") {
-           alert('El número de la orden no es valida ' + txtValidado);		
+           alert('El n&uacute;mero de la orden no es valida ' + txtValidado);		
            window.document.frmPrepViajeFacturacion.txtNumOrden.value;			
 		} else if (data == "EXISTEVIAJE") {
 			alert('La orden ya fue ingresada en un viaje. ' + txtValidado);		
-			if(confirm("¿Quiere sacar la orden del viaje?")) {
+			if(confirm("Â¿Quiere sacar la orden del viaje?")) {
 				window.document.frmPrepViajeFacturacion.hdnLiberar.value = "1";
 				validaOrden();
 			}
 		} else if (data == "recibida") {
 			alert('La orden ya fue recibida. ' + txtValidado);		
 		} else if (data == "ORDENNOCREDITO") {
-			alert('La orden no es de crédito. ' + txtValidado);		
+			alert('La orden no es de cr&eacute;dito. ' + txtValidado);		
 		} else if (data.length > 10) {
 			alert('La orden no es de la sucursal del usuario. ' + data);				
 		}else {

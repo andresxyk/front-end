@@ -15,7 +15,7 @@ function repFacturas(liga, nombre){
 }
 
 /**
- * Versi�n 25 de Marzo 2013 
+ * Versi&oacute;n 25 de Marzo 2013 
  BY 
  */
 function repRefacturas(liga, nombre){
