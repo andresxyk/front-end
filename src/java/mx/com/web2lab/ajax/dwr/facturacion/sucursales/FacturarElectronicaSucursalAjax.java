@@ -38,7 +38,7 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 		DatosFiscalesBean objDatosFiscalesBean = null;
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.crearOrdenFacturarElectronica:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			objDatosFiscalesBean = objDatosFiscalesDao.buscarDatosFiscalesOrden(-1, objFacturaBean.gethDatosFiscal());
 			if (objDatosFiscalesBean != null) {
 				objFacturaBean.sethDatosFiscal(objDatosFiscalesBean.getkDatosFiscales());
@@ -77,7 +77,7 @@ public class FacturarElectronicaSucursalAjax extends AjaxAction {
 		FacturacionElectronicaDomain objFEDomain = new FacturacionElectronicaDomain();
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.crearOrdenFacturar:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario + " Marca " + objFacturaBean.getCmarca());
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			objFacturaBean.setBolredondear(true);
 			objFacturaBean.setkOrdenSucursal(strkAdmision);
 			objFacturaBean.setTurbine_User(cUsuario);

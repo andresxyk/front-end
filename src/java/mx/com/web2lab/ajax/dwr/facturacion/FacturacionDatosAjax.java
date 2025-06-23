@@ -27,7 +27,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.validaOrden:Entrando..." + strOrden);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			iObjLog.debug("FacturacionDatosAjax.validaOrden:Validacion...." 
 					+ " -- Orden : " + strOrden 
 					+ " -- Unidad: " + cUnidad 
@@ -88,7 +88,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.validaOrden:Entrando..." + strOrden);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			iObjLog.debug("FacturacionDatosAjax.validaOrden:Validacion...." 
 					+ " -- Orden : " + strOrden 
 					+ " -- Unidad: " + cUnidad 
@@ -179,7 +179,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.sinViajeOrden:Entrando..." + cUnidad);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
     		strRespuesta = objOrdenSinViajeDAO.getOrdenesSinViaje(cUnidad,intOrdenar);
 		} catch (Exception e){
@@ -199,7 +199,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.sinViajeOrden:Entrando..." + cUnidad);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
     		strRespuesta = objOrdenSinViajeDAO.enViajeOrdenNoFac(cUnidad,intOrdenar);
 		} catch (Exception e){
@@ -219,7 +219,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.buscarViaje:Entrando..." + cUnidad);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
     		strRespuesta = objOrdenSinViajeDAO.buscarViaje(cUnidad, kViaje);
 		} catch (Exception e){
@@ -239,7 +239,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		iObjLog.debug("FacturacionDatosAjax.getOrdenesNewViaje:Entrando..." + cUnidad);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
     		strRespuesta = objOrdenSinViajeDAO.getOrdenesNewViaje(cUnidad);
 		} catch (Exception e){
@@ -260,7 +260,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		strRespuesta = objOrdenSinViajeDAO.cerrarViaje(cUnidad,idUsuario);
 		} catch (Exception e){
 			iObjLog.error("FacturacionDatosAjax.cerrarViaje:ERROR",e);
@@ -282,7 +282,7 @@ public class FacturacionDatosAjax extends AjaxAction {
 		ViajeFacturacionDao objOrdenSinViajeDAO = new ViajeFacturacionDao();
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
     		strRespuesta = objOrdenSinViajeDAO.reimprimirEtiquetasViaje(cUnidad, kViajeFacturacion);
 		} catch (Exception e){
 			iObjLog.error("FacturacionDatosAjax.reimprimirEtiquetasViaje:ERROR",e);

@@ -22,7 +22,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarViajeOrdenes:Entrando... Viaje " + objBuscarOrdenesViajeBean.getKviaje() + " cEstadoRegistro " + objBuscarOrdenesViajeBean.getIntcestadoregistro() + " Consecutivo " + objBuscarOrdenesViajeBean.getIntbloque());		
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			objBuscarOrdenesViajeBean = objDAOCliente.buscarOrdenesViaje(objBuscarOrdenesViajeBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarViajeOrdenes:Saliendo...  ");
@@ -38,7 +38,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarViajeOrdenes:Entrando... Viaje " + objBuscarOrdenesViajeBean.getKviaje() + " cEstadoRegistro " + objBuscarOrdenesViajeBean.getIntcestadoregistro() + " Consecutivo " + objBuscarOrdenesViajeBean.getIntbloque());		
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			objBuscarOrdenesViajeBean = objDAOCliente.buscarOrdenesViajeNewIndividual(objBuscarOrdenesViajeBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarViajeOrdenes:Saliendo...  ");
@@ -54,7 +54,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarViajeOrdenes:Entrando... Viaje " + objBuscarOrdenesViajeBean.getKviaje() + " cEstadoRegistro " + objBuscarOrdenesViajeBean.getIntcestadoregistro() + " Consecutivo " + objBuscarOrdenesViajeBean.getIntbloque());		
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			objBuscarOrdenesViajeBean = objDAOCliente.buscarOrdenesViajeNewPaciente(objBuscarOrdenesViajeBean,kpaciente);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarViajeOrdenes:Saliendo...  ");
@@ -76,7 +76,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 		String[] strCadaAcciones = null;
 		String[] strElementos = null;
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 
 			/**************************************Estados*********************************/
@@ -131,7 +131,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 		AIncidenciaFacturacion objIncidenciaReturn = new AIncidenciaFacturacion();
 		IncidenciasFacturacionDao objDAOIncidencia = new IncidenciasFacturacionDao();
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objIncidenciaReturn = objDAOIncidencia.guardarIncidencia(cincidencia, kadmision, UserId, "T_Orden_Sucursal_Fac", "kOrdenSucursal", "");
 			iObjLog.debug("Saliendo ViajeFacturacionAjax.levantarIncidenciaOrden:Saliendo...  ");
 			return objIncidenciaReturn.getKincidenciafacturacion().intValue();
@@ -149,7 +149,7 @@ public class ViajeFacturacionAjax extends AjaxAction {
 		AIncidenciaFacturacion objIncidenciaReturn = new AIncidenciaFacturacion();
 		IncidenciasFacturacionDao objDAOIncidencia = new IncidenciasFacturacionDao();
 		try {			
-			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objIncidenciaReturn = objDAOIncidencia.guardarIncidencia(cincidencia, kviaje, UserId, "T_Orden_Sucursal_Fac", "kViaje", "");
 			iObjLog.debug("Saliendo ViajeFacturacionAjax.levantarIncidenciaViaje:Saliendo...  ");
 			return objIncidenciaReturn.getKincidenciafacturacion().intValue();

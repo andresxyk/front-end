@@ -43,7 +43,7 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 		
 		iObjLog.debug("Entrando a FacturarElectronicaMayoreoAjax.crearOrdenFacturar:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " Sucursal " + cSucursal + " Usuario " + cUsuario + " CMArca " + objFacturaBean.getCmarca());
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			if (objFacturaBean.getSFacturaOld() == "") {
 				if ((objFacturaBean.getcFormato() > -1) && (objFacturaBean.getcFormato() < 4)) {
 					for (int inti=0;inti<lstOrdenesListaFacturar.size();inti++) {
@@ -86,7 +86,7 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 		
 		iObjLog.debug("Entrando a FacturarElectronicaMayoreoAjax.crearOrdenFacturar:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario + " cMarca " + cMarca);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			if (objFacturaBean.getSFacturaOld() == "") {
 				switch (objFacturaBean.getcFormato()) {
 					case 0: {
@@ -202,7 +202,7 @@ public class FacturarElectronicaMayoreoAjax extends AjaxAction {
 		
 		iObjLog.debug("Entrando a FacturarElectronicaMayoreoAjax.crearOrdenFacturar:Entrando... " + objFacturaBean.getSrazonsocialreceptor() + " kOrdenSucursal " + strkAdmision + " Sucursal " + cSucursal + " Usuario " + cUsuario + " cMarca " + cMarca);
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			objFacturaBean.setBolredondear(true);
 			objFacturaBean.setkOrdenSucursal(strkAdmision);
 			objFacturaBean.setTurbine_User(cUsuario);

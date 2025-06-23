@@ -632,7 +632,7 @@ function LoadClienteConvenio() {
 
 
 function LoadCompletedConvenio() {
-    var frmPantalla = document.getElementById('frmAdminClientes');    
+    var frmPantalla = window.document.frmAdminClientes;      
     if( !validaVacios(frmPantalla.txtFechaInicio.value)) {
     	alert("La fecha de inicio es un dato obligatorio.");
     	frmPantalla.txtFechaInicio.focus();

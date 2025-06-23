@@ -1159,7 +1159,7 @@ public class DatosExamenAjax extends AjaxAction {
 		boolean bolExamen = true;
 		List lstExamenes = new ArrayList();
 		String strReturn = "";		
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");	
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");	
 		try {
 			if (strExamen.trim().length() >= 2) {
 				iObjLog.debug("Entrando a DatosExamenAjax.consultaExamenesGrid:Entrando...Parametros... " + strExamen.trim());

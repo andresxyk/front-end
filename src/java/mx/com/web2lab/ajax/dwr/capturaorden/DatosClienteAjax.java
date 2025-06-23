@@ -35,7 +35,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.getMarcasUser:Entrando... userid:"+userid);
 		String marcas = null;
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			marcas = ConfiguracionProperties.getPropiedad("alta.convenios.users."+userid);
 			iObjLog.debug("marcas:"+marcas);
 			iObjLog.debug("Saliendo DatosClienteAjax.getMarcasUser:Saliendo...  ");
@@ -54,7 +54,7 @@ public class DatosClienteAjax extends AjaxAction {
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		MetricasClieConBean objMetricas = new MetricasClieConBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objMetricas = objDAOCliente.estatusClientesConvenios();
 			String marcas = ConfiguracionProperties.getPropiedad("alta.convenios.users."+userid);
 			iObjLog.info("marcasProperties:"+marcas);
@@ -139,7 +139,7 @@ public class DatosClienteAjax extends AjaxAction {
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		MetricasClieConBean objMetricas = new MetricasClieConBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			strReturn = objDAOCliente.showEstadistica(uTipoControl);
 			iObjLog.debug("Saliendo DatosClienteAjax.showEstadistica:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -157,7 +157,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarCliente:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			objClienteBean = (ClienteBean)objDAOCliente.buscarCliente(objClienteBean).get(0);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarCliente:Saliendo...  ");
@@ -174,7 +174,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarClienteCxC:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			objClienteBean = (ClienteBean)objDAOCliente.buscarClienteCxC(objClienteBean,true).get(0);						
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarClienteCxC:Saliendo...  ");
@@ -196,7 +196,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarClienteCxC:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			objClienteBean = (ClienteBean)objDAOCliente.buscarClienteVentas(objClienteBean,true).get(0);						
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarClienteCxC:Saliendo...  ");
@@ -220,7 +220,7 @@ public class DatosClienteAjax extends AjaxAction {
 		String strPathFOP = "";
 		int cMarca = 1;
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			/*************************Clientes que tienen Facturas Anteriores ***********************/
 			String strClientes = objFacturacionMayoreoDao.getClientesAntiguedadCxC();
 			objClienteBean.setSobservaciones(strClientes);
@@ -260,7 +260,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarClientes:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = this.showClientes(objDAOCliente.buscarCliente(objClienteBean));
 		
@@ -278,7 +278,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConvenio:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			objConvenioBean = (ConvenioBean)objDAOCliente.buscarConvenio(objConvenioBean,"").get(0);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarConvenio:Saliendo...  ");
@@ -295,7 +295,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConvenio:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			if (intTypeBusqueda == 1) {
 				objConvenioBean = (ConvenioBean)objDAOCliente.buscarConvenioAdministrador(objConvenioBean,strExamenes).get(0);
@@ -316,7 +316,7 @@ public class DatosClienteAjax extends AjaxAction {
 	{
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConvenio:Entrando... ");		
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			objConvenioBean = (ConvenioBean)objDAOCliente.buscarConvenioAdministrador(objConvenioBean,strExamenes).get(0);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarConvenio:Saliendo...  ");
@@ -335,7 +335,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConvenio:Entrando... ");		
 		String strReturn[] = new String[4];
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.buscarExamenesPerfilesConvenio(intConvenio);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarConvenio:Saliendo...  ");
@@ -353,7 +353,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConvenios:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.buscarConvenios(objConvenioBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarConvenios:Saliendo...  ");
@@ -371,7 +371,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarConveniosOrdenes:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			strReturn = objDAOCliente.buscarOrdenesConvenios(objConvenioBean,strFechaInicio,strFechaTermino);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarConveniosOrdenes:Saliendo...  ");
@@ -389,7 +389,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarViajeOrdenes:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			BuscarOrdenesViajeBean objBuscarOrdenesViajeBean = new BuscarOrdenesViajeBean();
 			objBuscarOrdenesViajeBean.setKviaje(kviajesucursal);
@@ -409,7 +409,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarFacturacionOrden:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			BuscarOrdenesViajeBean objBuscarOrdenesViajeBean = new BuscarOrdenesViajeBean();
 			objBuscarOrdenesViajeBean.setKadmision(kadmision);
@@ -429,7 +429,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarOrdenesConvenioPaciente:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			strReturn = objDAOCliente.buscarOrdenesConvenioPaciente(objConvenioBean,strFechaInicio,strFechaTermino,kPaciente);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarOrdenesConvenioPaciente:Saliendo...  ");
@@ -447,7 +447,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarOrdenesConvenioPaciente:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			strReturn = objDAOCliente.buscarOrdenesConvenioECE(objConvenioBean,strFechaInicio,strFechaTermino,kPaciente);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarOrdenesConvenioPaciente:Saliendo...  ");
@@ -467,7 +467,7 @@ public class DatosClienteAjax extends AjaxAction {
 		String strReturn = "";
 		boolean bFechaRegistro = false;
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			if (uFechaRegistro == 1) {
 				bFechaRegistro = true;
@@ -489,7 +489,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.actualizaCliente:Entrando... ");		
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			iObjLog.debug("getCregimenfiscal:"+objClienteBean.getCregimenfiscal());
 			iObjLog.debug("getCusocfdi:"+objClienteBean.getCusocfdi());
 			iObjLog.info("snombrecontacto: " + objClienteBean.getSnombrecontacto());
@@ -511,7 +511,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.altaPorcentajeClasificacionConvenio:Entrando... Convenio " + uConvenio + " Clasificacion " + uClasificacion + " Descuento " + pDescuento);		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			if (uConvenio > 0) {
 				ClientesNewDao objDAOCliente = new ClientesNewDao();
 				strReturn = objDAOCliente.altaPorcentajeClasificacionConvenio(uConvenio,uClasificacion,pDescuento);
@@ -532,7 +532,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.altaPorcentajeExamenConvenio:Entrando... Convenio " + uConvenio + " Examen " + uExamen + " Monto Facturar " + mFacturar);		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.altaPorcentajeExamenConvenio(uConvenio,uExamen,mFacturar);
 			iObjLog.debug("Saliendo DatosClienteAjax.altaPorcentajeExamenConvenio:Saliendo...  ");
@@ -549,7 +549,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.actualizarPorcentajeExamenConvenio:Entrando... Convenio " + uConvenio + " Examen " + uExamen + " Monto Facturar " + mFacturar);		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.actualizarPorcentajeExamenConvenio(kConvenioDetalle,uConvenio,uExamen,mFacturar);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizarPorcentajeExamenConvenio:Saliendo...  ");
@@ -566,7 +566,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.eliminarExamenConvenio:Entrando... Convenio " + uConvenio + " Examen " + uExamen);		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.eliminarExamenConvenio(kConvenioDetalle,uConvenio,uExamen,mFacturar);
 			iObjLog.debug("Saliendo DatosClienteAjax.eliminarExamenConvenio:Saliendo...  ");
@@ -584,7 +584,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.actualizarPorcentajeClasificacionConvenio:Entrando...kClasificacion " + kClasificacion + " Convenio " + uConvenio + " Clasificacion " + uClasificacion + " Descuento " + pDescuento);		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.actualizarPorcentajeClasificacionConvenio(kClasificacion,uConvenio,uClasificacion,pDescuento);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizarPorcentajeClasificacionConvenio:Saliendo...  ");
@@ -601,7 +601,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando... ");		
 		ClientesNewDao objDAOCliente = new ClientesNewDao();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Inicio " + objConvenioBean.getSiniciovigencia());		
 			objConvenioBean.setDinicio(new Formatos().getFecha(objConvenioBean.getSiniciovigencia()));
 			iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenio:Entrando...Termino " + objConvenioBean.getSterminovigencia());		
@@ -625,7 +625,7 @@ public class DatosClienteAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.actualizaConvenioPasswordECE:Entrando... ");	
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ClientesNewDao objDAOCliente = new ClientesNewDao();
 			strReturn = objDAOCliente.setConvenioActualizacionECEEmpresa(objConvenioBean);
 			iObjLog.debug("Saliendo DatosClienteAjax.actualizaConvenioPasswordECE:Saliendo...  ");

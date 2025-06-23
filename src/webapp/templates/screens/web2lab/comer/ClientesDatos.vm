@@ -599,13 +599,13 @@
 			</tr>
 			<tr>
 				<td style="width: 187px">
-                    <input type="text" name="txtFechaInicio" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">					        
+                    <input type="text" name="txtFechaInicio" id="txtFechaInicio" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">					        
 			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmAdminClientes.txtFechaInicio); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
 			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
 			        </a>	
 				</td>
 				<td style="width: 187px">
-                    <input type="text" name="txtFechaFin"    size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		       
+                    <input type="text" name="txtFechaFin" id=="txtFechaFin" size="12" value="" style="background:#E6E6FA" onKeyup="javascript:agregaDiag(this);" onChange="javascript:this.value=validaFormatoFecha(this.value);">		       
 			        <a href="javascript:doNothing()" onclick="javascript:setDateField(document.frmAdminClientes.txtFechaFin); top.newWin =  ventanaNormal('$content.getURI('javascript/calendar.html')','cal','WIDTH=230,HEIGHT=230')">
 			            <img alt='Seleccione una fecha' border='0' src='$content.getURI('images/icono_calend.gif')' />
 			        </a>	

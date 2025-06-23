@@ -1653,101 +1653,134 @@ function asignarValoresConvenio() {
 	}
 	
 	function crearSpinner() {
-	  if (document.getElementById("spinner-overlay")) return;
+	  try {
+	    if (document.getElementById("spinner-overlay")) return;
 
-	  const style = document.createElement("style");
-	  style.innerHTML = `
-	    #spinner-overlay {
-	      position: fixed;
-	      top: 0; left: 0;
-	      width: 100%; height: 100%;
-	      z-index: 9999;
-	      display: none;
+	    var style = document.createElement("style");
+	    style.type = "text/css";
+
+	    var css = ""
+	      + "#spinner-overlay {"
+	      + "position: fixed;"
+	      + "top: 0; left: 0;"
+	      + "width: 100%; height: 100%;"
+	      + "z-index: 9999;"
+	      + "display: none;"
+	      + "}"
+	      + "#spinner-background {"
+	      + "position: absolute;"
+	      + "top: 0; left: 0;"
+	      + "width: 100%; height: 100%;"
+	      + "background-color: black;"
+	      + "filter: alpha(opacity=50);" // IE fallback
+	      + "opacity: 0.5;"
+	      + "}"
+	      + "#spinner-content {"
+	      + "position: absolute;"
+	      + "top: 50%; left: 50%;"
+	      + "margin-left: -40px;" // Approx half of img width
+	      + "margin-top: -40px;"  // Approx half of img height
+	      + "text-align: center;"
+	      + "}"
+	      + "#spinner-content img {"
+	      + "width: 80px;"
+	      + "height: 80px;"
+	      + "}"
+	      + "#spinner-close {"
+	      + "position: absolute;"
+	      + "top: -10px;"
+	      + "right: -10px;"
+	      + "color: white;"
+	      + "font-size: 24px;"
+	      + "font-weight: bold;"
+	      + "text-decoration: none;"
+	      + "background: transparent;"
+	      + "border: none;"
+	      + "cursor: pointer;"
+	      + "}";
+
+	    if (style.styleSheet) {
+	      style.styleSheet.cssText = css; // IE8 y anteriores
+	    } else {
+	      style.appendChild(document.createTextNode(css)); // Modernos
 	    }
-	    #spinner-background {
-	      position: absolute;
-	      top: 0; left: 0;
-	      width: 100%; height: 100%;
-	      background-color: black;
-	      opacity: 0.5;
-	    }
-	    #spinner-content {
-	      position: absolute;
-	      top: 50%; left: 50%;
-	      transform: translate(-50%, -50%);
-	      text-align: center;
-	      position: relative;
-	    }
-	    #spinner-content img {
-	      width: 80px;
-	      height: 80px;
-	    }
-	    #spinner-close {
-	      position: absolute;
-	      top: -10px;
-	      right: -10px;
-	      color: white;
-	      font-size: 24px;
-	      font-weight: bold;
-	      text-decoration: none;
-	      background: transparent;
-	      border: none;
-	      cursor: pointer;
-	    }
-	  `;
-	  document.head.appendChild(style);
+	    document.getElementsByTagName("head")[0].appendChild(style);
 
-	  const overlay = document.createElement("div");
-	  overlay.id = "spinner-overlay";
+	    var overlay = document.createElement("div");
+	    overlay.id = "spinner-overlay";
 
-	  const background = document.createElement("div");
-	  background.id = "spinner-background";
+	    var background = document.createElement("div");
+	    background.id = "spinner-background";
 
-	  const content = document.createElement("div");
-	  content.id = "spinner-content";
+	    var content = document.createElement("div");
+	    content.id = "spinner-content";
 
-	  const img = document.createElement("img");
-	  img.src = "/web2labportal/images/spinner.gif";
-	  img.alt = "Cargando...";
+	    var img = document.createElement("img");
+	    img.src = "/web2labportal/images/spinner.gif";
+	    img.alt = "Cargando...";
 
-	  const closeLink = document.createElement("a");
+	    var closeLink = document.createElement("a");
 	    closeLink.id = "spinner-close";
 	    closeLink.href = "#";
-	    closeLink.innerHTML = "&times;"; // símbolo ×
-	    closeLink.onclick = function(e) {
-	      e.preventDefault();
+	    closeLink.innerHTML = "&times;";
+	    closeLink.onclick = function() {
 	      deshabilitarSpinner();
+	      return false;
 	    };
 
-		content.appendChild(closeLink);
-	  	content.appendChild(img);
+	    content.appendChild(closeLink);
+	    content.appendChild(img);
+	    overlay.appendChild(background);
+	    overlay.appendChild(content);
+	    document.body.appendChild(overlay);
 
-	  overlay.appendChild(background);
-	  overlay.appendChild(content);
-	  document.body.appendChild(overlay);
+	  } catch (error) {
+	    // Manejo del error
+	    if (window.console && console.log) console.log("Error controlado:", error.message);
+	  }
 	}
 
 	function habilitarSpinner() {
-	  const overlay = document.getElementById("spinner-overlay");
-	  if (overlay) overlay.style.display = "block";
+	  try {
+	    var overlay = document.getElementById("spinner-overlay");
+	    if (overlay) overlay.style.display = "block";
+	  } catch (error) {
+	    if (window.console && console.log) console.log("Error controlado:", error.message);
+	  }
 	}
 
 	function deshabilitarSpinner() {
-	  const overlay = document.getElementById("spinner-overlay");
-	  if (overlay) overlay.style.display = "none";
+	  try {
+	    var overlay = document.getElementById("spinner-overlay");
+	    if (overlay) overlay.style.display = "none";
+	  } catch (error) {
+	    if (window.console && console.log) console.log("Error controlado:", error.message);
+	  }
 	}
 
-	// Llamar al cargar la página
-	window.addEventListener("DOMContentLoaded", () => {
+	// Función equivalente a DOMContentLoaded compatible con IE
+	function onReady(fn) {
+	  if (document.readyState === "complete" || document.readyState === "interactive") {
+	    fn();
+	  } else if (document.addEventListener) {
+	    document.addEventListener("DOMContentLoaded", fn, false);
+	  } else if (document.attachEvent) {
+	    document.attachEvent("onreadystatechange", function () {
+	      if (document.readyState === "complete") fn();
+	    });
+	  }
+	}
+
+	// Llamada al cargar la página
+	onReady(function() {
 	  crearSpinner();
 
 	  // Integración con DWR
-	  if (DWREngine) {
-		console.log("DWREngine === window.DWREngine:", DWREngine === window.DWREngine);
-	    window.DWREngine.setPreHook(habilitarSpinner);
-	    window.DWREngine.setPostHook(deshabilitarSpinner);
+	  if (typeof DWREngine !== "undefined" && DWREngine !== null) {
+	    DWREngine.setPreHook(habilitarSpinner);
+	    DWREngine.setPostHook(deshabilitarSpinner);
 	  } else {
-	    console.warn("DWR no está cargado. No se puede enganchar el spinner.");
+	    if (window.console && console.warn) console.warn("DWR no está cargado.");
 	  }
 	});
 

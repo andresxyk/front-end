@@ -31,7 +31,7 @@ public class ToolsAjax extends AjaxAction {
 		List lstCodigosPostales = new ArrayList();
 		CodigoPostalUtil objCodigoPostalUtil = new CodigoPostalUtil();
 		try {
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");			
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");			
 			if (txtColonia.trim().length() > 3 || txtDelegacionMunicipio.trim().length() > 3 || txtCodigoPostal.trim().length() > 3) {		
 				objCodigoPostal.setKCodigo(0);
 				objCodigoPostal.setScolonia(txtColonia.trim() + "");

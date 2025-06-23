@@ -1,7 +1,7 @@
 /******************** General ********************************/
 var facturaelectronicaBean = new FacturaElectronicaBean();
 
-//var hostServerWebApp = "http://10.3.0.8:8192";
+//var hostServerWebApp = "http://10.20.26.6:8192";
 
 var hostServerWebApp = "http://10.20.26.6:8192";
 

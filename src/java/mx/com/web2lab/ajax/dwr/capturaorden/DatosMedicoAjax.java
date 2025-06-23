@@ -26,7 +26,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosMedicoAjax.buscarMedico:Entrando... ");		
 		MedicoBean objMedico = new MedicoBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objMedico.setKmedico(intCodigoMedico);
 			objMedico.setCmedico(new Long(0));
 			objMedico.setSnombre("");
@@ -49,7 +49,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosMedicoAjax.buscarMedicoClave:Entrando... ");		
 		MedicoBean objMedico = new MedicoBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objMedico.setKmedico(0);
 			objMedico.setCmedico(new Long(uMedico));
 			objMedico.setSnombre("");
@@ -72,7 +72,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosMedicoAjax.buscarMedicoEspecialidad:Entrando... ");		
 		MedicoBean objMedico = new MedicoBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objMedico.setCespecialidad(intEspecialidada);
 			objMedico.setUtipooperacion(0);
 			objMedico.setSorderby("bPF.cestadoregistro.cestadoregistro,sapellidopaterno,sapellidomaterno,snombre");
@@ -92,7 +92,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		MedicoBean objMedico = new MedicoBean();
 		MedicosDao objDAOMedico = new MedicosDao();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objMedico.setCzona(intZona);
 			objMedico.setUtipooperacion(0);
 			iObjLog.debug("Saliendo DatosMedicoAjax.buscarMedicoZona:Saliendo...  ");			
@@ -110,7 +110,7 @@ public class DatosMedicoAjax extends AjaxAction {
 	
 	public String consultaMedicosGrid(int intCodigoMedico,String strAP,String strAM,String strNombres) throws Exception	
 	{
-		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");		
+		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");		
 		iObjLog.debug("Entrando a DatosMedicoAjax.consultaMedicosGrid:Entrando...Parametros... " + strAP + " " + strAM + " " + strNombres);
 		if (strNombres.trim().length() >= 4 || strAP.trim().length() >= 4 || strAM.trim().length() >= 4 || intCodigoMedico > 0) {
 			MedicoBean objMedico = new MedicoBean();
@@ -133,7 +133,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		MedicosDao objDAOMedico = new MedicosDao();
 		iObjLog.debug("Entrando DatosMedicoAjax.actualizaMedico:Entrando... " + objMedicoBean.getCmedico().intValue());		
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 				objMedicoBean = objDAOMedico.setMedicoActualizacion(objMedicoBean);
 			iObjLog.debug("Saliendo DatosMedicoAjax.actualizaMedico:Saliendo...  " + objMedicoBean.toString());
     	}catch (Exception aObjException){
@@ -151,7 +151,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		MedicosDao objDAOMedico = new MedicosDao();
 		iObjLog.debug("Entrando DatosMedicoAjax.altaMedico:Entrando... " + objMedicoBean.getCmedico().intValue());		
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 				objMedicoBean = objDAOMedico.setMedicoAlta(objMedicoBean);
 			iObjLog.debug("Saliendo DatosMedicoAjax.altaMedico:Saliendo...  " + objMedicoBean.toString());
     	}catch (Exception aObjException){
@@ -170,7 +170,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		MedicosDao objDAOMedico = new MedicosDao();
 		String strReturn = "Error en la actualizacion del Correo Electronico";
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 				objDAOMedico.setMedicoActualizacionCorreoElectronico(cMedico,strCorreoElectronico);
 				iObjLog.debug("Saliendo DatosMedicoAjax.actualizaCorreoElectronicoMedico:Saliendo... cMedico " + cMedico + " CorreoElectronico " + strCorreoElectronico);
 				strReturn = "Exito en la actualizacion del Correo Electronico";
@@ -190,7 +190,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		String strReturn = "";
 		iObjLog.debug("Entrando DatosMedicoAjax.cambiarMedicoOrden:Entrando...KOrdenSucursal " + kOrdenSucursal + " ClaveMedicoAnterior " + cClaveMedicoOld + " ClaveMedicoActual " + cClaveMedicoNew + " Usuario " +cUser);		
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 				MedicosDao objDAOMedico = new MedicosDao();
 				objDAOMedico.ChangeMedicoOrden(kOrdenSucursal,cClaveMedicoNew,cUser);
 				objMedico.setKmedico(0);
@@ -213,7 +213,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		MedicoBean objMedicoBean = new MedicoBean();
 		iObjLog.debug("Entrando DatosMedicoAjax.actualizaMedico:Entrando... " + objMedicoBean.getCmedico().intValue());		
 		try {			
-				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+				if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 				objMedicoBean.setCmedico(new Long(0));
 				objMedicoBean.setSnombre(strNombre.trim() + "");
 				objMedicoBean.setSappaterno(strApellidoPaterno.trim() + "");
@@ -239,7 +239,7 @@ public class DatosMedicoAjax extends AjaxAction {
 		iObjLog.debug("Entrando DatosClienteAjax.buscarMedicosOrdenes:Entrando... ");		
 		String strReturn = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			ConsultaOrdenesDao objDAOCliente = new ConsultaOrdenesDao();
 			strReturn = objDAOCliente.buscarOrdenesMedicos(objMedicoBean,strFechaInicio,strFechaTermino);
 			iObjLog.debug("Saliendo DatosClienteAjax.buscarMedicosOrdenes:Saliendo...  ");

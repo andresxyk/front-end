@@ -48,7 +48,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenio(cconvenio);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenio:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -67,7 +67,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioAsignacion(cconvenio,abloques);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenio:Saliendo...  ");
 		} catch (Exception aObjException){
@@ -85,7 +85,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioElegidas(strfacturasElegidas);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenioElegidas:Saliendo...  "+strReturn);
 		} catch (Exception aObjException){
@@ -104,7 +104,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		
 		try {			
-			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			   if(!isSesionValida(true))throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			   strReturn = objNotadeCreditoDAO.getFacturasConvenioElegidasAsignacionBloque(strfacturasElegidas,sbloque);
 			   iObjLog.debug("Saliendo NotasdeCreditoAjax.getFacturasConvenioElegidasAsignacionBloque:Saliendo...  "+strReturn);
 		} catch (Exception aObjException){
@@ -243,7 +243,7 @@ public class NotasdeCreditoAjax extends AjaxAction {
 		NotaDeCreditoDao objNotadeCreditoDAO = new NotaDeCreditoDao();
 		FacturaElectronicaBean objFacturaBean = new FacturaElectronicaBean();
 		try {			
-			   if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			   if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			   
 			   objFacturaBean=this.crearFacturaElectronica(objNotadeCreditoDAO.generarNota(strfacturasElegidas,cconvenio,strdescripcionnota,dmontonotacredito));
 			   																			

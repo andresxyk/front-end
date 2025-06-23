@@ -43,7 +43,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		String strReturn = "";
 		iObjLog.debug("Entrando a FacturarElectronicaSucursalAjax.findCfdiPdf:Entrando... ");
 		try {
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			String remplacePath = path.replaceAll("http://"+hostServerApache, "/mnt/gda/apache-tomcat/webapps/ROOT");
 			URL url; 
 			url = new URL("http://"+hostServerWebApp+"/facturas/ordenes/find-cfdi-server?path="+remplacePath);
@@ -79,7 +79,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		int keyPago=0;
 		String resSustitucion = "";
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");	
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");	
 			
 						
 			objPagoFacturaBean.setCestadoregistro(52);
@@ -234,7 +234,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
 		PagoFacturaBean objPagoFacturaBean = new PagoFacturaBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");	
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");	
 						
 			objPagoFacturaBean.setCestadoregistro(52);
 			objPagoFacturaBean.setCtipopago(cTipoPago);
@@ -263,7 +263,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		PagoFacturaDao objPagoFacturaDao = new PagoFacturaDao();
 		PagoFacturaBean objPagoFacturaBean = new PagoFacturaBean();
 		try {			
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");						
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");						
 			objPagoFacturaBean = objPagoFacturaDao.getDatosPagoFactura(kFactura,true,true);
 			iObjLog.debug("Saliendo CuentasxCobrarMayoreoAjax.getDatosPagoFactura:Saliendo... mTotalFactura=" + objPagoFacturaBean.getMtotalfactura().doubleValue() + " kFactura=" + objPagoFacturaBean.getKfactura() + " FormatoFactura="+ objPagoFacturaBean.getSformatofactura());
 		} catch (Exception aObjException){
@@ -285,7 +285,7 @@ public class CuentasxCobrarMayoreoAjax extends AjaxAction {
 		FacturaElectronicaBean objFacturaElectronicaBean = new FacturaElectronicaBean();								
 		TFactura objTFactura = null;								
 		try {								
-			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");							
+			if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");							
 			objFacturaElectronicaBean.setSfolio(cFolio + "");
 			if((marca==7) || (marca==8)){
 				if(marca==7){

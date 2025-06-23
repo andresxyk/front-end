@@ -39,7 +39,7 @@ public class CorreoPromocionesAjax extends AjaxAction {
 		iObjLog.debug("CorreoPromocionesAjax.envioPromocionEmail:Entrando..." + cPromocion);
 		try
 		{
-    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesión válida ...");
+    		if(!isSesionValida())throw new AjaxDwrException(1, "La sesion ha caducado o no hay una sesion valida ...");
 			iObjLog.debug("CorreoPromocionesAjax.envioPromocionEmail:Validacion....");
 			objPacienteBean.setSapmaterno("");
 			objPacienteBean.setSappaterno("");
