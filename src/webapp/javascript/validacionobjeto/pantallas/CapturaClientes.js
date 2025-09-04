@@ -60,6 +60,51 @@ function getMarcasUser_CallBack(data) {
 	 window.open(url, "_blank");  
 }
 
+function cargaMasivaExamPaqPerfXConv(){
+	 var frmPantalla = window.document.frmOpConvenios;
+	 var idUser = document.getElementById("idUsuario").value;	 
+	 var url = "http://10.20.26.6:9083/CargaMasiva/modificacionExamenesPaquetesPerfiles/"+idUser;
+	 window.open(url, "_blank");  
+} 
+
+function enviarOperacion() {
+    // Obtenemos valores
+    const idUsuario = document.getElementById("idUsuario").value;
+    const token = document.getElementById("web2labtoken").value;
+    const operacion = document.getElementById("operacion").value;
+
+    // Armamos el form data
+    const formData = new FormData();
+    formData.append("idUsuario", idUsuario);
+    formData.append("web2labtoken", token);
+    formData.append("operacion", operacion);
+
+    // URL destino
+	if(operacion === "22"){
+		cargaMasivaExamPaqPerfXConv();
+	} else {
+	    const url = "http://10.20.26.6:8192/facturas/operacion";
+	
+	    // Creamos un form temporal para abrir en nueva pestaña (imitando target="_blank")
+	    const tempForm = document.createElement("form");
+	    tempForm.method = "POST";
+	    tempForm.action = url;
+	    tempForm.target = "_blank";
+	
+	    // Añadimos los campos al form
+	    for (let [key, value] of formData.entries()) {
+	        const input = document.createElement("input");
+	        input.type = "hidden";
+	        input.name = key;
+	        input.value = value;
+	        tempForm.appendChild(input);
+	    }
+	
+	    document.body.appendChild(tempForm);
+	    tempForm.submit(); // enviamos
+	    document.body.removeChild(tempForm); // limpiamos
+	}
+}
 
 
 
