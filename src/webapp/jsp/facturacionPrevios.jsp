@@ -16,7 +16,7 @@ function init(kfactura){
 <body>
 	<%
 		Definitivo definitivo = null;
-		FacturacionBean facturacionBean = null;
+		FacturacionBean facturacionBean = null;git co
 		
 		int tipofactura = 0;
 	 	String smetodopago = "";

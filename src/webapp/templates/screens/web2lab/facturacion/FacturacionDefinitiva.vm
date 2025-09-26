@@ -1,5 +1,12 @@
 #set ($titlePage = "Creacion de Previos" )
 
+<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/FacturaElectronicaEmpresaAjax.js'></script>
+<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
+
+
 <script language="javascript" SRC="$content.getURI("javascript/generales.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendarfoco.js")"></script>
 <script language='javascript' src="$content.getURI("javascript/calendar.js")"></script>
@@ -9,11 +16,7 @@
 <script language="javascript" SRC="$content.getURI("javascript/validacionobjeto/pantallas/FacturacionPrevio-22062022.js")"></script>
 
 
-<script type='text/javascript' src='/web2labportal/dwr/interface/FacturacionAjax.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/FacturaElectronicaEmpresaAjax.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/interface/BusquedaFacturas.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/engine.js'></script>
-<script type='text/javascript' src='/web2labportal/dwr/util.js'></script>
+
 
 <script>
 		 window.onload = init;			    		 

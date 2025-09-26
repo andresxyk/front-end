@@ -7,7 +7,7 @@ var hostServerWebApp = "http://10.20.26.6:8192";
 
    function init() 
    {
-	    DWRUtil.useLoadingMessage();
+	   // DWRUtil.useLoadingMessage();
    }
 
 /********************* Negocio *******************************/
@@ -184,19 +184,24 @@ var hostServerWebApp = "http://10.20.26.6:8192";
    
      
    function GeneracionDefinitivoFactura()
-   {
-	   	var frmPantalla = window.document.frmFacturacion;
-      	var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
-      	var strbloques = loopSelected();
-      	var tiporeporte = TypeObjeto(frmPantalla.selTipoReporte);
-      	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tiporeporte>0))) {
-      		//alert('convenio: '+cconvenio);
-      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack); 
-      		 
-		} else {
-			alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
-		}   			   
-   }
+      {
+   	   	var frmPantalla = window.document.frmFacturacion;
+         	var cconvenio = TypeObjeto(frmPantalla.selConvenios); 
+   	   	var cconvenioText = frmPantalla.selConvenios.options[frmPantalla.selConvenios.selectedIndex].text;
+         	var strbloques = loopSelected();
+         	var tiporeporte = TypeObjeto(frmPantalla.selTipoReporte);
+   		if(cconvenio === "309" || cconvenio === "310" || cconvenio === "311" || cconvenio === "312"){
+   			alert('El convenio '+cconvenioText+' no esta permitido para Factura Definitiva');
+   		} else {
+   	      	if (((cconvenio>0) && (strbloques !=',')&& (strbloques !='')&&(tiporeporte>0))) {
+   	      		//alert('convenio: '+cconvenio);
+   	      		BusquedaFacturas.buscarMarca(cconvenio,GeneracionDefinitivoFactura_CallBack); 
+   	      		 
+   			} else {
+   				alert('Debe seleccionar al menos un bloque y tipo de Reporte que requiere');
+   			}   
+   		}			   
+      }
    
    function GeneracionDefinitivoFactura_CallBack(data){
 	   
