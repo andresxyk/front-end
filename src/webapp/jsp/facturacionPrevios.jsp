@@ -84,7 +84,7 @@ function init(kfactura){
 			}else{
 				cmarca = facturacionBean.getCmarca();
 			}
-			String url = "http://10.20.26.6:8192/facturas/ordenes/empresas-anticipadas?" +
+			String url = "http://10.3.0.8:8192/facturas/ordenes/empresas-anticipadas?" +
 			"folio="+facturacionBean.getUfoliofactura()+"&tipofactura="+tipofactura+"&msubtotal="+facturacionBean.getMsubtotal()+"&miva="+facturacionBean.getMiva()+"&mtotal="+facturacionBean.getMtotal()+"&" +
 			"strnocuenta="+nocuenta+"&strmetodopago="+smetodopago+"&uuidSustitucion="+uuidSustitucion+"&" +
 			"sustitucion="+bSustitucion+"&descuento="+bDescuento+"&" +
