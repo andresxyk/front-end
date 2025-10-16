@@ -1,5 +1,5 @@
-//var hostServerWebApp = "http://10.3.0.8:8192"; 
-var hostServerWebApp = "http://10.3.0.8:8192";
+//var hostServerWebApp = "http://10.20.26.6:8192"; 
+var hostServerWebApp = "http://10.20.26.6:8192";
 
 function showSubModalPago(kfactura,formatFactura) {
 	var frmPantalla = window.document.frmAdminClientes;changeMontoPagar
@@ -479,13 +479,16 @@ function ConvenioBean() {
 }
 
 function aceptaPago(strConvenio) {
-	var frm = document.getElementById("frmAdminClientes");
+	
+	var frm = window.document.frmAdminClientes;
+	document.getElementById("txtMontoAPagarTotal"+strConvenio).value = "0";
 	document.getElementById("txtMontoAPagarTotal").value = "0";
 	for (i=0;i<frm.chkPagos.length;i++) {
 		if (frm.chkPagos[i].checked) {
 			frm.txtMontoAPagar[i].value = validarString(frm.txtMontoAPagar[i].value);
 			if (parseFloat(frm.hdnSaldoFactura[i].value) >= parseFloat(frm.txtMontoAPagar[i].value)) { 
-				document.getElementById("txtMontoAPagarTotal").value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal").value)).toFixed(2);				
+				document.getElementById("txtMontoAPagarTotal"+strConvenio).value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal"+strConvenio).value)).toFixed(2);	
+				document.getElementById("txtMontoAPagarTotal").value = (parseFloat(frm.txtMontoAPagar[i].value) + parseFloat(document.getElementById("txtMontoAPagarTotal").value)).toFixed(2);	
 			} else {
 				alert("El monto del pago no puede ser mayor al saldo de la factura");
 				frm.txtMontoAPagar[i].value = parseFloat(frm.hdnSaldoFactura[i].value).toFixed(2);
@@ -506,7 +509,7 @@ function aceptaPago(strConvenio) {
 //			}
 //        }
 //    }
-    changeMontoPagar(strConvenio);
+//    changeMontoPagar(strConvenio);
 }
 
 function validarString(cadenaAnalizar) {

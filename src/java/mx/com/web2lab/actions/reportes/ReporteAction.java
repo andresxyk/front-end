@@ -295,7 +295,7 @@ public class ReporteAction extends SecureAction {
 			    if (new Integer(uTipoFile).intValue() != 0) {							    
 			    	new GeneraReporte().generaReportePdf(strReporte + ".jasper", strNomArchivo, params, subreportes, objCon, aObjDatos, aObjContexto);                   
 			    } else {
-			    	new GeneraReporte().generaReporteExcel(strReporte + ".jasper", strNomArchivo, params, subreportes, objCon, aObjDatos, aObjContexto);                   
+			    	new GeneraReporte().generaReporteExcel(strReporte + "xls.jasper", strNomArchivo, params, subreportes, objCon, aObjDatos, aObjContexto);                   
 			    }
 			}catch (Exception aError) {
 			    iObjLog.error("Error en doReportepagos.doImprimir ",aError);

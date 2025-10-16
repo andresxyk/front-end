@@ -299,7 +299,13 @@ public class GeneraReporte  implements Serializable{
 			JRXlsExporter exporter = new JRXlsExporter ();
 			exporter.setParameter (JRExporterParameter.JASPER_PRINT, jasperPrint);
 			exporter.setParameter (JRExporterParameter.OUTPUT_FILE_NAME, ConfiguracionProperties.getPropiedad("reporte.ruta.jasperpdfwrite") + this.pdfFileName);
-			exporter.setParameter (JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.TRUE);
+			 // ⚙️ OPCIONES DE EXPORTACIÓN — elimina filas vacías y optimiza para Excel
+			// ✅ PARÁMETROS COMPATIBLES CON JASPER ANTIGUO (Java 1.4)
+			exporter.setParameter(JRXlsExporterParameter.IS_ONE_PAGE_PER_SHEET, Boolean.FALSE);
+			exporter.setParameter(JRXlsExporterParameter.IS_REMOVE_EMPTY_SPACE_BETWEEN_ROWS, Boolean.TRUE);
+			exporter.setParameter(JRXlsExporterParameter.IS_WHITE_PAGE_BACKGROUND, Boolean.FALSE);
+
+			
 			exporter.exportReport ();			
 			iObjLog.info("generarPdf:DESPUES:" + this.pdfFileName);
 			iObjLog.info("generarPdf:DESPUES:" + this.httpPath);
