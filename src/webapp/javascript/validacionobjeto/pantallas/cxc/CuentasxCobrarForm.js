@@ -222,6 +222,7 @@ function clienteAceptado_CallBack(data) {
     adminDIV("gridbusquedaFacturas","visible","inline");
  	codeDIVHTML("gridbusquedaFacturas",data.strFacturasGrid); 	
     adminDIV("gridprogressbar","hidden","none");
+	cargarHora(); 
 }
 
 function consultaClienteGrid_CallBack(data) {
@@ -590,7 +591,7 @@ function agregarValoresSustitucion(datafolio,datakfactura,datauuid){
 
 
 function pagosFacturas() { 
-	var frm = document.getElementById("frmAdminClientes");
+	var frmPantalla = window.document.frmAdminClientes;
 	var pago = "";
 	var saldo = "";
 	var anticipo = "";
@@ -645,9 +646,9 @@ function pagosFacturas() {
 	
 		if((sFechaPago!=null) && (sFechaPago!='') && (parseInt(cFormaPago)!=0)){
 			if(sustitucion){
-				for (i=0;i<frm.chkPagos.length;i++) {
-					if (frm.chkPagos[i].checked) {					
-						kfacturas += frm.hdnkFacturaSaldo[i].value+",";
+				for (i=0;i<frmPantalla.chkPagos.length;i++) {
+					if (frmPantalla.chkPagos[i].checked) {					
+						kfacturas += frmPantalla.hdnkFacturaSaldo[i].value+",";
 					}
 				}	
 				if(kfacturas!=""){
@@ -705,7 +706,7 @@ function pagosFacturas_CallBack(data) {
 function getKeyPago2_CallBack(data){
 	var keyPagocomplemento=parseInt(data);
 	keyPago=keyPagocomplemento;
-	var frm = document.getElementById("frmAdminClientes");
+	var frm = window.document.frmAdminClientes;
 	var pago = "";
 	var saldo = "";
 	var anticipo = "";
